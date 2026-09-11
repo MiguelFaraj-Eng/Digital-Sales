@@ -212,7 +212,7 @@ hr{border:none;border-top:1px solid var(--b1);margin:16px 0}
     <div class="nav-item" data-p="equipment"><span class="nav-dot"></span>Technica Equipment</div>
     <div class="nav-item" data-p="supplier"><span class="nav-dot"></span>Supplier Equipment</div>
     <div class="nav-group">Pricing</div>
-    <div class="nav-item" data-p="licenses"><span class="nav-dot"></span>SCADA Licenses</div>
+    <div class="nav-item" data-p="licenses"><span class="nav-dot"></span>Smart Factory License</div>
     <div class="nav-item" data-p="hardware"><span class="nav-dot"></span>Hardware</div>
     <div class="nav-item" data-p="mandays"><span class="nav-dot"></span>Mandays</div>
     <div class="nav-item" data-p="brief"><span class="nav-dot"></span>Budget Brief</div>
@@ -242,7 +242,7 @@ hr{border:none;border-top:1px solid var(--b1);margin:16px 0}
   </div>
 
   <div class="stat-grid">
-    <div class="stat"><div class="stat-label">SCADA Licenses</div><div class="stat-value c-blue" id="d-lic">$21,871</div><div class="stat-sub">Platform: <span id="d-platform">Ignition Perspective</span></div></div>
+    <div class="stat"><div class="stat-label">Smart Factory License</div><div class="stat-value c-blue" id="d-lic">$21,871</div><div class="stat-sub">Platform: <span id="d-platform">Ignition Perspective</span></div></div>
     <div class="stat"><div class="stat-label">Hardware</div><div class="stat-value" id="d-hw">$11,557</div><div class="stat-sub">Server + Network</div></div>
     <div class="stat"><div class="stat-label">Labor &amp; Travel</div><div class="stat-value c-amber" id="d-labor">$45,200</div><div class="stat-sub">Engineering mandays</div></div>
     <div class="stat"><div class="stat-label">Final Price Ex-Works</div><div class="stat-value c-green" id="d-total">$78,628</div><div class="stat-sub" id="d-margin">Gross margin: 38.4%</div></div>
@@ -364,9 +364,10 @@ hr{border:none;border-top:1px solid var(--b1);margin:16px 0}
 
   <div class="card">
     <div class="card-head">10. SCADA Platform</div>
-    <div class="fg"><label class="fl">Preferred Platform</label>
-      <select id="g-platform" onchange="recalcAll()"><option>Ignition</option><option>Siemens WinCC 7.5</option><option>Siemens WinCC 8.0</option><option>Provided By Customer</option></select></div>
-    <div id="platform-customer-note" class="note" style="display:none;margin-top:10px;background:var(--amber-bg);border-color:rgba(245,166,35,.25);color:var(--amber)">⚠ Platform provided by customer — SCADA License section will be zeroed out.</div>
+    <div class="fg"><label class="fl">Is the platform provided by the customer?</label>
+      <select id="g-platform" onchange="recalcAll()"><option>No</option><option>Provided By Customer</option></select></div>
+    <div id="platform-customer-note" class="note" style="display:none;margin-top:10px;background:var(--amber-bg);border-color:rgba(245,166,35,.25);color:var(--amber)">⚠ Platform provided by customer — Smart Factory License section will be zeroed out.</div>
+    <div class="note" style="margin-top:10px">Vendor and product (Ignition, WinCC, InTouch, FactoryTalk, etc.) are chosen on the Smart Factory License page.</div>
   </div>
 
   <div class="card">
@@ -486,84 +487,29 @@ hr{border:none;border-top:1px solid var(--b1);margin:16px 0}
   <div id="lic-note" class="lock-notice" style="display:none;background:var(--amber-bg);border-color:rgba(245,166,35,.25);color:var(--amber)"></div>
   <div id="budget-warn" class="lock-notice" style="display:none;background:var(--red-bg);border-color:rgba(245,101,101,.25);color:var(--red)">⚠ Total price exceeds client budget of $200,000</div>
   <div class="lock-notice" id="lock-lic" style="display:none">🔒 Pricing fields are read-only. Sign in as an authorized user to edit.</div>
-  <div class="ph"><div><div class="ph-title">SCADA Licenses</div><div class="ph-sub">Edit qty, cost, margin — totals update automatically</div></div></div>
+  <div class="ph"><div><div class="ph-title">Smart Factory License</div><div class="ph-sub">Pick a vendor + product — its module list loads from the license catalog</div></div></div>
 
-  <!-- Perspective -->
+  <!-- Vendor / Product Selection -->
   <div class="card">
-    <div class="card-head">IGNITION Perspective Licenses <span class="badge" id="badge-persp" style="margin-left:8px">—</span></div>
-    <div class="tbl-wrap">
-      <table>
-        <thead><tr><th>Item</th><th>Selected</th><th>Unit Cost ($)</th><th>Margin (%)</th><th>Unit Price</th><th>Total Price</th></tr></thead>
-        <tbody id="persp-body" data-lic="1">
-          <tr data-yes="1"><td>Ignition Platform (Required)</td><td><select class="esel ls" onchange="recalcAll()"><option>Yes</option><option>No</option></select></td><td><input class="en lc" type="number" value="1100" onchange="recalcAll()"></td><td><input class="en lm" type="number" value="15" onchange="recalcAll()"></td><td class="n lu"></td><td class="n lt"></td></tr>
-          <tr data-yes="1"><td>How Many Sessions (Unlimited)</td><td><select class="esel ls" onchange="recalcAll()"><option>Unlimited</option><option>No</option></select></td><td><input class="en lc" type="number" value="11225" onchange="recalcAll()"></td><td><input class="en lm" type="number" value="15" onchange="recalcAll()"></td><td class="n lu"></td><td class="n lt"></td></tr>
-          <tr data-yes="1"><td>Data Archiving</td><td><select class="esel ls" onchange="recalcAll()"><option>Yes</option><option>No</option></select></td><td><input class="en lc" type="number" value="2365" onchange="recalcAll()"></td><td><input class="en lm" type="number" value="15" onchange="recalcAll()"></td><td class="n lu"></td><td class="n lt"></td></tr>
-          <tr data-yes="1"><td>Ignition Reporting Module</td><td><select class="esel ls" onchange="recalcAll()"><option>Yes</option><option>No</option></select></td><td><input class="en lc" type="number" value="3900" onchange="recalcAll()"></td><td><input class="en lm" type="number" value="15" onchange="recalcAll()"></td><td class="n lu"></td><td class="n lt"></td></tr>
-          <tr><td>Alarm Notification</td><td><select class="esel ls" onchange="recalcAll()"><option>No</option><option>Yes</option></select></td><td><input class="en lc" type="number" value="0" onchange="recalcAll()"></td><td><input class="en lm" type="number" value="15" onchange="recalcAll()"></td><td class="n lu"></td><td class="n lt"></td></tr>
-        </tbody>
-        <tfoot><tr class="tr-total"><td colspan="5">TOTAL — Ignition Perspective</td><td class="n" id="persp-total"></td></tr></tfoot>
-      </table>
+    <div class="card-head">Platform</div>
+    <div class="g2">
+      <div class="fg"><label class="fl">Vendor</label>
+        <select id="lic-vendor" class="esel" onchange="onLicenseVendorChange()" style="width:100%;padding:8px 10px;font-size:13px"></select>
+      </div>
+      <div class="fg"><label class="fl">Product</label>
+        <select id="lic-product" class="esel" onchange="onLicenseProductChange()" style="width:100%;padding:8px 10px;font-size:13px"></select>
+      </div>
     </div>
+    <div class="note" style="margin-top:12px;margin-bottom:0" id="lic-product-note">Loading license catalog…</div>
   </div>
 
-  <!-- Vision -->
-  <div class="card">
-    <div class="card-head">IGNITION Vision Licenses <span class="badge" id="badge-vision" style="margin-left:8px">—</span></div>
-    <div class="tbl-wrap">
-      <table>
-        <thead><tr><th>Item</th><th>Selected</th><th>Unit Cost ($)</th><th>Margin (%)</th><th>Unit Price</th><th>Total Price</th></tr></thead>
-        <tbody id="vision-body" data-lic="1">
-          <tr><td>Ignition Platform (Required)</td><td><select class="esel ls" onchange="recalcAll()"><option>No</option><option>Yes</option></select></td><td><input class="en lc" type="number" value="0" onchange="recalcAll()"></td><td><input class="en lm" type="number" value="15" onchange="recalcAll()"></td><td class="n lu"></td><td class="n lt"></td></tr>
-          <tr><td>How Many PCs (Three)</td><td><select class="esel ls" onchange="recalcAll()"><option>Three</option><option>No</option></select></td><td><input class="en lc" type="number" value="3154" onchange="recalcAll()"></td><td><input class="en lm" type="number" value="15" onchange="recalcAll()"></td><td class="n lu"></td><td class="n lt"></td></tr>
-          <tr><td>Data Archiving</td><td><select class="esel ls" onchange="recalcAll()"><option>No</option><option>Yes</option></select></td><td><input class="en lc" type="number" value="0" onchange="recalcAll()"></td><td><input class="en lm" type="number" value="15" onchange="recalcAll()"></td><td class="n lu"></td><td class="n lt"></td></tr>
-          <tr><td>Ignition Reporting Module</td><td><select class="esel ls" onchange="recalcAll()"><option>Yes</option><option>No</option></select></td><td><input class="en lc" type="number" value="3900" onchange="recalcAll()"></td><td><input class="en lm" type="number" value="15" onchange="recalcAll()"></td><td class="n lu"></td><td class="n lt"></td></tr>
-          <tr><td>Alarm Notification</td><td><select class="esel ls" onchange="recalcAll()"><option>No</option><option>Yes</option></select></td><td><input class="en lc" type="number" value="0" onchange="recalcAll()"></td><td><input class="en lm" type="number" value="15" onchange="recalcAll()"></td><td class="n lu"></td><td class="n lt"></td></tr>
-        </tbody>
-        <tfoot><tr class="tr-total"><td colspan="5">TOTAL — Ignition Vision</td><td class="n" id="vision-total"></td></tr></tfoot>
-      </table>
-    </div>
-  </div>
-
-  <!-- WinCC 7.5 -->
-  <div class="card">
-    <div class="card-head">SIEMENS WinCC 7.5 Licenses <span class="badge" id="badge-w75" style="margin-left:8px">—</span></div>
-    <div class="tbl-wrap">
-      <table>
-        <thead><tr><th>Item</th><th>Selected</th><th>Unit Cost ($)</th><th>Margin (%)</th><th>Unit Price</th><th>Total Price</th></tr></thead>
-        <tbody id="w75-body">
-          <tr><td>WinCC 7.5 Platform</td><td><select class="esel ls" onchange="recalcAll()"><option>No</option><option>Yes</option></select></td><td><input class="en lc" type="number" value="0" onchange="recalcAll()"></td><td><input class="en lm" type="number" value="50" onchange="recalcAll()"></td><td class="n lu"></td><td class="n lt"></td></tr>
-          <tr><td>How Many Screens (Three)</td><td><select class="esel ls" onchange="recalcAll()"><option>Three</option><option>No</option></select></td><td><input class="en lc" type="number" value="3875.52" onchange="recalcAll()"></td><td><input class="en lm" type="number" value="50" onchange="recalcAll()"></td><td class="n lu"></td><td class="n lt"></td></tr>
-          <tr><td>Long Term Archiving</td><td><select class="esel ls" onchange="recalcAll()"><option>No</option><option>Yes</option></select></td><td><input class="en lc" type="number" value="0" onchange="recalcAll()"></td><td><input class="en lm" type="number" value="50" onchange="recalcAll()"></td><td class="n lu"></td><td class="n lt"></td></tr>
-          <tr><td>Supplier Machine Controllers</td><td><select class="esel ls" onchange="recalcAll()"><option>No</option><option>Yes</option></select></td><td><input class="en lc" type="number" value="0" onchange="recalcAll()"></td><td><input class="en lm" type="number" value="50" onchange="recalcAll()"></td><td class="n lu"></td><td class="n lt"></td></tr>
-          <tr><td>Total Machines on Site</td><td><input class="en ls" type="number" value="0" onchange="recalcAll()" style="width:60px"></td><td><input class="en lc" type="number" value="0" onchange="recalcAll()"></td><td><input class="en lm" type="number" value="50" onchange="recalcAll()"></td><td class="n lu"></td><td class="n lt"></td></tr>
-        </tbody>
-        <tfoot><tr class="tr-total"><td colspan="5">TOTAL — WinCC 7.5</td><td class="n" id="w75-total"></td></tr></tfoot>
-      </table>
-    </div>
-  </div>
-
-  <!-- WinCC 8.0 -->
-  <div class="card">
-    <div class="card-head">SIEMENS WinCC 8.0 Licenses <span class="badge" id="badge-w80" style="margin-left:8px">—</span></div>
-    <div class="tbl-wrap">
-      <table>
-        <thead><tr><th>Item</th><th>Selected</th><th>Unit Cost ($)</th><th>Margin (%)</th><th>Unit Price</th><th>Total Price</th></tr></thead>
-        <tbody id="w80-body">
-          <tr><td>WinCC 8.0 Platform</td><td><select class="esel ls" onchange="recalcAll()"><option>No</option><option>Yes</option></select></td><td><input class="en lc" type="number" value="0" onchange="recalcAll()"></td><td><input class="en lm" type="number" value="50" onchange="recalcAll()"></td><td class="n lu"></td><td class="n lt"></td></tr>
-          <tr><td>How Many Screens (Three)</td><td><select class="esel ls" onchange="recalcAll()"><option>Three</option><option>No</option></select></td><td><input class="en lc" type="number" value="0" onchange="recalcAll()"></td><td><input class="en lm" type="number" value="50" onchange="recalcAll()"></td><td class="n lu"></td><td class="n lt"></td></tr>
-          <tr><td>Long Term Archiving</td><td><select class="esel ls" onchange="recalcAll()"><option>No</option><option>Yes</option></select></td><td><input class="en lc" type="number" value="0" onchange="recalcAll()"></td><td><input class="en lm" type="number" value="50" onchange="recalcAll()"></td><td class="n lu"></td><td class="n lt"></td></tr>
-          <tr><td>Supplier Machine Controllers</td><td><select class="esel ls" onchange="recalcAll()"><option>No</option><option>Yes</option></select></td><td><input class="en lc" type="number" value="0" onchange="recalcAll()"></td><td><input class="en lm" type="number" value="50" onchange="recalcAll()"></td><td class="n lu"></td><td class="n lt"></td></tr>
-          <tr><td>Total Machines on Site</td><td><input class="en ls" type="number" value="0" onchange="recalcAll()" style="width:60px"></td><td><input class="en lc" type="number" value="0" onchange="recalcAll()"></td><td><input class="en lm" type="number" value="50" onchange="recalcAll()"></td><td class="n lu"></td><td class="n lt"></td></tr>
-        </tbody>
-        <tfoot><tr class="tr-total"><td colspan="5">TOTAL — WinCC 8.0</td><td class="n" id="w80-total"></td></tr></tfoot>
-      </table>
-    </div>
-  </div>
+  <!-- Dynamically rendered module groups land here -->
+  <div id="lic-modules-container"></div>
 
   <div class="card" style="border-color:var(--blue);background:var(--blue-bg)">
-    <div class="card-head">Final Licenses Price</div>
-    <div style="font-size:26px;font-weight:600;color:var(--blue);font-variant-numeric:tabular-nums" id="lic-total-final">$21,871</div>
-    <div style="font-size:12px;color:var(--t3);margin-top:4px">Sum of all selected license sections</div>
+    <div class="card-head">Final License Price</div>
+    <div style="font-size:26px;font-weight:600;color:var(--blue);font-variant-numeric:tabular-nums" id="lic-total-final">$0</div>
+    <div style="font-size:12px;color:var(--t3);margin-top:4px" id="lic-total-sub">Sum of all selected modules</div>
   </div>
 </div>
 
@@ -698,8 +644,8 @@ hr{border:none;border-top:1px solid var(--b1);margin:16px 0}
 
   <div class="g2" style="margin-bottom:16px">
     <div class="card">
-      <div class="card-head">SCADA Licenses</div>
-      <div style="margin-bottom:8px;display:flex;justify-content:space-between"><span class="dim">SCADA Licenses</span><span class="n" id="brief-lic">$21,871</span></div>
+      <div class="card-head">Smart Factory License</div>
+      <div style="margin-bottom:8px;display:flex;justify-content:space-between"><span class="dim">Smart Factory License</span><span class="n" id="brief-lic">$21,871</span></div>
       <div style="margin-bottom:8px;display:flex;justify-content:space-between"><span class="dim">Additional Licenses</span><span class="n">$0</span></div>
       <hr><div style="display:flex;justify-content:space-between;font-weight:600"><span>TOTAL</span><span class="c-blue" id="brief-lic-total">$21,871</span></div>
     </div>
@@ -765,12 +711,14 @@ hr{border:none;border-top:1px solid var(--b1);margin:16px 0}
   <div class="ph"><div><div class="ph-title">Component Suppliers</div><div class="ph-sub">Reference links for all hardware components</div></div></div>
 
   <div class="card">
-    <div class="card-head">SCADA Licenses</div>
+    <div class="card-head">Smart Factory License</div>
     <div class="tbl-wrap"><table>
       <thead><tr><th>Item</th><th>Source</th></tr></thead>
       <tbody>
-        <tr><td>Ignition Platform / Sessions / Archiving / Reporting</td><td><a href="https://inductiveautomation.com/pricing/ignition" target="_blank" style="color:var(--blue)">inductiveautomation.com/pricing/ignition</a></td></tr>
-        <tr><td>Siemens WinCC 7.5 / 8.0 Licenses</td><td><a href="https://mall.industry.siemens.com/mall/en/WW/Catalog/Products/10007460" target="_blank" style="color:var(--blue)">mall.industry.siemens.com</a></td></tr>
+        <tr><td>Inductive Automation — Ignition &amp; Ignition Edge</td><td><a href="https://inductiveautomation.com/pricing/list" target="_blank" style="color:var(--blue)">inductiveautomation.com/pricing/list</a></td></tr>
+        <tr><td>Siemens — WinCC V7.5 / WinCC Unified</td><td><a href="https://www.siemens.com/en-us/products/simatic-hmi/wincc-unified-software/" target="_blank" style="color:var(--blue)">siemens.com — WinCC Unified</a></td></tr>
+        <tr><td>AVEVA — InTouch HMI / System Platform</td><td><a href="https://www.aveva.com/en/info/intouch-hmi-pricing/" target="_blank" style="color:var(--blue)">aveva.com — InTouch HMI Pricing</a></td></tr>
+        <tr><td>Rockwell Automation — FactoryTalk View SE / ME</td><td><a href="https://www.rockwellautomation.com/en-us/products/software/factorytalk/operationsuite/view/factorytalk-view-site-edition.html" target="_blank" style="color:var(--blue)">rockwellautomation.com — FactoryTalk View</a></td></tr>
       </tbody>
     </table></div>
   </div>
@@ -1004,152 +952,137 @@ function countOPC(tbodyId) {
   return found;
 }
 
+// ─── SMART FACTORY LICENSE CATALOG (data/license-catalog.json) ───
+let licenseCatalog = null;
+let licenseSelection = { vendor: 'inductiveAutomation', product: 'ignition' };
+
+async function loadLicenseCatalog() {
+  try {
+    const res = await fetch('data/license-catalog.json', {cache:'no-store'});
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+    licenseCatalog = await res.json();
+    populateLicenseVendorSelect();
+    onLicenseVendorChange(true);
+  } catch (e) {
+    console.error('Failed to load data/license-catalog.json:', e);
+    const note = document.getElementById('lic-product-note');
+    if (note) note.textContent = 'Could not load license catalog (data/license-catalog.json).';
+  }
+}
+loadLicenseCatalog();
+
+function populateLicenseVendorSelect() {
+  const sel = document.getElementById('lic-vendor');
+  if (!sel || !licenseCatalog) return;
+  sel.innerHTML = Object.keys(licenseCatalog.vendors).map(key =>
+    `<option value="${key}"${key===licenseSelection.vendor?' selected':''}>${licenseCatalog.vendors[key].label}</option>`
+  ).join('');
+}
+
+function populateLicenseProductSelect(vendorKey) {
+  const sel = document.getElementById('lic-product');
+  const vendor = licenseCatalog?.vendors?.[vendorKey];
+  if (!sel || !vendor) return;
+  const productKeys = Object.keys(vendor.products);
+  if (!productKeys.includes(licenseSelection.product)) licenseSelection.product = productKeys[0];
+  sel.innerHTML = productKeys.map(key =>
+    `<option value="${key}"${key===licenseSelection.product?' selected':''}>${vendor.products[key].label}</option>`
+  ).join('');
+}
+
+// keepSelection: true on initial catalog load (preserve the default), false when the user picks a new vendor
+function onLicenseVendorChange(keepSelection) {
+  const sel = document.getElementById('lic-vendor');
+  if (sel && !keepSelection) licenseSelection.vendor = sel.value;
+  populateLicenseProductSelect(licenseSelection.vendor);
+  onLicenseProductChange(true);
+}
+
+function onLicenseProductChange(skipReadBack) {
+  const sel = document.getElementById('lic-product');
+  if (sel && !skipReadBack) licenseSelection.product = sel.value;
+  renderLicenseModules();
+  recalcAll();
+}
+
+// Builds one card per module group for the selected vendor/product, straight from the catalog.
+function renderLicenseModules() {
+  const container = document.getElementById('lic-modules-container');
+  const note = document.getElementById('lic-product-note');
+  if (!container || !licenseCatalog) return;
+  const vendor = licenseCatalog.vendors[licenseSelection.vendor];
+  const product = vendor?.products?.[licenseSelection.product];
+  if (!product) return;
+
+  // Hide every previously-built vendor/product block — they stay in the DOM
+  // (not destroyed) so switching back later preserves whatever was edited.
+  container.querySelectorAll(':scope > .lic-product-block').forEach(el => { el.style.display = 'none'; });
+
+  if (!product.groups || product.groups.length === 0) {
+    if (note) note.textContent = `${vendor.label} — no license modules to configure (customer-provided).`;
+    return;
+  }
+  if (note) note.textContent = `${vendor.label} — ${product.label}: check "Selected" on each module you need, sizes/costs are editable.`;
+
+  const blockId = 'lic-block-' + licenseSelection.vendor + '-' + licenseSelection.product;
+  let block = document.getElementById(blockId);
+  if (block) { block.style.display = ''; return; }
+
+  block = document.createElement('div');
+  block.id = blockId;
+  block.className = 'lic-product-block';
+  block.innerHTML = product.groups.map(group => `
+    <div class="card">
+      <div class="card-head">${group.group}</div>
+      <div class="tbl-wrap"><table>
+        <thead><tr><th>Item</th><th>Selected</th><th>Unit Cost ($)</th><th>Margin (%)</th><th>Unit Price</th><th>Total Price</th></tr></thead>
+        <tbody>
+          ${group.items.map(item => `
+            <tr title="${(item.note||'').replace(/"/g,'&quot;')}">
+              <td><span class="item-label">${item.name}</span></td>
+              <td><select class="esel ls" onchange="recalcAll()"><option${item.defaultIncluded?' selected':''}>Yes</option><option${item.defaultIncluded?'':' selected'}>No</option></select></td>
+              <td><input class="en lc" type="number" value="${item.unitCost}" onchange="recalcAll()"></td>
+              <td><input class="en lm" type="number" value="${item.marginPct}" onchange="recalcAll()"></td>
+              <td class="n lu"></td><td class="n lt"></td>
+            </tr>`).join('')}
+        </tbody>
+      </table></div>
+    </div>`).join('');
+  container.appendChild(block);
+}
+
+// Reads + recomputes rows from the currently-visible vendor/product block only.
+// Never writes to .ls/.lc/.lm (the source-of-truth inputs) — only .lu/.lt
+// (computed display) — so admin edits to cost/margin/selection always persist,
+// both across recalcs and across switching vendor/product and back.
 function calcLicenses(g) {
-  // ── Exact translation of Excel "SCADA LICENSES" sheet ──
-  // D7  =IF(G118="Ignition", IF(G129="No","Yes","No"), "No")
-  // D17 =IF(G118="Ignition", IF(G129="Yes","Yes","No"), "No")
-  // D27 =IF(G118="Siemens",  IF(G129="No","Yes","No"), "No")  ← "Siemens" not full name
-  // D36 =IF(G118="Siemens",  IF(G129="Yes","Yes","No"), "No")
+  const blockId = 'lic-block-' + licenseSelection.vendor + '-' + licenseSelection.product;
+  const block = document.getElementById(blockId);
+  const rows = [];
+  let licTotal = 0;
+  if (block) {
+    block.querySelectorAll('tr').forEach(tr => {
+      const nameEl = tr.querySelector('.item-label');
+      const selEl  = tr.querySelector('.ls');
+      const cEl    = tr.querySelector('.lc');
+      const mEl    = tr.querySelector('.lm');
+      const uEl    = tr.querySelector('.lu');
+      const tEl    = tr.querySelector('.lt');
+      const included = selEl ? selEl.value === 'Yes' : true;
+      const cost   = parseFloat(cEl?.value) || 0;
+      const margin = parseFloat(mEl?.value) || 0;
+      const up     = unitPrice(cost, margin);
+      const total  = included ? up : 0;
+      if (uEl) uEl.textContent = fmt(up);
+      if (tEl) tEl.textContent = fmt(total);
+      tr.classList.toggle('lic-active', included);
+      tr.classList.toggle('lic-inactive', !included);
+      rows.push({ name: nameEl ? nameEl.textContent : '', included, cost, margin, up, total });
+      licTotal += total;
+    });
+  }
+  return { rows, licTotal };
 
-  const plat = g.platform;   // "Ignition" | "Siemens WinCC 7.5" | "Siemens WinCC 8.0" | "Provided By Customer"
-  const rem  = g.remoteAccess; // "Yes" | "No"
-
-  // If platform is provided by customer → all license sections are zero
-  const customerProvided = plat === 'Provided By Customer';
-
-  // Excel checks G118 = "Ignition" or "Siemens" (prefix match for both WinCC versions)
-  const isIgnition = !customerProvided && plat === 'Ignition';
-  const isSiemens  = !customerProvided && (plat === 'Siemens WinCC 7.5' || plat === 'Siemens WinCC 8.0');
-  const isSiem75   = !customerProvided && plat === 'Siemens WinCC 7.5';
-  const isSiem80   = !customerProvided && plat === 'Siemens WinCC 8.0';
-
-  // Active flags
-  const d7  = isIgnition && rem === 'No';   // Vision active
-  const d17 = isIgnition && rem === 'Yes';  // Perspective active
-  const d27 = isSiemens  && rem === 'No';   // WinCC 7.5 active
-  const d36 = isSiemens  && rem === 'Yes';  // WinCC 8.0 active
-
-  const MI = 15;   // Ignition margin
-  const MS = 50;   // Siemens margin
-
-  // ── D8 = G85 (Total PCs text): "One"|"Two"|"Three"|"Four"|"Five"
-  // E8 =IF(D8="one","1918", IF(D8="Two","2536", IF(D8="Three","3154",...)))
-  // Note: Excel is case-INsensitive in IF comparisons
-  const pcKey = (g.totalPCsText || '').toLowerCase();
-  const visionPCcost  = {one:1918, two:2536, three:3154, four:3772, five:4390};
-  const e8 = visionPCcost[pcKey] ?? 0;
-
-  // ── D18 = G134 (Sessions): "one"|"Two"|...|"Unlimited"
-  // E18 =IF(D18="one","2775", IF(D18="Two","4370",...,"Unlimited","11225"))
-  const sessKey = (g.simUsers || '').toLowerCase();
-  const perspSessCost = {one:2775, two:4370, three:5965, four:7560, five:9155, unlimited:11225};
-  const e18 = perspSessCost[sessKey] ?? 0;
-
-  // ── D28/D37 = G85 (Total PCs / Screens)
-  // E28 =IF(D28="one","1990.25", IF(D28="Two","2090.1", IF(D28="Three","3875.521",...))
-  const s75ScreenCost = {one:1990.25, two:2090.1, three:3875.521, four:9227.504, five:9227.504, unlimited:14628.1};
-  const e28 = s75ScreenCost[pcKey] ?? 0;
-
-  // E37 =IF(D36="No",0, IF(D37="one",2100.345, IF(D37="Two",3212.391, IF(D37="Three",3212.391,...)))
-  const s80ScreenCost = {one:2100.345, two:3212.391, three:3212.391, four:5880.264, five:5880.264, unlimited:12140.323};
-  const e37 = d36 ? (s80ScreenCost[pcKey] ?? 0) : 0;
-
-  // ── D31/D40 = G20 (Machines Available): "More Than Eleven"|"Six Till Ten"|"One Till Five"
-  // E31 =IF(D31="One Till Five","2868.97", IF(D31="Six Till Ten","3089.24", IF(D31="More Than Eleven","4669.01")))
-  const machKey = (g.machinesAvail || '').toLowerCase();
-  const machCost75 = {'one till five':2868.97, 'six till ten':3089.24, 'more than eleven':4669.01}[machKey] ?? 0;
-  // E40 =IF(D36="No",0, IF(D40="One Till Five",3211.53, IF(D40="Six Till Ten",3948.92, IF(D40="More Than Eleven",4743.48))))
-  const machCost80 = d36 ? ({'one till five':3211.53, 'six till ten':3948.92, 'more than eleven':4743.48}[machKey] ?? 0) : 0;
-
-  // ── D29 Long Term Archiving WinCC 7.5
-  // =IF(AND(D27="yes", G173="yes"), "Yes", "No")
-  const d29 = d27 && g.longArchive === 'Yes';
-  // E29 =IF(D29="Yes","500",0)
-  const e29 = d29 ? 500 : 0;
-
-  // ── D38 Long Term Archiving WinCC 8.0
-  // =IF(AND(D36="yes", G173="yes"), "Yes", "No")
-  const d38 = d36 && g.longArchive === 'Yes';
-  // E38 depends on machines count:
-  // =IF(AND(D40="more than eleven",D38="yes",D36="yes"),1222.99, IF(AND(D40="one till five",...),828.7, IF(AND(D40="six till ten",...),894.41, 0)))
-  const e38 = d38 ? ({'more than eleven':1222.99, 'one till five':828.7, 'six till ten':894.41}[machKey] ?? 0) : 0;
-
-  // ── D30/D39 Supplier Machine Controllers
-  // =IF(COUNTIF('Non-Technica Equipment'!E10:E54, "*OPC*") > 0, "Yes", "No")
-  // We count supplier equipment rows where protocol contains "OPC"
-  const d30 = countOPC('equip-s-body');
-  const e30 = d30 ? 1267 : 0;
-  const d39 = d30; // same formula for WinCC 8.0
-  const e39 = e30;
-
-  // ── D10/D20 Reporting Module = G140 (Dynamic Reports)
-  const dynRep = g.dynReports === 'Yes';
-
-  // ── D11/D21 Alarm Notification = G195
-  const alarmOn = g.alarmEmail === 'Yes';
-
-  // Helper: unit price = E / (1 - F/100)
-  const up = (cost, m) => (parseFloat(cost) > 0 && m < 100) ? parseFloat(cost) / (1 - m/100) : 0;
-
-  // ══ BUILD ROWS ══════════════════════════════════════════════
-
-  // ── IGNITION VISION (rows 7-11, total H14) ──
-  // H8 =IF(D7="No",0, IF(D8="one"|"Two"|..., 1*G8, 0))   → active only if d7=Yes
-  const visionRows = [
-    { name:"Ignition Platform (Required)", active:d7,               cost:0,             margin:MI },
-    { name:`How Many PC's (${g.totalPCsText})`, active:d7,          cost:d7?e8:0,        margin:MI },
-    { name:"Data Archiving",               active:d7,               cost:d7?2365:0,      margin:MI },
-    { name:"Ignition Reporting Module",    active:d7&&dynRep,        cost:d7&&dynRep?3900:0, margin:MI },
-    { name:"Alarm Notification",           active:d7&&alarmOn,       cost:d7&&alarmOn?2245:0, margin:MI },
-  ];
-  let visionTotal = 0;
-  visionRows.forEach(r => { r.up=up(r.cost,r.margin); r.total=r.active?r.up:0; visionTotal+=r.total; });
-
-  // ── IGNITION PERSPECTIVE (rows 17-21, total H24) ──
-  // H17 =IF(D17="YES", 1*G17, 0)
-  // H18 =IF(D17="No",0, IF(D18="one"|...|"Unlimited", 1*G18, 0))
-  const perspRows = [
-    { name:"Ignition Platform (Required)",      active:d17,               cost:d17?1100:0,       margin:MI },
-    { name:`How Many Sessions (${g.simUsers})`, active:d17,               cost:d17?e18:0,        margin:MI },
-    { name:"Data Archiving",                    active:d17,               cost:d17?2365:0,       margin:MI },
-    { name:"Ignition Reporting Module",         active:d17&&dynRep,        cost:d17&&dynRep?3900:0, margin:MI },
-    { name:"Alarm Notification",                active:d17&&alarmOn,       cost:d17&&alarmOn?2245:0, margin:MI },
-  ];
-  let perspTotal = 0;
-  perspRows.forEach(r => { r.up=up(r.cost,r.margin); r.total=r.active?r.up:0; perspTotal+=r.total; });
-
-  // ── SIEMENS WinCC 7.5 (rows 27-31, total H33) ──
-  // H28 =IF(D27="No",0, IF(D28="one"|...|"Unlimited", 1*G28, 0))
-  // H31 =IF(D27="No",0, IF(D31="YES",1*G31,0))  ← note D31 = machines text, not "YES"
-  //   → Excel bug: H31 uses IF(D31="YES") which never matches text — so machines cost is always 0 in current file
-  //   → But E31 formula calculates correctly — we apply it directly since the intent is clear
-  const w75Rows = [
-    { name:"WinCC 7.5 Platform",              active:d27,          cost:0,             margin:MS },
-    { name:`How Many Screens (${g.totalPCsText})`, active:d27,     cost:d27?e28:0,     margin:MS },
-    { name:"Long Term Archiving",             active:d29,          cost:d29?e29:0,     margin:MS },
-    { name:"Supplier Machine Controllers",    active:d30&&d27,     cost:d30&&d27?e30:0,margin:MS },
-    { name:"Total Machines on Site",          active:d27,          cost:d27?machCost75:0, margin:MS },
-  ];
-  let w75Total = 0;
-  w75Rows.forEach(r => { r.up=up(r.cost,r.margin); r.total=r.active?r.up:0; w75Total+=r.total; });
-
-  // ── SIEMENS WinCC 8.0 (rows 36-40, total H42) ──
-  // H36 =G36  (not IF — always include platform cost when active)
-  // H40 =IF(D36="No",0, IF(D36="YES",1*G40,0)) ← same intent as D27: active when d36=Yes
-  const w80Rows = [
-    { name:"WinCC 8.0 Platform",              active:d36,          cost:d36?3014.388:0, margin:MS },
-    { name:`How Many Screens (${g.totalPCsText})`, active:d36,     cost:e37,           margin:MS },
-    { name:"Long Term Archiving",             active:d38,          cost:d38?e38:0,     margin:MS },
-    { name:"Supplier Machine Controllers",    active:d39&&d36,     cost:d39&&d36?e39:0,margin:MS },
-    { name:"Total Machines on Site",          active:d36,          cost:d36?machCost80:0, margin:MS },
-  ];
-  let w80Total = 0;
-  w80Rows.forEach(r => { r.up=up(r.cost,r.margin); r.total=r.active?r.up:0; w80Total+=r.total; });
-
-  // H46 =SUM(H14, H24, H33, H42)
-  const licTotal = visionTotal + perspTotal + w75Total + w80Total;
-  return { visionRows, visionTotal, perspRows, perspTotal, w75Rows, w75Total, w80Rows, w80Total, licTotal,
-           d7, d17, d27, d36 };
 }
 
 // ════════════════════════════════════════════════════════════════
@@ -1436,29 +1369,6 @@ function calcMandays(g, hw) {
 // ════════════════════════════════════════════════════════════════
 //  RENDER helpers
 // ════════════════════════════════════════════════════════════════
-function renderLicRows(bodyId, totalId, rows, total) {
-  const tb = document.getElementById(bodyId); if(!tb) return;
-  tb.querySelectorAll('tr').forEach((tr, i) => {
-    const r = rows[i]; if(!r) return;
-    // Visual active/inactive state
-    tr.classList.toggle('lic-active',   !!r.active);
-    tr.classList.toggle('lic-inactive', !r.active);
-    // Update name cell (1st td, not an input)
-    const nameCell = tr.querySelector('td:first-child');
-    if(nameCell && !nameCell.querySelector('input')) nameCell.textContent = r.name;
-    // Update cost input
-    const cEl = tr.querySelector('.lc');
-    if(cEl && !cEl.matches(':focus')) cEl.value = r.cost.toFixed(2);
-    // Unit price
-    const uEl = tr.querySelector('.lu');
-    if(uEl) uEl.textContent = r.up > 0 ? fmt(r.up) : '$0';
-    // Total
-    const tEl = tr.querySelector('.lt');
-    if(tEl) tEl.textContent = r.total > 0 ? fmt(r.total) : '$0';
-  });
-  sv(totalId, fmt(total));
-}
-
 function renderHwRows(bodyId, totalId, rows, total) {
   const tb = document.getElementById(bodyId); if(!tb) return;
   const trs = tb.querySelectorAll('tr');
@@ -1501,30 +1411,19 @@ function recalcAll() {
   const md  = calcMandays(g, hw);
 
   // ── LICENSES ──
-  renderLicRows('vision-body', 'vision-total', lic.visionRows, lic.visionTotal);
-  renderLicRows('persp-body',  'persp-total',  lic.perspRows,  lic.perspTotal);
-  renderLicRows('w75-body',    'w75-total',     lic.w75Rows,    lic.w75Total);
-  renderLicRows('w80-body',    'w80-total',     lic.w80Rows,    lic.w80Total);
+  // calcLicenses() already wrote .lu/.lt into the dynamically-rendered module
+  // rows in the same pass, so there's nothing left to render here — just
+  // reflect the totals and platform label.
   sv('lic-total-final', fmt(lic.licTotal));
 
-  const activePlat = lic.perspTotal>0 ? 'Ignition Perspective'
-    : lic.visionTotal>0 ? 'Ignition Vision'
-    : lic.w75Total>0    ? 'WinCC 7.5'
-    : lic.w80Total>0    ? 'WinCC 8.0' : 'None';
-  sv('d-platform', activePlat);
+  const selVendor  = licenseCatalog?.vendors?.[licenseSelection.vendor];
+  const selProduct = selVendor?.products?.[licenseSelection.product];
+  const platformLabel = licenseSelection.vendor === 'customer'
+    ? 'Provided By Customer'
+    : (selVendor && selProduct ? `${selVendor.label} — ${selProduct.label}` : '—');
+  sv('d-platform', platformLabel);
 
-  // Update per-section active badges
-  const setBadge = (id, active) => {
-    const el = document.getElementById(id); if(!el) return;
-    el.textContent = active ? 'ACTIVE' : 'INACTIVE';
-    el.className = 'badge ' + (active ? 'b-yes' : 'b-no');
-  };
-  setBadge('badge-persp',  lic.d17);
-  setBadge('badge-vision', lic.d7);
-  setBadge('badge-w75',    lic.d27);
-  setBadge('badge-w80',    lic.d36);
-
-  // Show/hide customer platform note
+  // Show/hide customer platform note (General Info's simplified Yes/No toggle)
   const custNote = document.getElementById('platform-customer-note');
   if (custNote) custNote.style.display = gv('g-platform') === 'Provided By Customer' ? 'flex' : 'none';
 
@@ -1534,8 +1433,8 @@ function recalcAll() {
 
   const licNote = document.getElementById('lic-note');
   if(licNote) {
-    if(lic.licTotal === 0) {
-      licNote.textContent = '⚠ No license active. Check General Info → SCADA Platform + Remote Access.';
+    if(lic.licTotal === 0 && licenseSelection.vendor !== 'customer') {
+      licNote.textContent = '⚠ No license modules selected. Pick a vendor + product above and mark at least one module "Selected".';
       licNote.style.display = 'flex';
     } else { licNote.style.display = 'none'; }
   }
@@ -1604,8 +1503,7 @@ function recalcAll() {
       costBasis += c * q;
     });
   });
-  [...lic.visionRows,...lic.perspRows,...lic.w75Rows,...lic.w80Rows]
-    .forEach(r => costBasis += r.cost);   // qty=1 for all license items
+  lic.rows.forEach(r => { if (r.included) costBasis += r.cost; });   // qty=1 for all license items
 
   // F123 = (H123 - E123) / H123 * 100
   const grossMargin = finalPrice > 0 ? ((finalPrice - costBasis) / finalPrice * 100) : 0;
@@ -1654,7 +1552,7 @@ function recalcAll() {
 
 function renderBreakdown(lic, hw, eng, travel) {
   const items = [
-    {label:'SCADA Licenses',     val:lic,    color:'var(--blue)'},
+    {label:'Smart Factory License', val:lic,    color:'var(--blue)'},
     {label:'Hardware',           val:hw,     color:'#7c6ef5'},
     {label:'Engineering Mandays',val:eng,    color:'var(--amber)'},
     {label:'Travel & Expenses',  val:travel, color:'#f5736a'},
@@ -1799,7 +1697,11 @@ function exportOffer() {
   const finalPrice = purchasing + mdTotal;
   const clientName = document.getElementById('g-name')?.value || '—';
   const clientLoc  = document.getElementById('g-loc')?.value  || '—';
-  const platform   = g.platform;
+  const selVendorX  = licenseCatalog?.vendors?.[licenseSelection.vendor];
+  const selProductX = selVendorX?.products?.[licenseSelection.product];
+  const platform    = licenseSelection.vendor === 'customer'
+    ? 'Provided By Customer'
+    : (selVendorX && selProductX ? `${selVendorX.label} — ${selProductX.label}` : '—');
   const today      = new Date().toLocaleDateString('en-GB', {day:'2-digit',month:'short',year:'numeric'});
 
   // Build offer rows
@@ -2015,7 +1917,7 @@ function exportOffer() {
 <!-- SUMMARY -->
 <div class="summary-grid">
   <div class="sum-card">
-    <div class="sum-label">SCADA Licenses</div>
+    <div class="sum-label">Smart Factory License</div>
     <div class="sum-value c-blue">${fmtN(licTotal)}</div>
     <div class="sum-sub">${platform}</div>
   </div>
@@ -2041,7 +1943,7 @@ function exportOffer() {
   <div class="breakdown-box">
     <div class="breakdown-title">Cost Breakdown</div>
     ${[
-      {label:'SCADA Licenses', val:licTotal, color:'#2563eb'},
+      {label:'Smart Factory License', val:licTotal, color:'#2563eb'},
       {label:'Hardware', val:hwTotal, color:'#7c6ef5'},
       {label:'Engineering', val:mdEngTot, color:'#d97706'},
       {label:'Travel & Expenses', val:mdTravTot, color:'#f56565'},
