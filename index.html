@@ -572,60 +572,51 @@ hr{border:none;border-top:1px solid var(--b1);margin:16px 0}
   <div class="lock-notice" id="lock-hw" style="display:none">🔒 Pricing fields are read-only. Sign in as an authorized user to edit.</div>
   <div class="ph"><div><div class="ph-title">Hardware</div><div class="ph-sub">Edit qty, cost, margin — all sections live-calculate</div></div></div>
 
-  <!-- Server Room -->
+  <!-- Category Selection -->
   <div class="card">
+    <div class="card-head">Hardware Categories</div>
+    <div style="display:flex;gap:22px;flex-wrap:wrap">
+      <label style="display:flex;align-items:center;gap:8px;font-size:13px;cursor:pointer">
+        <input type="checkbox" id="cat-serverRoom" checked onchange="toggleHwCategory('serverRoom')"> Server Room
+      </label>
+      <label style="display:flex;align-items:center;gap:8px;font-size:13px;cursor:pointer">
+        <input type="checkbox" id="cat-operatorPanel" onchange="toggleHwCategory('operatorPanel')"> Operator Panel
+      </label>
+      <label style="display:flex;align-items:center;gap:8px;font-size:13px;cursor:pointer">
+        <input type="checkbox" id="cat-commercialPC" onchange="toggleHwCategory('commercialPC')"> Commercial PC Hardware
+      </label>
+    </div>
+    <div class="note" style="margin-top:12px;margin-bottom:0">Pick any combination. Each category loads its own predefined component list below — sizes, qty, cost and margin are all still editable per row.</div>
+  </div>
+
+  <!-- Server Room -->
+  <div class="card" id="card-serverRoom">
     <div class="card-head">Server Room Hardware</div>
     <div class="tbl-wrap"><table>
       <thead><tr><th>Item</th><th>QTY</th><th>Unit Cost ($)</th><th>Margin (%)</th><th>Unit Price</th><th>Total</th></tr></thead>
       <tbody class="hw-body" id="hw-server">
-        <tr><td>IPC</td><td><input class="en hq" type="number" value="1" onchange="recalcAll()"></td><td><input class="en hc" type="number" value="1570.6" onchange="recalcAll()"></td><td><input class="en hm" type="number" value="55" onchange="recalcAll()"></td><td class="n hu"></td><td class="n ht"></td></tr>
-        <tr><td>Panel + Additional Accessories</td><td><input class="en hq" type="number" value="1" onchange="recalcAll()"></td><td><input class="en hc" type="number" value="840" onchange="recalcAll()"></td><td><input class="en hm" type="number" value="55" onchange="recalcAll()"></td><td class="n hu"></td><td class="n ht"></td></tr>
-        <tr><td>Electrical Accessories</td><td><input class="en hq" type="number" value="1" onchange="recalcAll()"></td><td><input class="en hc" type="number" value="150" onchange="recalcAll()"></td><td><input class="en hm" type="number" value="55" onchange="recalcAll()"></td><td class="n hu"></td><td class="n ht"></td></tr>
-        <tr><td>Power Supply</td><td><input class="en hq" type="number" value="1" onchange="recalcAll()"></td><td><input class="en hc" type="number" value="95" onchange="recalcAll()"></td><td><input class="en hm" type="number" value="55" onchange="recalcAll()"></td><td class="n hu"></td><td class="n ht"></td></tr>
-        <tr><td>PC Monitors</td><td><input class="en hq" type="number" value="1" onchange="recalcAll()"></td><td><input class="en hc" type="number" value="350" onchange="recalcAll()"></td><td><input class="en hm" type="number" value="55" onchange="recalcAll()"></td><td class="n hu"></td><td class="n ht"></td></tr>
-        <tr><td>HDMI Cables</td><td><input class="en hq" type="number" value="1" onchange="recalcAll()"></td><td><input class="en hc" type="number" value="40" onchange="recalcAll()"></td><td><input class="en hm" type="number" value="55" onchange="recalcAll()"></td><td class="n hu"></td><td class="n ht"></td></tr>
-        <tr><td>HDMI Extenders</td><td><input class="en hq" type="number" value="1" onchange="recalcAll()"></td><td><input class="en hc" type="number" value="100" onchange="recalcAll()"></td><td><input class="en hm" type="number" value="55" onchange="recalcAll()"></td><td class="n hu"></td><td class="n ht"></td></tr>
-        <tr><td>Ethernet Cables</td><td><input class="en hq" type="number" value="1" onchange="recalcAll()"></td><td><input class="en hc" type="number" value="10" onchange="recalcAll()"></td><td><input class="en hm" type="number" value="55" onchange="recalcAll()"></td><td class="n hu"></td><td class="n ht"></td></tr>
-        <tr><td>Printer</td><td><input class="en hq" type="number" value="1" onchange="recalcAll()"></td><td><input class="en hc" type="number" value="100" onchange="recalcAll()"></td><td><input class="en hm" type="number" value="55" onchange="recalcAll()"></td><td class="n hu"></td><td class="n ht"></td></tr>
-        <tr><td>Mouse + Keyboard</td><td><input class="en hq" type="number" value="1" onchange="recalcAll()"></td><td><input class="en hc" type="number" value="70" onchange="recalcAll()"></td><td><input class="en hm" type="number" value="55" onchange="recalcAll()"></td><td class="n hu"></td><td class="n ht"></td></tr>
-        <tr><td>SWITCH</td><td><input class="en hq" type="number" value="1" onchange="recalcAll()"></td><td><input class="en hc" type="number" value="390" onchange="recalcAll()"></td><td><input class="en hm" type="number" value="55" onchange="recalcAll()"></td><td class="n hu"></td><td class="n ht"></td></tr>
       </tbody>
       <tfoot><tr class="tr-total"><td colspan="5">TOTAL — Server Room</td><td class="n" id="hw-server-total"></td></tr></tfoot>
     </table></div>
   </div>
 
   <!-- Operator Panel -->
-  <div class="card">
+  <div class="card" id="card-operatorPanel" style="display:none">
     <div class="card-head">Operator Panel Hardware</div>
     <div class="tbl-wrap"><table>
       <thead><tr><th>Item</th><th>QTY</th><th>Unit Cost ($)</th><th>Margin (%)</th><th>Unit Price</th><th>Total</th></tr></thead>
       <tbody class="hw-body" id="hw-op">
-        <tr><td>PC Touch Screen</td><td><input class="en hq" type="number" value="0" onchange="recalcAll()"></td><td><input class="en hc" type="number" value="2384.13" onchange="recalcAll()"></td><td><input class="en hm" type="number" value="55" onchange="recalcAll()"></td><td class="n hu"></td><td class="n ht"></td></tr>
-        <tr><td>Operator Panel</td><td><input class="en hq" type="number" value="0" onchange="recalcAll()"></td><td><input class="en hc" type="number" value="2112" onchange="recalcAll()"></td><td><input class="en hm" type="number" value="55" onchange="recalcAll()"></td><td class="n hu"></td><td class="n ht"></td></tr>
-        <tr><td>Power Supply</td><td><input class="en hq" type="number" value="0" onchange="recalcAll()"></td><td><input class="en hc" type="number" value="95" onchange="recalcAll()"></td><td><input class="en hm" type="number" value="55" onchange="recalcAll()"></td><td class="n hu"></td><td class="n ht"></td></tr>
-        <tr><td>Ethernet Cables</td><td><input class="en hq" type="number" value="0" onchange="recalcAll()"></td><td><input class="en hc" type="number" value="10" onchange="recalcAll()"></td><td><input class="en hm" type="number" value="55" onchange="recalcAll()"></td><td class="n hu"></td><td class="n ht"></td></tr>
-        <tr><td>Printer</td><td><input class="en hq" type="number" value="0" onchange="recalcAll()"></td><td><input class="en hc" type="number" value="100" onchange="recalcAll()"></td><td><input class="en hm" type="number" value="55" onchange="recalcAll()"></td><td class="n hu"></td><td class="n ht"></td></tr>
-        <tr><td>Mouse + Keyboard</td><td><input class="en hq" type="number" value="0" onchange="recalcAll()"></td><td><input class="en hc" type="number" value="820" onchange="recalcAll()"></td><td><input class="en hm" type="number" value="55" onchange="recalcAll()"></td><td class="n hu"></td><td class="n ht"></td></tr>
-        <tr><td>Panel Accessories</td><td><input class="en hq" type="number" value="0" onchange="recalcAll()"></td><td><input class="en hc" type="number" value="150" onchange="recalcAll()"></td><td><input class="en hm" type="number" value="55" onchange="recalcAll()"></td><td class="n hu"></td><td class="n ht"></td></tr>
       </tbody>
       <tfoot><tr class="tr-total"><td colspan="5">TOTAL — Operator Panel</td><td class="n" id="hw-op-total"></td></tr></tfoot>
     </table></div>
   </div>
 
   <!-- Commercial PC -->
-  <div class="card">
+  <div class="card" id="card-commercialPC" style="display:none">
     <div class="card-head">Commercial PC Hardware</div>
     <div class="tbl-wrap"><table>
       <thead><tr><th>Item</th><th>QTY</th><th>Unit Cost ($)</th><th>Margin (%)</th><th>Unit Price</th><th>Total</th></tr></thead>
       <tbody class="hw-body" id="hw-com">
-        <tr><td>Commercial PC</td><td><input class="en hq" type="number" value="0" onchange="recalcAll()"></td><td><input class="en hc" type="number" value="647.99" onchange="recalcAll()"></td><td><input class="en hm" type="number" value="55" onchange="recalcAll()"></td><td class="n hu"></td><td class="n ht"></td></tr>
-        <tr><td>Screens</td><td><input class="en hq" type="number" value="0" onchange="recalcAll()"></td><td><input class="en hc" type="number" value="250" onchange="recalcAll()"></td><td><input class="en hm" type="number" value="55" onchange="recalcAll()"></td><td class="n hu"></td><td class="n ht"></td></tr>
-        <tr><td>Network Switch</td><td><input class="en hq" type="number" value="0" onchange="recalcAll()"></td><td><input class="en hc" type="number" value="40" onchange="recalcAll()"></td><td><input class="en hm" type="number" value="55" onchange="recalcAll()"></td><td class="n hu"></td><td class="n ht"></td></tr>
-        <tr><td>HDMI</td><td><input class="en hq" type="number" value="0" onchange="recalcAll()"></td><td><input class="en hc" type="number" value="40" onchange="recalcAll()"></td><td><input class="en hm" type="number" value="55" onchange="recalcAll()"></td><td class="n hu"></td><td class="n ht"></td></tr>
-        <tr><td>Ethernet Cables</td><td><input class="en hq" type="number" value="0" onchange="recalcAll()"></td><td><input class="en hc" type="number" value="10" onchange="recalcAll()"></td><td><input class="en hm" type="number" value="55" onchange="recalcAll()"></td><td class="n hu"></td><td class="n ht"></td></tr>
-        <tr><td>Printer</td><td><input class="en hq" type="number" value="0" onchange="recalcAll()"></td><td><input class="en hc" type="number" value="100" onchange="recalcAll()"></td><td><input class="en hm" type="number" value="55" onchange="recalcAll()"></td><td class="n hu"></td><td class="n ht"></td></tr>
-        <tr><td>Mouse + Keyboard</td><td><input class="en hq" type="number" value="0" onchange="recalcAll()"></td><td><input class="en hc" type="number" value="70" onchange="recalcAll()"></td><td><input class="en hm" type="number" value="55" onchange="recalcAll()"></td><td class="n hu"></td><td class="n ht"></td></tr>
-        <tr><td>Plugs Extenders</td><td><input class="en hq" type="number" value="0" onchange="recalcAll()"></td><td><input class="en hc" type="number" value="50" onchange="recalcAll()"></td><td><input class="en hm" type="number" value="55" onchange="recalcAll()"></td><td class="n hu"></td><td class="n ht"></td></tr>
       </tbody>
       <tfoot><tr class="tr-total"><td colspan="5">TOTAL — Commercial PC</td><td class="n" id="hw-com-total"></td></tr></tfoot>
     </table></div>
@@ -789,12 +780,15 @@ hr{border:none;border-top:1px solid var(--b1);margin:16px 0}
     <div class="tbl-wrap"><table>
       <thead><tr><th>Item</th><th>Source / Notes</th></tr></thead>
       <tbody>
-        <tr><td>IPC</td><td><a href="https://www.advantech.com/emt/search/?q=MIC-770%20V3" target="_blank" style="color:var(--blue)">Advantech MIC-770 V3</a></td></tr>
-        <tr><td>Panel, Fuses, Relays, Monitors, HDMI, Ethernet, Cable Glands</td><td class="dim">From Electrical Team</td></tr>
-        <tr><td>Power Supply</td><td><a href="https://sieportal.siemens.com" target="_blank" style="color:var(--blue)">Siemens SIE Portal</a></td></tr>
-        <tr><td>HDMI Extenders</td><td><a href="https://macrotronics.net/hdmi-120meters-hdmi-extender-over-ethernet-cat6-with-ir-h264-p-19885.html" target="_blank" style="color:var(--blue)">Macrotronics</a></td></tr>
-        <tr><td>Mouse + Keyboard</td><td><a href="https://mojitech.net" target="_blank" style="color:var(--blue)">Mojitech.net — Microsoft Wireless Desktop 2000</a></td></tr>
-        <tr><td>SWITCH</td><td><a href="https://www.siemens.com/global/en/products/automation/industrial-communication/industrial-ethernet/industrial-ethernet-switches-scalance-x.html" target="_blank" style="color:var(--blue)">Siemens SCALANCE X</a></td></tr>
+        <tr><td>Panel Enclosure (Small/Medium/Large)</td><td><a href="https://www.rittal.com/com-en/products/PG20231215SCH101/PG20231512SCH301/PRO0026" target="_blank" style="color:var(--blue)">Rittal AE Compact Enclosures</a></td></tr>
+        <tr><td>Rugged Industrial PC</td><td><a href="https://www.advantech.com/emt/products/6c53bcc8-1490-4e1e-a8d2-a56dc9a7f254/mic-770-v3/mod_2801e5b6-eec6-43a0-81f7-73efef338b54" target="_blank" style="color:var(--blue)">Advantech MIC-770 V3</a></td></tr>
+        <tr><td>Rugged Managed Ethernet Switch</td><td><a href="https://www.siemens.com/global/en/products/automation/industrial-communication/industrial-ethernet/industrial-ethernet-switches-scalance-x.html" target="_blank" style="color:var(--blue)">Siemens SCALANCE X</a></td></tr>
+        <tr><td>Rugged DIN-Rail Power Supply (24V)</td><td><a href="https://www.siemens.com/global/en/products/automation/power-supply.html" target="_blank" style="color:var(--blue)">Siemens SITOP</a></td></tr>
+        <tr><td>Rugged Industrial WiFi Access Point</td><td><a href="https://www.siemens.com/global/en/products/automation/industrial-communication/industrial-wireless-lan/scalance-w770-access-point-scalance-w730-client-module.html" target="_blank" style="color:var(--blue)">Siemens SCALANCE W</a></td></tr>
+        <tr><td>Rugged Industrial Monitor/Display</td><td class="dim">Estimated — confirm with supplier</td></tr>
+        <tr><td>Rugged UPS / Battery Backup</td><td><a href="https://www.phoenixcontact.com/en-pc/products/uninterruptible-power-supplies-ups/dc-ups" target="_blank" style="color:var(--blue)">Phoenix Contact QUINT-UPS</a></td></tr>
+        <tr><td>DIN Rail Terminal Blocks &amp; Circuit Breakers</td><td class="dim">From Electrical Team</td></tr>
+        <tr><td>Cable Glands &amp; Panel Wiring Accessories</td><td class="dim">From Electrical Team</td></tr>
       </tbody>
     </table></div>
   </div>
@@ -804,11 +798,13 @@ hr{border:none;border-top:1px solid var(--b1);margin:16px 0}
     <div class="tbl-wrap"><table>
       <thead><tr><th>Item</th><th>Source / Notes</th></tr></thead>
       <tbody>
-        <tr><td>PC Touch Screen</td><td><a href="https://www.advantech.com/emt/products/ppc-600-series-_-salable-computing/sub_1-2jklri" target="_blank" style="color:var(--blue)">Advantech PPC-600 Series</a></td></tr>
-        <tr><td>Operator Panel</td><td class="dim">From Mechanical Team</td></tr>
-        <tr><td>Power Supply</td><td><a href="https://sieportal.siemens.com" target="_blank" style="color:var(--blue)">Siemens SIE Portal</a></td></tr>
-        <tr><td>Ethernet, Cable Glands</td><td class="dim">From Electrical Team</td></tr>
-        <tr><td>Mouse + Keyboard</td><td><a href="https://mojitech.net" target="_blank" style="color:var(--blue)">Mojitech.net</a></td></tr>
+        <tr><td>Panel Enclosure (Small/Medium)</td><td><a href="https://www.rittal.com/com-en/products/PG20231215SCH101/PG20231512SCH301/PRO0026" target="_blank" style="color:var(--blue)">Rittal AE Compact Enclosures</a></td></tr>
+        <tr><td>Rugged Touchscreen Panel PC / HMI</td><td><a href="https://www.advantech.com/emt/products/ppc-600-series-_-salable-computing/sub_1-2jklri" target="_blank" style="color:var(--blue)">Advantech PPC-600 Series</a></td></tr>
+        <tr><td>Rugged DIN-Rail Power Supply (24V)</td><td><a href="https://www.siemens.com/global/en/products/automation/power-supply.html" target="_blank" style="color:var(--blue)">Siemens SITOP</a></td></tr>
+        <tr><td>Rugged Compact Industrial Switch (5-port)</td><td class="dim">Estimated — confirm with supplier</td></tr>
+        <tr><td>E-Stop &amp; Pushbutton/Indicator Kit</td><td class="dim">From Electrical Team</td></tr>
+        <tr><td>Rugged Ethernet Cabling</td><td class="dim">From Electrical Team</td></tr>
+        <tr><td>Mounting Arm / Bracket Kit</td><td class="dim">From Mechanical Team</td></tr>
       </tbody>
     </table></div>
   </div>
@@ -818,8 +814,10 @@ hr{border:none;border-top:1px solid var(--b1);margin:16px 0}
     <div class="tbl-wrap"><table>
       <thead><tr><th>Item</th><th>Source / Notes</th></tr></thead>
       <tbody>
-        <tr><td>Commercial PC</td><td><a href="https://ayoubcomputers.com/intel-nuc-12-pro-kit-core-i7-1260p-mini-pc-kit-nuc12wshi7000/" target="_blank" style="color:var(--blue)">Ayoub Computers — Intel NUC 12 Pro</a></td></tr>
-        <tr><td>Screens, Network Switch, HDMI, Ethernet, Plugs Extenders</td><td class="dim">From Electrical Team</td></tr>
+        <tr><td>Commercial Mini PC</td><td><a href="https://ayoubcomputers.com/intel-nuc-12-pro-kit-core-i7-1260p-mini-pc-kit-nuc12wshi7000/" target="_blank" style="color:var(--blue)">Ayoub Computers — Intel NUC 12 Pro</a></td></tr>
+        <tr><td>Standard Monitor/Screen</td><td><a href="https://www.dell.com/en-us/shop/computer-monitors/ar/8605/24-inch" target="_blank" style="color:var(--blue)">Dell 24" Monitors</a></td></tr>
+        <tr><td>Standard Network Switch</td><td><a href="https://www.amazon.com/TP-Link-Gigabit-Ethernet-Network-Switch/dp/B00A121WN6" target="_blank" style="color:var(--blue)">TP-Link 8-Port Unmanaged Switch</a></td></tr>
+        <tr><td>HDMI Cable, Ethernet Cable, Printer, Power Strip</td><td class="dim">From Electrical Team</td></tr>
         <tr><td>Mouse + Keyboard</td><td><a href="https://mojitech.net" target="_blank" style="color:var(--blue)">Mojitech.net</a></td></tr>
       </tbody>
     </table></div>
@@ -1158,90 +1156,116 @@ function calcLicenses(g) {
 //  HARDWARE — rows 14–59 of "Technica Only SCADA BUDGETING"
 //  All D (qty) cells computed from General Info exactly as Excel
 // ════════════════════════════════════════════════════════════════
+// ─── HARDWARE CATALOG (data/hardware-catalog.json) ────────────────
+let hwCatalog = null;
+let hwCategoryEnabled = { serverRoom: true, operatorPanel: false, commercialPC: false };
+
+async function loadHwCatalog() {
+  try {
+    const res = await fetch('data/hardware-catalog.json', {cache:'no-store'});
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+    hwCatalog = await res.json();
+    renderHwCatalogRows('serverRoom', 'hw-server');
+    renderHwCatalogRows('operatorPanel', 'hw-op');
+    renderHwCatalogRows('commercialPC', 'hw-com');
+    recalcAll();
+  } catch (e) {
+    console.error('Failed to load data/hardware-catalog.json:', e);
+  }
+}
+loadHwCatalog();
+
+// Build the predefined item rows for one hardware category from the catalog.
+// Runs once (on catalog load, or the first time a category is checked) —
+// after that the DOM is the source of truth, so qty/cost/margin edits stick.
+function renderHwCatalogRows(catKey, bodyId) {
+  const tb = document.getElementById(bodyId);
+  if (!tb || !hwCatalog) return;
+  const cat = hwCatalog.categories[catKey];
+  if (!cat) return;
+  tb.innerHTML = cat.items.map(item => {
+    let sizeSelect = '';
+    let defaultCost = item.unitCost;
+    if (item.hasSizes && cat.panelSizes) {
+      const di = cat.defaultSizeIndex || 0;
+      defaultCost = cat.panelSizes[di].cost;
+      sizeSelect = `<br><select class="esel hw-size" onchange="applyPanelSize(this)">` +
+        cat.panelSizes.map((s,i) => `<option value="${s.cost}"${i===di?' selected':''}>${s.label}</option>`).join('') +
+        `</select>`;
+    }
+    const note = (item.note || '').replace(/"/g, '&quot;');
+    return `<tr title="${note}">
+      <td><span class="item-label">${item.name}</span>${sizeSelect}</td>
+      <td><input class="en hq" type="number" value="${item.defaultQty}" onchange="recalcAll()"></td>
+      <td><input class="en hc" type="number" value="${defaultCost}" onchange="recalcAll()"></td>
+      <td><input class="en hm" type="number" value="${item.marginPct}" onchange="recalcAll()"></td>
+      <td class="n hu"></td><td class="n ht"></td>
+    </tr>`;
+  }).join('');
+}
+
+// Panel Enclosure size picker — pushes the selected size's cost into that row's cost field.
+function applyPanelSize(selectEl) {
+  const tr = selectEl.closest('tr');
+  const costInput = tr ? tr.querySelector('.hc') : null;
+  if (costInput) costInput.value = selectEl.value;
+  recalcAll();
+}
+
+// Show/hide a category's card and include/exclude it from the totals.
+function toggleHwCategory(catKey) {
+  const checkbox = document.getElementById('cat-' + catKey);
+  hwCategoryEnabled[catKey] = checkbox.checked;
+  const card = document.getElementById('card-' + catKey);
+  if (card) card.style.display = checkbox.checked ? '' : 'none';
+  const bodyIdByCat = { serverRoom:'hw-server', operatorPanel:'hw-op', commercialPC:'hw-com' };
+  const tb = document.getElementById(bodyIdByCat[catKey]);
+  if (checkbox.checked && tb && tb.children.length === 0) {
+    renderHwCatalogRows(catKey, bodyIdByCat[catKey]);
+  }
+  recalcAll();
+}
+
+// Read the current live qty/cost/margin from a catalog-seeded hardware table.
+// Used instead of a formula model so admin edits actually persist.
+function readHwCategoryFromDOM(bodyId, enabled) {
+  const tb = document.getElementById(bodyId);
+  if (!tb) return [];
+  const rows = [];
+  tb.querySelectorAll('tr').forEach(tr => {
+    const nameEl = tr.querySelector('.item-label');
+    const name = nameEl ? nameEl.textContent : (tr.querySelector('td')?.textContent.trim() || '');
+    const qty    = enabled ? (parseFloat(tr.querySelector('.hq')?.value) || 0) : 0;
+    const cost   = parseFloat(tr.querySelector('.hc')?.value) || 0;
+    const margin = parseFloat(tr.querySelector('.hm')?.value) || 0;
+    rows.push({ name, qty, cost, margin });
+  });
+  return rows;
+}
+
 function calcHardware(g) {
   const M  = 55;   // standard hardware margin
   const cd = g.cableDist || 0;  // G53 — cable distance in meters
 
-  // ── D15: IPC qty
-  // =IF(AND(G74="Server Room", G96="Provided by Technica"),
-  //      IF(G86="Zero",0, MATCH(G86,{"one","two","three","four","five"},0)), 0)
+  // ── Server Room / Operator Panel / Commercial PC are now driven directly
+  // by the category checkboxes + the predefined catalog (data/hardware-catalog.json)
+  // instead of the General Info location questions. Rows are read live from
+  // the DOM so admin edits to qty/cost/margin actually persist.
+  const serverRows = readHwCategoryFromDOM('hw-server', hwCategoryEnabled.serverRoom);
+  const opRows      = readHwCategoryFromDOM('hw-op',      hwCategoryEnabled.operatorPanel);
+  const comRows     = readHwCategoryFromDOM('hw-com',     hwCategoryEnabled.commercialPC);
+
+  // Retained purely to size the Network Config switch below (mirrors the
+  // original Excel "total units on site" formula) — no longer drives the
+  // three catalog-based categories above.
   const d15 = (g.srvLocation === 'Server Room' && g.srvProvider === 'Provided By Technica')
     ? matchWord(g.serversText) : 0;
-
-  // ── D16–D18: =IF(D15=0,0,1)
-  const d16 = d15 > 0 ? 1 : 0;
-  // ── D19, D20, D21, D24: =D15
-  // ── D22 (Ethernet Cables): =IF(D15=0,0,1), cost = IF(ISBLANK(G53),10, G53*1.5)
-  const d22 = d15 > 0 ? 1 : 0;
-  const e22 = cd > 0 ? cd * 1.5 : 10;
-  // ── D23 (Printer): =IF(OR(G145="",G145="No",D15=0),0,1)
-  const d23 = (g.printable === 'Yes' && d15 > 0) ? 1 : 0;
-  // ── D25 (SWITCH): =IF(D15=0,0,1)
-  const d25 = d15 > 0 ? 1 : 0;
-
-  const serverRows = [
-    { name:'IPC',                         qty:d15,  cost:1570.60, margin:M },
-    { name:'Panel + Additional Accessories', qty:d16, cost:840,   margin:M },
-    { name:'Electrical Accessories',      qty:d16,  cost:150,     margin:M },
-    { name:'Power Supply',                qty:d16,  cost:95,      margin:M },
-    { name:'PC Monitors',                 qty:d15,  cost:350,     margin:M },
-    { name:'HDMI Cables',                 qty:d15,  cost:40,      margin:M },
-    { name:'HDMI Extenders',              qty:d15,  cost:100,     margin:M },
-    { name:'Ethernet Cables',             qty:d22,  cost:e22,     margin:M },
-    { name:'Printer',                     qty:d23,  cost:100,     margin:M },
-    { name:'Mouse + Keyboard',            qty:d15,  cost:70,      margin:M },
-    { name:'SWITCH',                      qty:d25,  cost:390,     margin:M },
-  ];
-
-  // ── D29: Operator Panel qty
-  // =IF(AND(G74="Operator Panel",G96="Provided by Technica"), MATCH(G86,...), 0)
-  // +IF(AND(G75="Operator Panel",G107="Provided by Technica"), MATCH(G87,...), 0)
   const d29 =
     ((g.srvLocation === 'Operator Panel' && g.srvProvider === 'Provided By Technica') ? matchWord(g.serversText) : 0) +
     ((g.cliLocation === 'Operator Panel' && g.cliProvider === 'Provided By Technica') ? matchWord(g.clientsText) : 0);
-  const d30 = d29;
-  const d31 = d29;
-  const d32 = d29;
-  const e32 = cd > 0 ? cd * 1.5 : 10;
-  const d33 = (g.printable === 'Yes' && d29 > 0) ? 1 : 0;
-  const d34 = d29;
-  const d35 = d29;
-
-  const opRows = [
-    { name:'PC Touch Screen',   qty:d29,  cost:2384.13, margin:M },
-    { name:'Operator Panel',    qty:d30,  cost:2112,    margin:M },
-    { name:'Power Supply',      qty:d31,  cost:95,      margin:M },
-    { name:'Ethernet Cables',   qty:d32,  cost:e32,     margin:M },
-    { name:'Printer',           qty:d33,  cost:100,     margin:M },
-    { name:'Mouse + Keyboard',  qty:d34,  cost:820,     margin:M },
-    { name:'Panel Accessories', qty:d35,  cost:150,     margin:M },
-  ];
-
-  // ── D39: Commercial PC qty
-  // =IF(AND(G74="Control Room",G96="Provided by Technica"), MATCH(G86,...), 0)
-  // +IF(AND(G75="Control Room",G107="Provided by Technica"), MATCH(G87,...), 0)
   const d39 =
     ((g.srvLocation === 'Control Room' && g.srvProvider === 'Provided By Technica') ? matchWord(g.serversText) : 0) +
     ((g.cliLocation === 'Control Room' && g.cliProvider === 'Provided By Technica') ? matchWord(g.clientsText) : 0);
-  const d40 = d39;
-  const d41 = d39 > 0 ? 1 : 0;
-  const d42 = d39;
-  const d43 = d39 > 0 ? 1 : 0;
-  const e43 = cd > 0 ? cd * 1.5 : 10;
-  const d44 = (g.printable === 'Yes' && d39 > 0) ? 1 : 0;
-  const d45 = d39;
-  const d46 = d39 > 0 ? 1 : 0;
-
-  const comRows = [
-    { name:'Commercial PC',     qty:d39,  cost:647.99,  margin:M },
-    { name:'Screens',           qty:d40,  cost:250,     margin:M },
-    { name:'Network Switch',    qty:d41,  cost:40,      margin:M },
-    { name:'HDMI',              qty:d42,  cost:40,      margin:M },
-    { name:'Ethernet Cables',   qty:d43,  cost:e43,     margin:M },
-    { name:'Printer',           qty:d44,  cost:100,     margin:M },
-    { name:'Mouse + Keyboard',  qty:d45,  cost:70,      margin:M },
-    { name:'Plugs Extenders',   qty:d46,  cost:50,      margin:M },
-  ];
 
   // ── D50: Network Switch qty
   // =CHOOSE(MATCH(SUM(D15,D29,D39,G10), {0,8,16,24,32,40}), 1,1,2,3,4,5)
@@ -1283,9 +1307,9 @@ function calcHardware(g) {
   );
 
   // H27=SUM(H15:H25), H37=SUM(H29:H35), H48=SUM(H39:H46), H59=SUM(H50:H57)
-  const serverTotal = serverRows.reduce((s,r)=>s+r.total, 0);
-  const opTotal     = opRows.reduce((s,r)=>s+r.total, 0);
-  const comTotal    = comRows.reduce((s,r)=>s+r.total, 0);
+  const serverTotal = hwCategoryEnabled.serverRoom     ? serverRows.reduce((s,r)=>s+r.total, 0) : 0;
+  const opTotal     = hwCategoryEnabled.operatorPanel  ? opRows.reduce((s,r)=>s+r.total, 0)     : 0;
+  const comTotal    = hwCategoryEnabled.commercialPC   ? comRows.reduce((s,r)=>s+r.total, 0)    : 0;
   const netTotal    = netRows.reduce((s,r)=>s+r.total, 0);
 
   // H84 = SUM(H13,H77,H59,H48,H37,H27)  (H13=licTotal passed in separately)
@@ -1517,10 +1541,16 @@ function recalcAll() {
   }
 
   // ── HARDWARE ──
-  const liveServer = renderHwRows('hw-server', 'hw-server-total', hw.serverRows, hw.serverTotal) ?? hw.serverTotal;
-  const liveOp     = renderHwRows('hw-op',     'hw-op-total',     hw.opRows,     hw.opTotal)     ?? hw.opTotal;
-  const liveCom    = renderHwRows('hw-com',    'hw-com-total',     hw.comRows,    hw.comTotal)    ?? hw.comTotal;
-  const liveNet    = renderHwRows('hw-net',    'hw-net-total',     hw.netRows,    hw.netTotal)    ?? hw.netTotal;
+  // Disabled categories: report $0 without touching the DOM, so unchecking
+  // a category never overwrites the qty/cost the admin already typed in.
+  const renderHwSection = (bodyId, totalId, rows, total, enabled) => {
+    if (!enabled) { sv(totalId, fmt(0)); return 0; }
+    return renderHwRows(bodyId, totalId, rows, total) ?? total;
+  };
+  const liveServer = renderHwSection('hw-server', 'hw-server-total', hw.serverRows, hw.serverTotal, hwCategoryEnabled.serverRoom);
+  const liveOp     = renderHwSection('hw-op',     'hw-op-total',     hw.opRows,     hw.opTotal,     hwCategoryEnabled.operatorPanel);
+  const liveCom    = renderHwSection('hw-com',    'hw-com-total',    hw.comRows,    hw.comTotal,    hwCategoryEnabled.commercialPC);
+  const liveNet    = renderHwRows('hw-net', 'hw-net-total', hw.netRows, hw.netTotal) ?? hw.netTotal;
   const liveHwTotal = liveServer + liveOp + liveCom + liveNet;
   sv('hw-grand-total', fmt(liveHwTotal));
 
@@ -1559,10 +1589,13 @@ function recalcAll() {
   // Cost basis: read live cost/qty from actual inputs (admin may have overridden)
   let costBasis = 0;
   [
-    {id:'hw-server', rows:hw.serverRows}, {id:'hw-op', rows:hw.opRows},
-    {id:'hw-com', rows:hw.comRows},       {id:'hw-net', rows:hw.netRows},
-    {id:'md-eng-body', rows:md.engRows},  {id:'md-travel-body', rows:md.travelRows},
-  ].forEach(({id, rows}) => {
+    {id:'hw-server', rows:hw.serverRows, enabled:hwCategoryEnabled.serverRoom},
+    {id:'hw-op',     rows:hw.opRows,     enabled:hwCategoryEnabled.operatorPanel},
+    {id:'hw-com',    rows:hw.comRows,    enabled:hwCategoryEnabled.commercialPC},
+    {id:'hw-net',    rows:hw.netRows,    enabled:true},
+    {id:'md-eng-body', rows:md.engRows, enabled:true}, {id:'md-travel-body', rows:md.travelRows, enabled:true},
+  ].forEach(({id, rows, enabled}) => {
+    if (!enabled) return;
     const tb = document.getElementById(id); if(!tb) return;
     tb.querySelectorAll('tr').forEach((tr, i) => {
       const r = rows[i]; if(!r) return;
