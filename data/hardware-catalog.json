@@ -1,0 +1,238 @@
+{
+  "categories": {
+    "serverRoom": {
+      "label": "Server Room",
+      "description": "Fully rugged industrial cabinet — everything inside is wide-temperature, DIN-rail / panel-mount rated.",
+      "panelSizes": [
+        { "label": "Small — 400×300×200mm, IP66", "cost": 180 },
+        { "label": "Medium — 600×600×300mm, IP66", "cost": 320 },
+        { "label": "Large — 1000×800×300mm, IP66", "cost": 560 }
+      ],
+      "defaultSizeIndex": 1,
+      "items": [
+        {
+          "id": "srv-panel",
+          "name": "Panel Enclosure",
+          "hasSizes": true,
+          "marginPct": 55,
+          "defaultQty": 1,
+          "note": "Steel wall-mount enclosure, size selectable — the frame everything else mounts into.",
+          "source": "https://www.rittal.com/com-en/products/PG20231215SCH101/PG20231512SCH301/PRO0026"
+        },
+        {
+          "id": "srv-ipc",
+          "name": "Rugged Industrial PC",
+          "unitCost": 1600,
+          "marginPct": 55,
+          "defaultQty": 1,
+          "note": "Fanless, wide-temp (-20~60°C) DIN/panel-mount IPC — Advantech MIC-770 V3 class.",
+          "source": "https://www.advantech.com/emt/products/6c53bcc8-1490-4e1e-a8d2-a56dc9a7f254/mic-770-v3/mod_2801e5b6-eec6-43a0-81f7-73efef338b54"
+        },
+        {
+          "id": "srv-switch",
+          "name": "Rugged Managed Ethernet Switch",
+          "unitCost": 1450,
+          "marginPct": 55,
+          "defaultQty": 1,
+          "note": "IP20 DIN-rail managed switch, -40~70°C — Siemens SCALANCE XC-200 class.",
+          "source": "https://www.siemens.com/global/en/products/automation/industrial-communication/industrial-ethernet/industrial-ethernet-switches-scalance-x.html"
+        },
+        {
+          "id": "srv-psu",
+          "name": "Rugged DIN-Rail Power Supply (24V)",
+          "unitCost": 380,
+          "marginPct": 55,
+          "defaultQty": 1,
+          "note": "24VDC switched-mode supply, ~10A — Siemens SITOP class.",
+          "source": "https://www.siemens.com/global/en/products/automation/power-supply.html"
+        },
+        {
+          "id": "srv-wifi",
+          "name": "Rugged Industrial WiFi Access Point",
+          "unitCost": 890,
+          "marginPct": 55,
+          "defaultQty": 1,
+          "note": "IP-rated industrial WLAN access point — Siemens SCALANCE W class.",
+          "source": "https://www.siemens.com/global/en/products/automation/industrial-communication/industrial-wireless-lan/scalance-w770-access-point-scalance-w730-client-module.html"
+        },
+        {
+          "id": "srv-monitor",
+          "name": "Rugged Industrial Monitor/Display",
+          "unitCost": 650,
+          "marginPct": 55,
+          "defaultQty": 1,
+          "note": "Panel-mount wide-temp display for local diagnostics. Estimated — confirm with supplier."
+        },
+        {
+          "id": "srv-ups",
+          "name": "Rugged UPS / Battery Backup",
+          "unitCost": 620,
+          "marginPct": 55,
+          "defaultQty": 1,
+          "note": "DIN-rail 24VDC uninterruptible supply — Phoenix Contact QUINT-UPS class.",
+          "source": "https://www.phoenixcontact.com/en-pc/products/uninterruptible-power-supplies-ups/dc-ups"
+        },
+        {
+          "id": "srv-terminals",
+          "name": "DIN Rail Terminal Blocks & Circuit Breakers",
+          "unitCost": 180,
+          "marginPct": 55,
+          "defaultQty": 1,
+          "note": "Commodity kit — sourced locally / from electrical team. Estimated."
+        },
+        {
+          "id": "srv-glands",
+          "name": "Cable Glands & Panel Wiring Accessories",
+          "unitCost": 150,
+          "marginPct": 55,
+          "defaultQty": 1,
+          "note": "Commodity kit — sourced locally / from electrical team. Estimated."
+        }
+      ]
+    },
+    "operatorPanel": {
+      "label": "Operator Panel",
+      "description": "Rugged floor-mounted operator station — smaller footprint than Server Room, human-facing.",
+      "panelSizes": [
+        { "label": "Small — 300×250×150mm, IP65", "cost": 140 },
+        { "label": "Medium — 500×400×200mm, IP65", "cost": 260 }
+      ],
+      "defaultSizeIndex": 0,
+      "items": [
+        {
+          "id": "op-panel",
+          "name": "Panel Enclosure",
+          "hasSizes": true,
+          "marginPct": 55,
+          "defaultQty": 1,
+          "note": "Smaller machine-side enclosure, size selectable.",
+          "source": "https://www.rittal.com/com-en/products/PG20231215SCH101/PG20231512SCH301/PRO0026"
+        },
+        {
+          "id": "op-hmi",
+          "name": "Rugged Touchscreen Panel PC / HMI",
+          "unitCost": 1750,
+          "marginPct": 55,
+          "defaultQty": 1,
+          "note": "IP65-front industrial touch panel PC — Advantech PPC-600 series class.",
+          "source": "https://www.advantech.com/emt/products/ppc-600-series-_-salable-computing/sub_1-2jklri"
+        },
+        {
+          "id": "op-psu",
+          "name": "Rugged DIN-Rail Power Supply (24V)",
+          "unitCost": 380,
+          "marginPct": 55,
+          "defaultQty": 1,
+          "note": "24VDC switched-mode supply — Siemens SITOP class.",
+          "source": "https://www.siemens.com/global/en/products/automation/power-supply.html"
+        },
+        {
+          "id": "op-switch",
+          "name": "Rugged Compact Industrial Switch (5-port)",
+          "unitCost": 650,
+          "marginPct": 55,
+          "defaultQty": 1,
+          "note": "Small unmanaged/DIN-rail industrial switch for the local drop. Estimated."
+        },
+        {
+          "id": "op-estop",
+          "name": "E-Stop & Pushbutton/Indicator Kit",
+          "unitCost": 120,
+          "marginPct": 55,
+          "defaultQty": 1,
+          "note": "Commodity kit — sourced locally / from electrical team. Estimated."
+        },
+        {
+          "id": "op-cable",
+          "name": "Rugged Ethernet Cabling",
+          "unitCost": 60,
+          "marginPct": 55,
+          "defaultQty": 1,
+          "note": "Industrial-rated run from nearest switch. Estimated."
+        },
+        {
+          "id": "op-mount",
+          "name": "Mounting Arm / Bracket Kit",
+          "unitCost": 180,
+          "marginPct": 55,
+          "defaultQty": 1,
+          "note": "Commodity kit — sourced locally / from mechanical team. Estimated."
+        }
+      ]
+    },
+    "commercialPC": {
+      "label": "Commercial PC Hardware",
+      "description": "Standard off-the-shelf equipment for climate-controlled office/control-room settings — not ruggedized.",
+      "items": [
+        {
+          "id": "com-pc",
+          "name": "Commercial Mini PC",
+          "unitCost": 680,
+          "marginPct": 55,
+          "defaultQty": 1,
+          "note": "Business-class mini PC — Intel/ASUS NUC class.",
+          "source": "https://ayoubcomputers.com/intel-nuc-12-pro-kit-core-i7-1260p-mini-pc-kit-nuc12wshi7000/"
+        },
+        {
+          "id": "com-screen",
+          "name": "Standard Monitor/Screen",
+          "unitCost": 180,
+          "marginPct": 55,
+          "defaultQty": 1,
+          "note": "24\" commercial business monitor.",
+          "source": "https://www.dell.com/en-us/shop/computer-monitors/ar/8605/24-inch"
+        },
+        {
+          "id": "com-switch",
+          "name": "Standard Network Switch",
+          "unitCost": 40,
+          "marginPct": 55,
+          "defaultQty": 1,
+          "note": "8-port unmanaged gigabit switch.",
+          "source": "https://www.amazon.com/TP-Link-Gigabit-Ethernet-Network-Switch/dp/B00A121WN6"
+        },
+        {
+          "id": "com-hdmi",
+          "name": "HDMI Cable",
+          "unitCost": 25,
+          "marginPct": 55,
+          "defaultQty": 1,
+          "note": "Commodity item. Estimated."
+        },
+        {
+          "id": "com-eth",
+          "name": "Ethernet Cable",
+          "unitCost": 10,
+          "marginPct": 55,
+          "defaultQty": 1,
+          "note": "Commodity item. Estimated."
+        },
+        {
+          "id": "com-printer",
+          "name": "Printer",
+          "unitCost": 100,
+          "marginPct": 55,
+          "defaultQty": 0,
+          "note": "Commodity item. Estimated."
+        },
+        {
+          "id": "com-mk",
+          "name": "Mouse + Keyboard",
+          "unitCost": 70,
+          "marginPct": 55,
+          "defaultQty": 1,
+          "note": "Microsoft Wireless Desktop 2000 class.",
+          "source": "https://mojitech.net"
+        },
+        {
+          "id": "com-strip",
+          "name": "Power Strip / Plug Extenders",
+          "unitCost": 50,
+          "marginPct": 55,
+          "defaultQty": 1,
+          "note": "Commodity item. Estimated."
+        }
+      ]
+    }
+  }
+}
