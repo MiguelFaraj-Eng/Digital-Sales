@@ -1,0 +1,232 @@
+{
+  "vendors": {
+    "inductiveAutomation": {
+      "label": "Inductive Automation",
+      "products": {
+        "ignition": {
+          "label": "Ignition",
+          "groups": [
+            {
+              "group": "Platform",
+              "items": [
+                { "id": "ia-ign-platform", "name": "Ignition Platform (per server)", "unitCost": 1200, "marginPct": 15, "defaultIncluded": true, "note": "Unlimited tags, clients, screens & device connections.", "source": "https://inductiveautomation.com/pricing/list" }
+              ]
+            },
+            {
+              "group": "Visualization",
+              "items": [
+                { "id": "ia-ign-perspective", "name": "Perspective Module", "unitCost": 11225, "marginPct": 15, "defaultIncluded": false, "note": "HTML5 web/mobile visualization, unlimited sessions.", "source": "https://inductiveautomation.com/pricing/list" },
+                { "id": "ia-ign-vision", "name": "Vision Module", "unitCost": 8330, "marginPct": 15, "defaultIncluded": false, "note": "Desktop/panel HMI clients, unlimited clients.", "source": "https://inductiveautomation.com/pricing/list" },
+                { "id": "ia-ign-reporting", "name": "Reporting Module", "unitCost": 3900, "marginPct": 15, "defaultIncluded": false, "note": "Dynamic database-driven reports, auto-delivery.", "source": "https://inductiveautomation.com/pricing/list" }
+              ]
+            },
+            {
+              "group": "Data & Logic",
+              "items": [
+                { "id": "ia-ign-webdev", "name": "Web Development Module", "unitCost": 2300, "marginPct": 15, "defaultIncluded": false, "note": "Custom secure web endpoints / REST APIs.", "source": "https://inductiveautomation.com/pricing/list" },
+                { "id": "ia-ign-sfc", "name": "Sequential Function Charts (SFC) Module", "unitCost": 3950, "marginPct": 15, "defaultIncluded": false, "source": "https://inductiveautomation.com/pricing/list" },
+                { "id": "ia-ign-sqlbridge", "name": "SQL Bridge Module", "unitCost": 2300, "marginPct": 15, "defaultIncluded": false, "note": "Bidirectional OPC-to-SQL historian & transaction manager.", "source": "https://inductiveautomation.com/pricing/list" },
+                { "id": "ia-ign-eventstreams", "name": "Event Streams Module", "unitCost": 2300, "marginPct": 15, "defaultIncluded": false, "source": "https://inductiveautomation.com/pricing/list" }
+              ]
+            },
+            {
+              "group": "Alarm & Notification",
+              "items": [
+                { "id": "ia-ign-alarm", "name": "Alarm Notification Module", "unitCost": 2245, "marginPct": 15, "defaultIncluded": false, "note": "Pipeline builder, email notification, rosters.", "source": "https://inductiveautomation.com/pricing/list" },
+                { "id": "ia-ign-voice", "name": "Voice Notification Module", "unitCost": 945, "marginPct": 15, "defaultIncluded": false, "source": "https://inductiveautomation.com/pricing/list" },
+                { "id": "ia-ign-twilio", "name": "Twilio Notification Module", "unitCost": 945, "marginPct": 15, "defaultIncluded": false, "note": "Voice, text & WhatsApp via Twilio.", "source": "https://inductiveautomation.com/pricing/list" },
+                { "id": "ia-ign-sms", "name": "SMS Notification Module", "unitCost": 945, "marginPct": 15, "defaultIncluded": false, "source": "https://inductiveautomation.com/pricing/list" }
+              ]
+            },
+            {
+              "group": "Enterprise",
+              "items": [
+                { "id": "ia-ign-eam", "name": "Enterprise Administration Module", "unitCost": 1595, "marginPct": 15, "defaultIncluded": false, "note": "Combine gateways into an enterprise network.", "source": "https://inductiveautomation.com/pricing/list" }
+              ]
+            },
+            {
+              "group": "Connectivity",
+              "items": [
+                { "id": "ia-ign-mongodb", "name": "MongoDB Connector Module", "unitCost": 695, "marginPct": 15, "defaultIncluded": false, "source": "https://inductiveautomation.com/pricing/list" },
+                { "id": "ia-ign-siemensdriver", "name": "Siemens Enhanced Driver", "unitCost": 300, "marginPct": 15, "defaultIncluded": false, "note": "S7-300/400/1200/1500 connectivity.", "source": "https://inductiveautomation.com/pricing/list" },
+                { "id": "ia-ign-secsgem", "name": "SECS/GEM Module (Single-Tool)", "unitCost": 1060, "marginPct": 15, "defaultIncluded": false, "note": "Semiconductor fab equipment communication.", "source": "https://inductiveautomation.com/pricing/list" },
+                { "id": "ia-ign-opccom", "name": "OPC COM Module", "unitCost": 885, "marginPct": 15, "defaultIncluded": false, "note": "Classic OPC via DCOM.", "source": "https://inductiveautomation.com/pricing/list" },
+                { "id": "ia-ign-kafka", "name": "Kafka Connector Module", "unitCost": 695, "marginPct": 15, "defaultIncluded": false, "source": "https://inductiveautomation.com/pricing/list" },
+                { "id": "ia-ign-opto22", "name": "Cirrus Link Opto 22 groov Driver", "unitCost": 275, "marginPct": 15, "defaultIncluded": false, "source": "https://inductiveautomation.com/pricing/list" },
+                { "id": "ia-ign-efmemerson", "name": "Cirrus Link EFM Emerson ROC Driver", "unitCost": 1425, "marginPct": 15, "defaultIncluded": false, "source": "https://inductiveautomation.com/pricing/list" },
+                { "id": "ia-ign-efmabb", "name": "Cirrus Link EFM ABB Totalflow Module", "unitCost": 1425, "marginPct": 15, "defaultIncluded": false, "source": "https://inductiveautomation.com/pricing/list" }
+              ]
+            },
+            {
+              "group": "Cirrus Link IIoT",
+              "items": [
+                { "id": "ia-ign-mqttengine", "name": "MQTT Engine Module", "unitCost": 2150, "marginPct": 15, "defaultIncluded": false, "note": "Bidirectional MQTT to edge devices.", "source": "https://inductiveautomation.com/pricing/list" },
+                { "id": "ia-ign-mqtttransmission", "name": "MQTT Transmission Module", "unitCost": 1550, "marginPct": 15, "defaultIncluded": false, "source": "https://inductiveautomation.com/pricing/list" },
+                { "id": "ia-ign-mqttdistributor", "name": "MQTT Distributor Module", "unitCost": 3350, "marginPct": 15, "defaultIncluded": false, "note": "Adds an MQTT server/broker.", "source": "https://inductiveautomation.com/pricing/list" },
+                { "id": "ia-ign-mqttrecorder", "name": "MQTT Recorder Module", "unitCost": 10950, "marginPct": 15, "defaultIncluded": false, "source": "https://inductiveautomation.com/pricing/list" },
+                { "id": "ia-ign-awsinjector", "name": "AWS Injector Module", "unitCost": 4175, "marginPct": 15, "defaultIncluded": false, "source": "https://inductiveautomation.com/pricing/list" },
+                { "id": "ia-ign-azureinjector", "name": "Azure Injector Module", "unitCost": 4175, "marginPct": 15, "defaultIncluded": false, "source": "https://inductiveautomation.com/pricing/list" },
+                { "id": "ia-ign-gcpinjector", "name": "Google Cloud Platform Injector Module", "unitCost": 4175, "marginPct": 15, "defaultIncluded": false, "source": "https://inductiveautomation.com/pricing/list" }
+              ]
+            }
+          ]
+        },
+        "ignitionEdge": {
+          "label": "Ignition Edge",
+          "groups": [
+            {
+              "group": "Edge Products",
+              "items": [
+                { "id": "ia-edge-iiot", "name": "Ignition Edge IIoT", "unitCost": 945, "marginPct": 15, "defaultIncluded": true, "note": "Data acquisition & MQTT publishing at the edge, no visualization.", "source": "https://inductiveautomation.com/pricing/list" },
+                { "id": "ia-edge-panel", "name": "Ignition Edge Panel", "unitCost": 1950, "marginPct": 15, "defaultIncluded": false, "note": "Adds local visualization (Perspective 2 sessions or Vision) to Edge IIoT.", "source": "https://inductiveautomation.com/pricing/list" }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "siemens": {
+      "label": "Siemens",
+      "products": {
+        "wincc75": {
+          "label": "WinCC V7.5 (Classic)",
+          "groups": [
+            {
+              "group": "Platform",
+              "items": [
+                { "id": "sie-w75-runtime", "name": "WinCC V7.5 Runtime (RT 512 PowerTags)", "unitCost": 1900, "marginPct": 50, "defaultIncluded": true, "note": "Classic S7-based SCADA runtime, tag-tiered licensing.", "source": "https://www.electricautomationnetwork.com/en/siemens/6av6371-2bg07-5ax0-siemens-wincc-powerpack-rt-512-2048-for-wincc-v75-sp2-runtime-license-without-version-c" },
+                { "id": "sie-w75-powertags", "name": "PowerTags Upgrade Pack (512→2048)", "unitCost": 1530, "marginPct": 50, "defaultIncluded": false, "source": "https://www.electricautomationnetwork.com/en/siemens/6av6371-2bg07-5ax0-siemens-wincc-powerpack-rt-512-2048-for-wincc-v75-sp2-runtime-license-without-version-c" }
+              ]
+            },
+            {
+              "group": "Visualization",
+              "items": [
+                { "id": "sie-w75-rtclient", "name": "RT Client (additional station)", "unitCost": 2090, "marginPct": 50, "defaultIncluded": false, "source": "https://www.electricautomationnetwork.com/en/siemens/6av6381-2ca07-5ax0-siemens-wincc-system-software-v75-sp2-wincc-rt-client-v75-sp2-runtime-software-single" }
+              ]
+            },
+            {
+              "group": "Data",
+              "items": [
+                { "id": "sie-w75-archive", "name": "Long Term Archiving", "unitCost": 500, "marginPct": 50, "defaultIncluded": false }
+              ]
+            },
+            {
+              "group": "Connectivity",
+              "items": [
+                { "id": "sie-w75-opc", "name": "Supplier Machine Controller License (OPC)", "unitCost": 1267, "marginPct": 50, "defaultIncluded": false }
+              ]
+            }
+          ]
+        },
+        "winccUnified": {
+          "label": "WinCC Unified",
+          "groups": [
+            {
+              "group": "Platform",
+              "items": [
+                { "id": "sie-wu-pcrt", "name": "WinCC Unified PC Runtime", "unitCost": 4200, "marginPct": 50, "defaultIncluded": true, "note": "Estimated — confirm with supplier. Modern web-native SCADA runtime (OPC UA, GraphQL).", "source": "https://www.siemens.com/en-us/products/simatic-hmi/wincc-unified-software/" }
+              ]
+            },
+            {
+              "group": "Visualization",
+              "items": [
+                { "id": "sie-wu-comfortclient", "name": "Unified Comfort Client", "unitCost": 6015, "marginPct": 50, "defaultIncluded": false, "note": "5x1 operate client license.", "source": "https://ie.rs-online.com/web/p/software/2674793" }
+              ]
+            },
+            {
+              "group": "Enterprise",
+              "items": [
+                { "id": "sie-wu-redundancy", "name": "WinCC Unified Redundancy Option", "unitCost": 3500, "marginPct": 50, "defaultIncluded": false, "note": "Estimated — confirm with supplier." }
+              ]
+            },
+            {
+              "group": "Data",
+              "items": [
+                { "id": "sie-wu-historian", "name": "Unified Historian Option", "unitCost": 2800, "marginPct": 50, "defaultIncluded": false, "note": "Estimated — confirm with supplier." }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "aveva": {
+      "label": "AVEVA",
+      "products": {
+        "intouch": {
+          "label": "InTouch HMI",
+          "groups": [
+            {
+              "group": "Platform",
+              "items": [
+                { "id": "av-it-1000", "name": "InTouch HMI (1,000 Tags, Perpetual)", "unitCost": 1795, "marginPct": 25, "defaultIncluded": true, "note": "Includes 1 desktop workstation + 1 HTML5 web client.", "source": "https://www.aveva.com/en/perspectives/blog/unlock-the-power-of-the-most-advanced-hmi-with-aveva-intouch-hmi/" }
+              ]
+            },
+            {
+              "group": "Tags",
+              "items": [
+                { "id": "av-it-2500", "name": "Tag Count Upgrade — 2,500 Tags", "unitCost": 2995, "marginPct": 25, "defaultIncluded": false, "note": "Estimated — confirm with supplier." },
+                { "id": "av-it-10000", "name": "Tag Count Upgrade — 10,000 Tags", "unitCost": 5995, "marginPct": 25, "defaultIncluded": false, "note": "Estimated — confirm with supplier." },
+                { "id": "av-it-unlimited", "name": "InTouch Unlimited (Unlimited Tags & Clients)", "unitCost": 9995, "marginPct": 25, "defaultIncluded": false, "note": "Estimated — confirm with supplier." }
+              ]
+            }
+          ]
+        },
+        "systemPlatform": {
+          "label": "System Platform",
+          "groups": [
+            {
+              "group": "Platform",
+              "items": [
+                { "id": "av-sp-runtime", "name": "System Platform Runtime (per node)", "unitCost": 12000, "marginPct": 25, "defaultIncluded": true, "note": "Estimated — confirm with supplier. Enterprise SCADA/MES platform, significantly pricier than InTouch alone." }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "rockwell": {
+      "label": "Rockwell Automation",
+      "products": {
+        "factoryTalkViewSE": {
+          "label": "FactoryTalk View SE",
+          "groups": [
+            {
+              "group": "Platform",
+              "items": [
+                { "id": "rw-se-studio", "name": "FactoryTalk View SE Studio (Dev + 1 Station)", "unitCost": 2600, "marginPct": 30, "defaultIncluded": true, "note": "Combined ME/SE development license.", "source": "https://industrialmonitordirect.com/blogs/knowledgebase/factorytalk-view-se-license-options-and-part-numbers" },
+                { "id": "rw-se-server25", "name": "SE Server — 25 Display Bundle", "unitCost": 3500, "marginPct": 30, "defaultIncluded": false, "note": "Estimated — confirm with supplier." },
+                { "id": "rw-se-serverunlimited", "name": "SE Server — Unlimited Display Bundle", "unitCost": 8500, "marginPct": 30, "defaultIncluded": false, "note": "Estimated — confirm with supplier." }
+              ]
+            },
+            {
+              "group": "Clients",
+              "items": [
+                { "id": "rw-se-viewpoint", "name": "FactoryTalk ViewPoint Web Clients", "unitCost": 0, "marginPct": 0, "defaultIncluded": true, "note": "Unlimited web clients included since SE V11." }
+              ]
+            }
+          ]
+        },
+        "factoryTalkViewME": {
+          "label": "FactoryTalk View ME",
+          "groups": [
+            {
+              "group": "Platform",
+              "items": [
+                { "id": "rw-me-station", "name": "FactoryTalk View ME Station (per HMI terminal)", "unitCost": 650, "marginPct": 30, "defaultIncluded": true, "note": "Estimated — confirm with supplier." }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "customer": {
+      "label": "Provided By Customer",
+      "products": {
+        "none": {
+          "label": "No License Required",
+          "groups": []
+        }
+      }
+    }
+  }
+}
