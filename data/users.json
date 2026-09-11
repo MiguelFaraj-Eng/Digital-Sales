@@ -1,0 +1,4 @@
+{
+  "Miguel":   { "pass": "D0022b0c0cf53@$", "role": "admin",  "label": "Administrator" },
+  "Technica": { "pass": "TechnicaDev1",    "role": "viewer", "label": "Technica User" }
+}
