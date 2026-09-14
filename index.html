@@ -238,7 +238,12 @@ hr{border:none;border-top:1px solid var(--b1);margin:16px 0}
 <div id="page-dashboard" class="page active">
   <div class="ph">
     <div><div class="ph-title">Budget Dashboard</div><div class="ph-sub">All values update live as you edit</div></div>
-    <button class="btn btn-primary" onclick="exportOffer()">⬇ Print / Export</button>
+    <div style="display:flex;align-items:center;gap:8px">
+      <button class="btn btn-ghost" onclick="triggerLoadProject()">📂 Load Project</button>
+      <input id="load-project-input" type="file" accept="application/json" style="display:none" onchange="handleLoadProjectFile(this)">
+      <button class="btn btn-ghost" onclick="saveProject()">💾 Save Project</button>
+      <button class="btn btn-primary" onclick="exportOffer()">⬇ Print / Export</button>
+    </div>
   </div>
 
   <div class="stat-grid">
@@ -437,15 +442,15 @@ hr{border:none;border-top:1px solid var(--b1);margin:16px 0}
     <div style="display:flex;align-items:center;gap:8px">
       <div style="display:flex;align-items:center;gap:6px;background:var(--s3);border:1px solid var(--b2);border-radius:var(--r);padding:4px 4px 4px 10px">
         <label style="font-size:12px;color:var(--t2);white-space:nowrap">Generate</label>
-        <input id="bulk-count-t" type="number" min="1" max="50" value="5" style="width:52px;background:var(--s4);border:1px solid var(--b2);border-radius:5px;padding:4px 6px;color:var(--t1);font-size:13px;text-align:center">
+        <input id="bulk-count-t" type="number" min="1" max="500" value="5" style="width:52px;background:var(--s4);border:1px solid var(--b2);border-radius:5px;padding:4px 6px;color:var(--t1);font-size:13px;text-align:center">
         <label style="font-size:12px;color:var(--t2)">rows</label>
         <button class="btn btn-ghost" style="padding:5px 10px;font-size:12px" onclick="bulkGenerate('t')">⚡ Generate</button>
       </div>
       <button class="btn btn-ghost" onclick="addEquip('t')">+ Add Row</button>
     </div>
   </div>
-  <div class="note" style="margin-bottom:14px">Each conveyor group (Vertical, Horizontal, Oblique) = 1 equipment. E.g. 10 motors in Vertical = 1 Equipment. &nbsp;<strong>Name each row "Equipment #1", "Equipment #2"…</strong> — the number drives manday calculations.</div>
   <div class="card">
+    <div class="note" style="margin-bottom:14px;margin-top:0">Each conveyor group (Vertical, Horizontal, Oblique) = 1 equipment. E.g. 10 motors in Vertical = 1 Equipment. &nbsp;<strong>Name each row "Equipment #1", "Equipment #2"…</strong> — the number drives manday calculations.</div>
     <div class="tbl-wrap">
       <table id="equip-t">
         <thead><tr><th>Plant</th><th>Zone/Room</th><th>Area/Line</th><th>Machine/Equipment</th><th>Comm Type</th><th>PLC/Controller</th><th>Protocol</th><th>OEM Access</th><th></th></tr></thead>
@@ -463,7 +468,7 @@ hr{border:none;border-top:1px solid var(--b1);margin:16px 0}
     <div style="display:flex;align-items:center;gap:8px">
       <div style="display:flex;align-items:center;gap:6px;background:var(--s3);border:1px solid var(--b2);border-radius:var(--r);padding:4px 4px 4px 10px">
         <label style="font-size:12px;color:var(--t2);white-space:nowrap">Generate</label>
-        <input id="bulk-count-s" type="number" min="1" max="50" value="5" style="width:52px;background:var(--s4);border:1px solid var(--b2);border-radius:5px;padding:4px 6px;color:var(--t1);font-size:13px;text-align:center">
+        <input id="bulk-count-s" type="number" min="1" max="500" value="5" style="width:52px;background:var(--s4);border:1px solid var(--b2);border-radius:5px;padding:4px 6px;color:var(--t1);font-size:13px;text-align:center">
         <label style="font-size:12px;color:var(--t2)">rows</label>
         <button class="btn btn-ghost" style="padding:5px 10px;font-size:12px" onclick="bulkGenerate('s')">⚡ Generate</button>
       </div>
@@ -792,9 +797,9 @@ document.querySelectorAll('.nav-item').forEach(item => {
 });
 
 // ─── EQUIPMENT TABLE HELPERS ─────────────────────────────────────
-function addEquip(t) {
-  const tbody = document.getElementById('equip-' + t + '-body');
-  const n = tbody.querySelectorAll('tr').length + 1;
+// Shared row template for both addEquip and bulkGenerate — keeps the two
+// paths from drifting out of sync and avoids rebuilding the HTML string twice.
+function makeEquipRow(n) {
   const tr = document.createElement('tr');
   tr.innerHTML = `
     <td><input class="ein" placeholder="Plant #1"></td>
@@ -806,31 +811,30 @@ function addEquip(t) {
     <td><input class="ein" placeholder="Protocol"></td>
     <td><select class="esel"><option>YES</option><option>NO</option></select></td>
     <td><span style="color:var(--red);cursor:pointer;font-size:16px" onclick="delRow(this)">×</span></td>`;
-  tbody.appendChild(tr);
+  return tr;
+}
+
+function addEquip(t) {
+  const tbody = document.getElementById('equip-' + t + '-body');
+  const n = tbody.querySelectorAll('tr').length + 1;
+  tbody.appendChild(makeEquipRow(n));
   recalcAll();
 }
 function delRow(el) { el.closest('tr').remove(); recalcAll(); }
 
 function bulkGenerate(t) {
   const countEl = document.getElementById('bulk-count-' + t);
-  const count = Math.min(50, Math.max(1, parseInt(countEl.value) || 5));
+  // Cap raised from 50 to 500 — large equipment lists (e.g. 300 rows) now generate in full.
+  const count = Math.min(500, Math.max(1, parseInt(countEl.value) || 5));
   const tbody = document.getElementById('equip-' + t + '-body');
   const existing = tbody.querySelectorAll('tr').length;
+  // Build off-DOM and append once — appending 300 rows one at a time each
+  // triggers a reflow; a DocumentFragment batches them into a single insert.
+  const frag = document.createDocumentFragment();
   for (let i = 0; i < count; i++) {
-    const n = existing + i + 1;
-    const tr = document.createElement('tr');
-    tr.innerHTML = `
-      <td><input class="ein" placeholder="Plant #1"></td>
-      <td><input class="ein" placeholder="Zone/Room"></td>
-      <td><input class="ein" placeholder="Area/Line"></td>
-      <td><input class="ein equip-name" value="Equipment #${n}" oninput="recalcAll()"></td>
-      <td><select class="esel"><option>Communication</option><option>External Sensors</option></select></td>
-      <td><input class="ein" placeholder="PLC type"></td>
-      <td><input class="ein" placeholder="Protocol"></td>
-      <td><select class="esel"><option>YES</option><option>NO</option></select></td>
-      <td><span style="color:var(--red);cursor:pointer;font-size:16px" onclick="delRow(this)">×</span></td>`;
-    tbody.appendChild(tr);
+    frag.appendChild(makeEquipRow(existing + i + 1));
   }
+  tbody.appendChild(frag);
   recalcAll();
   // Smooth scroll to table
   tbody.closest('.card').scrollIntoView({behavior:'smooth', block:'nearest'});
@@ -2005,6 +2009,228 @@ function exportOffer() {
 
 function fmtN(v) {
   return '$' + (+v).toLocaleString('en-US', {minimumFractionDigits:0, maximumFractionDigits:0});
+}
+
+// ════════════════════════════════════════════════════════════════
+//  SAVE / LOAD PROJECT
+//  Since this is a static site with no backend, "save" downloads a
+//  .json snapshot of every field to the browser, and "load" reads one
+//  back in. Drop the downloaded file into a projects/ folder in the
+//  GitHub repo (same drag-and-drop you used to publish the site) to
+//  keep it versioned alongside the tool.
+// ════════════════════════════════════════════════════════════════
+
+// Generic capture for any .hq/.hc/.hm-style table (hardware + mandays tables
+// all share these classes). Keyed by item name so a restore still lines up
+// correctly even if catalog item order changes later.
+function captureRows(tbodyId) {
+  const tb = document.getElementById(tbodyId);
+  if (!tb) return [];
+  return Array.from(tb.querySelectorAll('tr')).map(tr => {
+    const nameEl = tr.querySelector('.item-label');
+    const name = nameEl ? nameEl.textContent : (tr.querySelector('td')?.textContent.trim() || '');
+    const row = { name };
+    const size = tr.querySelector('.hw-size'); if (size) row.size = size.value;
+    const q = tr.querySelector('.hq'); if (q) row.qty = q.value;
+    const c = tr.querySelector('.hc'); if (c) row.cost = c.value;
+    const m = tr.querySelector('.hm'); if (m) row.margin = m.value;
+    return row;
+  });
+}
+function restoreRows(tbodyId, savedRows) {
+  const tb = document.getElementById(tbodyId);
+  if (!tb || !savedRows || !savedRows.length) return;
+  const byName = {};
+  savedRows.forEach(r => { byName[r.name] = r; });
+  tb.querySelectorAll('tr').forEach(tr => {
+    const nameEl = tr.querySelector('.item-label');
+    const name = nameEl ? nameEl.textContent : (tr.querySelector('td')?.textContent.trim() || '');
+    const saved = byName[name];
+    if (!saved) return;
+    const size = tr.querySelector('.hw-size'); if (size && saved.size !== undefined) size.value = saved.size;
+    const q = tr.querySelector('.hq'); if (q && saved.qty !== undefined) q.value = saved.qty;
+    const c = tr.querySelector('.hc'); if (c && saved.cost !== undefined) c.value = saved.cost;
+    const m = tr.querySelector('.hm'); if (m && saved.margin !== undefined) m.value = saved.margin;
+  });
+}
+
+// Same idea for license rows (.ls/.lc/.lm + optional .lic-tier).
+function captureLicenseRows(blockEl) {
+  return Array.from(blockEl.querySelectorAll('tr')).map(tr => {
+    const nameEl = tr.querySelector('.item-label');
+    const name = nameEl ? nameEl.textContent : '';
+    const row = { name };
+    const tier = tr.querySelector('.lic-tier'); if (tier) row.tier = tier.value;
+    const sel = tr.querySelector('.ls'); if (sel) row.selected = sel.value;
+    const c = tr.querySelector('.lc'); if (c) row.cost = c.value;
+    const m = tr.querySelector('.lm'); if (m) row.margin = m.value;
+    return row;
+  });
+}
+function restoreLicenseRows(blockEl, savedRows) {
+  const byName = {};
+  (savedRows || []).forEach(r => { byName[r.name] = r; });
+  blockEl.querySelectorAll('tr').forEach(tr => {
+    const nameEl = tr.querySelector('.item-label');
+    const name = nameEl ? nameEl.textContent : '';
+    const saved = byName[name];
+    if (!saved) return;
+    const tier = tr.querySelector('.lic-tier'); if (tier && saved.tier !== undefined) tier.value = saved.tier;
+    const sel = tr.querySelector('.ls'); if (sel && saved.selected !== undefined) sel.value = saved.selected;
+    const c = tr.querySelector('.lc'); if (c && saved.cost !== undefined) c.value = saved.cost;
+    const m = tr.querySelector('.lm'); if (m && saved.margin !== undefined) m.value = saved.margin;
+  });
+}
+
+// Equipment tables capture/restore by column position (free-text data, no catalog to key against).
+function captureEquipTable(tbodyId) {
+  const tb = document.getElementById(tbodyId);
+  if (!tb) return [];
+  return Array.from(tb.querySelectorAll('tr')).map(tr => {
+    const cells = tr.querySelectorAll('td');
+    return [0,1,2,3,4,5,6,7].map(i => { const el = cells[i]?.querySelector('input, select'); return el ? el.value : ''; });
+  });
+}
+function restoreEquipTable(tbodyId, savedRows) {
+  const tb = document.getElementById(tbodyId);
+  if (!tb || !savedRows) return;
+  tb.innerHTML = '';
+  const frag = document.createDocumentFragment();
+  savedRows.forEach((vals, i) => {
+    const tr = makeEquipRow(i + 1);
+    const cells = tr.querySelectorAll('td');
+    [0,1,2,3,4,5,6,7].forEach(idx => { const el = cells[idx]?.querySelector('input, select'); if (el && vals[idx] !== undefined) el.value = vals[idx]; });
+    frag.appendChild(tr);
+  });
+  tb.appendChild(frag);
+}
+
+// Finds which vendor/product key pair a given block element id belongs to
+// by checking against the loaded catalog, rather than parsing the id string
+// (vendor/product keys are camelCase with no dashes, so this is unambiguous).
+function findVendorProductForBlockId(blockId) {
+  if (!licenseCatalog) return null;
+  for (const vKey of Object.keys(licenseCatalog.vendors)) {
+    for (const pKey of Object.keys(licenseCatalog.vendors[vKey].products)) {
+      if (blockId === 'lic-block-' + vKey + '-' + pKey) return { vendor: vKey, product: pKey };
+    }
+  }
+  return null;
+}
+
+function buildProjectSnapshot() {
+  const snap = {
+    version: 1,
+    savedAt: new Date().toISOString(),
+    fields: {},
+    equipment: { technica: captureEquipTable('equip-t-body'), supplier: captureEquipTable('equip-s-body') },
+    hardware: {
+      categoryEnabled: { ...hwCategoryEnabled },
+      rows: { 'hw-server': captureRows('hw-server'), 'hw-op': captureRows('hw-op'), 'hw-com': captureRows('hw-com'), 'hw-net': captureRows('hw-net') }
+    },
+    license: { selection: { ...licenseSelection }, blocks: [] },
+    mandays: { rows: { 'md-eng-body': captureRows('md-eng-body'), 'md-travel-body': captureRows('md-travel-body') } }
+  };
+
+  ['#page-general', '#page-production'].forEach(sel => {
+    document.querySelectorAll(sel + ' [id]').forEach(el => {
+      if (!el.matches('input, select, textarea')) return;
+      snap.fields[el.id] = el.type === 'checkbox' ? el.checked : el.value;
+    });
+  });
+
+  document.querySelectorAll('#lic-modules-container > .lic-product-block').forEach(block => {
+    const vp = findVendorProductForBlockId(block.id);
+    if (!vp) return;
+    snap.license.blocks.push({ vendor: vp.vendor, product: vp.product, rows: captureLicenseRows(block) });
+  });
+
+  return snap;
+}
+
+function applyProjectSnapshot(snap) {
+  if (!snap || typeof snap !== 'object' || !snap.fields) { alert('This file does not look like a valid project save.'); return; }
+  if (!hwCatalog || !licenseCatalog) { alert('Catalogs are still loading — wait a second and try loading the file again.'); return; }
+
+  Object.entries(snap.fields || {}).forEach(([id, val]) => {
+    const el = document.getElementById(id);
+    if (!el) return;
+    if (el.type === 'checkbox') el.checked = !!val; else el.value = val;
+  });
+
+  restoreEquipTable('equip-t-body', snap.equipment?.technica || []);
+  restoreEquipTable('equip-s-body', snap.equipment?.supplier || []);
+
+  if (snap.hardware?.categoryEnabled) {
+    const bodyIdByCat = { serverRoom:'hw-server', operatorPanel:'hw-op', commercialPC:'hw-com' };
+    Object.keys(hwCategoryEnabled).forEach(key => {
+      const enabled = !!snap.hardware.categoryEnabled[key];
+      hwCategoryEnabled[key] = enabled;
+      const checkbox = document.getElementById('cat-' + key); if (checkbox) checkbox.checked = enabled;
+      const card = document.getElementById('card-' + key); if (card) card.style.display = enabled ? '' : 'none';
+      const tb = document.getElementById(bodyIdByCat[key]);
+      if (tb && tb.children.length === 0) renderHwCatalogRows(key, bodyIdByCat[key]);
+    });
+  }
+  ['hw-server','hw-op','hw-com','hw-net'].forEach(id => restoreRows(id, snap.hardware?.rows?.[id]));
+
+  (snap.license?.blocks || []).forEach(b => {
+    const saved = { vendor: licenseSelection.vendor, product: licenseSelection.product };
+    licenseSelection.vendor = b.vendor; licenseSelection.product = b.product;
+    renderLicenseModules();
+    const block = document.getElementById('lic-block-' + b.vendor + '-' + b.product);
+    if (block) restoreLicenseRows(block, b.rows);
+    licenseSelection.vendor = saved.vendor; licenseSelection.product = saved.product;
+  });
+  if (snap.license?.selection) {
+    licenseSelection.vendor = snap.license.selection.vendor;
+    licenseSelection.product = snap.license.selection.product;
+  }
+  populateLicenseVendorSelect();
+  populateLicenseProductSelect(licenseSelection.vendor);
+  const vSel = document.getElementById('lic-vendor'); if (vSel) vSel.value = licenseSelection.vendor;
+  const pSel = document.getElementById('lic-product'); if (pSel) pSel.value = licenseSelection.product;
+  renderLicenseModules();
+
+  ['md-eng-body','md-travel-body'].forEach(id => restoreRows(id, snap.mandays?.rows?.[id]));
+
+  recalcAll();
+}
+
+function saveProject() {
+  const snap = buildProjectSnapshot();
+  const json = JSON.stringify(snap, null, 2);
+  const blob = new Blob([json], {type:'application/json'});
+  const url = URL.createObjectURL(blob);
+  const rawName = (document.getElementById('g-name')?.value || 'project').trim() || 'project';
+  const safeName = rawName.replace(/[^a-z0-9]+/gi, '-').toLowerCase().replace(/^-+|-+$/g, '');
+  const date = new Date().toISOString().slice(0,10);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `project-${safeName}-${date}.json`;
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+  URL.revokeObjectURL(url);
+}
+
+function triggerLoadProject() {
+  const input = document.getElementById('load-project-input');
+  if (input) input.click();
+}
+function handleLoadProjectFile(inputEl) {
+  const file = inputEl.files && inputEl.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = e => {
+    try {
+      applyProjectSnapshot(JSON.parse(e.target.result));
+    } catch (err) {
+      alert('Could not read this project file: ' + err.message);
+    }
+  };
+  reader.readAsText(file);
+  inputEl.value = '';
 }
 
 // ─── INIT ─────────────────────────────────────────────────────────
