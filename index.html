@@ -275,6 +275,33 @@ hr{border:none;border-top:1px solid var(--b1);margin:16px 0}
     <div class="card-head">Cost Breakdown</div>
     <div id="breakdown-bars"></div>
   </div>
+
+  <div class="card" id="gh-sync-card">
+    <div class="card-head">☁ Save to GitHub</div>
+    <div class="g2">
+      <div class="fg"><label class="fl">Repository (owner/repo)</label>
+        <input id="gh-repo" type="text" placeholder="yourname/scada-budget-tool"></div>
+      <div class="fg"><label class="fl">Personal Access Token</label>
+        <input id="gh-token" type="password" placeholder="fine-grained token, Contents: read/write"></div>
+    </div>
+    <div class="g2" style="margin-top:10px">
+      <div class="fg"><label class="fl">Project name</label>
+        <input id="gh-project-name" type="text" placeholder="e.g. SOT023"></div>
+      <div class="fg"><label class="fl">Previously saved (by you)</label>
+        <select id="gh-project-list" onchange="if(this.value){document.getElementById('gh-project-name').value=this.value;}"><option value="">— pick a saved project —</option></select></div>
+    </div>
+    <div style="display:flex;align-items:center;gap:14px;margin-top:12px;flex-wrap:wrap">
+      <label style="display:flex;align-items:center;gap:6px;font-size:12px;color:var(--t2);cursor:pointer">
+        <input type="checkbox" id="gh-remember" onchange="if(!this.checked) forgetGitHubSync()"> Remember repo/token on this device
+      </label>
+      <span style="flex:1"></span>
+      <button class="btn btn-ghost" style="padding:6px 12px;font-size:12px" onclick="refreshGitHubProjectList()">🔄 Refresh list</button>
+      <button class="btn btn-ghost" style="padding:6px 12px;font-size:12px" onclick="loadFromGitHub()">📂 Load from GitHub</button>
+      <button class="btn btn-primary" style="padding:6px 14px;font-size:12px" onclick="saveToGitHub()">☁ Save to GitHub</button>
+    </div>
+    <div class="note" id="gh-status" style="margin-top:10px;display:none"></div>
+    <div class="note" style="margin-top:10px">Saves to <code id="gh-path-preview">Projects/&lt;your-username&gt;/&lt;project-name&gt;.json</code> in the repo above, under a folder named for whoever's signed in. Use a fine-grained token scoped only to this one repo (Contents: read/write) — not a classic token with broad account access. The token stays in this tab only unless you check "remember," which stores it in this browser's local storage on this device.</div>
+  </div>
 </div>
 
 <!-- ═══ GENERAL INFO ═══ -->
@@ -1626,6 +1653,7 @@ function doLogin() {
   // Admin: full unlock. Viewer (Technica): unlock all except cost/margin
   setPricingLock(!isAdmin);
   err.textContent = '';
+  refreshGitHubProjectList();
 }
 function doLogout() {
   currentUser = null;
@@ -2233,9 +2261,144 @@ function handleLoadProjectFile(inputEl) {
   inputEl.value = '';
 }
 
+// ════════════════════════════════════════════════════════════════
+//  SAVE / LOAD TO GITHUB
+//  Uses the GitHub Contents API directly from the browser — GitHub's
+//  REST API supports CORS for authenticated requests from any origin,
+//  so no backend is needed. The token comes from whoever is signed in,
+//  entered at runtime: it is never written into this file, so it isn't
+//  exposed by viewing the page source the way a baked-in credential
+//  would be. It lives in memory only unless "remember" is checked,
+//  which stores it in this browser's localStorage on this device.
+// ════════════════════════════════════════════════════════════════
+
+function utf8ToBase64(str) { return btoa(unescape(encodeURIComponent(str))); }
+function base64ToUtf8(str) { return decodeURIComponent(escape(atob(str.replace(/\n/g, '')))); }
+
+function ghProjectPath(projectName) {
+  const username = currentUser ? currentUser.name : 'unknown';
+  const safeUser = username.replace(/[^a-zA-Z0-9_-]+/g, '-');
+  const safeProject = projectName.trim().replace(/[^a-zA-Z0-9_-]+/g, '-');
+  return `Projects/${safeUser}/${safeProject}.json`;
+}
+function ghSetStatus(msg, isError) {
+  const el = document.getElementById('gh-status');
+  if (!el) return;
+  el.style.display = 'block';
+  el.textContent = msg;
+  el.style.color = isError ? 'var(--red)' : 'var(--t2)';
+}
+function ghConfig() {
+  return {
+    repo: document.getElementById('gh-repo')?.value.trim(),
+    token: document.getElementById('gh-token')?.value.trim(),
+    projectName: document.getElementById('gh-project-name')?.value.trim(),
+  };
+}
+
+async function saveToGitHub() {
+  if (!currentUser) { ghSetStatus('Sign in first.', true); return; }
+  const { repo, token, projectName } = ghConfig();
+  if (!repo || !token || !projectName) { ghSetStatus('Fill in repo, token, and project name first.', true); return; }
+
+  const path = ghProjectPath(projectName);
+  const apiUrl = `https://api.github.com/repos/${repo}/contents/${path}`;
+  const content = JSON.stringify(buildProjectSnapshot(), null, 2);
+
+  ghSetStatus('Saving…');
+  try {
+    let sha = null;
+    const getRes = await fetch(apiUrl, { headers: { 'Authorization': `Bearer ${token}`, 'Accept': 'application/vnd.github+json' } });
+    if (getRes.ok) { sha = (await getRes.json()).sha; }
+    else if (getRes.status !== 404) { throw new Error(`Could not check for an existing file (HTTP ${getRes.status})`); }
+
+    const body = { message: sha ? `Update project ${projectName}` : `Save project ${projectName}`, content: utf8ToBase64(content) };
+    if (sha) body.sha = sha;
+
+    const putRes = await fetch(apiUrl, {
+      method: 'PUT',
+      headers: { 'Authorization': `Bearer ${token}`, 'Accept': 'application/vnd.github+json', 'Content-Type': 'application/json' },
+      body: JSON.stringify(body)
+    });
+    if (!putRes.ok) {
+      const errData = await putRes.json().catch(() => ({}));
+      throw new Error(errData.message || `HTTP ${putRes.status}`);
+    }
+    ghSetStatus(`Saved to ${path} ✓`);
+    persistGitHubSyncPrefs();
+    refreshGitHubProjectList();
+  } catch (err) {
+    ghSetStatus('Save failed: ' + err.message, true);
+  }
+}
+
+async function loadFromGitHub() {
+  if (!currentUser) { ghSetStatus('Sign in first.', true); return; }
+  const { repo, token, projectName } = ghConfig();
+  if (!repo || !token || !projectName) { ghSetStatus('Fill in repo, token, and project name first.', true); return; }
+  if (!hwCatalog || !licenseCatalog) { ghSetStatus('Catalogs are still loading — try again in a second.', true); return; }
+
+  const path = ghProjectPath(projectName);
+  const apiUrl = `https://api.github.com/repos/${repo}/contents/${path}`;
+  ghSetStatus('Loading…');
+  try {
+    const res = await fetch(apiUrl, { headers: { 'Authorization': `Bearer ${token}`, 'Accept': 'application/vnd.github+json' } });
+    if (!res.ok) throw new Error(res.status === 404 ? 'No saved project found at that path.' : `HTTP ${res.status}`);
+    const data = await res.json();
+    applyProjectSnapshot(JSON.parse(base64ToUtf8(data.content)));
+    ghSetStatus(`Loaded from ${path} ✓`);
+    persistGitHubSyncPrefs();
+  } catch (err) {
+    ghSetStatus('Load failed: ' + err.message, true);
+  }
+}
+
+async function refreshGitHubProjectList() {
+  if (!currentUser) return;
+  const { repo, token } = ghConfig();
+  if (!repo || !token) return;
+  const username = currentUser.name.replace(/[^a-zA-Z0-9_-]+/g, '-');
+  const apiUrl = `https://api.github.com/repos/${repo}/contents/Projects/${username}`;
+  const select = document.getElementById('gh-project-list');
+  try {
+    const res = await fetch(apiUrl, { headers: { 'Authorization': `Bearer ${token}`, 'Accept': 'application/vnd.github+json' } });
+    if (!select) return;
+    if (!res.ok) { select.innerHTML = '<option value="">— pick a saved project —</option>'; return; }
+    const files = await res.json();
+    const names = (Array.isArray(files) ? files : []).filter(f => f.name.endsWith('.json')).map(f => f.name.replace(/\.json$/, ''));
+    select.innerHTML = '<option value="">— pick a saved project —</option>' + names.map(n => `<option value="${n}">${n}</option>`).join('');
+  } catch (err) {
+    console.error('Could not list GitHub projects:', err);
+  }
+}
+
+function persistGitHubSyncPrefs() {
+  if (!document.getElementById('gh-remember')?.checked) return;
+  const { repo, token } = ghConfig();
+  try {
+    localStorage.setItem('scada-gh-repo', repo || '');
+    localStorage.setItem('scada-gh-token', token || '');
+  } catch (e) { console.error('Could not persist GitHub sync prefs:', e); }
+}
+function forgetGitHubSync() {
+  try { localStorage.removeItem('scada-gh-repo'); localStorage.removeItem('scada-gh-token'); } catch (e) {}
+}
+function restoreGitHubSyncPrefs() {
+  try {
+    const repo = localStorage.getItem('scada-gh-repo');
+    const token = localStorage.getItem('scada-gh-token');
+    if (repo || token) {
+      const repoEl = document.getElementById('gh-repo'); if (repoEl) repoEl.value = repo || '';
+      const tokEl = document.getElementById('gh-token'); if (tokEl) tokEl.value = token || '';
+      const remEl = document.getElementById('gh-remember'); if (remEl) remEl.checked = true;
+    }
+  } catch (e) {}
+}
+
 // ─── INIT ─────────────────────────────────────────────────────────
 setPricingLock(true);
 recalcAll();
+restoreGitHubSyncPrefs();
 </script>
 </body>
 </body>
