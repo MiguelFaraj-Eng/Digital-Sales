@@ -2383,6 +2383,20 @@ function persistGitHubSyncPrefs() {
 function forgetGitHubSync() {
   try { localStorage.removeItem('scada-gh-repo'); localStorage.removeItem('scada-gh-token'); } catch (e) {}
 }
+// The tool is already being served from the exact repo it needs to save to —
+// a *.github.io hostname with the repo name as the first path segment (project
+// pages) — so there's no reason to make anyone type it and risk exactly the
+// "Miguel/SOT" mix-up (typing the app login instead of the GitHub owner).
+function detectGitHubRepoFromLocation() {
+  try {
+    const m = location.hostname.match(/^([^.]+)\.github\.io$/i);
+    if (!m) return null;
+    const owner = m[1];
+    const repo = location.pathname.split('/').filter(Boolean)[0];
+    return repo ? `${owner}/${repo}` : null;
+  } catch (e) { return null; }
+}
+
 function restoreGitHubSyncPrefs() {
   try {
     const repo = localStorage.getItem('scada-gh-repo');
@@ -2391,6 +2405,9 @@ function restoreGitHubSyncPrefs() {
       const repoEl = document.getElementById('gh-repo'); if (repoEl) repoEl.value = repo || '';
       const tokEl = document.getElementById('gh-token'); if (tokEl) tokEl.value = token || '';
       const remEl = document.getElementById('gh-remember'); if (remEl) remEl.checked = true;
+    } else {
+      const detected = detectGitHubRepoFromLocation();
+      if (detected) { const repoEl = document.getElementById('gh-repo'); if (repoEl) repoEl.value = detected; }
     }
   } catch (e) {}
 }
