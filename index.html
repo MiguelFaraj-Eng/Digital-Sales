@@ -292,7 +292,7 @@ hr{border:none;border-top:1px solid var(--b1);margin:16px 0}
     </div>
     <div style="display:flex;align-items:center;gap:14px;margin-top:12px;flex-wrap:wrap">
       <label style="display:flex;align-items:center;gap:6px;font-size:12px;color:var(--t2);cursor:pointer">
-        <input type="checkbox" id="gh-remember" onchange="this.checked ? persistGitHubSyncPrefs() : forgetGitHubSync()"> Remember repo/token on this device
+        <input type="checkbox" id="gh-remember" onchange="this.checked ? persistGitHubSyncPrefs() : forgetGitHubSync()"> Remember token on this device
       </label>
       <span style="flex:1"></span>
       <button class="btn btn-ghost" style="padding:6px 12px;font-size:12px" onclick="refreshGitHubProjectList()">🔄 Refresh list</button>
@@ -300,7 +300,7 @@ hr{border:none;border-top:1px solid var(--b1);margin:16px 0}
       <button class="btn btn-primary" style="padding:6px 14px;font-size:12px" onclick="saveToGitHub()">☁ Save to GitHub</button>
     </div>
     <div class="note" id="gh-status" style="margin-top:10px;display:none"></div>
-    <div class="note" style="margin-top:10px">Saves to <code id="gh-path-preview">Projects/&lt;your-username&gt;/&lt;project-name&gt;.json</code> in the repo above, under a folder named for whoever's signed in. Use a fine-grained token scoped only to this one repo (Contents: read/write) — not a classic token with broad account access. The token stays in this tab only unless you check "remember," which stores it in this browser's local storage on this device.</div>
+    <div class="note" style="margin-top:10px">Saves to <code id="gh-path-preview">Projects/&lt;your-username&gt;/&lt;project-name&gt;.json</code> in the repo above, under a folder named for whoever's signed in. The repo field auto-fills from this page's own URL — you shouldn't normally need to type it. Use a fine-grained token scoped only to this one repo (Contents: read/write) — not a classic token with broad account access. The token stays in this tab only unless you check "remember," which stores it in this browser's local storage on this device.</div>
   </div>
 </div>
 
@@ -2374,19 +2374,20 @@ async function refreshGitHubProjectList() {
 
 function persistGitHubSyncPrefs() {
   if (!document.getElementById('gh-remember')?.checked) return;
-  const { repo, token } = ghConfig();
+  const { token } = ghConfig();
   try {
-    localStorage.setItem('scada-gh-repo', repo || '');
     localStorage.setItem('scada-gh-token', token || '');
   } catch (e) { console.error('Could not persist GitHub sync prefs:', e); }
 }
 function forgetGitHubSync() {
-  try { localStorage.removeItem('scada-gh-repo'); localStorage.removeItem('scada-gh-token'); } catch (e) {}
+  try { localStorage.removeItem('scada-gh-token'); localStorage.removeItem('scada-gh-repo'); } catch (e) {}
 }
 // The tool is already being served from the exact repo it needs to save to —
 // a *.github.io hostname with the repo name as the first path segment (project
 // pages) — so there's no reason to make anyone type it and risk exactly the
-// "Miguel/SOT" mix-up (typing the app login instead of the GitHub owner).
+// "Miguel/SOT" mix-up (typing the app login instead of the GitHub owner). The
+// repo field is re-derived from the URL on every load rather than cached, so
+// a bad value typed once can never get stuck.
 function detectGitHubRepoFromLocation() {
   try {
     const m = location.hostname.match(/^([^.]+)\.github\.io$/i);
@@ -2399,15 +2400,18 @@ function detectGitHubRepoFromLocation() {
 
 function restoreGitHubSyncPrefs() {
   try {
-    const repo = localStorage.getItem('scada-gh-repo');
+    const detected = detectGitHubRepoFromLocation();
+    const repoEl = document.getElementById('gh-repo');
+    if (repoEl && detected) repoEl.value = detected;
+
+    // scada-gh-repo may still exist from before this fix — clear it so it can
+    // never resurface and override the freshly-detected value.
+    try { localStorage.removeItem('scada-gh-repo'); } catch (e2) {}
+
     const token = localStorage.getItem('scada-gh-token');
-    if (repo || token) {
-      const repoEl = document.getElementById('gh-repo'); if (repoEl) repoEl.value = repo || '';
-      const tokEl = document.getElementById('gh-token'); if (tokEl) tokEl.value = token || '';
+    if (token) {
+      const tokEl = document.getElementById('gh-token'); if (tokEl) tokEl.value = token;
       const remEl = document.getElementById('gh-remember'); if (remEl) remEl.checked = true;
-    } else {
-      const detected = detectGitHubRepoFromLocation();
-      if (detected) { const repoEl = document.getElementById('gh-repo'); if (repoEl) repoEl.value = detected; }
     }
   } catch (e) {}
 }
