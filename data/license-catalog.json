@@ -16,7 +16,10 @@
               "group": "Visualization",
               "items": [
                 { "id": "ia-ign-perspective", "name": "Perspective Module", "unitCost": 11225, "marginPct": 15, "defaultIncluded": false, "note": "HTML5 web/mobile visualization, unlimited sessions.", "source": "https://inductiveautomation.com/pricing/list" },
-                { "id": "ia-ign-vision", "name": "Vision Module", "unitCost": 8330, "marginPct": 15, "defaultIncluded": false, "note": "Desktop/panel HMI clients, unlimited clients.", "source": "https://inductiveautomation.com/pricing/list" },
+                { "id": "ia-ign-vision", "name": "Vision Module", "hasTiers": true, "marginPct": 15, "defaultIncluded": false, "note": "Desktop/panel HMI clients.", "tiers": [
+                    { "label": "Limited (up to 5 concurrent clients)", "cost": 3500, "note": "From an official IA sell sheet that may predate the current price list — confirm with supplier." },
+                    { "label": "Unlimited (unlimited clients)", "cost": 8330, "note": "Verified current price." }
+                  ], "defaultTierIndex": 1, "source": "https://files.inductiveautomation.com/sellsheets/pricing.pdf" },
                 { "id": "ia-ign-reporting", "name": "Reporting Module", "unitCost": 3900, "marginPct": 15, "defaultIncluded": false, "note": "Dynamic database-driven reports, auto-delivery.", "source": "https://inductiveautomation.com/pricing/list" }
               ]
             },
