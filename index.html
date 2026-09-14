@@ -280,9 +280,9 @@ hr{border:none;border-top:1px solid var(--b1);margin:16px 0}
     <div class="card-head">☁ Save to GitHub</div>
     <div class="g2">
       <div class="fg"><label class="fl">Repository (owner/repo)</label>
-        <input id="gh-repo" type="text" placeholder="yourname/scada-budget-tool"></div>
+        <input id="gh-repo" type="text" placeholder="yourname/scada-budget-tool" onchange="persistGitHubSyncPrefs()"></div>
       <div class="fg"><label class="fl">Personal Access Token</label>
-        <input id="gh-token" type="password" placeholder="fine-grained token, Contents: read/write"></div>
+        <input id="gh-token" type="password" placeholder="fine-grained token, Contents: read/write" onchange="persistGitHubSyncPrefs()"></div>
     </div>
     <div class="g2" style="margin-top:10px">
       <div class="fg"><label class="fl">Project name</label>
@@ -292,7 +292,7 @@ hr{border:none;border-top:1px solid var(--b1);margin:16px 0}
     </div>
     <div style="display:flex;align-items:center;gap:14px;margin-top:12px;flex-wrap:wrap">
       <label style="display:flex;align-items:center;gap:6px;font-size:12px;color:var(--t2);cursor:pointer">
-        <input type="checkbox" id="gh-remember" onchange="if(!this.checked) forgetGitHubSync()"> Remember repo/token on this device
+        <input type="checkbox" id="gh-remember" onchange="this.checked ? persistGitHubSyncPrefs() : forgetGitHubSync()"> Remember repo/token on this device
       </label>
       <span style="flex:1"></span>
       <button class="btn btn-ghost" style="padding:6px 12px;font-size:12px" onclick="refreshGitHubProjectList()">🔄 Refresh list</button>
