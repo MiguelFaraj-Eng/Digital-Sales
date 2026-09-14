@@ -1037,14 +1037,20 @@ function renderLicenseModules() {
       <div class="tbl-wrap"><table>
         <thead><tr><th>Item</th><th>Selected</th><th>Unit Cost ($)</th><th>Margin (%)</th><th>Unit Price</th><th>Total Price</th></tr></thead>
         <tbody>
-          ${group.items.map(item => `
+          ${group.items.map(item => {
+            const tierSelect = item.hasTiers ? `<br><select class="esel lic-tier" onchange="applyLicenseTier(this)">` +
+              item.tiers.map((t,i) => `<option value="${t.cost}"${i===(item.defaultTierIndex||0)?' selected':''}>${t.label}</option>`).join('') +
+              `</select>` : '';
+            const defaultCost = item.hasTiers ? item.tiers[item.defaultTierIndex||0].cost : item.unitCost;
+            return `
             <tr title="${(item.note||'').replace(/"/g,'&quot;')}">
-              <td><span class="item-label">${item.name}</span></td>
+              <td><span class="item-label">${item.name}</span>${tierSelect}</td>
               <td><select class="esel ls" onchange="recalcAll()"><option${item.defaultIncluded?' selected':''}>Yes</option><option${item.defaultIncluded?'':' selected'}>No</option></select></td>
-              <td><input class="en lc" type="number" value="${item.unitCost}" onchange="recalcAll()"></td>
+              <td><input class="en lc" type="number" value="${defaultCost}" onchange="recalcAll()"></td>
               <td><input class="en lm" type="number" value="${item.marginPct}" onchange="recalcAll()"></td>
               <td class="n lu"></td><td class="n lt"></td>
-            </tr>`).join('')}
+            </tr>`;
+          }).join('')}
         </tbody>
       </table></div>
     </div>`).join('');
@@ -1141,6 +1147,14 @@ function renderHwCatalogRows(catKey, bodyId) {
 function applyPanelSize(selectEl) {
   const tr = selectEl.closest('tr');
   const costInput = tr ? tr.querySelector('.hc') : null;
+  if (costInput) costInput.value = selectEl.value;
+  recalcAll();
+}
+
+// License tier picker (e.g. Vision Limited vs Unlimited) — same pattern as applyPanelSize.
+function applyLicenseTier(selectEl) {
+  const tr = selectEl.closest('tr');
+  const costInput = tr ? tr.querySelector('.lc') : null;
   if (costInput) costInput.value = selectEl.value;
   recalcAll();
 }
