@@ -217,6 +217,8 @@ hr{border:none;border-top:1px solid var(--b1);margin:16px 0}
     <div class="nav-item" data-p="mandays"><span class="nav-dot"></span>Mandays</div>
     <div class="nav-item" data-p="brief"><span class="nav-dot"></span>Budget Brief</div>
     <div class="nav-item" data-p="suppliers-ref"><span class="nav-dot"></span>Component Suppliers</div>
+    <div class="nav-group" id="nav-group-admin" style="display:none">Admin</div>
+    <div class="nav-item" data-p="users" id="nav-item-users" style="display:none"><span class="nav-dot"></span>User Management</div>
   </nav>
   <div class="theme-toggle" onclick="toggleTheme()">
     <div class="toggle-track"><div class="toggle-thumb"></div></div>
@@ -802,6 +804,29 @@ hr{border:none;border-top:1px solid var(--b1);margin:16px 0}
         <tr><td>Mouse + Keyboard</td><td><a href="https://mojitech.net" target="_blank" style="color:var(--blue)">Mojitech.net</a></td></tr>
       </tbody>
     </table></div>
+  </div>
+</div>
+
+<!-- ═══ USER MANAGEMENT ═══ -->
+<div id="page-users" class="page">
+  <div class="ph"><div><div class="ph-title">User Management</div><div class="ph-sub">Add, edit, or remove sign-in accounts — Administrator and Super Admin only</div></div></div>
+
+  <div class="card">
+    <div class="card-head">Accounts</div>
+    <div class="tbl-wrap"><table>
+      <thead><tr><th>Username</th><th>Display Name</th><th>Role</th><th>Password</th><th></th></tr></thead>
+      <tbody id="users-table-body"></tbody>
+    </table></div>
+    <div style="margin-top:12px">
+      <button class="btn btn-ghost" onclick="addUserRow()">+ Add User</button>
+    </div>
+  </div>
+
+  <div class="card" style="border-color:var(--blue);background:var(--blue-bg)">
+    <div class="card-head">Save Changes</div>
+    <div class="note" style="margin-bottom:12px">Changes here only apply in this browser tab until you save — everyone else keeps signing in with the accounts currently saved, until then.</div>
+    <button class="btn btn-primary" onclick="saveUsersToCloud()">☁ Save Changes to Cloud</button>
+    <div class="note" id="users-save-status" style="margin-top:10px;display:none"></div>
   </div>
 </div>
 
@@ -1648,11 +1673,15 @@ function doLogin() {
   document.getElementById('user-name-display').textContent = u;
   document.getElementById('user-role-display').textContent = match.label;
   document.getElementById('user-avatar').textContent = u.substring(0,2).toUpperCase();
-  const isAdmin = match.role === 'admin';
+  const isAdmin = match.role === 'admin' || match.role === 'superadmin';
   document.getElementById('user-avatar').style.cssText +=
     `;border-color:${isAdmin?'var(--amber)':'var(--blue)'};color:${isAdmin?'var(--amber)':'var(--blue)'};background:${isAdmin?'var(--amber-bg)':'var(--blue-bg)'}`;
   // Admin: full unlock. Viewer (Technica): unlock all except cost/margin
   setPricingLock(!isAdmin);
+  const canManageUsers = match.role === 'admin' || match.role === 'superadmin';
+  const navGroupAdmin = document.getElementById('nav-group-admin'); if (navGroupAdmin) navGroupAdmin.style.display = canManageUsers ? '' : 'none';
+  const navItemUsers = document.getElementById('nav-item-users'); if (navItemUsers) navItemUsers.style.display = canManageUsers ? '' : 'none';
+  if (canManageUsers) renderUserManagementTable();
   err.textContent = '';
   refreshGitHubProjectList();
 }
@@ -1662,6 +1691,16 @@ function doLogout() {
   document.getElementById('login-overlay').style.display = 'flex';
   ['login-user','login-pass'].forEach(id => document.getElementById(id).value='');
   document.getElementById('login-err').textContent='';
+  const navGroupAdmin = document.getElementById('nav-group-admin'); if (navGroupAdmin) navGroupAdmin.style.display = 'none';
+  const navItemUsers = document.getElementById('nav-item-users'); if (navItemUsers) navItemUsers.style.display = 'none';
+  // If they were on the User Management page, bounce back to Dashboard since it's no longer accessible
+  const usersPage = document.getElementById('page-users');
+  if (usersPage && usersPage.classList.contains('active')) {
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    document.getElementById('page-dashboard').classList.add('active');
+    document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+    document.querySelector('.nav-item[data-p="dashboard"]').classList.add('active');
+  }
   setPricingLock(true);
 }
 function setPricingLock(locked) {
@@ -2309,35 +2348,57 @@ function disconnectCloud() {
   updateCloudConnectionUI(false);
 }
 
+// Shared GitHub Contents API writer (GET for sha if the file already exists,
+// then PUT) — used by both project saves and user-account saves so there's
+// one tested path instead of two copies that could drift apart.
+async function writeFileToGitHub(path, contentString, commitMessage) {
+  const { repo, token } = ghConfig();
+  if (!repo) throw new Error('Could not determine where to save — open this tool from its published cloud URL.');
+  if (!token) throw new Error('Connect to Cloud first (paste your access key on the Dashboard).');
+
+  const apiUrl = `https://api.github.com/repos/${repo}/contents/${path}`;
+  let sha = null;
+  const getRes = await fetch(apiUrl, { headers: { 'Authorization': `Bearer ${token}`, 'Accept': 'application/vnd.github+json' } });
+  if (getRes.ok) { sha = (await getRes.json()).sha; }
+  else if (getRes.status !== 404) { throw new Error(`Could not check for an existing file (HTTP ${getRes.status})`); }
+
+  const body = { message: commitMessage, content: utf8ToBase64(contentString) };
+  if (sha) body.sha = sha;
+
+  const putRes = await fetch(apiUrl, {
+    method: 'PUT',
+    headers: { 'Authorization': `Bearer ${token}`, 'Accept': 'application/vnd.github+json', 'Content-Type': 'application/json' },
+    body: JSON.stringify(body)
+  });
+  if (!putRes.ok) {
+    const errData = await putRes.json().catch(() => ({}));
+    throw new Error(errData.message || `HTTP ${putRes.status}`);
+  }
+}
+
+async function readFileFromGitHub(path) {
+  const { repo, token } = ghConfig();
+  if (!repo) throw new Error('Could not determine where to read from — open this tool from its published cloud URL.');
+  if (!token) throw new Error('Connect to Cloud first (paste your access key on the Dashboard).');
+  const apiUrl = `https://api.github.com/repos/${repo}/contents/${path}`;
+  const res = await fetch(apiUrl, { headers: { 'Authorization': `Bearer ${token}`, 'Accept': 'application/vnd.github+json' } });
+  if (!res.ok) throw new Error(res.status === 404 ? 'File not found.' : `HTTP ${res.status}`);
+  const data = await res.json();
+  return base64ToUtf8(data.content);
+}
+
 async function saveToGitHub() {
   if (!currentUser) { ghSetStatus('Sign in first.', true); return; }
-  const { repo, token, projectName } = ghConfig();
-  if (!repo) { ghSetStatus('Could not determine where to save — open this tool from its published cloud URL.', true); return; }
+  const { projectName } = ghConfig();
+  const { token } = ghConfig();
   if (!token || !projectName) { ghSetStatus('Paste your access key and enter a project name first.', true); return; }
 
   const path = ghProjectPath(projectName);
-  const apiUrl = `https://api.github.com/repos/${repo}/contents/${path}`;
   const content = JSON.stringify(buildProjectSnapshot(), null, 2);
 
   ghSetStatus('Saving…');
   try {
-    let sha = null;
-    const getRes = await fetch(apiUrl, { headers: { 'Authorization': `Bearer ${token}`, 'Accept': 'application/vnd.github+json' } });
-    if (getRes.ok) { sha = (await getRes.json()).sha; }
-    else if (getRes.status !== 404) { throw new Error(`Could not check for an existing save (HTTP ${getRes.status})`); }
-
-    const body = { message: sha ? `Update project ${projectName}` : `Save project ${projectName}`, content: utf8ToBase64(content) };
-    if (sha) body.sha = sha;
-
-    const putRes = await fetch(apiUrl, {
-      method: 'PUT',
-      headers: { 'Authorization': `Bearer ${token}`, 'Accept': 'application/vnd.github+json', 'Content-Type': 'application/json' },
-      body: JSON.stringify(body)
-    });
-    if (!putRes.ok) {
-      const errData = await putRes.json().catch(() => ({}));
-      throw new Error(errData.message || `HTTP ${putRes.status}`);
-    }
+    await writeFileToGitHub(path, content, `Save project ${projectName}`);
     ghSetStatus(`Saved "${projectName}" to the cloud ✓`);
     persistGitHubSyncPrefs();
     updateCloudConnectionUI(true);
@@ -2349,24 +2410,21 @@ async function saveToGitHub() {
 
 async function loadFromGitHub() {
   if (!currentUser) { ghSetStatus('Sign in first.', true); return; }
-  const { repo, token, projectName } = ghConfig();
-  if (!repo) { ghSetStatus('Could not determine where to load from — open this tool from its published cloud URL.', true); return; }
+  const { projectName } = ghConfig();
+  const { token } = ghConfig();
   if (!token || !projectName) { ghSetStatus('Paste your access key and enter a project name first.', true); return; }
   if (!hwCatalog || !licenseCatalog) { ghSetStatus('Still loading — try again in a second.', true); return; }
 
   const path = ghProjectPath(projectName);
-  const apiUrl = `https://api.github.com/repos/${repo}/contents/${path}`;
   ghSetStatus('Loading…');
   try {
-    const res = await fetch(apiUrl, { headers: { 'Authorization': `Bearer ${token}`, 'Accept': 'application/vnd.github+json' } });
-    if (!res.ok) throw new Error(res.status === 404 ? 'No saved project found with that name.' : `HTTP ${res.status}`);
-    const data = await res.json();
-    applyProjectSnapshot(JSON.parse(base64ToUtf8(data.content)));
+    const content = await readFileFromGitHub(path);
+    applyProjectSnapshot(JSON.parse(content));
     ghSetStatus(`Loaded "${projectName}" from the cloud ✓`);
     persistGitHubSyncPrefs();
     updateCloudConnectionUI(true);
   } catch (err) {
-    ghSetStatus('Load failed: ' + err.message, true);
+    ghSetStatus('Load failed: ' + (err.message === 'File not found.' ? 'No saved project found with that name.' : err.message), true);
   }
 }
 
@@ -2427,7 +2485,118 @@ function restoreGitHubSyncPrefs() {
   } catch (e) {}
 }
 
-// ─── INIT ─────────────────────────────────────────────────────────
+// ════════════════════════════════════════════════════════════════
+//  USER MANAGEMENT (Administrator / Super Admin only)
+//  Edits happen in-memory first (so they can be reviewed before
+//  committing), then "Save Changes to Cloud" writes the updated
+//  data/users.json back to the repo via the same GitHub Contents
+//  API + access key already wired up for project saves.
+// ════════════════════════════════════════════════════════════════
+
+function userRowInnerHtml(username, u) {
+  const isSelf = currentUser && currentUser.name === username;
+  const targetIsSuperadmin = u.role === 'superadmin';
+  const iAmSuperadmin = currentUser && currentUser.role === 'superadmin';
+  const canDelete = !isSelf && (!targetIsSuperadmin || iAmSuperadmin);
+  // A plain Administrator can't touch an existing Super Admin's role, AND can't
+  // grant Super Admin to anyone else (existing or brand new) either — the
+  // option is omitted entirely rather than just disabled on rows that already
+  // show it, otherwise adding a fresh row would sidestep the restriction.
+  const roleLocked = targetIsSuperadmin && !iAmSuperadmin;
+  const esc = s => (s || '').replace(/"/g, '&quot;');
+  const superAdminOption = (iAmSuperadmin || targetIsSuperadmin)
+    ? `<option value="superadmin"${u.role==='superadmin'?' selected':''}>Super Admin</option>`
+    : '';
+  return `
+    <td><input class="en un-username" type="text" value="${esc(username)}" placeholder="username"></td>
+    <td><input class="en un-label" type="text" value="${esc(u.label)}" placeholder="Display name"></td>
+    <td><select class="esel un-role" ${roleLocked ? 'disabled title="Only a Super Admin can change another Super Admin\'s role"' : ''}>
+      <option value="viewer"${u.role==='viewer'?' selected':''}>Viewer</option>
+      <option value="admin"${u.role==='admin'?' selected':''}>Administrator</option>
+      ${superAdminOption}
+    </select></td>
+    <td><input class="en un-pass" type="text" value="${esc(u.pass)}" placeholder="password"></td>
+    <td>${canDelete
+      ? `<span style="color:var(--red);cursor:pointer;font-size:16px" onclick="deleteUserRow(this)" title="Remove user">×</span>`
+      : `<span style="color:var(--t3);font-size:11px" title="${isSelf ? 'Can\'t delete your own account while signed in' : 'Only a Super Admin can remove a Super Admin'}">—</span>`}</td>`;
+}
+
+function renderUserManagementTable() {
+  const tb = document.getElementById('users-table-body');
+  if (!tb) return;
+  tb.innerHTML = Object.keys(USERS).map(username => `<tr>${userRowInnerHtml(username, USERS[username])}</tr>`).join('');
+}
+
+function addUserRow() {
+  const tb = document.getElementById('users-table-body');
+  if (!tb) return;
+  const tr = document.createElement('tr');
+  tr.innerHTML = userRowInnerHtml('', { pass: '', role: 'viewer', label: '' });
+  tb.appendChild(tr);
+  tr.querySelector('.un-username')?.focus();
+}
+
+function deleteUserRow(el) {
+  const tr = el.closest('tr');
+  if (!tr) return;
+  if (!confirm('Remove this user? This only takes effect once you save to the cloud.')) return;
+  tr.remove();
+}
+
+function usersSetStatus(msg, isError) {
+  const el = document.getElementById('users-save-status');
+  if (!el) return;
+  el.style.display = 'block';
+  el.textContent = msg;
+  el.style.color = isError ? 'var(--red)' : 'var(--t2)';
+}
+
+async function saveUsersToCloud() {
+  if (!currentUser || (currentUser.role !== 'admin' && currentUser.role !== 'superadmin')) {
+    usersSetStatus('You do not have permission to do this.', true); return;
+  }
+  const iAmSuperadmin = currentUser.role === 'superadmin';
+  const tb = document.getElementById('users-table-body');
+  if (!tb) return;
+
+  const newUsers = {};
+  let missingField = false;
+  let selfStillPresent = false;
+  let duplicateUsername = false;
+  let unauthorizedSuperadminGrant = false;
+
+  tb.querySelectorAll('tr').forEach(tr => {
+    const username = tr.querySelector('.un-username')?.value.trim();
+    const label = tr.querySelector('.un-label')?.value.trim();
+    const role = tr.querySelector('.un-role')?.value;
+    const pass = tr.querySelector('.un-pass')?.value;
+    if (!username || !pass) { missingField = true; return; }
+    if (newUsers[username]) { duplicateUsername = true; return; }
+    // Backstop in case the UI-level restriction was bypassed (e.g. via dev tools) —
+    // only a Super Admin may grant the Super Admin role, to anyone, ever.
+    if (role === 'superadmin' && !iAmSuperadmin && !(USERS[username] && USERS[username].role === 'superadmin')) {
+      unauthorizedSuperadminGrant = true; return;
+    }
+    newUsers[username] = { pass, role, label: label || username };
+    if (currentUser && username === currentUser.name) selfStillPresent = true;
+  });
+
+  if (missingField) { usersSetStatus('Every user needs at least a username and password.', true); return; }
+  if (duplicateUsername) { usersSetStatus('Two users have the same username — usernames must be unique.', true); return; }
+  if (unauthorizedSuperadminGrant) { usersSetStatus('Only a Super Admin can grant the Super Admin role.', true); return; }
+  if (!selfStillPresent) { usersSetStatus("You've removed or renamed your own account from the list — undo that first so you don't lock yourself out.", true); return; }
+
+  usersSetStatus('Saving…');
+  try {
+    await writeFileToGitHub('data/users.json', JSON.stringify(newUsers, null, 2), 'Update user accounts');
+    USERS = newUsers; // reflect immediately in this session too, without waiting for a reload
+    usersSetStatus('Saved ✓ — accounts are updated for everyone.');
+  } catch (err) {
+    usersSetStatus('Save failed: ' + err.message, true);
+  }
+}
+
+
 setPricingLock(true);
 recalcAll();
 restoreGitHubSyncPrefs();
