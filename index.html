@@ -169,9 +169,73 @@ hr{border:none;border-top:1px solid var(--b1);margin:16px 0}
 /* License rows — dim inactive ones */
 .lic-inactive td { opacity: 0.35; }
 .lic-active td { opacity: 1; }
-/* Technica viewer: only cost + margin fields locked */
+/* Technica viewer / Tendering: only cost + margin fields locked */
 .cost-locked input.hc,.cost-locked input.lc,.cost-locked input.hm,.cost-locked input.lm{pointer-events:none;opacity:0.38;cursor:not-allowed;background:var(--s2) !important}
 .locked input.en,.locked select.esel,.locked input.hq,.locked input.hc,.locked input.hm,.locked input.ls{pointer-events:none;opacity:0.45;cursor:not-allowed}
+
+/* ═══ ROLE-BASED VISIBILITY (Sales / Tendering / Procurement) ═══
+   Applied via a role-* class on <body>. Every pricing table shares the same
+   column order — Name, Qty/Selected, Cost, Margin, Unit Price, Total — so
+   this is driven by column position rather than tagging every cell. */
+
+/* SALES: cost & margin (columns 3–4) hidden across every pricing table;
+   qty/selected + unit price/total stay visible and editable. */
+body.role-sales #page-licenses table th:nth-child(3), body.role-sales #page-licenses table td:nth-child(3),
+body.role-sales #page-licenses table th:nth-child(4), body.role-sales #page-licenses table td:nth-child(4),
+body.role-sales #page-hardware table th:nth-child(3), body.role-sales #page-hardware table td:nth-child(3),
+body.role-sales #page-hardware table th:nth-child(4), body.role-sales #page-hardware table td:nth-child(4),
+body.role-sales #page-mandays table th:nth-child(3), body.role-sales #page-mandays table td:nth-child(3),
+body.role-sales #page-mandays table th:nth-child(4), body.role-sales #page-mandays table td:nth-child(4)
+{ display:none; }
+body.role-sales #d-margin, body.role-sales .cost-row { display:none; }
+
+/* PROCUREMENT: only item name (1) + cost + margin (3–4) remain visible —
+   qty/selected (2) and unit price/total (5–6) describe a specific
+   customer's order, not sourcing cost, so they're hidden. */
+body.role-procurement #page-licenses table th:nth-child(2), body.role-procurement #page-licenses table td:nth-child(2),
+body.role-procurement #page-licenses table th:nth-child(5), body.role-procurement #page-licenses table td:nth-child(5),
+body.role-procurement #page-licenses table th:nth-child(6), body.role-procurement #page-licenses table td:nth-child(6),
+body.role-procurement #page-hardware table th:nth-child(2), body.role-procurement #page-hardware table td:nth-child(2),
+body.role-procurement #page-hardware table th:nth-child(5), body.role-procurement #page-hardware table td:nth-child(5),
+body.role-procurement #page-hardware table th:nth-child(6), body.role-procurement #page-hardware table td:nth-child(6),
+body.role-procurement #page-mandays table th:nth-child(2), body.role-procurement #page-mandays table td:nth-child(2),
+body.role-procurement #page-mandays table th:nth-child(5), body.role-procurement #page-mandays table td:nth-child(5),
+body.role-procurement #page-mandays table th:nth-child(6), body.role-procurement #page-mandays table td:nth-child(6)
+{ display:none; }
+/* Table footers collapse columns 1–5 into one colspan cell, so the "Total"
+   cell there is really the 2nd actual <td>, not the 6th — nth-child can't
+   see through colspan, so this is handled as its own rule. */
+body.role-procurement table tfoot tr td:last-child { display:none; }
+
+/* Procurement: hide platform/category pickers and add/generate controls —
+   those configure a specific order, not sourcing cost. */
+body.role-procurement #card-hw-categories,
+body.role-procurement #card-lic-platform,
+body.role-procurement button[onclick^="addEquip"],
+body.role-procurement button[onclick^="bulkGenerate"],
+body.role-procurement input[id^="bulk-count"]
+{ display:none; }
+
+/* Procurement: pages with no cost content at all — hide every card, leave
+   the page title so navigation still makes sense. */
+body.role-procurement #page-general .card,
+body.role-procurement #page-production .card,
+body.role-procurement #page-equipment .card,
+body.role-procurement #page-supplier .card,
+body.role-procurement #page-suppliers-ref .card,
+body.role-procurement #page-brief .card
+{ display:none; }
+
+/* Procurement: Dashboard is almost entirely price-derived — hide it all
+   except the one genuine cost figure (Total cost basis). */
+body.role-procurement #dash-stat-grid,
+body.role-procurement #card-budget-target,
+body.role-procurement #card-cost-breakdown,
+body.role-procurement .price-row
+{ display:none; }
+
+/* Exporting a client-facing quote isn't Procurement's function */
+body.role-procurement button[onclick="exportOffer()"] { display:none; }
 
 </style>
 </head>
@@ -248,7 +312,7 @@ hr{border:none;border-top:1px solid var(--b1);margin:16px 0}
     </div>
   </div>
 
-  <div class="stat-grid">
+  <div class="stat-grid" id="dash-stat-grid">
     <div class="stat"><div class="stat-label">Smart Factory License</div><div class="stat-value c-blue" id="d-lic">$21,871</div><div class="stat-sub">Platform: <span id="d-platform">Ignition Perspective</span></div></div>
     <div class="stat"><div class="stat-label">Hardware</div><div class="stat-value" id="d-hw">$11,557</div><div class="stat-sub">Server + Network</div></div>
     <div class="stat"><div class="stat-label">Labor &amp; Travel</div><div class="stat-value c-amber" id="d-labor">$45,200</div><div class="stat-sub">Engineering mandays</div></div>
@@ -256,7 +320,7 @@ hr{border:none;border-top:1px solid var(--b1);margin:16px 0}
   </div>
 
   <div class="g2" style="margin-bottom:16px">
-    <div class="card">
+    <div class="card" id="card-budget-target">
       <div class="card-head">Budget vs Client Target ($200,000)</div>
       <div style="display:flex;align-items:center;gap:12px;margin-bottom:8px">
         <div style="flex:1"><div class="prog-wrap"><div class="prog-fill" id="d-prog" style="width:39.3%;background:var(--green)"></div></div></div>
@@ -267,13 +331,13 @@ hr{border:none;border-top:1px solid var(--b1);margin:16px 0}
     <div class="card">
       <div class="card-head">Cost Summary</div>
       <div style="font-size:12px;color:var(--t3);margin-bottom:10px">Purchasing + Labor breakdown</div>
-      <div style="display:flex;justify-content:space-between;margin-bottom:6px"><span style="color:var(--t2)">Purchasing (hardware + software)</span><span style="font-family:'IBM Plex Mono',monospace" id="d-purch">$33,427</span></div>
-      <div style="display:flex;justify-content:space-between;margin-bottom:6px"><span style="color:var(--t2)">Labor &amp; travel</span><span style="font-family:'IBM Plex Mono',monospace" id="d-labor2">$45,200</span></div>
-      <div style="display:flex;justify-content:space-between;padding-top:8px;border-top:1px solid var(--b1)"><span style="color:var(--t2)">Total cost basis</span><span style="font-family:'IBM Plex Mono',monospace" id="d-cost">$48,454</span></div>
+      <div class="price-row" style="display:flex;justify-content:space-between;margin-bottom:6px"><span style="color:var(--t2)">Purchasing (hardware + software)</span><span style="font-family:'IBM Plex Mono',monospace" id="d-purch">$33,427</span></div>
+      <div class="price-row" style="display:flex;justify-content:space-between;margin-bottom:6px"><span style="color:var(--t2)">Labor &amp; travel</span><span style="font-family:'IBM Plex Mono',monospace" id="d-labor2">$45,200</span></div>
+      <div class="cost-row" style="display:flex;justify-content:space-between;padding-top:8px;border-top:1px solid var(--b1)"><span style="color:var(--t2)">Total cost basis</span><span style="font-family:'IBM Plex Mono',monospace" id="d-cost">$48,454</span></div>
     </div>
   </div>
 
-  <div class="card">
+  <div class="card" id="card-cost-breakdown">
     <div class="card-head">Cost Breakdown</div>
     <div id="breakdown-bars"></div>
   </div>
@@ -525,7 +589,7 @@ hr{border:none;border-top:1px solid var(--b1);margin:16px 0}
   <div class="ph"><div><div class="ph-title">Smart Factory License</div><div class="ph-sub">Pick a vendor + product — its module list loads from the license catalog</div></div></div>
 
   <!-- Vendor / Product Selection -->
-  <div class="card">
+  <div class="card" id="card-lic-platform">
     <div class="card-head">Platform</div>
     <div class="g2">
       <div class="fg"><label class="fl">Vendor</label>
@@ -554,7 +618,7 @@ hr{border:none;border-top:1px solid var(--b1);margin:16px 0}
   <div class="ph"><div><div class="ph-title">Hardware</div><div class="ph-sub">Edit qty, cost, margin — all sections live-calculate</div></div></div>
 
   <!-- Category Selection -->
-  <div class="card">
+  <div class="card" id="card-hw-categories">
     <div class="card-head">Hardware Categories</div>
     <div style="display:flex;gap:22px;flex-wrap:wrap">
       <label style="display:flex;align-items:center;gap:8px;font-size:13px;cursor:pointer">
@@ -719,8 +783,8 @@ hr{border:none;border-top:1px solid var(--b1);margin:16px 0}
       <div style="font-size:12px;color:var(--t3)">Client budget: $200,000</div>
     </div>
     <div class="g3" style="margin-top:12px">
-      <div><div class="stat-label">Total Cost</div><div style="font-weight:500" id="brief-cost">$48,454</div></div>
-      <div><div class="stat-label">Gross Margin</div><div style="font-weight:500;color:var(--green)" id="brief-margin">38.4%</div></div>
+      <div class="cost-row"><div class="stat-label">Total Cost</div><div style="font-weight:500" id="brief-cost">$48,454</div></div>
+      <div class="cost-row"><div class="stat-label">Gross Margin</div><div style="font-weight:500;color:var(--green)" id="brief-margin">38.4%</div></div>
       <div><div class="stat-label">Budget Used</div><div style="font-weight:500" id="brief-budget-pct">39.3%</div></div>
     </div>
     <div class="note" style="margin-top:14px;background:var(--green-bg);border-color:rgba(52,211,153,.25)">Client budget: $200,000 — Remaining headroom: <strong id="brief-room">$121,372</strong></div>
@@ -814,7 +878,7 @@ hr{border:none;border-top:1px solid var(--b1);margin:16px 0}
   <div class="card">
     <div class="card-head">Accounts</div>
     <div class="tbl-wrap"><table>
-      <thead><tr><th>Username</th><th>Display Name</th><th>Role</th><th>Password</th><th></th></tr></thead>
+      <thead><tr><th>Username</th><th>Display Name</th><th>Role</th><th style="min-width:220px">What they can see/edit</th><th>Password</th><th></th></tr></thead>
       <tbody id="users-table-body"></tbody>
     </table></div>
     <div style="margin-top:12px">
@@ -1676,9 +1740,13 @@ function doLogin() {
   const isAdmin = match.role === 'admin' || match.role === 'superadmin';
   document.getElementById('user-avatar').style.cssText +=
     `;border-color:${isAdmin?'var(--amber)':'var(--blue)'};color:${isAdmin?'var(--amber)':'var(--blue)'};background:${isAdmin?'var(--amber-bg)':'var(--blue-bg)'}`;
-  // Admin: full unlock. Viewer (Technica): unlock all except cost/margin
+
+  // role-* class on <body> drives the Sales/Procurement CSS visibility rules
+  document.body.className = document.body.className.replace(/\brole-\S+/g, '').trim();
+  document.body.classList.add('role-' + match.role);
+
   setPricingLock(!isAdmin);
-  const canManageUsers = match.role === 'admin' || match.role === 'superadmin';
+  const canManageUsers = isAdmin;
   const navGroupAdmin = document.getElementById('nav-group-admin'); if (navGroupAdmin) navGroupAdmin.style.display = canManageUsers ? '' : 'none';
   const navItemUsers = document.getElementById('nav-item-users'); if (navItemUsers) navItemUsers.style.display = canManageUsers ? '' : 'none';
   if (canManageUsers) renderUserManagementTable();
@@ -1691,6 +1759,7 @@ function doLogout() {
   document.getElementById('login-overlay').style.display = 'flex';
   ['login-user','login-pass'].forEach(id => document.getElementById(id).value='');
   document.getElementById('login-err').textContent='';
+  document.body.className = document.body.className.replace(/\brole-\S+/g, '').trim();
   const navGroupAdmin = document.getElementById('nav-group-admin'); if (navGroupAdmin) navGroupAdmin.style.display = 'none';
   const navItemUsers = document.getElementById('nav-item-users'); if (navItemUsers) navItemUsers.style.display = 'none';
   // If they were on the User Management page, bounce back to Dashboard since it's no longer accessible
@@ -1703,38 +1772,44 @@ function doLogout() {
   }
   setPricingLock(true);
 }
+// Branches directly on currentUser.role rather than threading the `locked`
+// boolean through every case — that ambiguity was exactly what caused a real
+// bug here: Procurement (not a full admin, but cost SHOULD be editable for
+// them) was ending up stuck with the full .locked class, wiping out their
+// ability to edit cost/margin entirely. Reading role directly avoids that.
 function setPricingLock(locked) {
-  const pages=['page-licenses','page-hardware','page-mandays'];
-  const locks=['lock-lic','lock-hw','lock-md'];
-  const isViewer = currentUser && currentUser.role==='viewer';
-  pages.forEach((id,i) => {
+  const pages = ['page-licenses','page-hardware','page-mandays'];
+  const lockIds = ['lock-lic','lock-hw','lock-md'];
+  const role = currentUser ? currentUser.role : null;
+  const isFullAdmin = role === 'admin' || role === 'superadmin';
+
+  pages.forEach((id, i) => {
     const page = document.getElementById(id);
-    if(locked) page.classList.add('locked'); else page.classList.remove('locked');
-    const ln = document.getElementById(locks[i]); if(!ln) return;
-    ln.style.display = locked ? 'flex' : 'none';
-    if(isViewer) {
+    const ln = document.getElementById(lockIds[i]);
+    page.classList.remove('locked', 'cost-locked');
+
+    if (!currentUser) {
+      page.classList.add('locked');
+      if (ln) { ln.style.display = 'flex'; ln.classList.remove('viewer-lock'); ln.innerHTML = '🔒 Pricing is read-only. Sign in as an authorized user to edit.'; }
+      return;
+    }
+    if (isFullAdmin || role === 'procurement') {
+      // Fully unlocked for these roles — Procurement only *sees* a
+      // restricted set of columns per the CSS rules above, but whatever it
+      // does see, it can fully edit.
+      if (ln) ln.style.display = 'none';
+      return;
+    }
+    // Sales / Tendering: everything editable except cost & margin.
+    page.classList.add('cost-locked');
+    if (ln) {
+      ln.style.display = 'flex';
       ln.classList.add('viewer-lock');
-      ln.innerHTML = '👁 Signed in as <strong style="margin:0 4px">Technica</strong> — cost &amp; margin are read-only. All other fields are editable.';
-    } else {
-      ln.classList.remove('viewer-lock');
-      ln.innerHTML = '🔒 Pricing is read-only. Sign in as Administrator to edit.';
+      ln.innerHTML = role === 'sales'
+        ? `👁 Signed in as <strong style="margin:0 4px">${currentUser.name}</strong> — cost &amp; margin are hidden for Sales. All other fields are editable.`
+        : `👁 Signed in as <strong style="margin:0 4px">${currentUser.name}</strong> — cost &amp; margin are read-only. All other fields are editable.`;
     }
   });
-
-  // Technica viewer: lock ONLY cost (.hc, .lc) and margin (.hm, .lm) inputs
-  // All other inputs (qty, selects, equipment names) remain editable
-  if (isViewer) {
-    // Remove full lock from pricing pages, apply only cost/margin lock
-    pages.forEach(id => {
-      const page = document.getElementById(id);
-      page.classList.remove('locked');
-      page.classList.add('cost-locked');
-    });
-  } else if (!locked) {
-    pages.forEach(id => {
-      document.getElementById(id).classList.remove('cost-locked');
-    });
-  }
 }
 document.getElementById('login-pass').addEventListener('keydown', e=>{if(e.key==='Enter') doLogin();});
 document.getElementById('login-user').addEventListener('keydown', e=>{if(e.key==='Enter') document.getElementById('login-pass').focus();});
@@ -2493,6 +2568,20 @@ function restoreGitHubSyncPrefs() {
 //  API + access key already wired up for project saves.
 // ════════════════════════════════════════════════════════════════
 
+function roleDescription(role) {
+  return {
+    sales: 'Sees everything except cost & margin. Can edit everything else.',
+    tendering: 'Sees everything, cost & margin read-only. Can edit everything else.',
+    procurement: 'Sees & edits only cost & margin — everything else hidden.',
+    admin: 'Full access, including User Management.',
+    superadmin: 'Full access, including managing other admins.',
+  }[role] || '';
+}
+function updateRoleDescription(selectEl) {
+  const cell = selectEl.closest('tr')?.querySelector('.un-role-desc');
+  if (cell) cell.textContent = roleDescription(selectEl.value);
+}
+
 function userRowInnerHtml(username, u) {
   const isSelf = currentUser && currentUser.name === username;
   const targetIsSuperadmin = u.role === 'superadmin';
@@ -2510,11 +2599,14 @@ function userRowInnerHtml(username, u) {
   return `
     <td><input class="en un-username" type="text" value="${esc(username)}" placeholder="username"></td>
     <td><input class="en un-label" type="text" value="${esc(u.label)}" placeholder="Display name"></td>
-    <td><select class="esel un-role" ${roleLocked ? 'disabled title="Only a Super Admin can change another Super Admin\'s role"' : ''}>
-      <option value="viewer"${u.role==='viewer'?' selected':''}>Viewer</option>
+    <td><select class="esel un-role" onchange="updateRoleDescription(this)" ${roleLocked ? 'disabled title="Only a Super Admin can change another Super Admin\'s role"' : ''}>
+      <option value="sales"${u.role==='sales'?' selected':''}>Sales</option>
+      <option value="tendering"${u.role==='tendering'?' selected':''}>Tendering</option>
+      <option value="procurement"${u.role==='procurement'?' selected':''}>Procurement</option>
       <option value="admin"${u.role==='admin'?' selected':''}>Administrator</option>
       ${superAdminOption}
     </select></td>
+    <td class="un-role-desc" style="font-size:11px;color:var(--t3)">${roleDescription(u.role)}</td>
     <td><input class="en un-pass" type="text" value="${esc(u.pass)}" placeholder="password"></td>
     <td>${canDelete
       ? `<span style="color:var(--red);cursor:pointer;font-size:16px" onclick="deleteUserRow(this)" title="Remove user">×</span>`
