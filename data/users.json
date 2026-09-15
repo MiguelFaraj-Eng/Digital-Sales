@@ -78,5 +78,10 @@
     "pass": "Password",
     "role": "sales",
     "label": "Fadi"
+  },
+  "Rami Rayess": {
+    "pass": "Password",
+    "role": "admin",
+    "label": "Rami"
   }
 }
