@@ -277,30 +277,31 @@ hr{border:none;border-top:1px solid var(--b1);margin:16px 0}
   </div>
 
   <div class="card" id="gh-sync-card">
-    <div class="card-head">☁ Save to GitHub</div>
-    <div class="g2">
-      <div class="fg"><label class="fl">Repository (owner/repo)</label>
-        <input id="gh-repo" type="text" placeholder="yourname/scada-budget-tool" oninput="persistGitHubSyncPrefs()"></div>
-      <div class="fg"><label class="fl">Personal Access Token</label>
-        <input id="gh-token" type="password" placeholder="fine-grained token, Contents: read/write" oninput="persistGitHubSyncPrefs()"></div>
+    <div class="card-head">☁ Save to Cloud</div>
+
+    <div id="cloud-connect-row">
+      <div class="fg"><label class="fl">Access Key</label>
+        <input id="gh-token" type="password" placeholder="Paste your cloud access key" oninput="persistGitHubSyncPrefs()"></div>
+      <div class="note" style="margin-top:8px;margin-bottom:14px">One-time setup — paste your access key once. It's remembered on this device after your first successful save.</div>
     </div>
-    <div class="g2" style="margin-top:10px">
+    <div id="cloud-connected-row" style="display:none;align-items:center;gap:10px;margin-bottom:14px">
+      <span style="display:inline-flex;align-items:center;gap:6px;font-size:12px;color:var(--green);font-weight:500">🟢 Connected to Cloud</span>
+      <button class="btn btn-ghost" style="padding:4px 10px;font-size:11px" onclick="disconnectCloud()">Disconnect</button>
+    </div>
+
+    <div class="g2">
       <div class="fg"><label class="fl">Project name</label>
         <input id="gh-project-name" type="text" placeholder="e.g. SOT023"></div>
       <div class="fg"><label class="fl">Previously saved (by you)</label>
         <select id="gh-project-list" onchange="if(this.value){document.getElementById('gh-project-name').value=this.value;}"><option value="">— pick a saved project —</option></select></div>
     </div>
     <div style="display:flex;align-items:center;gap:14px;margin-top:12px;flex-wrap:wrap">
-      <label style="display:flex;align-items:center;gap:6px;font-size:12px;color:var(--t2);cursor:pointer">
-        <input type="checkbox" id="gh-remember" onchange="this.checked ? persistGitHubSyncPrefs() : forgetGitHubSync()"> Remember token on this device
-      </label>
       <span style="flex:1"></span>
       <button class="btn btn-ghost" style="padding:6px 12px;font-size:12px" onclick="refreshGitHubProjectList()">🔄 Refresh list</button>
-      <button class="btn btn-ghost" style="padding:6px 12px;font-size:12px" onclick="loadFromGitHub()">📂 Load from GitHub</button>
-      <button class="btn btn-primary" style="padding:6px 14px;font-size:12px" onclick="saveToGitHub()">☁ Save to GitHub</button>
+      <button class="btn btn-ghost" style="padding:6px 12px;font-size:12px" onclick="loadFromGitHub()">📂 Load from Cloud</button>
+      <button class="btn btn-primary" style="padding:6px 14px;font-size:12px" onclick="saveToGitHub()">☁ Save to Cloud</button>
     </div>
     <div class="note" id="gh-status" style="margin-top:10px;display:none"></div>
-    <div class="note" style="margin-top:10px">Saves to <code id="gh-path-preview">Projects/&lt;your-username&gt;/&lt;project-name&gt;.json</code> in the repo above, under a folder named for whoever's signed in. The repo field auto-fills from this page's own URL — you shouldn't normally need to type it. Use a fine-grained token scoped only to this one repo (Contents: read/write) — not a classic token with broad account access. The token stays in this tab only unless you check "remember," which stores it in this browser's local storage on this device.</div>
   </div>
 </div>
 
@@ -2290,16 +2291,29 @@ function ghSetStatus(msg, isError) {
 }
 function ghConfig() {
   return {
-    repo: document.getElementById('gh-repo')?.value.trim(),
+    repo: detectGitHubRepoFromLocation(),
     token: document.getElementById('gh-token')?.value.trim(),
     projectName: document.getElementById('gh-project-name')?.value.trim(),
   };
 }
 
+function updateCloudConnectionUI(connected) {
+  const connectRow = document.getElementById('cloud-connect-row');
+  const connectedRow = document.getElementById('cloud-connected-row');
+  if (connectRow) connectRow.style.display = connected ? 'none' : '';
+  if (connectedRow) connectedRow.style.display = connected ? 'flex' : 'none';
+}
+function disconnectCloud() {
+  forgetGitHubSync();
+  const tokEl = document.getElementById('gh-token'); if (tokEl) tokEl.value = '';
+  updateCloudConnectionUI(false);
+}
+
 async function saveToGitHub() {
   if (!currentUser) { ghSetStatus('Sign in first.', true); return; }
   const { repo, token, projectName } = ghConfig();
-  if (!repo || !token || !projectName) { ghSetStatus('Fill in repo, token, and project name first.', true); return; }
+  if (!repo) { ghSetStatus('Could not determine where to save — open this tool from its published cloud URL.', true); return; }
+  if (!token || !projectName) { ghSetStatus('Paste your access key and enter a project name first.', true); return; }
 
   const path = ghProjectPath(projectName);
   const apiUrl = `https://api.github.com/repos/${repo}/contents/${path}`;
@@ -2310,7 +2324,7 @@ async function saveToGitHub() {
     let sha = null;
     const getRes = await fetch(apiUrl, { headers: { 'Authorization': `Bearer ${token}`, 'Accept': 'application/vnd.github+json' } });
     if (getRes.ok) { sha = (await getRes.json()).sha; }
-    else if (getRes.status !== 404) { throw new Error(`Could not check for an existing file (HTTP ${getRes.status})`); }
+    else if (getRes.status !== 404) { throw new Error(`Could not check for an existing save (HTTP ${getRes.status})`); }
 
     const body = { message: sha ? `Update project ${projectName}` : `Save project ${projectName}`, content: utf8ToBase64(content) };
     if (sha) body.sha = sha;
@@ -2324,8 +2338,9 @@ async function saveToGitHub() {
       const errData = await putRes.json().catch(() => ({}));
       throw new Error(errData.message || `HTTP ${putRes.status}`);
     }
-    ghSetStatus(`Saved to ${path} ✓`);
+    ghSetStatus(`Saved "${projectName}" to the cloud ✓`);
     persistGitHubSyncPrefs();
+    updateCloudConnectionUI(true);
     refreshGitHubProjectList();
   } catch (err) {
     ghSetStatus('Save failed: ' + err.message, true);
@@ -2335,19 +2350,21 @@ async function saveToGitHub() {
 async function loadFromGitHub() {
   if (!currentUser) { ghSetStatus('Sign in first.', true); return; }
   const { repo, token, projectName } = ghConfig();
-  if (!repo || !token || !projectName) { ghSetStatus('Fill in repo, token, and project name first.', true); return; }
-  if (!hwCatalog || !licenseCatalog) { ghSetStatus('Catalogs are still loading — try again in a second.', true); return; }
+  if (!repo) { ghSetStatus('Could not determine where to load from — open this tool from its published cloud URL.', true); return; }
+  if (!token || !projectName) { ghSetStatus('Paste your access key and enter a project name first.', true); return; }
+  if (!hwCatalog || !licenseCatalog) { ghSetStatus('Still loading — try again in a second.', true); return; }
 
   const path = ghProjectPath(projectName);
   const apiUrl = `https://api.github.com/repos/${repo}/contents/${path}`;
   ghSetStatus('Loading…');
   try {
     const res = await fetch(apiUrl, { headers: { 'Authorization': `Bearer ${token}`, 'Accept': 'application/vnd.github+json' } });
-    if (!res.ok) throw new Error(res.status === 404 ? 'No saved project found at that path.' : `HTTP ${res.status}`);
+    if (!res.ok) throw new Error(res.status === 404 ? 'No saved project found with that name.' : `HTTP ${res.status}`);
     const data = await res.json();
     applyProjectSnapshot(JSON.parse(base64ToUtf8(data.content)));
-    ghSetStatus(`Loaded from ${path} ✓`);
+    ghSetStatus(`Loaded "${projectName}" from the cloud ✓`);
     persistGitHubSyncPrefs();
+    updateCloudConnectionUI(true);
   } catch (err) {
     ghSetStatus('Load failed: ' + err.message, true);
   }
@@ -2368,26 +2385,22 @@ async function refreshGitHubProjectList() {
     const names = (Array.isArray(files) ? files : []).filter(f => f.name.endsWith('.json')).map(f => f.name.replace(/\.json$/, ''));
     select.innerHTML = '<option value="">— pick a saved project —</option>' + names.map(n => `<option value="${n}">${n}</option>`).join('');
   } catch (err) {
-    console.error('Could not list GitHub projects:', err);
+    console.error('Could not list saved projects:', err);
   }
 }
 
 function persistGitHubSyncPrefs() {
-  if (!document.getElementById('gh-remember')?.checked) return;
   const { token } = ghConfig();
   try {
     localStorage.setItem('scada-gh-token', token || '');
-  } catch (e) { console.error('Could not persist GitHub sync prefs:', e); }
+  } catch (e) { console.error('Could not persist cloud sync prefs:', e); }
 }
 function forgetGitHubSync() {
   try { localStorage.removeItem('scada-gh-token'); localStorage.removeItem('scada-gh-repo'); } catch (e) {}
 }
 // The tool is already being served from the exact repo it needs to save to —
 // a *.github.io hostname with the repo name as the first path segment (project
-// pages) — so there's no reason to make anyone type it and risk exactly the
-// "Miguel/SOT" mix-up (typing the app login instead of the GitHub owner). The
-// repo field is re-derived from the URL on every load rather than cached, so
-// a bad value typed once can never get stuck.
+// pages) — so it's derived automatically rather than shown or typed anywhere.
 function detectGitHubRepoFromLocation() {
   try {
     const m = location.hostname.match(/^([^.]+)\.github\.io$/i);
@@ -2400,18 +2413,16 @@ function detectGitHubRepoFromLocation() {
 
 function restoreGitHubSyncPrefs() {
   try {
-    const detected = detectGitHubRepoFromLocation();
-    const repoEl = document.getElementById('gh-repo');
-    if (repoEl && detected) repoEl.value = detected;
-
-    // scada-gh-repo may still exist from before this fix — clear it so it can
-    // never resurface and override the freshly-detected value.
+    // scada-gh-repo may still exist from before the repo field was removed —
+    // purge it so it can never resurface.
     try { localStorage.removeItem('scada-gh-repo'); } catch (e2) {}
 
     const token = localStorage.getItem('scada-gh-token');
     if (token) {
       const tokEl = document.getElementById('gh-token'); if (tokEl) tokEl.value = token;
-      const remEl = document.getElementById('gh-remember'); if (remEl) remEl.checked = true;
+      updateCloudConnectionUI(true);
+    } else {
+      updateCloudConnectionUI(false);
     }
   } catch (e) {}
 }
