@@ -83,5 +83,30 @@
     "pass": "Password",
     "role": "admin",
     "label": "Rami"
+  },
+  "Janet Zein": {
+    "pass": "Password",
+    "role": "procurement",
+    "label": "Janet"
+  },
+  "Toufic Sayah": {
+    "pass": "Password",
+    "role": "procurement",
+    "label": "Toufic"
+  },
+  "Lama Helou": {
+    "pass": "Password",
+    "role": "procurement",
+    "label": "Lama"
+  },
+  "Tarek Assaad": {
+    "pass": "Password",
+    "role": "procurement",
+    "label": "Tarek"
+  },
+  "Sandra Hanna": {
+    "pass": "Password",
+    "role": "procurement",
+    "label": "Sandra"
   }
 }
