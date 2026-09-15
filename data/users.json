@@ -1,4 +1,82 @@
 {
-  "Miguel":   { "pass": "D0022b0c0cf53@$", "role": "admin",     "label": "Administrator" },
-  "Technica": { "pass": "TechnicaDev1",    "role": "tendering", "label": "Technica User" }
+  "Miguel": {
+    "pass": "D0022b0c0cf53@$",
+    "role": "admin",
+    "label": "Administrator"
+  },
+  "Michel Halabi": {
+    "pass": "Password",
+    "role": "tendering",
+    "label": "Michel"
+  },
+  "Elie Kharat": {
+    "pass": "Password",
+    "role": "tendering",
+    "label": "Elie"
+  },
+  "Jeanne Marie Abou Nader": {
+    "pass": "Password",
+    "role": "tendering",
+    "label": "JM"
+  },
+  "Maged Nakhle": {
+    "pass": "Password",
+    "role": "tendering",
+    "label": "Maged"
+  },
+  "Michel Anwar Bitar": {
+    "pass": "Password",
+    "role": "tendering",
+    "label": "Michel"
+  },
+  "Michel Kamil Bitar": {
+    "pass": "Password",
+    "role": "tendering",
+    "label": "Michel"
+  },
+  "Nataly Mohtar": {
+    "pass": "Password",
+    "role": "tendering",
+    "label": "Nataly"
+  },
+  "Raoul El Kik": {
+    "pass": "Password",
+    "role": "tendering",
+    "label": "Raoul"
+  },
+  "Salah Chlouk": {
+    "pass": "Password",
+    "role": "tendering",
+    "label": "Salah"
+  },
+  "Bechara Nassar": {
+    "pass": "Password",
+    "role": "sales",
+    "label": "Bechara"
+  },
+  "Eliana Salameh": {
+    "pass": "Password",
+    "role": "sales",
+    "label": "Eliana"
+  },
+  "Georges Mitri": {
+    "pass": "Password",
+    "role": "sales",
+    "label": "Georges"
+  },
+  "Hasmeet Parmar": {
+    "pass": "Password",
+    "role": "sales",
+    "label": "Hasmeet"
+  },
+  "Pierre Murr": {
+    "pass": "Password",
+    "role": "sales",
+    "label": "Pierre"
+  },
+  "Fadi Masri": {
+    "pass": "Password",
+    "role": "sales",
+    "label": "Fadi"
+  }
 }
