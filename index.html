@@ -140,7 +140,7 @@ hr{border:none;border-top:1px solid var(--b1);margin:16px 0}
 
 /* USER BADGE in sidebar */
 .user-badge{display:flex;align-items:center;gap:8px;padding:10px 16px;border-top:1px solid var(--b1);background:var(--s2)}
-.user-avatar{width:26px;height:26px;border-radius:50%;background:var(--blue-bg);border:1px solid var(--blue);display:flex;align-items:center;justify-content:center;font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:500;color:var(--blue);flex-shrink:0}
+.user-avatar{width:26px;height:26px;border-radius:50%;background:var(--blue-bg);border:1px solid var(--blue);display:flex;align-items:center;justify-content:center;font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:500;color:var(--blue);flex-shrink:0;background-size:cover;background-position:center}
 .user-info{flex:1;min-width:0}
 .user-name{font-size:12px;font-weight:500;color:var(--t1);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .user-role{font-size:10px;color:var(--t3);font-family:'IBM Plex Mono',monospace}
@@ -289,12 +289,15 @@ body.role-procurement button[onclick="exportOffer()"] { display:none; }
     <span id="theme-label">Light mode</span>
   </div>
   <div class="user-badge" id="user-badge" style="display:none">
-    <div class="user-avatar" id="user-avatar">MG</div>
+    <div class="user-avatar" id="user-avatar" onclick="openMyProfile()" style="cursor:pointer" title="Edit your profile">MG</div>
     <div class="user-info">
       <div class="user-name" id="user-name-display">Miguel</div>
       <div class="user-role" id="user-role-display">Pricing Editor</div>
     </div>
-    <span class="user-logout" onclick="doLogout()">Sign out</span>
+    <div style="display:flex;flex-direction:column;align-items:flex-end;gap:1px">
+      <span class="user-logout" onclick="openMyProfile()">Profile</span>
+      <span class="user-logout" onclick="doLogout()">Sign out</span>
+    </div>
   </div>
 </aside>
 
@@ -891,6 +894,40 @@ body.role-procurement button[onclick="exportOffer()"] { display:none; }
     <div class="note" style="margin-bottom:12px">Changes here only apply in this browser tab until you save — everyone else keeps signing in with the accounts currently saved, until then.</div>
     <button class="btn btn-primary" onclick="saveUsersToCloud()">☁ Save Changes to Cloud</button>
     <div class="note" id="users-save-status" style="margin-top:10px;display:none"></div>
+  </div>
+</div>
+
+<!-- ═══ MY PROFILE (every signed-in user) ═══ -->
+<div id="page-profile" class="page">
+  <div class="ph"><div><div class="ph-title">My Profile</div><div class="ph-sub">Update your picture, display name, and password</div></div></div>
+
+  <div class="card">
+    <div class="card-head">Profile Picture</div>
+    <div style="display:flex;align-items:center;gap:16px">
+      <div id="profile-avatar-preview" style="width:64px;height:64px;border-radius:50%;background:var(--blue-bg);border:1px solid var(--blue);display:flex;align-items:center;justify-content:center;font-family:'IBM Plex Mono',monospace;font-size:20px;font-weight:500;color:var(--blue);flex-shrink:0;background-size:cover;background-position:center">MI</div>
+      <div>
+        <input type="file" id="profile-avatar-input" accept="image/*" style="display:none" onchange="handleAvatarUpload(this)">
+        <button class="btn btn-ghost" onclick="document.getElementById('profile-avatar-input').click()">Change Picture</button>
+        <button class="btn btn-ghost" onclick="removeAvatarPicture()">Remove</button>
+        <div class="note" style="margin-top:10px;margin-bottom:0">Resized automatically to keep things small. Nothing changes for anyone else until you save at the bottom.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-head">Account Details</div>
+    <div class="g2">
+      <div class="fg"><label class="fl">Username</label><input type="text" id="profile-username" disabled></div>
+      <div class="fg"><label class="fl">Role</label><input type="text" id="profile-role" disabled></div>
+    </div>
+    <div class="fg" style="margin-top:12px"><label class="fl">Display Name</label><input type="text" id="profile-label" placeholder="How your name shows up in the sidebar"></div>
+    <div class="fg" style="margin-top:12px"><label class="fl">New Password</label><input type="password" id="profile-password" placeholder="Leave blank to keep your current password"></div>
+  </div>
+
+  <div class="card" style="border-color:var(--blue);background:var(--blue-bg)">
+    <div class="card-head">Save</div>
+    <button class="btn btn-primary" onclick="saveMyProfile()">☁ Save Profile to Cloud</button>
+    <div class="note" id="profile-save-status" style="margin-top:10px;display:none"></div>
   </div>
 </div>
 
@@ -1736,10 +1773,8 @@ function doLogin() {
   document.getElementById('user-badge').style.display = 'flex';
   document.getElementById('user-name-display').textContent = u;
   document.getElementById('user-role-display').textContent = match.label;
-  document.getElementById('user-avatar').textContent = u.substring(0,2).toUpperCase();
+  renderAvatarElement(document.getElementById('user-avatar'), u, match);
   const isAdmin = match.role === 'admin' || match.role === 'superadmin';
-  document.getElementById('user-avatar').style.cssText +=
-    `;border-color:${isAdmin?'var(--amber)':'var(--blue)'};color:${isAdmin?'var(--amber)':'var(--blue)'};background:${isAdmin?'var(--amber-bg)':'var(--blue-bg)'}`;
 
   // role-* class on <body> drives the Sales/Procurement CSS visibility rules
   document.body.className = document.body.className.replace(/\brole-\S+/g, '').trim();
@@ -2689,11 +2724,140 @@ async function saveUsersToCloud() {
 }
 
 
+// ════════════════════════════════════════════════════════════════
+//  MY PROFILE (any signed-in user, not just admins)
+//  Avatars are stored as a resized data-URI directly on the user's
+//  entry in data/users.json — no separate image files/uploads needed,
+//  it rides along in the same save as everything else.
+// ════════════════════════════════════════════════════════════════
+
+// Shared by the sidebar badge and the profile page preview: shows the
+// uploaded picture if the user has one, otherwise falls back to initials.
+function renderAvatarElement(el, username, userData) {
+  if (!el || !userData) return;
+  const isAdmin = userData.role === 'admin' || userData.role === 'superadmin';
+  const accent = isAdmin ? 'var(--amber)' : 'var(--blue)';
+  const accentBg = isAdmin ? 'var(--amber-bg)' : 'var(--blue-bg)';
+  el.style.borderColor = accent;
+  if (userData.avatar) {
+    el.style.backgroundImage = `url(${userData.avatar})`;
+    el.style.backgroundColor = 'transparent';
+    el.textContent = '';
+  } else {
+    el.style.backgroundImage = 'none';
+    el.style.backgroundColor = accentBg;
+    el.style.color = accent;
+    el.textContent = (username || '').substring(0,2).toUpperCase();
+  }
+}
+
+// Resizes/compresses an uploaded image client-side before it ever becomes a
+// data-URI, so avatars stay small (data/users.json is a plain JSON file —
+// keeping images modest keeps it fast to load for everyone).
+function resizeImageFile(file, maxSize, quality) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = e => {
+      const img = new Image();
+      img.onload = () => {
+        let w = img.width, h = img.height;
+        if (w > h) { if (w > maxSize) { h = Math.round(h * maxSize / w); w = maxSize; } }
+        else       { if (h > maxSize) { w = Math.round(w * maxSize / h); h = maxSize; } }
+        const canvas = document.createElement('canvas');
+        canvas.width = w; canvas.height = h;
+        canvas.getContext('2d').drawImage(img, 0, 0, w, h);
+        resolve(canvas.toDataURL('image/jpeg', quality));
+      };
+      img.onerror = () => reject(new Error('Could not read that image file.'));
+      img.src = e.target.result;
+    };
+    reader.onerror = () => reject(new Error('Could not read that file.'));
+    reader.readAsDataURL(file);
+  });
+}
+
+let pendingAvatarDataUrl = undefined; // undefined = no change, null = explicit removal, string = new picture
+
+function openMyProfile() {
+  if (!currentUser) return;
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById('page-profile').classList.add('active');
+  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+
+  const u = USERS[currentUser.name] || {};
+  pendingAvatarDataUrl = undefined;
+  document.getElementById('profile-username').value = currentUser.name;
+  document.getElementById('profile-role').value = currentUser.label || currentUser.role;
+  document.getElementById('profile-label').value = u.label || '';
+  document.getElementById('profile-password').value = '';
+  document.getElementById('profile-save-status').style.display = 'none';
+  renderAvatarElement(document.getElementById('profile-avatar-preview'), currentUser.name, u);
+}
+
+async function handleAvatarUpload(inputEl) {
+  const file = inputEl.files && inputEl.files[0];
+  if (!file) return;
+  try {
+    const dataUrl = await resizeImageFile(file, 200, 0.82);
+    pendingAvatarDataUrl = dataUrl;
+    const preview = document.getElementById('profile-avatar-preview');
+    preview.style.backgroundImage = `url(${dataUrl})`;
+    preview.style.backgroundColor = 'transparent';
+    preview.textContent = '';
+  } catch (err) {
+    profileSetStatus('Could not use that image: ' + err.message, true);
+  }
+  inputEl.value = '';
+}
+function removeAvatarPicture() {
+  pendingAvatarDataUrl = null;
+  const u = USERS[currentUser.name] || {};
+  renderAvatarElement(document.getElementById('profile-avatar-preview'), currentUser.name, { ...u, avatar: null });
+}
+
+function profileSetStatus(msg, isError) {
+  const el = document.getElementById('profile-save-status');
+  if (!el) return;
+  el.style.display = 'block';
+  el.textContent = msg;
+  el.style.color = isError ? 'var(--red)' : 'var(--t2)';
+}
+
+async function saveMyProfile() {
+  if (!currentUser) return;
+  const label = document.getElementById('profile-label').value.trim();
+  const newPass = document.getElementById('profile-password').value;
+
+  const existing = USERS[currentUser.name] || {};
+  const updated = { ...existing };
+  if (label) updated.label = label;
+  if (newPass) updated.pass = newPass;
+  if (pendingAvatarDataUrl === null) delete updated.avatar;
+  else if (pendingAvatarDataUrl !== undefined) updated.avatar = pendingAvatarDataUrl;
+
+  const newUsers = { ...USERS, [currentUser.name]: updated };
+
+  profileSetStatus('Saving…');
+  try {
+    await writeFileToGitHub('data/users.json', JSON.stringify(newUsers, null, 2), `Update profile: ${currentUser.name}`);
+    USERS = newUsers;
+    currentUser.label = updated.label || currentUser.label;
+    document.getElementById('user-name-display').textContent = currentUser.name;
+    document.getElementById('user-role-display').textContent = currentUser.label;
+    renderAvatarElement(document.getElementById('user-avatar'), currentUser.name, updated);
+    document.getElementById('profile-password').value = '';
+    pendingAvatarDataUrl = undefined;
+    profileSetStatus('Saved ✓ — your profile is updated for everyone.');
+  } catch (err) {
+    profileSetStatus('Save failed: ' + err.message + ' — if someone else saved changes moments ago, reload and try again.', true);
+  }
+}
+
+
+// ─── INIT ─────────────────────────────────────────────────────────
 setPricingLock(true);
 recalcAll();
 restoreGitHubSyncPrefs();
 </script>
-</body>
-</body>
 </body>
 </html>
