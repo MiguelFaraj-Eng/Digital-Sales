@@ -13,7 +13,8 @@
     "Power Supplies",
     "Cabling & Wiring",
     "Sensors & Instrumentation",
-    "HMI"
+    "HMI",
+    "Memory"
   ],
   "entries": [
     {
@@ -92,6 +93,17 @@
       "item": "SIMATIC HMI MTP1500 Unified Comfort",
       "supplier": "Kettaneh",
       "cost": 3786.21,
+      "latestPrice": 0,
+      "updated": "2026-09-16",
+      "email": "",
+      "description": "6AV2128-3QB06-0AX1"
+    },
+    {
+      "id": "sup-1789543905071-aq75d",
+      "category": "Memory",
+      "item": "SIMATIC SD memory card 2 GB",
+      "supplier": "",
+      "cost": 0,
       "latestPrice": 0,
       "updated": "2026-09-16",
       "email": "",
