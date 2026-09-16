@@ -280,8 +280,12 @@ body.role-procurement button[onclick="exportOffer()"] { display:none; }
     <div class="nav-item" data-p="hardware"><span class="nav-dot"></span>Hardware</div>
     <div class="nav-item" data-p="mandays"><span class="nav-dot"></span>Mandays</div>
     <div class="nav-item" data-p="brief"><span class="nav-dot"></span>Budget Brief</div>
-    <div class="nav-item" data-p="suppliers-ref"><span class="nav-dot"></span>Component Suppliers</div>
-    <div class="nav-item" data-p="suppliers" id="nav-item-suppliers" style="display:none"><span class="nav-dot"></span>Suppliers</div>
+    <div class="nav-group">Suppliers</div>
+    <div class="nav-item" data-p="suppliers-overview" id="nav-item-suppliers-overview" style="display:none"><span class="nav-dot"></span>Overview</div>
+    <div class="nav-item" data-p="suppliers" id="nav-item-suppliers" style="display:none"><span class="nav-dot"></span>Directory</div>
+    <div class="nav-item" data-p="suppliers-vendors" id="nav-item-suppliers-vendors" style="display:none"><span class="nav-dot"></span>Vendors</div>
+    <div class="nav-item" data-p="suppliers-history" id="nav-item-suppliers-history" style="display:none"><span class="nav-dot"></span>Price History</div>
+    <div class="nav-item" data-p="suppliers-ref"><span class="nav-dot"></span>Reference Links</div>
     <div class="nav-group" id="nav-group-admin" style="display:none">Admin</div>
     <div class="nav-item" data-p="users" id="nav-item-users" style="display:none"><span class="nav-dot"></span>User Management</div>
   </nav>
@@ -875,16 +879,39 @@ body.role-procurement button[onclick="exportOffer()"] { display:none; }
   </div>
 </div>
 
-<!-- ═══ SUPPLIERS DATABASE ═══ -->
-<div id="page-suppliers" class="page">
-  <div class="ph"><div><div class="ph-title">Suppliers</div><div class="ph-sub">Vendor contacts, pricing, descriptions &amp; datasheets — Procurement, Administrator, and Super Admin only</div></div></div>
+<!-- ═══ SUPPLIERS OVERVIEW ═══ -->
+<div id="page-suppliers-overview" class="page">
+  <div class="ph"><div><div class="ph-title">Suppliers Overview</div><div class="ph-sub">Vendor coverage, pricing freshness &amp; recent changes — Procurement, Administrator, and Super Admin only</div></div></div>
 
   <div class="stat-grid" id="supplier-stat-grid">
     <div class="stat"><div class="stat-label">Entries</div><div class="stat-value c-blue" id="sup-stat-count">0</div><div class="stat-sub">Across all categories</div></div>
-    <div class="stat"><div class="stat-label">Categories</div><div class="stat-value" id="sup-stat-categories">0</div><div class="stat-sub">Digital + electrical panel</div></div>
-    <div class="stat"><div class="stat-label">Updated Last 30 Days</div><div class="stat-value c-amber" id="sup-stat-fresh">0</div><div class="stat-sub">Prices still current</div></div>
-    <div class="stat"><div class="stat-label">With Datasheet</div><div class="stat-value c-green" id="sup-stat-pdf">0</div><div class="stat-sub">PDF attached</div></div>
+    <div class="stat"><div class="stat-label">Vendors</div><div class="stat-value" id="sup-stat-vendors">0</div><div class="stat-sub">Unique suppliers tracked</div></div>
+    <div class="stat"><div class="stat-label">Categories</div><div class="stat-value c-amber" id="sup-stat-categories">0</div><div class="stat-sub">Digital + electrical panel</div></div>
+    <div class="stat"><div class="stat-label">Needs Attention</div><div class="stat-value c-red" id="sup-stat-attention">0</div><div class="stat-sub">Stale price or missing info</div></div>
   </div>
+
+  <div class="g2" style="margin-bottom:16px">
+    <div class="card">
+      <div class="card-head">Entries by Category</div>
+      <div id="supplier-category-bars"></div>
+    </div>
+    <div class="card">
+      <div class="card-head">Needs Attention</div>
+      <div class="note" style="margin-bottom:10px">No price update in 90+ days, or missing email/cost — click one to jump to it in the Directory.</div>
+      <div id="supplier-attention-list"></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-head">Recent Price Changes</div>
+    <div class="note" style="margin-bottom:10px">Every time a Latest Price is updated in the Directory, it's logged here — see the full trail on the Price History page.</div>
+    <div id="supplier-recent-changes"></div>
+  </div>
+</div>
+
+<!-- ═══ SUPPLIERS DATABASE (Directory) ═══ -->
+<div id="page-suppliers" class="page">
+  <div class="ph"><div><div class="ph-title">Directory</div><div class="ph-sub">Item-level supplier entries, descriptions &amp; datasheets — Procurement, Administrator, and Super Admin only</div></div></div>
 
   <div class="card">
     <div class="card-head">Categories</div>
@@ -917,6 +944,38 @@ body.role-procurement button[onclick="exportOffer()"] { display:none; }
     <div class="note" style="margin-bottom:12px">Changes here only apply in this browser tab until you save — everyone else keeps seeing the directory as it was last saved.</div>
     <button class="btn btn-primary" onclick="saveSuppliersToCloud()">☁ Save Suppliers to Cloud</button>
     <div class="note" id="suppliers-save-status" style="margin-top:10px;display:none"></div>
+  </div>
+</div>
+
+<!-- ═══ SUPPLIERS — VENDORS ═══ -->
+<div id="page-suppliers-vendors" class="page">
+  <div class="ph"><div><div class="ph-title">Vendors</div><div class="ph-sub">Every entry rolled up by supplier company — Procurement, Administrator, and Super Admin only</div></div></div>
+
+  <div class="card">
+    <div class="note" style="margin-bottom:14px">Built automatically from the Directory — nothing to maintain here separately. Click a vendor to see everything they supply.</div>
+    <div class="tbl-wrap"><table>
+      <thead><tr><th></th><th>Supplier</th><th>Email</th><th>Categories</th><th>Items</th><th>Total Value ($)</th><th>Last Updated</th></tr></thead>
+      <tbody id="vendors-table-body"></tbody>
+    </table></div>
+  </div>
+</div>
+
+<!-- ═══ SUPPLIERS — PRICE HISTORY ═══ -->
+<div id="page-suppliers-history" class="page">
+  <div class="ph"><div><div class="ph-title">Price History</div><div class="ph-sub">Every recorded Latest Price change, across every entry — Procurement, Administrator, and Super Admin only</div></div></div>
+
+  <div class="card">
+    <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px;flex-wrap:wrap">
+      <div class="fg" style="margin-bottom:0;min-width:220px"><label class="fl">Filter by category</label>
+        <select id="history-filter" onchange="renderPriceHistory()"><option value="">— All categories —</option></select></div>
+      <div class="fg" style="margin-bottom:0;flex:1;min-width:200px"><label class="fl">Search</label>
+        <input type="text" id="history-search" placeholder="Item or supplier name…" oninput="renderPriceHistory()"></div>
+    </div>
+    <div class="note" style="margin-bottom:14px">Logged automatically whenever Latest Price changes on the Directory page — nothing to enter here manually.</div>
+    <div class="tbl-wrap"><table>
+      <thead><tr><th>Date</th><th>Item</th><th>Supplier</th><th>Category</th><th>Was</th><th></th><th>Now</th><th>Change</th></tr></thead>
+      <tbody id="history-table-body"></tbody>
+    </table></div>
   </div>
 </div>
 
@@ -1839,7 +1898,9 @@ function doLogin() {
   if (canManageUsers) renderUserManagementTable();
 
   const canSeeSuppliers = isAdmin || match.role === 'procurement';
-  const navItemSuppliers = document.getElementById('nav-item-suppliers'); if (navItemSuppliers) navItemSuppliers.style.display = canSeeSuppliers ? '' : 'none';
+  ['nav-item-suppliers-overview', 'nav-item-suppliers', 'nav-item-suppliers-vendors', 'nav-item-suppliers-history'].forEach(id => {
+    const el = document.getElementById(id); if (el) el.style.display = canSeeSuppliers ? '' : 'none';
+  });
   if (canSeeSuppliers) renderSuppliersPage();
   refreshSupplierPricingLinks();
 
@@ -1855,12 +1916,14 @@ function doLogout() {
   document.body.className = document.body.className.replace(/\brole-\S+/g, '').trim();
   const navGroupAdmin = document.getElementById('nav-group-admin'); if (navGroupAdmin) navGroupAdmin.style.display = 'none';
   const navItemUsers = document.getElementById('nav-item-users'); if (navItemUsers) navItemUsers.style.display = 'none';
-  const navItemSuppliers = document.getElementById('nav-item-suppliers'); if (navItemSuppliers) navItemSuppliers.style.display = 'none';
+  ['nav-item-suppliers-overview', 'nav-item-suppliers', 'nav-item-suppliers-vendors', 'nav-item-suppliers-history'].forEach(id => {
+    const el = document.getElementById(id); if (el) el.style.display = 'none';
+  });
   document.querySelectorAll('.supplier-link-badge').forEach(b => b.remove());
   // Bounce back to Dashboard if they were on a page that requires being
   // signed in (User Management, My Profile, Suppliers) — none of these
   // make sense to show behind the login overlay.
-  const restrictedPages = ['page-users', 'page-profile', 'page-suppliers'];
+  const restrictedPages = ['page-users', 'page-profile', 'page-suppliers', 'page-suppliers-overview', 'page-suppliers-vendors', 'page-suppliers-history'];
   const onRestrictedPage = restrictedPages.some(id => document.getElementById(id)?.classList.contains('active'));
   if (onRestrictedPage) {
     document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
@@ -2824,7 +2887,10 @@ loadSuppliers();
 function renderSuppliersPage() {
   renderSupplierCategoryChips();
   renderSupplierFilterOptions();
-  renderSupplierTable();
+  renderSupplierTable(); // also calls updateSupplierStats() + refreshSupplierPricingLinks()
+  renderVendorsTable();
+  renderHistoryFilterOptions();
+  renderPriceHistory();
 }
 
 function renderSupplierCategoryChips() {
@@ -2941,11 +3007,30 @@ function toggleSupplierDetail(id) {
 
 // Updating the latest quoted price is exactly the moment worth recording —
 // auto-stamps today's date so nobody has to remember to do it by hand
-// (still fully editable afterward, e.g. to backdate a quote).
+// (still fully editable afterward, e.g. to backdate a quote), and logs the
+// change to price history. Runs before syncSupplierData() re-syncs the DOM
+// into suppliersData.entries, so `existing.latestPrice` here is still the
+// pre-edit value — that's the whole point of the history entry.
 function stampSupplierDate(inputEl) {
   const tr = inputEl.closest('tr');
+  const id = tr?.dataset.id;
   const dateEl = tr?.querySelector('.sup-date');
   if (dateEl) dateEl.value = new Date().toISOString().slice(0,10);
+
+  if (!id) return;
+  const existing = suppliersData.entries.find(e => e.id === id);
+  if (!existing) return;
+  const oldPrice = existing.latestPrice;
+  const newPrice = parseFloat(inputEl.value) || 0;
+  const hadRealOldPrice = typeof oldPrice === 'number' && oldPrice > 0;
+  if (hadRealOldPrice && oldPrice !== newPrice) {
+    if (!Array.isArray(existing.history)) existing.history = [];
+    existing.history.push({
+      date: new Date().toISOString().slice(0,10),
+      oldPrice, newPrice,
+    });
+    if (existing.history.length > 25) existing.history = existing.history.slice(-25);
+  }
 }
 
 function addSupplierEntry() {
@@ -2983,16 +3068,182 @@ function suppliersSetStatus(msg, isError) {
   el.style.color = isError ? 'var(--red)' : 'var(--t2)';
 }
 
+function getUniqueVendorCount() {
+  const names = new Set(suppliersData.entries.map(e => (e.supplier || '').trim().toLowerCase()).filter(Boolean));
+  return names.size;
+}
+
+function supplierNeedsAttention(e) {
+  const cutoff = new Date(); cutoff.setDate(cutoff.getDate() - 90);
+  const stale = !e.updated || new Date(e.updated) < cutoff;
+  const missingInfo = !e.email || (!e.cost && !e.latestPrice);
+  return stale || missingInfo;
+}
+
 function updateSupplierStats() {
   const countEl = document.getElementById('sup-stat-count');
-  if (!countEl) return; // stats only exist on the Suppliers page itself
-  const cutoff = new Date(); cutoff.setDate(cutoff.getDate() - 30);
-  const fresh = suppliersData.entries.filter(e => e.updated && new Date(e.updated) >= cutoff).length;
-  const withPdf = suppliersData.entries.filter(e => e.pdfPath).length;
+  if (!countEl) return; // stats only exist on the Overview page
+  const attention = suppliersData.entries.filter(supplierNeedsAttention).length;
   sv('sup-stat-count', String(suppliersData.entries.length));
+  sv('sup-stat-vendors', String(getUniqueVendorCount()));
   sv('sup-stat-categories', String(suppliersData.categories.length));
-  sv('sup-stat-fresh', String(fresh));
-  sv('sup-stat-pdf', String(withPdf));
+  sv('sup-stat-attention', String(attention));
+  renderSupplierCategoryBars();
+  renderSupplierAttentionList();
+  renderSupplierRecentChanges();
+}
+
+function renderSupplierCategoryBars() {
+  const wrap = document.getElementById('supplier-category-bars');
+  if (!wrap) return;
+  const counts = suppliersData.categories.map(cat => ({
+    cat, n: suppliersData.entries.filter(e => e.category === cat).length,
+  })).sort((a,b) => b.n - a.n);
+  const max = Math.max(1, ...counts.map(c => c.n));
+  wrap.innerHTML = counts.map(c => `
+    <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px">
+      <div style="width:150px;font-size:12px;color:var(--t2);flex-shrink:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${c.cat}</div>
+      <div class="prog-wrap" style="flex:1"><div class="prog-fill" style="width:${(c.n/max*100).toFixed(0)}%;background:var(--blue)"></div></div>
+      <div style="width:24px;text-align:right;font-size:12px;color:var(--t2);flex-shrink:0">${c.n}</div>
+    </div>`).join('') || '<span class="dim" style="font-size:12px">No entries yet.</span>';
+}
+
+function renderSupplierAttentionList() {
+  const wrap = document.getElementById('supplier-attention-list');
+  if (!wrap) return;
+  const flagged = suppliersData.entries.filter(supplierNeedsAttention).slice(0, 8);
+  wrap.innerHTML = flagged.map(e => {
+    const cutoff = new Date(); cutoff.setDate(cutoff.getDate() - 90);
+    const stale = !e.updated || new Date(e.updated) < cutoff;
+    const reason = stale ? (e.updated ? `Not updated since ${e.updated}` : 'Never priced') : 'Missing email or cost';
+    return `<div style="display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid var(--b1);cursor:pointer" onclick="jumpToSupplierEntry('${e.id}')">
+      <span style="font-size:12px;color:var(--t1)">${supplierEsc(e.item) || '(unnamed item)'} <span class="dim">— ${supplierEsc(e.supplier) || 'no supplier'}</span></span>
+      <span style="font-size:11px;color:var(--amber)">${reason}</span>
+    </div>`;
+  }).join('') || '<span class="dim" style="font-size:12px">Nothing needs attention right now.</span>';
+}
+
+function renderSupplierRecentChanges() {
+  const wrap = document.getElementById('supplier-recent-changes');
+  if (!wrap) return;
+  const changes = getAllPriceHistory().slice(0, 8);
+  wrap.innerHTML = changes.length ? changes.map(h => {
+    const up = h.newPrice > h.oldPrice;
+    const pct = h.oldPrice ? (((h.newPrice - h.oldPrice) / h.oldPrice) * 100).toFixed(0) : '—';
+    return `<div style="display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid var(--b1)">
+      <span style="font-size:12px;color:var(--t1)">${supplierEsc(h.item)} <span class="dim">— ${supplierEsc(h.supplier)}</span></span>
+      <span style="font-size:12px;font-family:'IBM Plex Mono',monospace">$${h.oldPrice.toLocaleString()} → $${h.newPrice.toLocaleString()} <span style="color:${up?'var(--red)':'var(--green)'}">(${up?'+':''}${pct}%)</span></span>
+    </div>`;
+  }).join('') : '<span class="dim" style="font-size:12px">No price changes recorded yet — they\'ll show up here as Latest Price gets updated.</span>';
+}
+
+function jumpToSupplierEntry(id) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById('page-suppliers').classList.add('active');
+  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+  document.querySelector('.nav-item[data-p="suppliers"]')?.classList.add('active');
+  document.getElementById('supplier-filter').value = '';
+  document.getElementById('supplier-search').value = '';
+  renderSupplierTable();
+  setTimeout(() => {
+    const row = document.querySelector(`tr[data-id="${id}"]`);
+    row?.scrollIntoView({behavior:'smooth', block:'center'});
+    if (row) { row.style.outline = '2px solid var(--blue)'; setTimeout(() => row.style.outline = '', 1500); }
+    toggleSupplierDetail(id);
+  }, 50);
+}
+
+// ── Vendors (auto-derived rollup by supplier name) ──
+function getVendorsSummary() {
+  const bySupplier = {};
+  suppliersData.entries.forEach(e => {
+    const name = (e.supplier || '').trim() || 'Unknown Supplier';
+    if (!bySupplier[name]) bySupplier[name] = { name, email: '', categories: new Set(), itemCount: 0, totalValue: 0, lastUpdated: '' };
+    const v = bySupplier[name];
+    if (e.email && !v.email) v.email = e.email;
+    if (e.category) v.categories.add(e.category);
+    v.itemCount += 1;
+    v.totalValue += (e.latestPrice || e.cost || 0);
+    if (e.updated && e.updated > v.lastUpdated) v.lastUpdated = e.updated;
+  });
+  return Object.values(bySupplier)
+    .map(v => ({ ...v, categories: Array.from(v.categories) }))
+    .sort((a, b) => b.itemCount - a.itemCount);
+}
+
+function renderVendorsTable() {
+  const tb = document.getElementById('vendors-table-body');
+  if (!tb) return;
+  const vendors = getVendorsSummary();
+  tb.innerHTML = vendors.map((v, i) => `
+    <tr>
+      <td><span class="sup-expand-toggle" onclick="toggleVendorDetail(${i})" style="cursor:pointer;display:inline-block;width:16px;color:var(--t3)">▸</span></td>
+      <td>${supplierEsc(v.name)}</td>
+      <td class="dim">${supplierEsc(v.email) || '—'}</td>
+      <td class="dim" style="font-size:12px">${v.categories.map(supplierEsc).join(', ') || '—'}</td>
+      <td>${v.itemCount}</td>
+      <td>$${v.totalValue.toLocaleString()}</td>
+      <td class="dim">${v.lastUpdated || '—'}</td>
+    </tr>
+    <tr class="sup-detail-row" id="vendor-detail-${i}" style="display:none">
+      <td colspan="7" style="background:var(--s2);padding:12px 20px 12px 42px">
+        ${suppliersData.entries.filter(e => (e.supplier||'').trim() === v.name || (!e.supplier && v.name === 'Unknown Supplier'))
+          .map(e => `<div style="display:flex;justify-content:space-between;padding:4px 0;font-size:12px">
+            <span>${supplierEsc(e.item) || '(unnamed item)'} <span class="dim">— ${supplierEsc(e.category)}</span></span>
+            <span class="dim">$${(e.latestPrice||e.cost||0).toLocaleString()}, updated ${e.updated || '—'}</span>
+          </div>`).join('')}
+      </td>
+    </tr>`).join('') || `<tr><td colspan="7" class="dim" style="text-align:center;padding:20px">No supplier entries yet — add some in the Directory.</td></tr>`;
+}
+function toggleVendorDetail(i) {
+  const el = document.getElementById('vendor-detail-' + i);
+  if (!el) return;
+  el.style.display = el.style.display === 'none' ? 'table-row' : 'none';
+}
+
+// ── Price History (flattened across every entry) ──
+function getAllPriceHistory() {
+  const all = [];
+  suppliersData.entries.forEach(e => {
+    (e.history || []).forEach(h => {
+      all.push({ ...h, item: e.item, supplier: e.supplier, category: e.category });
+    });
+  });
+  return all.sort((a, b) => (b.date || '').localeCompare(a.date || ''));
+}
+
+function renderHistoryFilterOptions() {
+  const sel = document.getElementById('history-filter');
+  if (!sel) return;
+  const current = sel.value;
+  sel.innerHTML = '<option value="">— All categories —</option>' +
+    suppliersData.categories.map(c => `<option value="${c}"${c===current?' selected':''}>${c}</option>`).join('');
+}
+
+function renderPriceHistory() {
+  const tb = document.getElementById('history-table-body');
+  if (!tb) return;
+  const filter = document.getElementById('history-filter')?.value || '';
+  const search = (document.getElementById('history-search')?.value || '').trim().toLowerCase();
+  const rows = getAllPriceHistory().filter(h => {
+    if (filter && h.category !== filter) return false;
+    if (search && !(h.item||'').toLowerCase().includes(search) && !(h.supplier||'').toLowerCase().includes(search)) return false;
+    return true;
+  });
+  tb.innerHTML = rows.map(h => {
+    const up = h.newPrice > h.oldPrice;
+    const pct = h.oldPrice ? (((h.newPrice - h.oldPrice) / h.oldPrice) * 100).toFixed(1) : '—';
+    return `<tr>
+      <td class="dim">${h.date || '—'}</td>
+      <td>${supplierEsc(h.item) || '(unnamed item)'}</td>
+      <td class="dim">${supplierEsc(h.supplier) || '—'}</td>
+      <td class="dim">${supplierEsc(h.category) || '—'}</td>
+      <td>$${h.oldPrice.toLocaleString()}</td>
+      <td class="dim">→</td>
+      <td>$${h.newPrice.toLocaleString()}</td>
+      <td style="color:${up?'var(--red)':'var(--green)'}">${up?'+':''}${pct}%</td>
+    </tr>`;
+  }).join('') || `<tr><td colspan="8" class="dim" style="text-align:center;padding:20px">No price changes recorded yet.</td></tr>`;
 }
 
 // Reads every currently-rendered row (both the visible summary row and its
@@ -3007,6 +3258,9 @@ function updateSupplierStats() {
 function syncSupplierData() {
   collectVisibleSupplierRows();
   refreshSupplierPricingLinks();
+  updateSupplierStats();  // also refreshes category bars, attention list, recent changes
+  renderVendorsTable();
+  renderPriceHistory();
 }
 
 function collectVisibleSupplierRows() {
@@ -3029,6 +3283,7 @@ function collectVisibleSupplierRows() {
       description: detailTr?.querySelector('.sup-description')?.value.trim() || '',
       pdfPath: existing.pdfPath,   // set only via upload/remove, not a plain text field
       pdfName: existing.pdfName,
+      history: existing.history,  // set only via stampSupplierDate, not a plain text field
     };
   });
   suppliersData.entries = suppliersData.entries.map(e => updatedById[e.id] || e);
