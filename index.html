@@ -281,6 +281,7 @@ body.role-procurement button[onclick="exportOffer()"] { display:none; }
     <div class="nav-item" data-p="mandays"><span class="nav-dot"></span>Mandays</div>
     <div class="nav-item" data-p="brief"><span class="nav-dot"></span>Budget Brief</div>
     <div class="nav-item" data-p="suppliers-ref"><span class="nav-dot"></span>Component Suppliers</div>
+    <div class="nav-item" data-p="suppliers" id="nav-item-suppliers" style="display:none"><span class="nav-dot"></span>Suppliers</div>
     <div class="nav-group" id="nav-group-admin" style="display:none">Admin</div>
     <div class="nav-item" data-p="users" id="nav-item-users" style="display:none"><span class="nav-dot"></span>User Management</div>
   </nav>
@@ -871,6 +872,42 @@ body.role-procurement button[onclick="exportOffer()"] { display:none; }
         <tr><td>Mouse + Keyboard</td><td><a href="https://mojitech.net" target="_blank" style="color:var(--blue)">Mojitech.net</a></td></tr>
       </tbody>
     </table></div>
+  </div>
+</div>
+
+<!-- ═══ SUPPLIERS DATABASE ═══ -->
+<div id="page-suppliers" class="page">
+  <div class="ph"><div><div class="ph-title">Suppliers</div><div class="ph-sub">Vendor contacts &amp; pricing — Procurement, Administrator, and Super Admin only</div></div></div>
+
+  <div class="card">
+    <div class="card-head">Categories</div>
+    <div id="supplier-category-chips" style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px"></div>
+    <div style="display:flex;gap:10px;align-items:flex-end">
+      <div class="fg" style="flex:1;margin-bottom:0"><label class="fl">New category</label>
+        <input type="text" id="supplier-new-category" placeholder="e.g. Pneumatics"></div>
+      <button class="btn btn-ghost" onclick="addSupplierCategory()">+ Add Category</button>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-head">Supplier Directory</div>
+    <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px;flex-wrap:wrap">
+      <div class="fg" style="margin-bottom:0;min-width:220px"><label class="fl">Filter by category</label>
+        <select id="supplier-filter" onchange="renderSupplierTable()"><option value="">— All categories —</option></select></div>
+      <span style="flex:1"></span>
+      <button class="btn btn-ghost" onclick="addSupplierEntry()">+ Add Entry</button>
+    </div>
+    <div class="tbl-wrap"><table>
+      <thead><tr><th>Category</th><th>Hardware / Item</th><th>Supplier</th><th>Email</th><th>Cost ($)</th><th>Latest Price ($)</th><th>Updated</th><th></th></tr></thead>
+      <tbody id="supplier-table-body"></tbody>
+    </table></div>
+  </div>
+
+  <div class="card" style="border-color:var(--blue);background:var(--blue-bg)">
+    <div class="card-head">Save Changes</div>
+    <div class="note" style="margin-bottom:12px">Changes here only apply in this browser tab until you save — everyone else keeps seeing the directory as it was last saved.</div>
+    <button class="btn btn-primary" onclick="saveSuppliersToCloud()">☁ Save Suppliers to Cloud</button>
+    <div class="note" id="suppliers-save-status" style="margin-top:10px;display:none"></div>
   </div>
 </div>
 
@@ -1789,6 +1826,11 @@ function doLogin() {
   const navGroupAdmin = document.getElementById('nav-group-admin'); if (navGroupAdmin) navGroupAdmin.style.display = canManageUsers ? '' : 'none';
   const navItemUsers = document.getElementById('nav-item-users'); if (navItemUsers) navItemUsers.style.display = canManageUsers ? '' : 'none';
   if (canManageUsers) renderUserManagementTable();
+
+  const canSeeSuppliers = isAdmin || match.role === 'procurement';
+  const navItemSuppliers = document.getElementById('nav-item-suppliers'); if (navItemSuppliers) navItemSuppliers.style.display = canSeeSuppliers ? '' : 'none';
+  if (canSeeSuppliers) renderSuppliersPage();
+
   err.textContent = '';
   refreshGitHubProjectList();
 }
@@ -1801,10 +1843,11 @@ function doLogout() {
   document.body.className = document.body.className.replace(/\brole-\S+/g, '').trim();
   const navGroupAdmin = document.getElementById('nav-group-admin'); if (navGroupAdmin) navGroupAdmin.style.display = 'none';
   const navItemUsers = document.getElementById('nav-item-users'); if (navItemUsers) navItemUsers.style.display = 'none';
+  const navItemSuppliers = document.getElementById('nav-item-suppliers'); if (navItemSuppliers) navItemSuppliers.style.display = 'none';
   // Bounce back to Dashboard if they were on a page that requires being
-  // signed in (User Management, My Profile) — neither makes sense to show
-  // behind the login overlay.
-  const restrictedPages = ['page-users', 'page-profile'];
+  // signed in (User Management, My Profile, Suppliers) — none of these
+  // make sense to show behind the login overlay.
+  const restrictedPages = ['page-users', 'page-profile', 'page-suppliers'];
   const onRestrictedPage = restrictedPages.some(id => document.getElementById(id)?.classList.contains('active'));
   if (onRestrictedPage) {
     document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
@@ -2727,6 +2770,189 @@ async function saveUsersToCloud() {
     usersSetStatus('Saved ✓ — accounts are updated for everyone.');
   } catch (err) {
     usersSetStatus('Save failed: ' + err.message, true);
+  }
+}
+
+// ════════════════════════════════════════════════════════════════
+//  SUPPLIERS DATABASE (Procurement / Admin / Super Admin only)
+//  A vendor/pricing directory spanning both the digital-SCADA scope
+//  (PCs, networking, UPS...) and the electrical-panel scope (PLCs,
+//  servo drives, cabinet hardware...). Categories are fully editable
+//  in the UI, not hardcoded, since this list will keep growing.
+// ════════════════════════════════════════════════════════════════
+
+let suppliersData = { categories: [], entries: [] };
+let suppliersLoaded = false;
+
+async function loadSuppliers() {
+  try {
+    const res = await fetch('data/suppliers.json', {cache:'no-store'});
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+    suppliersData = await res.json();
+    if (!Array.isArray(suppliersData.categories)) suppliersData.categories = [];
+    if (!Array.isArray(suppliersData.entries)) suppliersData.entries = [];
+    suppliersLoaded = true;
+    if (currentUser && (currentUser.role === 'admin' || currentUser.role === 'superadmin' || currentUser.role === 'procurement')) {
+      renderSuppliersPage();
+    }
+  } catch (e) {
+    console.error('Failed to load data/suppliers.json:', e);
+  }
+}
+loadSuppliers();
+
+function renderSuppliersPage() {
+  renderSupplierCategoryChips();
+  renderSupplierFilterOptions();
+  renderSupplierTable();
+}
+
+function renderSupplierCategoryChips() {
+  const wrap = document.getElementById('supplier-category-chips');
+  if (!wrap) return;
+  wrap.innerHTML = suppliersData.categories.map(cat => `
+    <span style="display:inline-flex;align-items:center;gap:6px;background:var(--s3);border:1px solid var(--b2);border-radius:20px;padding:5px 6px 5px 12px;font-size:12px">
+      ${cat}
+      <span style="color:var(--red);cursor:pointer;font-weight:600;padding:0 4px" onclick="removeSupplierCategory('${cat.replace(/'/g,"\\'")}')" title="Remove category">×</span>
+    </span>`).join('') || '<span class="dim" style="font-size:12px">No categories yet — add one below.</span>';
+}
+
+function addSupplierCategory() {
+  const input = document.getElementById('supplier-new-category');
+  const name = input.value.trim();
+  if (!name) return;
+  if (suppliersData.categories.some(c => c.toLowerCase() === name.toLowerCase())) {
+    input.value = '';
+    return;
+  }
+  suppliersData.categories.push(name);
+  input.value = '';
+  renderSupplierCategoryChips();
+  renderSupplierFilterOptions();
+  renderSupplierTable(); // row category dropdowns need the new option too
+}
+function removeSupplierCategory(cat) {
+  const inUse = suppliersData.entries.some(e => e.category === cat);
+  if (inUse && !confirm(`"${cat}" is used by one or more entries below. Remove it anyway? Those entries will show it as "Uncategorized" until you pick a new category for them.`)) return;
+  suppliersData.categories = suppliersData.categories.filter(c => c !== cat);
+  renderSupplierCategoryChips();
+  renderSupplierFilterOptions();
+  renderSupplierTable();
+}
+
+function renderSupplierFilterOptions() {
+  const sel = document.getElementById('supplier-filter');
+  if (!sel) return;
+  const current = sel.value;
+  sel.innerHTML = '<option value="">— All categories —</option>' +
+    suppliersData.categories.map(c => `<option value="${c}"${c===current?' selected':''}>${c}</option>`).join('');
+}
+
+function supplierCategorySelectHtml(selected) {
+  return suppliersData.categories.map(c => `<option value="${c}"${c===selected?' selected':''}>${c}</option>`).join('');
+}
+
+function renderSupplierTable() {
+  // Sync whatever's currently in the DOM back into the data model *before*
+  // rebuilding it — otherwise switching the category filter mid-edit would
+  // silently discard anything just typed into the rows that are about to
+  // be replaced.
+  collectVisibleSupplierRows();
+  const tb = document.getElementById('supplier-table-body');
+  if (!tb) return;
+  const filter = document.getElementById('supplier-filter')?.value || '';
+  const rows = suppliersData.entries.filter(e => !filter || e.category === filter);
+  tb.innerHTML = rows.map(e => `
+    <tr data-id="${e.id}">
+      <td><select class="esel sup-category">${supplierCategorySelectHtml(e.category)}</select></td>
+      <td><input class="en sup-item" type="text" value="${(e.item||'').replace(/"/g,'&quot;')}" placeholder="Item name"></td>
+      <td><input class="en sup-supplier" type="text" value="${(e.supplier||'').replace(/"/g,'&quot;')}" placeholder="Supplier name"></td>
+      <td><input class="en sup-email" type="email" value="${(e.email||'').replace(/"/g,'&quot;')}" placeholder="email@supplier.com"></td>
+      <td><input class="en sup-cost" type="number" value="${e.cost ?? ''}" placeholder="0"></td>
+      <td><input class="en sup-latest" type="number" value="${e.latestPrice ?? ''}" placeholder="0" onchange="stampSupplierDate(this)"></td>
+      <td><input class="en sup-date" type="date" value="${e.updated || ''}"></td>
+      <td><span style="color:var(--red);cursor:pointer;font-size:16px" onclick="deleteSupplierRow(this)" title="Remove entry">×</span></td>
+    </tr>`).join('');
+}
+
+// Updating the latest quoted price is exactly the moment worth recording —
+// auto-stamps today's date so nobody has to remember to do it by hand
+// (still fully editable afterward, e.g. to backdate a quote).
+function stampSupplierDate(inputEl) {
+  const tr = inputEl.closest('tr');
+  const dateEl = tr?.querySelector('.sup-date');
+  if (dateEl) dateEl.value = new Date().toISOString().slice(0,10);
+}
+
+function addSupplierEntry() {
+  if (suppliersData.categories.length === 0) {
+    alert('Add at least one category first.');
+    return;
+  }
+  const filter = document.getElementById('supplier-filter')?.value || '';
+  const newEntry = {
+    id: 'sup-' + Date.now() + '-' + Math.random().toString(36).slice(2,7),
+    category: filter || suppliersData.categories[0],
+    item: '', supplier: '', email: '', cost: '', latestPrice: '',
+    updated: new Date().toISOString().slice(0,10),
+  };
+  suppliersData.entries.push(newEntry);
+  renderSupplierTable();
+  const tb = document.getElementById('supplier-table-body');
+  tb?.lastElementChild?.querySelector('.sup-item')?.focus();
+}
+function deleteSupplierRow(el) {
+  const tr = el.closest('tr');
+  const id = tr?.dataset.id;
+  if (!id) return;
+  if (!confirm('Remove this supplier entry? This only takes effect once you save to the cloud.')) return;
+  suppliersData.entries = suppliersData.entries.filter(e => e.id !== id);
+  renderSupplierTable();
+}
+
+function suppliersSetStatus(msg, isError) {
+  const el = document.getElementById('suppliers-save-status');
+  if (!el) return;
+  el.style.display = 'block';
+  el.textContent = msg;
+  el.style.color = isError ? 'var(--red)' : 'var(--t2)';
+}
+
+// Reads every currently-rendered row back into suppliersData.entries before
+// saving — the filter dropdown only ever shows a subset of rows in the DOM
+// at once, so this must merge against the full dataset rather than assume
+// the table currently holds everything.
+function collectVisibleSupplierRows() {
+  const tb = document.getElementById('supplier-table-body');
+  if (!tb) return;
+  const updatedById = {};
+  tb.querySelectorAll('tr').forEach(tr => {
+    const id = tr.dataset.id;
+    updatedById[id] = {
+      id,
+      category: tr.querySelector('.sup-category')?.value || '',
+      item: tr.querySelector('.sup-item')?.value.trim() || '',
+      supplier: tr.querySelector('.sup-supplier')?.value.trim() || '',
+      email: tr.querySelector('.sup-email')?.value.trim() || '',
+      cost: parseFloat(tr.querySelector('.sup-cost')?.value) || 0,
+      latestPrice: parseFloat(tr.querySelector('.sup-latest')?.value) || 0,
+      updated: tr.querySelector('.sup-date')?.value || '',
+    };
+  });
+  suppliersData.entries = suppliersData.entries.map(e => updatedById[e.id] || e);
+}
+
+async function saveSuppliersToCloud() {
+  if (!currentUser || (currentUser.role !== 'admin' && currentUser.role !== 'superadmin' && currentUser.role !== 'procurement')) {
+    suppliersSetStatus('You do not have permission to do this.', true); return;
+  }
+  collectVisibleSupplierRows();
+  suppliersSetStatus('Saving…');
+  try {
+    await writeFileToGitHub('data/suppliers.json', JSON.stringify(suppliersData, null, 2), 'Update suppliers directory');
+    suppliersSetStatus('Saved ✓ — the directory is updated for everyone.');
+  } catch (err) {
+    suppliersSetStatus('Save failed: ' + err.message, true);
   }
 }
 
