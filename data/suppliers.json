@@ -12,7 +12,8 @@
     "Circuit Protection",
     "Power Supplies",
     "Cabling & Wiring",
-    "Sensors & Instrumentation"
+    "Sensors & Instrumentation",
+    "HMI"
   ],
   "entries": [
     {
@@ -36,6 +37,28 @@
       "updated": "2026-09-16",
       "email": "Peter89.Huang@advantech.com.tw",
       "description": "P/N: IPC-510MB-30F\n\nChassis: 4U Rack Mount\n\nChassis color: Beige\n\nPower Supply Unit: Singel 300W PSU (AC input)\n\nProcessor: Intel 12th Gen Core i5-12400 (2.5GHz, 6 Cores)\n\nDRAM: 8GB UDIMM or 16GB UDIMM (see price difference below)\n\nStorage: 1 x 128GB M.2 NVMe (for Windows 11 Pro installation)\n\nAvailable storage bay: 4 x 3.5” Drive bay (Not Hot-Swap), 1 x 5.25” Drive bay\n\nRAID function: Not available\n\nDisplay Interface: 1 x VGA, 1 x HDMI\n\nLAN Port: 2 x GbE LAN\n\nUSB Port: 4 x USB 3.2 Gen 1, 2 x USB 2.0\n\nCOM Port: 2 x RS-232 (DB9)\n\nAudio: 1 x Mic-in, 1 x Line-out\n\nO.S: Windows 11 Pro 64bit (Pre-installed on M.2 128GB SSD)"
+    },
+    {
+      "id": "sup-1789542816254-vvwvk",
+      "category": "HMI",
+      "item": "AIM-68S-201011",
+      "supplier": "Advantech",
+      "cost": 1196.6,
+      "latestPrice": 0,
+      "updated": "2026-09-16",
+      "email": "Peter89.Huang@advantech.com.tw",
+      "description": "10.1\"/1920 x 1200/Intel N50/8GB RAM/128GB SSD/Win 11_LTSC/Wifi 6E"
+    },
+    {
+      "id": "sup-1789543041643-5ynvd",
+      "category": "HMI",
+      "item": "PPC-315SW-PDI5A (15.6\")",
+      "supplier": "Advantech",
+      "cost": 2099,
+      "latestPrice": 0,
+      "updated": "2026-09-16",
+      "email": "Peter89.Huang@advantech.com.tw",
+      "description": "P/N: PPC-315SW-PDI5A\n\nScreen Size: 15.6”\n\nTouch: PCAP\n\nProcessor: Intel Core i5-1335UE\n\nDRAM: 16GB DDR5\n\nStorage: 1 x 2TB HDD\n\nO.S: Windows 11 IoT Enterprise\n\nUnit Price: USD 2,099/set"
     }
   ]
 }
