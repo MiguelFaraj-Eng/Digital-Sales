@@ -877,7 +877,14 @@ body.role-procurement button[onclick="exportOffer()"] { display:none; }
 
 <!-- ═══ SUPPLIERS DATABASE ═══ -->
 <div id="page-suppliers" class="page">
-  <div class="ph"><div><div class="ph-title">Suppliers</div><div class="ph-sub">Vendor contacts &amp; pricing — Procurement, Administrator, and Super Admin only</div></div></div>
+  <div class="ph"><div><div class="ph-title">Suppliers</div><div class="ph-sub">Vendor contacts, pricing, descriptions &amp; datasheets — Procurement, Administrator, and Super Admin only</div></div></div>
+
+  <div class="stat-grid" id="supplier-stat-grid">
+    <div class="stat"><div class="stat-label">Entries</div><div class="stat-value c-blue" id="sup-stat-count">0</div><div class="stat-sub">Across all categories</div></div>
+    <div class="stat"><div class="stat-label">Categories</div><div class="stat-value" id="sup-stat-categories">0</div><div class="stat-sub">Digital + electrical panel</div></div>
+    <div class="stat"><div class="stat-label">Updated Last 30 Days</div><div class="stat-value c-amber" id="sup-stat-fresh">0</div><div class="stat-sub">Prices still current</div></div>
+    <div class="stat"><div class="stat-label">With Datasheet</div><div class="stat-value c-green" id="sup-stat-pdf">0</div><div class="stat-sub">PDF attached</div></div>
+  </div>
 
   <div class="card">
     <div class="card-head">Categories</div>
@@ -894,11 +901,13 @@ body.role-procurement button[onclick="exportOffer()"] { display:none; }
     <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px;flex-wrap:wrap">
       <div class="fg" style="margin-bottom:0;min-width:220px"><label class="fl">Filter by category</label>
         <select id="supplier-filter" onchange="renderSupplierTable()"><option value="">— All categories —</option></select></div>
-      <span style="flex:1"></span>
-      <button class="btn btn-ghost" onclick="addSupplierEntry()">+ Add Entry</button>
+      <div class="fg" style="margin-bottom:0;flex:1;min-width:200px"><label class="fl">Search</label>
+        <input type="text" id="supplier-search" placeholder="Item or supplier name…" oninput="renderSupplierTable()"></div>
+      <button class="btn btn-ghost" style="align-self:flex-end" onclick="addSupplierEntry()">+ Add Entry</button>
     </div>
+    <div class="note" style="margin-bottom:14px">Click a row to expand it — email, description, and datasheet live there. Items priced here that match a name on the Hardware/License/Mandays pages show up as a quick-apply badge next to that page's Cost field.</div>
     <div class="tbl-wrap"><table>
-      <thead><tr><th>Category</th><th>Hardware / Item</th><th>Supplier</th><th>Email</th><th>Cost ($)</th><th>Latest Price ($)</th><th>Updated</th><th></th></tr></thead>
+      <thead><tr><th></th><th>Category</th><th>Hardware / Item</th><th>Supplier</th><th>Cost ($)</th><th>Latest Price ($)</th><th>Updated</th><th></th></tr></thead>
       <tbody id="supplier-table-body"></tbody>
     </table></div>
   </div>
@@ -1221,7 +1230,7 @@ function renderLicenseModules() {
 
   const blockId = 'lic-block-' + licenseSelection.vendor + '-' + licenseSelection.product;
   let block = document.getElementById(blockId);
-  if (block) { block.style.display = ''; return; }
+  if (block) { block.style.display = ''; refreshSupplierPricingLinks(); return; }
 
   block = document.createElement('div');
   block.id = blockId;
@@ -1250,6 +1259,7 @@ function renderLicenseModules() {
       </table></div>
     </div>`).join('');
   container.appendChild(block);
+  refreshSupplierPricingLinks();
 }
 
 // Reads + recomputes rows from the currently-visible vendor/product block only.
@@ -1336,6 +1346,7 @@ function renderHwCatalogRows(catKey, bodyId) {
       <td class="n hu"></td><td class="n ht"></td>
     </tr>`;
   }).join('');
+  refreshSupplierPricingLinks();
 }
 
 // Panel Enclosure size picker — pushes the selected size's cost into that row's cost field.
@@ -1830,6 +1841,7 @@ function doLogin() {
   const canSeeSuppliers = isAdmin || match.role === 'procurement';
   const navItemSuppliers = document.getElementById('nav-item-suppliers'); if (navItemSuppliers) navItemSuppliers.style.display = canSeeSuppliers ? '' : 'none';
   if (canSeeSuppliers) renderSuppliersPage();
+  refreshSupplierPricingLinks();
 
   err.textContent = '';
   refreshGitHubProjectList();
@@ -1844,6 +1856,7 @@ function doLogout() {
   const navGroupAdmin = document.getElementById('nav-group-admin'); if (navGroupAdmin) navGroupAdmin.style.display = 'none';
   const navItemUsers = document.getElementById('nav-item-users'); if (navItemUsers) navItemUsers.style.display = 'none';
   const navItemSuppliers = document.getElementById('nav-item-suppliers'); if (navItemSuppliers) navItemSuppliers.style.display = 'none';
+  document.querySelectorAll('.supplier-link-badge').forEach(b => b.remove());
   // Bounce back to Dashboard if they were on a page that requires being
   // signed in (User Management, My Profile, Suppliers) — none of these
   // make sense to show behind the login overlay.
@@ -2511,7 +2524,10 @@ function disconnectCloud() {
 // Shared GitHub Contents API writer (GET for sha if the file already exists,
 // then PUT) — used by both project saves and user-account saves so there's
 // one tested path instead of two copies that could drift apart.
-async function writeFileToGitHub(path, contentString, commitMessage) {
+// Core GET-sha-then-PUT writer, taking content that's *already* base64-encoded.
+// Shared by the text-file wrapper below and the PDF upload path, which needs
+// its own base64 encoding (raw binary, not UTF-8 text) rather than utf8ToBase64.
+async function writeFileToGitHubRaw(path, base64Content, commitMessage) {
   const { repo, token } = ghConfig();
   if (!repo) throw new Error('Could not determine where to save — open this tool from its published cloud URL.');
   if (!token) throw new Error('Connect to Cloud first (paste your access key on the Dashboard).');
@@ -2522,7 +2538,7 @@ async function writeFileToGitHub(path, contentString, commitMessage) {
   if (getRes.ok) { sha = (await getRes.json()).sha; }
   else if (getRes.status !== 404) { throw new Error(`Could not check for an existing file (HTTP ${getRes.status})`); }
 
-  const body = { message: commitMessage, content: utf8ToBase64(contentString) };
+  const body = { message: commitMessage, content: base64Content };
   if (sha) body.sha = sha;
 
   const putRes = await fetch(apiUrl, {
@@ -2534,6 +2550,9 @@ async function writeFileToGitHub(path, contentString, commitMessage) {
     const errData = await putRes.json().catch(() => ({}));
     throw new Error(errData.message || `HTTP ${putRes.status}`);
   }
+}
+async function writeFileToGitHub(path, contentString, commitMessage) {
+  return writeFileToGitHubRaw(path, utf8ToBase64(contentString), commitMessage);
 }
 
 async function readFileFromGitHub(path) {
@@ -2795,6 +2814,7 @@ async function loadSuppliers() {
     if (currentUser && (currentUser.role === 'admin' || currentUser.role === 'superadmin' || currentUser.role === 'procurement')) {
       renderSuppliersPage();
     }
+    refreshSupplierPricingLinks();
   } catch (e) {
     console.error('Failed to load data/suppliers.json:', e);
   }
@@ -2852,27 +2872,71 @@ function supplierCategorySelectHtml(selected) {
   return suppliersData.categories.map(c => `<option value="${c}"${c===selected?' selected':''}>${c}</option>`).join('');
 }
 
+const supplierEsc = s => (s || '').toString().replace(/"/g, '&quot;');
+
 function renderSupplierTable() {
   // Sync whatever's currently in the DOM back into the data model *before*
-  // rebuilding it — otherwise switching the category filter mid-edit would
-  // silently discard anything just typed into the rows that are about to
-  // be replaced.
+  // rebuilding it — otherwise switching the category filter, or typing a
+  // search term, would silently discard anything just typed into rows
+  // that are about to be replaced.
   collectVisibleSupplierRows();
   const tb = document.getElementById('supplier-table-body');
   if (!tb) return;
   const filter = document.getElementById('supplier-filter')?.value || '';
-  const rows = suppliersData.entries.filter(e => !filter || e.category === filter);
-  tb.innerHTML = rows.map(e => `
-    <tr data-id="${e.id}">
-      <td><select class="esel sup-category">${supplierCategorySelectHtml(e.category)}</select></td>
-      <td><input class="en sup-item" type="text" value="${(e.item||'').replace(/"/g,'&quot;')}" placeholder="Item name"></td>
-      <td><input class="en sup-supplier" type="text" value="${(e.supplier||'').replace(/"/g,'&quot;')}" placeholder="Supplier name"></td>
-      <td><input class="en sup-email" type="email" value="${(e.email||'').replace(/"/g,'&quot;')}" placeholder="email@supplier.com"></td>
-      <td><input class="en sup-cost" type="number" value="${e.cost ?? ''}" placeholder="0"></td>
-      <td><input class="en sup-latest" type="number" value="${e.latestPrice ?? ''}" placeholder="0" onchange="stampSupplierDate(this)"></td>
-      <td><input class="en sup-date" type="date" value="${e.updated || ''}"></td>
+  const search = (document.getElementById('supplier-search')?.value || '').trim().toLowerCase();
+  const rows = suppliersData.entries.filter(e => {
+    if (filter && e.category !== filter) return false;
+    if (search && !(e.item||'').toLowerCase().includes(search) && !(e.supplier||'').toLowerCase().includes(search)) return false;
+    return true;
+  });
+  tb.innerHTML = rows.map(supplierRowsHtml).join('') ||
+    `<tr><td colspan="8" class="dim" style="text-align:center;padding:20px">No entries match — try "+ Add Entry" or clear the filter/search.</td></tr>`;
+  updateSupplierStats();
+  refreshSupplierPricingLinks();
+}
+
+function supplierRowsHtml(e) {
+  const pdfCell = e.pdfPath
+    ? `📄 <a href="${e.pdfPath}" target="_blank" style="color:var(--blue)">${supplierEsc(e.pdfName || 'datasheet.pdf')}</a>
+       <button class="btn btn-ghost" style="padding:2px 8px;font-size:10px;margin-left:6px" onclick="removeSupplierPdf('${e.id}')">Remove</button>`
+    : `<span class="dim">No PDF attached</span>`;
+  const sync = 'onchange="syncSupplierData()"';
+  return `
+    <tr data-id="${e.id}" class="sup-row">
+      <td><span class="sup-expand-toggle" onclick="toggleSupplierDetail('${e.id}')" style="cursor:pointer;display:inline-block;width:16px;color:var(--t3)">▸</span></td>
+      <td><select class="esel sup-category" ${sync}>${supplierCategorySelectHtml(e.category)}</select></td>
+      <td><input class="en sup-item" type="text" value="${supplierEsc(e.item)}" placeholder="Item name" ${sync}></td>
+      <td><input class="en sup-supplier" type="text" value="${supplierEsc(e.supplier)}" placeholder="Supplier name" ${sync}></td>
+      <td><input class="en sup-cost" type="number" value="${e.cost ?? ''}" placeholder="0" ${sync}></td>
+      <td><input class="en sup-latest" type="number" value="${e.latestPrice ?? ''}" placeholder="0" onchange="stampSupplierDate(this); syncSupplierData()"></td>
+      <td><input class="en sup-date" type="date" value="${e.updated || ''}" ${sync}></td>
       <td><span style="color:var(--red);cursor:pointer;font-size:16px" onclick="deleteSupplierRow(this)" title="Remove entry">×</span></td>
-    </tr>`).join('');
+    </tr>
+    <tr class="sup-detail-row" id="detail-${e.id}" style="display:none">
+      <td colspan="8" style="background:var(--s2);padding:16px 20px 20px 42px">
+        <div class="g2">
+          <div class="fg"><label class="fl">Email</label><input class="en sup-email" type="email" value="${supplierEsc(e.email)}" placeholder="email@supplier.com" style="width:100%;text-align:left" ${sync}></div>
+          <div class="fg"><label class="fl">PDF / Datasheet</label>
+            <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
+              ${pdfCell}
+              <input type="file" accept="application/pdf" style="display:none" id="pdf-input-${e.id}" onchange="handleSupplierPdfUpload('${e.id}', this)">
+              <button class="btn btn-ghost" style="padding:4px 10px;font-size:11px" onclick="document.getElementById('pdf-input-${e.id}').click()">${e.pdfPath ? 'Replace' : 'Upload'} PDF</button>
+            </div>
+          </div>
+        </div>
+        <div class="fg" style="margin-top:12px;margin-bottom:0"><label class="fl">Description / Notes</label>
+          <textarea class="en sup-description" style="width:100%;text-align:left;min-height:56px" placeholder="Lead time, MOQ, part number, anything worth remembering…" ${sync}>${supplierEsc(e.description)}</textarea></div>
+      </td>
+    </tr>`;
+}
+
+function toggleSupplierDetail(id) {
+  const detailRow = document.getElementById('detail-' + id);
+  const toggle = document.querySelector(`tr[data-id="${id}"] .sup-expand-toggle`);
+  if (!detailRow) return;
+  const willOpen = detailRow.style.display === 'none';
+  detailRow.style.display = willOpen ? 'table-row' : 'none';
+  if (toggle) toggle.textContent = willOpen ? '▾' : '▸';
 }
 
 // Updating the latest quoted price is exactly the moment worth recording —
@@ -2893,13 +2957,14 @@ function addSupplierEntry() {
   const newEntry = {
     id: 'sup-' + Date.now() + '-' + Math.random().toString(36).slice(2,7),
     category: filter || suppliersData.categories[0],
-    item: '', supplier: '', email: '', cost: '', latestPrice: '',
+    item: '', supplier: '', email: '', description: '', cost: '', latestPrice: '',
     updated: new Date().toISOString().slice(0,10),
   };
   suppliersData.entries.push(newEntry);
   renderSupplierTable();
   const tb = document.getElementById('supplier-table-body');
-  tb?.lastElementChild?.querySelector('.sup-item')?.focus();
+  const newRow = tb?.querySelector(`tr[data-id="${newEntry.id}"]`);
+  newRow?.querySelector('.sup-item')?.focus();
 }
 function deleteSupplierRow(el) {
   const tr = el.closest('tr');
@@ -2918,25 +2983,52 @@ function suppliersSetStatus(msg, isError) {
   el.style.color = isError ? 'var(--red)' : 'var(--t2)';
 }
 
-// Reads every currently-rendered row back into suppliersData.entries before
-// saving — the filter dropdown only ever shows a subset of rows in the DOM
-// at once, so this must merge against the full dataset rather than assume
-// the table currently holds everything.
+function updateSupplierStats() {
+  const countEl = document.getElementById('sup-stat-count');
+  if (!countEl) return; // stats only exist on the Suppliers page itself
+  const cutoff = new Date(); cutoff.setDate(cutoff.getDate() - 30);
+  const fresh = suppliersData.entries.filter(e => e.updated && new Date(e.updated) >= cutoff).length;
+  const withPdf = suppliersData.entries.filter(e => e.pdfPath).length;
+  sv('sup-stat-count', String(suppliersData.entries.length));
+  sv('sup-stat-categories', String(suppliersData.categories.length));
+  sv('sup-stat-fresh', String(fresh));
+  sv('sup-stat-pdf', String(withPdf));
+}
+
+// Reads every currently-rendered row (both the visible summary row and its
+// — possibly collapsed — detail row) back into suppliersData.entries before
+// saving or re-rendering. The filter/search only ever show a subset of rows
+// in the DOM at once, so this must merge against the full dataset rather
+// than assume the table currently holds everything.
+// Lightweight sync used on every field's onchange — keeps suppliersData.entries
+// (and therefore the pricing-page badges) current as someone types, without
+// the disruptive full re-render that renderSupplierTable() would trigger
+// (which would collapse expanded rows and reset scroll position mid-edit).
+function syncSupplierData() {
+  collectVisibleSupplierRows();
+  refreshSupplierPricingLinks();
+}
+
 function collectVisibleSupplierRows() {
   const tb = document.getElementById('supplier-table-body');
   if (!tb) return;
   const updatedById = {};
-  tb.querySelectorAll('tr').forEach(tr => {
+  tb.querySelectorAll('tr.sup-row').forEach(tr => {
     const id = tr.dataset.id;
+    const detailTr = document.getElementById('detail-' + id);
+    const existing = suppliersData.entries.find(e => e.id === id) || {};
     updatedById[id] = {
       id,
       category: tr.querySelector('.sup-category')?.value || '',
       item: tr.querySelector('.sup-item')?.value.trim() || '',
       supplier: tr.querySelector('.sup-supplier')?.value.trim() || '',
-      email: tr.querySelector('.sup-email')?.value.trim() || '',
       cost: parseFloat(tr.querySelector('.sup-cost')?.value) || 0,
       latestPrice: parseFloat(tr.querySelector('.sup-latest')?.value) || 0,
       updated: tr.querySelector('.sup-date')?.value || '',
+      email: detailTr?.querySelector('.sup-email')?.value.trim() || '',
+      description: detailTr?.querySelector('.sup-description')?.value.trim() || '',
+      pdfPath: existing.pdfPath,   // set only via upload/remove, not a plain text field
+      pdfName: existing.pdfName,
     };
   });
   suppliersData.entries = suppliersData.entries.map(e => updatedById[e.id] || e);
@@ -2951,9 +3043,133 @@ async function saveSuppliersToCloud() {
   try {
     await writeFileToGitHub('data/suppliers.json', JSON.stringify(suppliersData, null, 2), 'Update suppliers directory');
     suppliersSetStatus('Saved ✓ — the directory is updated for everyone.');
+    refreshSupplierPricingLinks();
   } catch (err) {
     suppliersSetStatus('Save failed: ' + err.message, true);
   }
+}
+
+// ── PDF attachments ──
+// Stored as their own file in the repo (data/supplier-docs/<id>.pdf) rather
+// than embedded in suppliers.json, so the JSON stays small and fast to load.
+// GitHub's simple Contents API tops out around 1MB per file, so uploads are
+// capped safely below that.
+function fileToBase64(file) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = () => resolve(reader.result.split(',')[1]);
+    reader.onerror = () => reject(new Error('Could not read that file.'));
+    reader.readAsDataURL(file);
+  });
+}
+
+async function handleSupplierPdfUpload(id, inputEl) {
+  const file = inputEl.files && inputEl.files[0];
+  if (!file) return;
+  if (file.type !== 'application/pdf') { alert('Please choose a PDF file.'); inputEl.value = ''; return; }
+  const maxBytes = 900 * 1024;
+  if (file.size > maxBytes) {
+    alert(`That PDF is ${(file.size/1024/1024).toFixed(1)}MB — this kind of storage tops out around 1MB per file. Try compressing it, or paste a link to it (Drive, Dropbox, etc.) into the Description field instead.`);
+    inputEl.value = '';
+    return;
+  }
+  const { repo, token } = ghConfig();
+  if (!repo || !token) {
+    alert('Connect to Cloud first (paste your access key on the Dashboard) — uploading a PDF saves immediately, unlike the other fields here.');
+    inputEl.value = '';
+    return;
+  }
+  suppliersSetStatus('Uploading PDF…');
+  try {
+    const base64 = await fileToBase64(file);
+    const path = `data/supplier-docs/${id}.pdf`;
+    await writeFileToGitHubRaw(path, base64, `Attach PDF for supplier entry ${id}`);
+    const entry = suppliersData.entries.find(e => e.id === id);
+    if (entry) { entry.pdfPath = path; entry.pdfName = file.name; }
+    renderSupplierTable();
+    const detailRow = document.getElementById('detail-' + id);
+    const toggle = document.querySelector(`tr[data-id="${id}"] .sup-expand-toggle`);
+    if (detailRow) detailRow.style.display = 'table-row';
+    if (toggle) toggle.textContent = '▾';
+    suppliersSetStatus('PDF uploaded ✓ — click "Save Suppliers to Cloud" too, so the reference to it is saved.');
+  } catch (err) {
+    suppliersSetStatus('PDF upload failed: ' + err.message, true);
+  }
+  inputEl.value = '';
+}
+function removeSupplierPdf(id) {
+  const entry = suppliersData.entries.find(e => e.id === id);
+  if (!entry) return;
+  if (!confirm('Remove this PDF reference? (The file itself stays in the repo — this just detaches it from the entry.)')) return;
+  delete entry.pdfPath;
+  delete entry.pdfName;
+  renderSupplierTable();
+  const detailRow = document.getElementById('detail-' + id);
+  const toggle = document.querySelector(`tr[data-id="${id}"] .sup-expand-toggle`);
+  if (detailRow) detailRow.style.display = 'table-row';
+  if (toggle) toggle.textContent = '▾';
+}
+
+// ── Reflecting supplier prices into the pricing pages ──
+// Matches by exact item name (case-insensitive) against whatever's already
+// rendered on the Hardware/License/Mandays tables, and injects a small
+// clickable badge next to the cost field showing the latest known supplier
+// price — click it to copy that value straight into the cost field.
+function findSupplierMatches(itemName) {
+  if (!itemName || !suppliersData.entries) return [];
+  const target = itemName.trim().toLowerCase();
+  if (!target) return [];
+  return suppliersData.entries
+    .filter(e => (e.item || '').trim().toLowerCase() === target)
+    .sort((a, b) => (b.updated || '').localeCompare(a.updated || ''));
+}
+
+function injectSupplierBadges(containerSelector) {
+  document.querySelectorAll(containerSelector + ' tr').forEach(tr => {
+    tr.querySelectorAll('.supplier-link-badge').forEach(b => b.remove());
+    const nameEl = tr.querySelector('.item-label');
+    const itemName = nameEl ? nameEl.textContent : (tr.querySelector('td')?.textContent || '');
+    const matches = findSupplierMatches(itemName);
+    if (matches.length === 0) return;
+    const best = matches[0];
+    const price = best.latestPrice || best.cost || 0;
+    const badge = document.createElement('span');
+    badge.className = 'supplier-link-badge';
+    badge.style.cssText = 'display:inline-block;margin-left:6px;font-size:10px;color:var(--blue);cursor:pointer;white-space:nowrap;border:1px solid var(--blue);border-radius:10px;padding:1px 7px';
+    badge.title = `${best.supplier || 'Unknown supplier'} — updated ${best.updated || 'unknown date'}${matches.length > 1 ? ` (+${matches.length - 1} more quote${matches.length>2?'s':''})` : ''}. Click to use this price.`;
+    badge.textContent = `🔗 $${price.toLocaleString()}${matches.length > 1 ? ` +${matches.length - 1}` : ''}`;
+    badge.onclick = (ev) => {
+      ev.stopPropagation();
+      const costInput = tr.querySelector('.hc, .lc');
+      if (costInput) { costInput.value = price; costInput.dispatchEvent(new Event('change')); }
+    };
+    const targetEl = nameEl || tr.querySelector('td');
+    targetEl?.appendChild(badge);
+  });
+}
+
+// Called after Suppliers loads/saves, and after Hardware/License catalog
+// rows render, so the badges stay in sync with whichever loaded first.
+// Gated to roles that can already see cost — the badge lands in the item-name
+// column, which stays visible for Sales even though their Cost/Margin columns
+// are hidden, so this must not run for them or it becomes a back-door leak.
+function refreshSupplierPricingLinks() {
+  if (!suppliersLoaded) return;
+  const role = currentUser ? currentUser.role : null;
+  const canSeeCost = role === 'admin' || role === 'superadmin' || role === 'tendering' || role === 'procurement';
+  if (!canSeeCost) {
+    document.querySelectorAll('.supplier-link-badge').forEach(b => b.remove());
+    return;
+  }
+  injectSupplierBadges('#hw-server');
+  injectSupplierBadges('#hw-op');
+  injectSupplierBadges('#hw-com');
+  injectSupplierBadges('#hw-net');
+  injectSupplierBadges('#md-eng-body');
+  injectSupplierBadges('#md-travel-body');
+  document.querySelectorAll('#lic-modules-container .lic-product-block').forEach(block => {
+    if (block.id) injectSupplierBadges('#' + block.id);
+  });
 }
 
 
