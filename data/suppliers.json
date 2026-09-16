@@ -125,6 +125,19 @@
       "description": "SIMATIC S7-1200 G2: compact CPU 1214C DC/DC/DC; power supply: DC 20.4-28.8 V DC; onboard I/O: 14x DI 24 V DC; 10 DO 24 V DC; memory: program 250 KB data: 750 KB, retentivity: 20 KB",
       "pdfPath": "data/supplier-docs/sup-1789544608314-nmhnh.pdf",
       "pdfName": "6ES72141AH500XB0_datasheet_en.pdf"
+    },
+    {
+      "id": "sup-1789544691010-qovz0",
+      "category": "Memory",
+      "item": "6ES7954-8LP04-0AA0",
+      "supplier": "",
+      "cost": 0,
+      "latestPrice": 0,
+      "updated": "2026-09-16",
+      "email": "",
+      "description": "SIMATIC S7, memory cards for S7-1x 00 CPU, 3, 3V Flash, 2 GB",
+      "pdfPath": "data/supplier-docs/sup-1789544691010-qovz0.pdf",
+      "pdfName": "6ES79548LP040AA0_datasheet_en.pdf"
     }
   ]
 }
