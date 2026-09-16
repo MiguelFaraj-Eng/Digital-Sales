@@ -86,32 +86,6 @@
       "updated": "2026-09-16",
       "email": "Peter89.Huang@advantech.com.tw",
       "description": "P/N: PPC-321W-PJ60A\n\nScreen: 21.5” PCAP touch, 1920 x 1080\n\nProcessor: Intel Celeron J6412\n\nDRAM: 8GB DDR4\n\nStorage: 1 x 128GB SSD\n\nO.S: Windows 11 IoT Enterprise\n\nUnit Price: USD 1,313/set"
-    },
-    {
-      "id": "sup-1789543698644-ttmeh",
-      "category": "HMI",
-      "item": "SIMATIC HMI MTP1500 Unified Comfort",
-      "supplier": "Kettaneh",
-      "cost": 3786.21,
-      "latestPrice": 0,
-      "updated": "2026-09-16",
-      "email": "",
-      "description": "6AV2128-3QB06-0AX1\nSIMATIC HMI MTP1500, Unified Comfort Panel, touch operation, 15.6\" widescreen TFT display, 16 million colors, PROFINET interface, configurable as of WinCC Unified Comfort V16, contains open-source software, which is provided free of charge see enclosed DVD",
-      "pdfPath": "data/supplier-docs/sup-1789543698644-ttmeh.pdf",
-      "pdfName": "6AV21283QB060AX1_datasheet_en.pdf"
-    },
-    {
-      "id": "sup-1789543905071-aq75d",
-      "category": "Memory",
-      "item": "SIMATIC SD memory card 2 GB",
-      "supplier": "",
-      "cost": 165.39,
-      "latestPrice": 0,
-      "updated": "2026-09-16",
-      "email": "",
-      "description": "6AV2181-8XP00-0AX0\nSIMATIC SD memory card 2 GB secure digital card for devices with corresponding slot, scope of supply: 1 memory card",
-      "pdfPath": "data/supplier-docs/sup-1789543905071-aq75d.pdf",
-      "pdfName": "6AV21818XP000AX0_datasheet_en.pdf"
     }
   ]
 }
