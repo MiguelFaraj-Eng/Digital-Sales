@@ -175,6 +175,19 @@
       "description": "6GK7543-1AX10-0XE0\nCommunications processor CP 1543-1 for connection of SIMATIC S7-1500 to Industrial Ethernet; TCP/IP, ISO, UDP, S7 communication, IP broadcast/ multicast, security (VPN, firewall), diagnostics, SNMPv1/v3, DHCP, FTP client/server, email, IPv4/IPv6, IEEE 802.1X (radius), time synchronization via NTP, 1x RJ45 (10/100/1000 Mbps).",
       "pdfPath": "data/supplier-docs/sup-1789545480943-ijb9n.pdf",
       "pdfName": "6GK75431AX100XE0_datasheet_en.pdf"
+    },
+    {
+      "id": "sup-1789545659233-bj7o9",
+      "category": "PLCs",
+      "item": "SIMATIC S7-1500T, CPU 1518T-3 PN",
+      "supplier": "Kettaneh",
+      "cost": 8008.05,
+      "latestPrice": 0,
+      "updated": "2026-09-16",
+      "email": "",
+      "description": "6ES7518-3TT10-0AB0\nThe CPU 1518T-3 PN (6ES7518-3TT10-0AB0) is not compatible with the predecessor CPUs\nwith regard to the replacement parts. Therefore, it is not possible to use a SIMATIC Memory\nCard from a predecessor CPU directly in the current CPU. If you want to replace a predecessor\nCPU with the current CPU, you have to replace the CPU in the TIA project using the \"Replace\ndevice\" function.\nIf you use the PROFIBUS interface in your project, you require an additional PROFIBUS\nmodule. The CPU only has PROFINET interfaces.",
+      "pdfPath": "data/supplier-docs/sup-1789545659233-bj7o9.pdf",
+      "pdfName": "s71500_cpu_1518t_3_pn_manual_en-US_en-US.pdf"
     }
   ]
 }
