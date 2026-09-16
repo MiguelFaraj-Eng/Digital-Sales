@@ -67,13 +67,24 @@
     {
       "id": "sup-1789543490024-6mbuk",
       "category": "HMI",
-      "item": "ESRP-CMS-TPCB300, 21.5\", ThinManager",
+      "item": "21.5\" ESRP-CMS-TPCB300, ThinManager",
       "supplier": "Advantech",
       "cost": 1443.62,
       "latestPrice": 0,
       "updated": "2025-03-11",
-      "email": "",
+      "email": "Peter89.Huang@advantech.com.tw",
       "description": ""
+    },
+    {
+      "id": "sup-1789543643516-zd4ll",
+      "category": "HMI",
+      "item": "21.5” PCAP touch, 1920 x 1080",
+      "supplier": "Advantech",
+      "cost": 1313,
+      "latestPrice": 0,
+      "updated": "2026-09-16",
+      "email": "Peter89.Huang@advantech.com.tw",
+      "description": "P/N: PPC-321W-PJ60A\n\nScreen: 21.5” PCAP touch, 1920 x 1080\n\nProcessor: Intel Celeron J6412\n\nDRAM: 8GB DDR4\n\nStorage: 1 x 128GB SSD\n\nO.S: Windows 11 IoT Enterprise\n\nUnit Price: USD 1,313/set"
     }
   ]
 }
