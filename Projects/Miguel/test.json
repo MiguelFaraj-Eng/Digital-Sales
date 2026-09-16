@@ -1,0 +1,546 @@
+{
+  "version": 1,
+  "savedAt": "2026-09-16T06:23:45.452Z",
+  "fields": {
+    "g-name": "",
+    "g-loc": "",
+    "g-machines": "More Than Eleven",
+    "g-panels": "4",
+    "g-comm": "Wired",
+    "g-dist": "",
+    "g-sensors": "Not Required",
+    "g-routing": "Provided By Technica",
+    "g-cabledist": "",
+    "g-trays": "Yes",
+    "g-traysuse": "Yes",
+    "g-srv-loc": "Server Room",
+    "g-cli-loc": "Server Room",
+    "g-pcs": "Three",
+    "g-srv": "One",
+    "g-cli": "Two",
+    "g-srv-prov": "Provided By Technica",
+    "g-cli-prov": "Provided By Technica",
+    "g-platform": "No",
+    "g-remote": "Yes",
+    "g-users": "Unlimited",
+    "g-dynrep": "Yes",
+    "g-print": "Yes",
+    "g-type": "Static",
+    "g-auth": "Admins and Operators",
+    "g-archive": "Yes",
+    "g-erp": "No",
+    "g-alarm": "No"
+  },
+  "equipment": {
+    "technica": [],
+    "supplier": []
+  },
+  "hardware": {
+    "categoryEnabled": {
+      "serverRoom": true,
+      "operatorPanel": false,
+      "commercialPC": false
+    },
+    "rows": {
+      "hw-server": [
+        {
+          "name": "Panel Enclosure",
+          "size": "320",
+          "qty": "1",
+          "cost": "320",
+          "margin": "55"
+        },
+        {
+          "name": "Rugged Industrial PC",
+          "qty": "1",
+          "cost": "1600",
+          "margin": "55"
+        },
+        {
+          "name": "Rugged Managed Ethernet Switch",
+          "qty": "1",
+          "cost": "1450",
+          "margin": "55"
+        },
+        {
+          "name": "Rugged DIN-Rail Power Supply (24V)",
+          "qty": "1",
+          "cost": "380",
+          "margin": "55"
+        },
+        {
+          "name": "Rugged Industrial WiFi Access Point",
+          "qty": "1",
+          "cost": "890",
+          "margin": "55"
+        },
+        {
+          "name": "Rugged Industrial Monitor/Display",
+          "qty": "1",
+          "cost": "650",
+          "margin": "55"
+        },
+        {
+          "name": "Rugged UPS / Battery Backup",
+          "qty": "1",
+          "cost": "620",
+          "margin": "55"
+        },
+        {
+          "name": "DIN Rail Terminal Blocks & Circuit Breakers",
+          "qty": "1",
+          "cost": "180",
+          "margin": "55"
+        },
+        {
+          "name": "Cable Glands & Panel Wiring Accessories",
+          "qty": "1",
+          "cost": "150",
+          "margin": "55"
+        }
+      ],
+      "hw-op": [
+        {
+          "name": "Panel Enclosure",
+          "size": "140",
+          "qty": "1",
+          "cost": "140",
+          "margin": "55"
+        },
+        {
+          "name": "Rugged Touchscreen Panel PC / HMI",
+          "qty": "1",
+          "cost": "1750",
+          "margin": "55"
+        },
+        {
+          "name": "Rugged DIN-Rail Power Supply (24V)",
+          "qty": "1",
+          "cost": "380",
+          "margin": "55"
+        },
+        {
+          "name": "Rugged Compact Industrial Switch (5-port)",
+          "qty": "1",
+          "cost": "650",
+          "margin": "55"
+        },
+        {
+          "name": "E-Stop & Pushbutton/Indicator Kit",
+          "qty": "1",
+          "cost": "120",
+          "margin": "55"
+        },
+        {
+          "name": "Rugged Ethernet Cabling",
+          "qty": "1",
+          "cost": "60",
+          "margin": "55"
+        },
+        {
+          "name": "Mounting Arm / Bracket Kit",
+          "qty": "1",
+          "cost": "180",
+          "margin": "55"
+        }
+      ],
+      "hw-com": [
+        {
+          "name": "Commercial Mini PC",
+          "qty": "1",
+          "cost": "680",
+          "margin": "55"
+        },
+        {
+          "name": "Standard Monitor/Screen",
+          "qty": "1",
+          "cost": "180",
+          "margin": "55"
+        },
+        {
+          "name": "Standard Network Switch",
+          "qty": "1",
+          "cost": "40",
+          "margin": "55"
+        },
+        {
+          "name": "HDMI Cable",
+          "qty": "1",
+          "cost": "25",
+          "margin": "55"
+        },
+        {
+          "name": "Ethernet Cable",
+          "qty": "1",
+          "cost": "10",
+          "margin": "55"
+        },
+        {
+          "name": "Printer",
+          "qty": "0",
+          "cost": "100",
+          "margin": "55"
+        },
+        {
+          "name": "Mouse + Keyboard",
+          "qty": "1",
+          "cost": "70",
+          "margin": "55"
+        },
+        {
+          "name": "Power Strip / Plug Extenders",
+          "qty": "1",
+          "cost": "50",
+          "margin": "55"
+        }
+      ],
+      "hw-net": [
+        {
+          "name": "Switch",
+          "qty": "1",
+          "cost": "350",
+          "margin": "55"
+        },
+        {
+          "name": "Electrical Components",
+          "qty": "1",
+          "cost": "75",
+          "margin": "55"
+        },
+        {
+          "name": "Cabinet",
+          "qty": "1",
+          "cost": "350",
+          "margin": "55"
+        },
+        {
+          "name": "Cable Glands",
+          "qty": "1",
+          "cost": "50",
+          "margin": "55"
+        },
+        {
+          "name": "Power Supply",
+          "qty": "1",
+          "cost": "150",
+          "margin": "55"
+        },
+        {
+          "name": "Communication Modules",
+          "qty": "1",
+          "cost": "350",
+          "margin": "55"
+        },
+        {
+          "name": "Ethernet Cables",
+          "qty": "1",
+          "cost": "100",
+          "margin": "55"
+        },
+        {
+          "name": "Technician Mandays",
+          "qty": "3",
+          "cost": "20",
+          "margin": "55"
+        }
+      ]
+    }
+  },
+  "license": {
+    "selection": {
+      "vendor": "inductiveAutomation",
+      "product": "ignition"
+    },
+    "blocks": [
+      {
+        "vendor": "inductiveAutomation",
+        "product": "ignition",
+        "rows": [
+          {
+            "name": ""
+          },
+          {
+            "name": "Ignition Platform (per server)",
+            "selected": "Yes",
+            "cost": "1200",
+            "margin": "15"
+          },
+          {
+            "name": ""
+          },
+          {
+            "name": "Perspective Module",
+            "tier": "11225",
+            "selected": "No",
+            "cost": "11225",
+            "margin": "15"
+          },
+          {
+            "name": "Vision Module",
+            "tier": "8330",
+            "selected": "No",
+            "cost": "8330",
+            "margin": "15"
+          },
+          {
+            "name": "Reporting Module",
+            "selected": "No",
+            "cost": "3900",
+            "margin": "15"
+          },
+          {
+            "name": ""
+          },
+          {
+            "name": "Web Development Module",
+            "selected": "No",
+            "cost": "2300",
+            "margin": "15"
+          },
+          {
+            "name": "Sequential Function Charts (SFC) Module",
+            "selected": "No",
+            "cost": "3950",
+            "margin": "15"
+          },
+          {
+            "name": "SQL Bridge Module",
+            "selected": "No",
+            "cost": "2300",
+            "margin": "15"
+          },
+          {
+            "name": "Event Streams Module",
+            "selected": "No",
+            "cost": "2300",
+            "margin": "15"
+          },
+          {
+            "name": ""
+          },
+          {
+            "name": "Alarm Notification Module",
+            "selected": "No",
+            "cost": "2245",
+            "margin": "15"
+          },
+          {
+            "name": "Voice Notification Module",
+            "selected": "No",
+            "cost": "945",
+            "margin": "15"
+          },
+          {
+            "name": "Twilio Notification Module",
+            "selected": "No",
+            "cost": "945",
+            "margin": "15"
+          },
+          {
+            "name": "SMS Notification Module",
+            "selected": "No",
+            "cost": "945",
+            "margin": "15"
+          },
+          {
+            "name": ""
+          },
+          {
+            "name": "Enterprise Administration Module",
+            "selected": "No",
+            "cost": "1595",
+            "margin": "15"
+          },
+          {
+            "name": ""
+          },
+          {
+            "name": "MongoDB Connector Module",
+            "selected": "No",
+            "cost": "695",
+            "margin": "15"
+          },
+          {
+            "name": "Siemens Enhanced Driver",
+            "selected": "No",
+            "cost": "300",
+            "margin": "15"
+          },
+          {
+            "name": "SECS/GEM Module (Single-Tool)",
+            "selected": "No",
+            "cost": "1060",
+            "margin": "15"
+          },
+          {
+            "name": "OPC COM Module",
+            "selected": "No",
+            "cost": "885",
+            "margin": "15"
+          },
+          {
+            "name": "Kafka Connector Module",
+            "selected": "No",
+            "cost": "695",
+            "margin": "15"
+          },
+          {
+            "name": "Cirrus Link Opto 22 groov Driver",
+            "selected": "No",
+            "cost": "275",
+            "margin": "15"
+          },
+          {
+            "name": "Cirrus Link EFM Emerson ROC Driver",
+            "selected": "No",
+            "cost": "1425",
+            "margin": "15"
+          },
+          {
+            "name": "Cirrus Link EFM ABB Totalflow Module",
+            "selected": "No",
+            "cost": "1425",
+            "margin": "15"
+          },
+          {
+            "name": ""
+          },
+          {
+            "name": "MQTT Engine Module",
+            "selected": "No",
+            "cost": "2150",
+            "margin": "15"
+          },
+          {
+            "name": "MQTT Transmission Module",
+            "selected": "No",
+            "cost": "1550",
+            "margin": "15"
+          },
+          {
+            "name": "MQTT Distributor Module",
+            "selected": "No",
+            "cost": "3350",
+            "margin": "15"
+          },
+          {
+            "name": "MQTT Recorder Module",
+            "selected": "No",
+            "cost": "10950",
+            "margin": "15"
+          },
+          {
+            "name": "AWS Injector Module",
+            "selected": "No",
+            "cost": "4175",
+            "margin": "15"
+          },
+          {
+            "name": "Azure Injector Module",
+            "selected": "No",
+            "cost": "4175",
+            "margin": "15"
+          },
+          {
+            "name": "Google Cloud Platform Injector Module",
+            "selected": "No",
+            "cost": "4175",
+            "margin": "15"
+          }
+        ]
+      }
+    ]
+  },
+  "mandays": {
+    "rows": {
+      "md-eng-body": [
+        {
+          "name": "Project Management",
+          "qty": "0",
+          "cost": "170",
+          "margin": "55"
+        },
+        {
+          "name": "Technician Offline",
+          "qty": "0",
+          "cost": "170",
+          "margin": "55"
+        },
+        {
+          "name": "Technician Onsite",
+          "qty": "0",
+          "cost": "300",
+          "margin": "55"
+        },
+        {
+          "name": "Elec/Soft Engineer Offline",
+          "qty": "0",
+          "cost": "190",
+          "margin": "55"
+        },
+        {
+          "name": "Digital Engineer Offline",
+          "qty": "0",
+          "cost": "190",
+          "margin": "55"
+        },
+        {
+          "name": "Elec/Soft Engineer Onsite",
+          "qty": "0",
+          "cost": "350",
+          "margin": "55"
+        },
+        {
+          "name": "Digital Engineer Onsite",
+          "qty": "0",
+          "cost": "350",
+          "margin": "55"
+        },
+        {
+          "name": "Hyper Care Onsite",
+          "qty": "0",
+          "cost": "350",
+          "margin": "55"
+        },
+        {
+          "name": "Hyper Care Remote",
+          "qty": "0",
+          "cost": "190",
+          "margin": "55"
+        },
+        {
+          "name": "Remote Support Package",
+          "qty": "0",
+          "cost": "80",
+          "margin": "45"
+        }
+      ],
+      "md-travel-body": [
+        {
+          "name": "Tickets",
+          "qty": "2",
+          "cost": "500",
+          "margin": "20"
+        },
+        {
+          "name": "Daily Allowance (Technician) [ref]",
+          "qty": "0",
+          "cost": "150",
+          "margin": "20"
+        },
+        {
+          "name": "Daily Allowance (Engineer) [ref]",
+          "qty": "0",
+          "cost": "150",
+          "margin": "20"
+        },
+        {
+          "name": "All Travel Expenses",
+          "qty": "1",
+          "cost": "0",
+          "margin": "20"
+        }
+      ]
+    }
+  }
+}
