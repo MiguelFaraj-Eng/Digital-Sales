@@ -3307,8 +3307,7 @@ async function saveSuppliersToCloud() {
 // ── PDF attachments ──
 // Stored as their own file in the repo (data/supplier-docs/<id>.pdf) rather
 // than embedded in suppliers.json, so the JSON stays small and fast to load.
-// GitHub's simple Contents API tops out around 1MB per file, so uploads are
-// capped safely below that.
+// Capped at 5MB — see the size check below for why.
 function fileToBase64(file) {
   return new Promise((resolve, reject) => {
     const reader = new FileReader();
@@ -3322,9 +3321,14 @@ async function handleSupplierPdfUpload(id, inputEl) {
   const file = inputEl.files && inputEl.files[0];
   if (!file) return;
   if (file.type !== 'application/pdf') { alert('Please choose a PDF file.'); inputEl.value = ''; return; }
-  const maxBytes = 900 * 1024;
+  // GitHub's Contents API create/update endpoint is documented up to 100MB,
+  // but real-world reports show it getting unreliable well before that. 5MB
+  // stays comfortably inside the reliable range while covering the vast
+  // majority of real supplier datasheets/quotes (the earlier ~900KB cap here
+  // was based on the *retrieval* endpoint's older limit, not this one).
+  const maxBytes = 5 * 1024 * 1024;
   if (file.size > maxBytes) {
-    alert(`That PDF is ${(file.size/1024/1024).toFixed(1)}MB — this kind of storage tops out around 1MB per file. Try compressing it, or paste a link to it (Drive, Dropbox, etc.) into the Description field instead.`);
+    alert(`That PDF is ${(file.size/1024/1024).toFixed(1)}MB — try to keep datasheets under 5MB for reliable uploads. Compress it, or paste a link to it (Drive, Dropbox, etc.) into the Description field instead.`);
     inputEl.value = '';
     return;
   }
