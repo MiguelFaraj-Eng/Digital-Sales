@@ -73,7 +73,7 @@ body{font-family:'IBM Plex Sans',sans-serif;background:var(--bg);color:var(--t1)
 /* FORM */
 .fg{display:flex;flex-direction:column;gap:5px}
 label.fl{font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--t3)}
-input[type=text],input[type=number],select,textarea{
+input[type=text],input[type=number],input[type=password],select,textarea{
   background:var(--s3);border:1px solid var(--b2);border-radius:var(--r);
   padding:8px 10px;color:var(--t1);font-family:'IBM Plex Sans',sans-serif;font-size:13px;
   width:100%;outline:none;transition:border-color .15s
@@ -763,15 +763,15 @@ body.role-procurement button[onclick="exportOffer()"] { display:none; }
     <div class="card-head">Hardware</div>
     <div class="g2">
       <div>
-        <div style="font-size:11px;color:var(--t3);margin-bottom:8px;font-family:'IBM Plex Mono',monospace;letter-spacing:.08em;text-transform:uppercase">Server Room &amp; Hardware</div>
-        <div style="display:flex;justify-content:space-between;margin-bottom:5px"><span class="dim">Industrial PCs</span><span class="n" id="brief-ipc">$3,490</span></div>
-        <div style="display:flex;justify-content:space-between;margin-bottom:5px"><span class="dim">Hardware &amp; Electrical</span><span class="n" id="brief-hw-elec">$4,767</span></div>
+        <div style="font-size:11px;color:var(--t3);margin-bottom:8px;font-family:'IBM Plex Mono',monospace;letter-spacing:.08em;text-transform:uppercase">Purchasing</div>
+        <div style="display:flex;justify-content:space-between;margin-bottom:5px"><span class="dim">Server Room</span><span class="n" id="brief-ipc">$3,490</span></div>
+        <div style="display:flex;justify-content:space-between;margin-bottom:5px"><span class="dim">Operator Panel</span><span class="n" id="brief-hw-elec">$4,767</span></div>
         <div style="display:flex;justify-content:space-between;font-weight:500"><span>Subtotal</span><span class="n" id="brief-server-sub">$8,257</span></div>
       </div>
       <div>
-        <div style="font-size:11px;color:var(--t3);margin-bottom:8px;font-family:'IBM Plex Mono',monospace;letter-spacing:.08em;text-transform:uppercase">Networking</div>
-        <div style="display:flex;justify-content:space-between;margin-bottom:5px"><span class="dim">Networking</span><span class="n" id="brief-net">$1,778</span></div>
-        <div style="display:flex;justify-content:space-between;margin-bottom:5px"><span class="dim">Electrical Components</span><span class="n" id="brief-net-elec">$1,522</span></div>
+        <div style="font-size:11px;color:var(--t3);margin-bottom:8px;font-family:'IBM Plex Mono',monospace;letter-spacing:.08em;text-transform:uppercase">&nbsp;</div>
+        <div style="display:flex;justify-content:space-between;margin-bottom:5px"><span class="dim">Commercial PC</span><span class="n" id="brief-net">$1,778</span></div>
+        <div style="display:flex;justify-content:space-between;margin-bottom:5px"><span class="dim">Network Config</span><span class="n" id="brief-net-elec">$1,522</span></div>
         <div style="display:flex;justify-content:space-between;font-weight:500"><span>Subtotal</span><span class="n" id="brief-net-sub">$3,300</span></div>
       </div>
     </div>
@@ -1706,8 +1706,12 @@ function recalcAll() {
   sv('brief-eng',         fmt(liveEng));
   sv('brief-travel',      fmt(liveTravel));
   sv('brief-labor-total', fmt(liveMdTotal));
-  sv('brief-server-sub',  fmt(liveServer + liveOp + liveCom));
-  sv('brief-net-sub',     fmt(hw.netTotal));
+  sv('brief-ipc',         fmt(liveServer));
+  sv('brief-hw-elec',     fmt(liveOp));
+  sv('brief-server-sub',  fmt(liveServer + liveOp));
+  sv('brief-net',         fmt(liveCom));
+  sv('brief-net-elec',    fmt(hw.netTotal));
+  sv('brief-net-sub',     fmt(liveCom + hw.netTotal));
   sv('brief-purch-total', fmt(purchasing));
   sv('brief-final',       fmt(finalPrice));
   sv('brief-cost',        fmt(costBasis));
@@ -1797,9 +1801,12 @@ function doLogout() {
   document.body.className = document.body.className.replace(/\brole-\S+/g, '').trim();
   const navGroupAdmin = document.getElementById('nav-group-admin'); if (navGroupAdmin) navGroupAdmin.style.display = 'none';
   const navItemUsers = document.getElementById('nav-item-users'); if (navItemUsers) navItemUsers.style.display = 'none';
-  // If they were on the User Management page, bounce back to Dashboard since it's no longer accessible
-  const usersPage = document.getElementById('page-users');
-  if (usersPage && usersPage.classList.contains('active')) {
+  // Bounce back to Dashboard if they were on a page that requires being
+  // signed in (User Management, My Profile) — neither makes sense to show
+  // behind the login overlay.
+  const restrictedPages = ['page-users', 'page-profile'];
+  const onRestrictedPage = restrictedPages.some(id => document.getElementById(id)?.classList.contains('active'));
+  if (onRestrictedPage) {
     document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
     document.getElementById('page-dashboard').classList.add('active');
     document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
