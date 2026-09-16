@@ -130,14 +130,27 @@
       "id": "sup-1789544691010-qovz0",
       "category": "Memory",
       "item": "6ES7954-8LP04-0AA0",
-      "supplier": "",
-      "cost": 0,
+      "supplier": "Kettaneh",
+      "cost": 594.57,
       "latestPrice": 0,
       "updated": "2026-09-16",
       "email": "",
       "description": "SIMATIC S7, memory cards for S7-1x 00 CPU, 3, 3V Flash, 2 GB",
       "pdfPath": "data/supplier-docs/sup-1789544691010-qovz0.pdf",
       "pdfName": "6ES79548LP040AA0_datasheet_en.pdf"
+    },
+    {
+      "id": "sup-1789544732826-5ecyw",
+      "category": "PLCs",
+      "item": "SIMATIC S7-1500, CPU 1515-2 PN",
+      "supplier": "Kettaneh",
+      "cost": 2040.44,
+      "latestPrice": 0,
+      "updated": "2026-09-16",
+      "email": "",
+      "description": "SIMATIC S7-1500, CPU 1515-2 PN, central processing unit with work memory 1 MB for program and 4.5 MB for data, 1st interface: PROFINET IRT with 2-port switch, 2nd interface: PROFINET RT, 6 ns bit performance, SIMATIC Memory Card required - - approvals and certificates according to entry 109817466 at support.industry.siemens.com to be considered",
+      "pdfPath": "data/supplier-docs/sup-1789544732826-5ecyw.pdf",
+      "pdfName": "6ES75152AN030AB0_datasheet_en.pdf"
     }
   ]
 }
