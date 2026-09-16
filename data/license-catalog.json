@@ -7,7 +7,7 @@
           "label": "Ignition",
           "groups": [
             {
-              "group": "Platform",
+              "group": "Base License",
               "items": [
                 { "id": "ia-ign-platform", "name": "Ignition Platform (per server)", "unitCost": 1200, "marginPct": 15, "defaultIncluded": true, "note": "Unlimited tags, clients, screens & device connections.", "source": "https://inductiveautomation.com/pricing/list" }
               ]
@@ -106,7 +106,7 @@
           "label": "WinCC V7.5 (Classic)",
           "groups": [
             {
-              "group": "Platform",
+              "group": "Base License",
               "items": [
                 { "id": "sie-w75-runtime", "name": "WinCC V7.5 Runtime (RT 512 PowerTags)", "unitCost": 1900, "marginPct": 50, "defaultIncluded": true, "note": "Classic S7-based SCADA runtime, tag-tiered licensing.", "source": "https://www.electricautomationnetwork.com/en/siemens/6av6371-2bg07-5ax0-siemens-wincc-powerpack-rt-512-2048-for-wincc-v75-sp2-runtime-license-without-version-c" },
                 { "id": "sie-w75-powertags", "name": "PowerTags Upgrade Pack (512→2048)", "unitCost": 1530, "marginPct": 50, "defaultIncluded": false, "source": "https://www.electricautomationnetwork.com/en/siemens/6av6371-2bg07-5ax0-siemens-wincc-powerpack-rt-512-2048-for-wincc-v75-sp2-runtime-license-without-version-c" }
@@ -136,7 +136,7 @@
           "label": "WinCC Unified",
           "groups": [
             {
-              "group": "Platform",
+              "group": "Base License",
               "items": [
                 { "id": "sie-wu-pcrt", "name": "WinCC Unified PC Runtime", "unitCost": 4200, "marginPct": 50, "defaultIncluded": true, "note": "Estimated — confirm with supplier. Modern web-native SCADA runtime (OPC UA, GraphQL).", "source": "https://www.siemens.com/en-us/products/simatic-hmi/wincc-unified-software/" }
               ]
@@ -170,7 +170,7 @@
           "label": "InTouch HMI",
           "groups": [
             {
-              "group": "Platform",
+              "group": "Base License",
               "items": [
                 { "id": "av-it-1000", "name": "InTouch HMI (1,000 Tags, Perpetual)", "unitCost": 1795, "marginPct": 25, "defaultIncluded": true, "note": "Includes 1 desktop workstation + 1 HTML5 web client.", "source": "https://www.aveva.com/en/perspectives/blog/unlock-the-power-of-the-most-advanced-hmi-with-aveva-intouch-hmi/" }
               ]
@@ -189,7 +189,7 @@
           "label": "System Platform",
           "groups": [
             {
-              "group": "Platform",
+              "group": "Base License",
               "items": [
                 { "id": "av-sp-runtime", "name": "System Platform Runtime (per node)", "unitCost": 12000, "marginPct": 25, "defaultIncluded": true, "note": "Estimated — confirm with supplier. Enterprise SCADA/MES platform, significantly pricier than InTouch alone." }
               ]
@@ -205,7 +205,7 @@
           "label": "FactoryTalk View SE",
           "groups": [
             {
-              "group": "Platform",
+              "group": "Base License",
               "items": [
                 { "id": "rw-se-studio", "name": "FactoryTalk View SE Studio (Dev + 1 Station)", "unitCost": 2600, "marginPct": 30, "defaultIncluded": true, "note": "Combined ME/SE development license.", "source": "https://industrialmonitordirect.com/blogs/knowledgebase/factorytalk-view-se-license-options-and-part-numbers" },
                 { "id": "rw-se-server25", "name": "SE Server — 25 Display Bundle", "unitCost": 3500, "marginPct": 30, "defaultIncluded": false, "note": "Estimated — confirm with supplier." },
@@ -224,7 +224,7 @@
           "label": "FactoryTalk View ME",
           "groups": [
             {
-              "group": "Platform",
+              "group": "Base License",
               "items": [
                 { "id": "rw-me-station", "name": "FactoryTalk View ME Station (per HMI terminal)", "unitCost": 650, "marginPct": 30, "defaultIncluded": true, "note": "Estimated — confirm with supplier." }
               ]
