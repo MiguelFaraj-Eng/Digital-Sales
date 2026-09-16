@@ -112,6 +112,19 @@
       "description": "6AV2181-8XP00-0AX0\nSIMATIC SD memory card 2 GB secure digital card for devices with corresponding slot, scope of supply: 1 memory card",
       "pdfPath": "data/supplier-docs/sup-1789543905071-aq75d.pdf",
       "pdfName": "6AV21818XP000AX0_datasheet_en.pdf"
+    },
+    {
+      "id": "sup-1789544608314-nmhnh",
+      "category": "Power Supplies",
+      "item": "SIMATIC S7-1200 G2",
+      "supplier": "Kettaneh",
+      "cost": 372.49,
+      "latestPrice": 0,
+      "updated": "2026-09-16",
+      "email": "",
+      "description": "SIMATIC S7-1200 G2: compact CPU 1214C DC/DC/DC; power supply: DC 20.4-28.8 V DC; onboard I/O: 14x DI 24 V DC; 10 DO 24 V DC; memory: program 250 KB data: 750 KB, retentivity: 20 KB",
+      "pdfPath": "data/supplier-docs/sup-1789544608314-nmhnh.pdf",
+      "pdfName": "6ES72141AH500XB0_datasheet_en.pdf"
     }
   ]
 }
