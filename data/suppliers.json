@@ -206,14 +206,25 @@
       "id": "sup-1789545923387-2ulc0",
       "category": "PLCs",
       "item": "SIMATIC ET 200SP, BusAdapter BA 2xRJ45, 2 RJ45 sockets",
-      "supplier": "",
-      "cost": 0,
+      "supplier": "Kettaneh",
+      "cost": 60.23,
       "latestPrice": 0,
       "updated": "2026-09-16",
       "email": "",
       "description": "6ES7193-6AR00-0AA0",
       "pdfPath": "data/supplier-docs/sup-1789545923387-2ulc0.pdf",
       "pdfName": "6ES71936AR000AA0_datasheet_en.pdf"
+    },
+    {
+      "id": "sup-1789546027250-rd1ax",
+      "category": "HMI",
+      "item": "SIMATIC HMI MTP700",
+      "supplier": "Kettaneh",
+      "cost": 1092.27,
+      "latestPrice": 0,
+      "updated": "2026-09-16",
+      "email": "",
+      "description": "6AV2128-3GB06-0AX1\nSIMATIC HMI MTP700, Unified Comfort Panel, touch operation, 7\" widescreen TFT display, 16 million colors, PROFINET interface, configurable as of WinCC Unified Comfort V16, contains open-source software, which is provided free of charge see enclosed DVD"
     }
   ]
 }
