@@ -238,6 +238,19 @@
       "description": "6AV2128-3KB06-0AX1\nSIMATIC HMI MTP1000, Unified Comfort Panel, touch operation, 10.1\" widescreen TFT display, 16 million colors, PROFINET interface, configurable as of WinCC Unified Comfort V16, contains open-source software, which is provided free of charge see enclosed DVD",
       "pdfPath": "data/supplier-docs/sup-1789546074035-d6cxg.pdf",
       "pdfName": "6AV21283KB060AX1_datasheet_en.pdf"
+    },
+    {
+      "id": "sup-1789546147899-6qngk",
+      "category": "HMI",
+      "item": "SIMATIC HMI MTP1200",
+      "supplier": "Kettaneh",
+      "cost": 0,
+      "latestPrice": 0,
+      "updated": "2026-09-16",
+      "email": "",
+      "description": "6AV2128-3MB06-0AX1\nSIMATIC HMI MTP1200, Unified Comfort Panel, touch operation, 12.1\" widescreen TFT display, 16 million colors, PROFINET interface, configurable as of WinCC Unified Comfort V16, contains open-source software, which is provided free of charge see enclosed DVD",
+      "pdfPath": "data/supplier-docs/sup-1789546147899-6qngk.pdf",
+      "pdfName": "6AV21283MB060AX1_datasheet_en.pdf"
     }
   ]
 }
