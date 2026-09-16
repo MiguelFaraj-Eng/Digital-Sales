@@ -84,16 +84,14 @@
       "latestPrice": 0,
       "updated": "2026-09-16",
       "email": "Peter89.Huang@advantech.com.tw",
-      "description": "P/N: PPC-321W-PJ60A\n\nScreen: 21.5” PCAP touch, 1920 x 1080\n\nProcessor: Intel Celeron J6412\n\nDRAM: 8GB DDR4\n\nStorage: 1 x 128GB SSD\n\nO.S: Windows 11 IoT Enterprise\n\nUnit Price: USD 1,313/set",
-      "pdfPath": "data/supplier-docs/sup-1789543643516-zd4ll.pdf",
-      "pdfName": "ESRP-CMS-TPCB300_DS(080524)20250213140054.pdf"
+      "description": "P/N: PPC-321W-PJ60A\n\nScreen: 21.5” PCAP touch, 1920 x 1080\n\nProcessor: Intel Celeron J6412\n\nDRAM: 8GB DDR4\n\nStorage: 1 x 128GB SSD\n\nO.S: Windows 11 IoT Enterprise\n\nUnit Price: USD 1,313/set"
     },
     {
       "id": "sup-1789543698644-ttmeh",
       "category": "HMI",
-      "item": "",
-      "supplier": "",
-      "cost": 0,
+      "item": "SIMATIC HMI MTP1500 Unified Comfort",
+      "supplier": "Kettaneh",
+      "cost": 3786.21,
       "latestPrice": 0,
       "updated": "2026-09-16",
       "email": "",
