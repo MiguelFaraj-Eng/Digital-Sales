@@ -150,5 +150,351 @@
     "vacuumSwitchPrice": 134,
     "commModulePrice": 348,
     "factoryBaseHours": 3
+  },
+  "powerDistBreakdown": {
+    "Siemens|CE": [
+      {
+        "item": "Disconnect - 100A",
+        "qty": 1,
+        "price": 55
+      },
+      {
+        "item": "Contactor - 110A",
+        "qty": 1,
+        "price": 253
+      },
+      {
+        "item": "Power Supply - 20A",
+        "qty": 1,
+        "price": 253
+      },
+      {
+        "item": "DB - 125A",
+        "qty": 1,
+        "price": 253
+      },
+      {
+        "item": "Voltage Relay",
+        "qty": 1,
+        "price": 121
+      },
+      {
+        "item": "MCB - 100A",
+        "qty": 1,
+        "price": 143
+      },
+      {
+        "item": "CB - 1P 1A",
+        "qty": 1,
+        "price": 3.3
+      },
+      {
+        "item": "CB - 3P 6A",
+        "qty": 1,
+        "price": 19.8
+      },
+      {
+        "item": "CB - 2P 6A",
+        "qty": 1,
+        "price": 11
+      },
+      {
+        "item": "CB - 1P 2A",
+        "qty": 1,
+        "price": 3.3
+      },
+      {
+        "item": "RCD - 2P 25A",
+        "qty": 1,
+        "price": 132
+      },
+      {
+        "item": "Fuse - 3P 32A",
+        "qty": 1,
+        "price": 8.8
+      },
+      {
+        "item": "Output Relay",
+        "qtyFormula": "outputRelay",
+        "price": 12
+      },
+      {
+        "item": "Murr ECB",
+        "qty": 1,
+        "price": 180
+      }
+    ],
+    "Allen Bradley|CE": [
+      {
+        "item": "Disconnect - 100A",
+        "qty": 1,
+        "price": 65
+      },
+      {
+        "item": "Contactor - 97A",
+        "qty": 1,
+        "price": 240
+      },
+      {
+        "item": "Power Supply - 20A",
+        "qty": 1,
+        "price": 240
+      },
+      {
+        "item": "DB - 125A",
+        "qty": 1,
+        "price": 240
+      },
+      {
+        "item": "Voltage Relay",
+        "qty": 1,
+        "price": 150
+      },
+      {
+        "item": "MCB - 100A",
+        "qty": 1,
+        "price": 235
+      },
+      {
+        "item": "CB - 1P 2A",
+        "qty": 1,
+        "price": 5
+      },
+      {
+        "item": "CB - 3P 6A",
+        "qty": 1,
+        "price": 17
+      },
+      {
+        "item": "CB - 2P 6A",
+        "qty": 1,
+        "price": 17
+      },
+      {
+        "item": "CB - 1P 2A (2)",
+        "qty": 1,
+        "price": 5
+      },
+      {
+        "item": "RCD - 2P 25A",
+        "qty": 1,
+        "price": 80
+      },
+      {
+        "item": "Fuse - 3P 32A",
+        "qty": 1,
+        "price": 30
+      },
+      {
+        "item": "Output Relay",
+        "qtyFormula": "outputRelay",
+        "price": 13
+      },
+      {
+        "item": "Disconnect - 100A accessories",
+        "qty": 1,
+        "price": 13
+      },
+      {
+        "item": "Murr ECB",
+        "qty": 1,
+        "price": 180
+      }
+    ],
+    "Allen Bradley|UL": [
+      {
+        "item": "Disconnect - 100A",
+        "qty": 1,
+        "price": 65
+      },
+      {
+        "item": "Contactor - 97A",
+        "qty": 1,
+        "price": 240
+      },
+      {
+        "item": "Power Supply - 20A",
+        "qty": 1,
+        "price": 240
+      },
+      {
+        "item": "DB - 125A",
+        "qty": 1,
+        "price": 240
+      },
+      {
+        "item": "Voltage Relay",
+        "qty": 1,
+        "price": 150
+      },
+      {
+        "item": "MCB - 100A",
+        "qty": 1,
+        "price": 235
+      },
+      {
+        "item": "CB - 1P 1A",
+        "qty": 1,
+        "price": 50
+      },
+      {
+        "item": "CB - 3P 6A",
+        "qty": 1,
+        "price": 70
+      },
+      {
+        "item": "CB - 2P 6A",
+        "qty": 1,
+        "price": 50
+      },
+      {
+        "item": "CB - 1P 2A",
+        "qty": 1,
+        "price": 50
+      },
+      {
+        "item": "RCD - 2P 25A",
+        "qty": 1,
+        "price": 80
+      },
+      {
+        "item": "Fuse - 3P 32A",
+        "qty": 1,
+        "price": 30
+      },
+      {
+        "item": "Output Relay",
+        "qtyFormula": "outputRelay",
+        "price": 13
+      },
+      {
+        "item": "Trans -1000VA",
+        "qty": 1,
+        "price": 340
+      },
+      {
+        "item": "CB - 2P 2A",
+        "qty": 1,
+        "price": 50
+      },
+      {
+        "item": "Disconnect - 100A accessories",
+        "qty": 1,
+        "price": 13
+      },
+      {
+        "item": "Murr ECB",
+        "qty": 1,
+        "price": 180
+      }
+    ],
+    "Siemens|UL": [
+      {
+        "item": "Disconnect - 100A",
+        "qty": 1,
+        "price": 55
+      },
+      {
+        "item": "Contactor - 110A",
+        "qty": 1,
+        "price": 253
+      },
+      {
+        "item": "Power Supply - 20A",
+        "qty": 1,
+        "price": 253
+      },
+      {
+        "item": "DB - 125A",
+        "qty": 1,
+        "price": 253
+      },
+      {
+        "item": "Voltage Relay",
+        "qty": 1,
+        "price": 121
+      },
+      {
+        "item": "MCB - 100A",
+        "qty": 1,
+        "price": 643.5
+      },
+      {
+        "item": "CB - 1P 1A",
+        "qty": 1,
+        "price": 99
+      },
+      {
+        "item": "CB - 3P 6A",
+        "qty": 1,
+        "price": 165
+      },
+      {
+        "item": "CB - 2P 6A",
+        "qty": 1,
+        "price": 104.5
+      },
+      {
+        "item": "CB - 1P 2A",
+        "qty": 1,
+        "price": 99
+      },
+      {
+        "item": "RCD - 2P 25A",
+        "qty": 1,
+        "price": 132
+      },
+      {
+        "item": "Fuse - 3P 32A",
+        "qty": 1,
+        "price": 71.5
+      },
+      {
+        "item": "Output Relay",
+        "qtyFormula": "outputRelay",
+        "price": 12
+      },
+      {
+        "item": "Trans -1000VA",
+        "qty": 1,
+        "price": 300
+      },
+      {
+        "item": "MPCB - 6.3A",
+        "qty": 1,
+        "price": 93.5
+      },
+      {
+        "item": "Murr ECB",
+        "qty": 1,
+        "price": 180
+      }
+    ]
+  },
+  "panelsFormula": {
+    "Technica|Painted Steel": {
+      "basePrice": 1014,
+      "extraDoorPrice": 507
+    },
+    "Technica|Stainless Steel": {
+      "basePrice": 1446,
+      "extraDoorPrice": 723
+    },
+    "Local|Painted Steel": {
+      "basePrice": 1435,
+      "extraDoorPrice": 717.5
+    },
+    "Local|Stainless Steel": {
+      "basePrice": 2312.364,
+      "extraDoorPrice": 1156.182
+    },
+    "Rittal|Painted Steel": {
+      "basePrice": 4000,
+      "extraDoorPrice": 1580
+    },
+    "Rittal|Stainless Steel": {
+      "basePrice": 9500,
+      "extraDoorPrice": 4750
+    }
   }
 }
