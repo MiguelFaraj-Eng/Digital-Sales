@@ -284,6 +284,7 @@ body.role-procurement button[onclick="exportOffer()"] { display:none; }
     <div class="nav-group">Electrical Cabinet</div>
     <div class="nav-item" data-p="cabinet-config"><span class="nav-dot"></span>Configurator</div>
     <div class="nav-item" data-p="cabinet-bom"><span class="nav-dot"></span>Bill of Materials</div>
+    <div class="nav-item" data-p="cabinet-material-pr"><span class="nav-dot"></span>Material for PR</div>
     <div class="nav-group">Suppliers</div>
     <div class="nav-item" data-p="suppliers-overview" id="nav-item-suppliers-overview" style="display:none"><span class="nav-dot"></span>Overview</div>
     <div class="nav-item" data-p="suppliers" id="nav-item-suppliers" style="display:none"><span class="nav-dot"></span>Directory</div>
@@ -1064,6 +1065,29 @@ body.role-procurement button[onclick="exportOffer()"] { display:none; }
         <tr style="border-top:1px solid var(--b2)"><td style="padding:8px 0;font-weight:600">TOTAL</td><td class="n" style="font-weight:600;color:var(--green)" id="cab-detail-total">$0</td></tr>
       </tbody>
     </table>
+  </div>
+</div>
+
+<!-- ═══ ELECTRICAL CABINET — MATERIAL FOR PR ═══ -->
+<div id="page-cabinet-material-pr" class="page">
+  <div class="ph"><div><div class="ph-title">Material for PR</div><div class="ph-sub">Every purchasable component behind the price, flattened into one list — ready to hand to Procurement</div></div>
+    <button class="btn btn-primary" onclick="window.print()" style="align-self:flex-start">🖨 Print</button>
+  </div>
+  <div id="cab-data-error-pr" style="display:none;background:rgba(239,68,68,.1);border:1px solid var(--red);color:var(--red);border-radius:var(--r);padding:12px 16px;margin-bottom:16px;font-size:13px"></div>
+
+  <div class="stat-grid" style="grid-template-columns:repeat(3,1fr)">
+    <div class="stat"><div class="stat-label">Line Items</div><div class="stat-value c-blue" id="pr-stat-lines">0</div><div class="stat-sub">Individual components</div></div>
+    <div class="stat"><div class="stat-label">With Supplier on File</div><div class="stat-value" id="pr-stat-suppliers">0</div><div class="stat-sub">Contact ready</div></div>
+    <div class="stat"><div class="stat-label">Total Material</div><div class="stat-value c-green" id="pr-stat-total">$0</div><div class="stat-sub">Matches Material on the BOM</div></div>
+  </div>
+
+  <div class="card">
+    <div class="note" style="margin-bottom:14px">This explodes the Power Distribution bundle into its actual sub-components (disconnects, contactors, breakers, relays) — since a Purchase Request needs the real part, not the bundle. Everything else matches the Bill of Materials line-for-line. Supplier &amp; email are pulled from the Suppliers Directory when tracked there.</div>
+    <div class="tbl-wrap"><table>
+      <thead><tr><th>Category</th><th>Item</th><th>Qty</th><th>Unit Price</th><th>Total</th><th>Supplier</th><th>Email</th></tr></thead>
+      <tbody id="pr-material-body"></tbody>
+      <tfoot><tr class="tr-total"><td colspan="4" style="font-weight:600">TOTAL MATERIAL</td><td class="n" style="font-weight:600;color:var(--green)" id="pr-material-total">$0</td><td colspan="2"></td></tr></tfoot>
+    </table></div>
   </div>
 </div>
 
@@ -3100,7 +3124,7 @@ function renderCabinetDataErrorBanner() {
   const msg = cabinetDataError
     ? `⚠ Couldn't load the equipment catalog (${cabinetDataError}). Nothing will calculate until data/cabinet-catalog.json and data/cabinet-costing.json are both present alongside the other files in the data/ folder — check they were uploaded, then reload this page.`
     : '';
-  ['cab-data-error-config', 'cab-data-error-bom'].forEach(id => {
+  ['cab-data-error-config', 'cab-data-error-bom', 'cab-data-error-pr'].forEach(id => {
     const el = document.getElementById(id);
     if (!el) return;
     el.style.display = cabinetDataError ? 'block' : 'none';
@@ -3237,6 +3261,16 @@ function getReferencePrice(itemName, catalogPrice) {
 function hasSupplierPrice(itemName) {
   if (!itemName || !suppliersData || !suppliersData.entries) return false;
   return suppliersData.entries.some(e => (e.item||'').trim().toLowerCase() === itemName.trim().toLowerCase() && (e.latestPrice || e.cost));
+}
+// Same match as getReferencePrice, but returns the supplier's name/email
+// too — for the Material for PR list, which needs to say who to buy from,
+// not just what to pay.
+function getSupplierContact(itemName) {
+  if (!itemName || !suppliersData || !suppliersData.entries) return null;
+  const matches = suppliersData.entries.filter(e => (e.item||'').trim().toLowerCase() === itemName.trim().toLowerCase());
+  if (!matches.length) return null;
+  const best = matches.slice().sort((a,b) => (b.updated||'').localeCompare(a.updated||''))[0];
+  return { supplier: best.supplier || '', email: best.email || '' };
 }
 function getPowerDistDetailItems(bundleBrand, bundleStandard, outputRelayQty) {
   if (!cabinetCosting || !cabinetCosting.powerDistBreakdown) return [];
@@ -3575,6 +3609,49 @@ function calcCabinet(inp, catalog, costingData) {
   return { plc, numberOfPanels, topology, bom, warnings, material, design, testingCost, factoryCost, factoryMaterial, total };
 }
 
+function renderMaterialForPR(r, inp) {
+  const body = document.getElementById('pr-material-body');
+  if (!body) return; // page not in this build, or not yet loaded
+
+  const rows = [];
+  r.bom.forEach(l => {
+    if (l.slotKey === 'powerDist') {
+      // Explode the bundle into its real sub-components — a PR needs the
+      // actual part, not "one Power Distribution bundle".
+      const outputRelayQty = 8 + 8*((Number(inp.actuatorsMono)||0) + 2*(Number(inp.actuatorsBi)||0));
+      const parts = getPowerDistDetailItems(l.bundleBrand, l.bundleStandard, outputRelayQty);
+      parts.forEach(p => {
+        const unitPrice = getReferencePrice(p.item, p.catalogPrice);
+        rows.push({ category: 'Power Distribution', item: p.item, qty: p.qty, unitPrice, total: unitPrice*p.qty, lookupName: p.item });
+      });
+      return;
+    }
+    rows.push({ category: l.category, item: l.name || l.item, qty: l.qty, unitPrice: l.unitPrice, total: l.total, lookupName: l.lookupName || l.name });
+  });
+
+  let withSupplier = 0;
+  const grandTotal = rows.reduce((s, row) => s + row.total, 0);
+
+  body.innerHTML = rows.map(row => {
+    const contact = getSupplierContact(row.lookupName);
+    if (contact) withSupplier++;
+    return `<tr>
+      <td class="dim">${row.category}</td>
+      <td>${row.item}</td>
+      <td>${(Math.round(row.qty*100)/100).toLocaleString()}</td>
+      <td class="n">${fmt(row.unitPrice)}</td>
+      <td class="n">${fmt(row.total)}</td>
+      <td>${contact && contact.supplier ? contact.supplier : '<span class="dim">—</span>'}</td>
+      <td>${contact && contact.email ? contact.email : '<span class="dim">—</span>'}</td>
+    </tr>`;
+  }).join('') || `<tr><td colspan="7" class="dim" style="text-align:center;padding:20px">Fill in the Configurator to see the materials list.</td></tr>`;
+
+  sv('pr-stat-lines', String(rows.length));
+  sv('pr-stat-suppliers', String(withSupplier));
+  sv('pr-stat-total', fmt(grandTotal));
+  sv('pr-material-total', fmt(grandTotal));
+}
+
 function calcCabinetPage() {
   renderCabinetDataErrorBanner();
   if (!cabinetCatalog || !cabinetCosting) return;
@@ -3665,6 +3742,8 @@ function calcCabinetPage() {
       warnCard.style.display = 'none';
     }
   }
+
+  renderMaterialForPR(r, inp);
 }
 
 
