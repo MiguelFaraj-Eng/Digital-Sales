@@ -1036,7 +1036,11 @@ body.role-procurement button[onclick="exportOffer()"] { display:none; }
   </div>
 
   <div class="card">
-    <div class="card-head">Selected Equipment</div>
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px">
+      <div class="card-head" style="margin-bottom:0">Selected Equipment</div>
+      <button class="btn btn-ghost" style="padding:4px 10px;font-size:11px" onclick="resetCabinetOverrides()">↺ Reset to Auto-Selected</button>
+    </div>
+    <div class="note" style="margin-bottom:14px">Rows with more than one acceptable product show a dropdown — pick any of them, same as swapping the selection in the original spreadsheet.</div>
     <div class="tbl-wrap"><table>
       <thead><tr><th>Category</th><th>Item</th><th>Selected Product</th><th>Qty</th><th>Unit Price</th><th>Total</th></tr></thead>
       <tbody id="cab-bom-body"></tbody>
@@ -3118,6 +3122,31 @@ function readCabinetInputs() {
   };
 }
 
+// Manual overrides: { slotKey: itemNo }. Persists across recalculations —
+// resolved against the CURRENT eligible list each time, so an override that's
+// no longer valid (e.g. brand changed) quietly falls back to the auto pick
+// instead of pointing at a product that no longer qualifies.
+let cabinetOverrides = {};
+
+function pickFromEligible(slotKey, eligibleList) {
+  if (!eligibleList || eligibleList.length === 0) return undefined;
+  const overrideNo = cabinetOverrides[slotKey];
+  if (overrideNo !== undefined) {
+    const match = eligibleList.find(x => x.itemNo === overrideNo);
+    if (match) return match;
+  }
+  return eligibleList[0]; // auto default: first in table order, same as the workbook's own FILTER-then-first behavior
+}
+
+function changeCabinetOverride(slotKey, itemNoStr) {
+  cabinetOverrides[slotKey] = itemNoStr === '' ? undefined : Number(itemNoStr);
+  calcCabinetPage();
+}
+function resetCabinetOverrides() {
+  cabinetOverrides = {};
+  calcCabinetPage();
+}
+
 function calcCabinet(inp, catalog, costingData) {
   const int = v => Math.trunc(Number(v) || 0);
   const num = v => Number(v) || 0;
@@ -3131,7 +3160,7 @@ function calcCabinet(inp, catalog, costingData) {
   const numSkus = Math.max(1, int(inp.numSkus));
   const numRobots = int(inp.numRobots);
 
-  const plc = catalog.plc.find(p =>
+  const eligPlc = catalog.plc.filter(p =>
     p.brand === inp.plcBrand &&
     (safetyPlcRequired ? p.safety === 'Yes' : true) &&
     (inp.application === 'Conveying' ? p.conveying === 'Yes' : true) &&
@@ -3139,47 +3168,71 @@ function calcCabinet(inp, catalog, costingData) {
     (inp.application === 'Robot cell' ? p.robot3d === 'Yes' : true) &&
     num(p.maxVfds) >= totalVFDs && num(p.maxRobots) >= numRobots
   );
+  const plc = pickFromEligible('plc', eligPlc);
   const isS71200 = plc && plc.name === 'SIMATIC S7-1200, CPU 1214C';
 
-  const ioSlave = catalog.plcIO.find(io => io.brand === inp.plcBrand && io.category === 'Slave');
-  const ioDI = catalog.plcIO.find(io => io.brand === inp.plcBrand && io.category === 'DI');
-  const ioDQ = catalog.plcIO.find(io => io.brand === inp.plcBrand && io.category === 'DQ');
-  const ioFDI = catalog.plcIO.find(io => io.brand === inp.plcBrand && io.category === 'F-DI');
-  const ioFDQ = catalog.plcIO.find(io => io.brand === inp.plcBrand && io.category === 'F-DQ');
-  const ioAI = catalog.plcIO.find(io => io.brand === inp.plcBrand && io.category === 'AI');
+  const eligIoSlave = catalog.plcIO.filter(io => io.brand === inp.plcBrand && io.category === 'Slave');
+  const eligIoDI = catalog.plcIO.filter(io => io.brand === inp.plcBrand && io.category === 'DI');
+  const eligIoDQ = catalog.plcIO.filter(io => io.brand === inp.plcBrand && io.category === 'DQ');
+  const eligIoFDI = catalog.plcIO.filter(io => io.brand === inp.plcBrand && io.category === 'F-DI');
+  const eligIoFDQ = catalog.plcIO.filter(io => io.brand === inp.plcBrand && io.category === 'F-DQ');
+  const eligIoAI = catalog.plcIO.filter(io => io.brand === inp.plcBrand && io.category === 'AI');
+  const ioSlave = pickFromEligible('ioSlave', eligIoSlave), ioDI = pickFromEligible('ioDI', eligIoDI),
+        ioDQ = pickFromEligible('ioDQ', eligIoDQ), ioFDI = pickFromEligible('ioFDI', eligIoFDI),
+        ioFDQ = pickFromEligible('ioFDQ', eligIoFDQ), ioAI = pickFromEligible('ioAI', eligIoAI);
 
   const hmiSizeReq = (inp.hmiSize === 'No Specification' || inp.hmiSize === 'Not Included') ? 0 : int(inp.hmiSize);
-  const hmi = catalog.hmi.find(h => h.brand === inp.plcBrand && num(h.size) >= hmiSizeReq && (inp.packml === 'Yes' ? h.packml === 'yes' : true));
+  const eligHmi = catalog.hmi.filter(h => h.brand === inp.plcBrand && num(h.size) >= hmiSizeReq && (inp.packml === 'Yes' ? h.packml === 'yes' : true));
+  const hmi = pickFromEligible('hmi', eligHmi);
 
-  const swManaged = catalog.switches.find(s => s.brand === inp.plcBrand && s.category === 'Managed');
-  const swUnmanaged = catalog.switches.find(s => s.brand === inp.plcBrand && s.category === 'Unmanaged');
-  const powerDist = catalog.powerDist.find(pd => pd.brand === inp.plcBrand && pd.category === (inp.standard === 'CE' ? 'Power Distribution CE' : 'Power Distribution UL'));
-  const ups = catalog.ups.find(u => u.brand === inp.plcBrand);
-  const ventilation = catalog.ventilation.find(v => v.category === (inp.ac === 'Not Included' ? 'Fans & Filters' : 'Air Conditioner') && v.brand === 'Seifert');
+  const eligSwManaged = catalog.switches.filter(s => s.brand === inp.plcBrand && s.category === 'Managed');
+  const eligSwUnmanaged = catalog.switches.filter(s => s.brand === inp.plcBrand && s.category === 'Unmanaged');
+  const swManaged = pickFromEligible('swManaged', eligSwManaged), swUnmanaged = pickFromEligible('swUnmanaged', eligSwUnmanaged);
+  const eligPowerDist = catalog.powerDist.filter(pd => pd.brand === inp.plcBrand && pd.category === (inp.standard === 'CE' ? 'Power Distribution CE' : 'Power Distribution UL'));
+  const powerDist = pickFromEligible('powerDist', eligPowerDist);
+  const eligUps = catalog.ups.filter(u => u.brand === inp.plcBrand);
+  const ups = pickFromEligible('ups', eligUps);
+  const eligVentilation = catalog.ventilation.filter(v => v.category === (inp.ac === 'Not Included' ? 'Fans & Filters' : 'Air Conditioner') && v.brand === 'Seifert');
+  const ventilation = pickFromEligible('ventilation', eligVentilation);
 
-  const findVfdCent = size => catalog.vfdCentralized.find(v => v.brand === inp.driveBrand && num(v.size) === size && (inp.standard === 'UL' ? v.ul === 'YES' : v.ul === 'NO'));
-  const vfdCent075 = findVfdCent(0.75), vfdCent15 = findVfdCent(1.5), vfdCent22 = findVfdCent(2.2);
-  const findVfdDist = size => catalog.vfdDistributed.find(v => v.brand === inp.driveBrand && num(v.size) === size && (inp.standard === 'UL' ? v.ul === 'YES' : v.ul === 'NO'));
-  const vfdDist075 = findVfdDist(0.75), vfdDist15 = findVfdDist(1.5), vfdDist22 = findVfdDist(2.2);
-  const findServo = size => catalog.servo.find(v => v.brand === inp.servoBrand && num(v.size) === size && (inp.standard === 'UL' ? v.ul === 'YES' : v.ul === 'NO'));
-  const servo075 = findServo(0.75), servo15 = findServo(1.5), servo22 = findServo(2.2);
+  const eligVfdCent = size => catalog.vfdCentralized.filter(v => v.brand === inp.driveBrand && num(v.size) === size && (inp.standard === 'UL' ? v.ul === 'YES' : v.ul === 'NO'));
+  const eligVfdCent075 = eligVfdCent(0.75), eligVfdCent15 = eligVfdCent(1.5), eligVfdCent22 = eligVfdCent(2.2);
+  const vfdCent075 = pickFromEligible('vfdCent075', eligVfdCent075), vfdCent15 = pickFromEligible('vfdCent15', eligVfdCent15), vfdCent22 = pickFromEligible('vfdCent22', eligVfdCent22);
+  const eligVfdDist = size => catalog.vfdDistributed.filter(v => v.brand === inp.driveBrand && num(v.size) === size && (inp.standard === 'UL' ? v.ul === 'YES' : v.ul === 'NO'));
+  const eligVfdDist075 = eligVfdDist(0.75), eligVfdDist15 = eligVfdDist(1.5), eligVfdDist22 = eligVfdDist(2.2);
+  const vfdDist075 = pickFromEligible('vfdDist075', eligVfdDist075), vfdDist15 = pickFromEligible('vfdDist15', eligVfdDist15), vfdDist22 = pickFromEligible('vfdDist22', eligVfdDist22);
+  const eligServo = size => catalog.servo.filter(v => v.brand === inp.servoBrand && num(v.size) === size && (inp.standard === 'UL' ? v.ul === 'YES' : v.ul === 'NO'));
+  const eligServo075 = eligServo(0.75), eligServo15 = eligServo(1.5), eligServo22 = eligServo(2.2);
+  const servo075 = pickFromEligible('servo075', eligServo075), servo15 = pickFromEligible('servo15', eligServo15), servo22 = pickFromEligible('servo22', eligServo22);
 
-  const panel = catalog.panels.find(p => p.brand === inp.enclosureBrand && p.category === inp.enclosureType);
-  const junctionBox = catalog.junctionBox.find(j => j.brand === inp.jbBrand && j.category === inp.jbType);
-  const pdb = catalog.pdb[0];
-  const photoSensor = catalog.sensors.find(s => s.category === 'PhotoElectric sensor');
-  const transparentSensor = catalog.sensors.find(s => s.category === 'Transparent Sensors');
-  const proximitySensor = catalog.sensors.find(s => s.category === 'Proximity Sensor');
-  const distanceSensor = catalog.sensors.find(s => s.category === 'Distance Analog Sensor');
-  const scanner2dBasicItem = catalog.sensors.find(s => s.category === 'Barcode Scanner 2D basic');
-  const scanner2dAdvItem = catalog.sensors.find(s => s.category === 'Barcode Scanner 2D Advance');
-  const scanner3dItem = catalog.sensors.find(s => s.category === 'Camera Scanner 3D');
-  const lbBody = catalog.safety.find(s => s.category === 'Light Barrier - body') || catalog.safety.find(s => s.category === 'Light Barrier - Body');
-  const lbHandsItem = catalog.safety.find(s => s.category === 'Light Barrier - Hands');
-  const eStopBtnItem = catalog.safety.find(s => s.category === 'Emergency Stops Buttons');
-  const eStopRopeItem = catalog.safety.find(s => s.category === 'Emergency Stop - Ropes');
-  const guardSwitchItem = catalog.safety.find(s => s.category === 'Guard Switch');
-  const laserScannerItem = catalog.safety.find(s => s.category === 'Laser Scanner');
+  const eligPanel = catalog.panels.filter(p => p.brand === inp.enclosureBrand && p.category === inp.enclosureType);
+  const panel = pickFromEligible('panel', eligPanel);
+  const eligJunctionBox = catalog.junctionBox.filter(j => j.brand === inp.jbBrand && j.category === inp.jbType);
+  const junctionBox = pickFromEligible('junctionBox', eligJunctionBox);
+  const eligPdb = catalog.pdb;
+  const pdb = pickFromEligible('pdb', eligPdb);
+
+  const eligPhoto = catalog.sensors.filter(s => s.category === 'PhotoElectric sensor');
+  const eligTransparent = catalog.sensors.filter(s => s.category === 'Transparent Sensors');
+  const eligProximity = catalog.sensors.filter(s => s.category === 'Proximity Sensor');
+  const eligDistance = catalog.sensors.filter(s => s.category === 'Distance Analog Sensor');
+  const eligScanner2dBasic = catalog.sensors.filter(s => s.category === 'Barcode Scanner 2D basic');
+  const eligScanner2dAdv = catalog.sensors.filter(s => s.category === 'Barcode Scanner 2D Advance');
+  const eligScanner3d = catalog.sensors.filter(s => s.category === 'Camera Scanner 3D');
+  const photoSensor = pickFromEligible('photoSensor', eligPhoto), transparentSensor = pickFromEligible('transparentSensor', eligTransparent),
+        proximitySensor = pickFromEligible('proximitySensor', eligProximity), distanceSensor = pickFromEligible('distanceSensor', eligDistance),
+        scanner2dBasicItem = pickFromEligible('scanner2dBasic', eligScanner2dBasic), scanner2dAdvItem = pickFromEligible('scanner2dAdv', eligScanner2dAdv),
+        scanner3dItem = pickFromEligible('scanner3d', eligScanner3d);
+
+  const eligLbBody = catalog.safety.filter(s => s.category === 'Light Barrier - body' || s.category === 'Light Barrier - Body');
+  const eligLbHands = catalog.safety.filter(s => s.category === 'Light Barrier - Hands');
+  const eligEStopBtn = catalog.safety.filter(s => s.category === 'Emergency Stops Buttons');
+  const eligEStopRope = catalog.safety.filter(s => s.category === 'Emergency Stop - Ropes');
+  const eligGuardSwitch = catalog.safety.filter(s => s.category === 'Guard Switch');
+  const eligLaserScanner = catalog.safety.filter(s => s.category === 'Laser Scanner');
+  const lbBody = pickFromEligible('lbBody', eligLbBody), lbHandsItem = pickFromEligible('lbHands', eligLbHands),
+        eStopBtnItem = pickFromEligible('eStopBtn', eligEStopBtn), eStopRopeItem = pickFromEligible('eStopRope', eligEStopRope),
+        guardSwitchItem = pickFromEligible('guardSwitch', eligGuardSwitch), laserScannerItem = pickFromEligible('laserScanner', eligLaserScanner);
 
   const layoutLength = int(inp.layoutLength);
   const cableRunCost = n2 => n2 === 0 ? 0 : (n2*5 + ((n2-1)*n2/2) * (layoutLength / Math.max(n2-1, 1)));
@@ -3242,75 +3295,77 @@ function calcCabinet(inp, catalog, costingData) {
 
   const bom = [];
   const warnings = [];
-  const addLine = (category, item, prod, qty, unitPrice) => {
+  const addLine = (category, item, slotKey, eligibleList, prod, qty, unitPrice) => {
     if (qty > 0 && !prod) warnings.push(`${item}: no matching product for ${inp.plcBrand==='Allen Bradley'&&(category.includes('Drive')||category==='Servo Drives')?inp.driveBrand+'/'+inp.servoBrand:'the selected brand'} in the catalog — priced at $0, check manually.`);
     const total = qty * unitPrice;
-    if (qty !== 0 || category==='Special Items') bom.push({ category, item, name: prod?.name, qty, unitPrice, total });
+    if (qty !== 0 || category==='Special Items') {
+      bom.push({ category, item, slotKey, eligibleList: eligibleList||[], selectedItemNo: prod?.itemNo, name: prod?.name, qty, unitPrice, total });
+    }
     return total;
   };
 
-  addLine('PLC and HMIs','PLC',plc,1,plc?.price||0);
-  addLine('PLC and HMIs','Slave IM',ioSlave,slaveModulesNeeded,ioSlave?.price||0);
-  addLine('PLC and HMIs','DI',ioDI,diModulesNeeded,ioDI?.price||0);
-  addLine('PLC and HMIs','DQ (incl. Relays)',ioDQ,dqModulesNeeded,ioDQ?.price||0);
-  addLine('PLC and HMIs','F-DI',ioFDI,fdiModulesNeeded,ioFDI?.price||0);
-  addLine('PLC and HMIs','F-DQ',ioFDQ,fdqModulesNeeded,ioFDQ?.price||0);
-  addLine('PLC and HMIs','AI',ioAI,aiModulesNeeded,ioAI?.price||0);
-  addLine('PLC and HMIs','HMI',hmi,(inp.hmiSize==='Not Included'?0:numberOfPanels),hmi?.price||0);
+  addLine('PLC and HMIs','PLC','plc',eligPlc,plc,1,plc?.price||0);
+  addLine('PLC and HMIs','Slave IM','ioSlave',eligIoSlave,ioSlave,slaveModulesNeeded,ioSlave?.price||0);
+  addLine('PLC and HMIs','DI','ioDI',eligIoDI,ioDI,diModulesNeeded,ioDI?.price||0);
+  addLine('PLC and HMIs','DQ (incl. Relays)','ioDQ',eligIoDQ,ioDQ,dqModulesNeeded,ioDQ?.price||0);
+  addLine('PLC and HMIs','F-DI','ioFDI',eligIoFDI,ioFDI,fdiModulesNeeded,ioFDI?.price||0);
+  addLine('PLC and HMIs','F-DQ','ioFDQ',eligIoFDQ,ioFDQ,fdqModulesNeeded,ioFDQ?.price||0);
+  addLine('PLC and HMIs','AI','ioAI',eligIoAI,ioAI,aiModulesNeeded,ioAI?.price||0);
+  addLine('PLC and HMIs','HMI','hmi',eligHmi,hmi,(inp.hmiSize==='Not Included'?0:numberOfPanels),hmi?.price||0);
 
-  addLine('Switches & Power','Network Switches Managed',swManaged,networkSwitchesManaged,swManaged?.price||0);
-  addLine('Switches & Power','Network Switches Unmanaged',swUnmanaged,networkSwitchesUnmanaged,swUnmanaged?.price||0);
-  addLine('Switches & Power','Power Distribution',powerDist,numberOfPanels,powerDist?.price||0);
-  addLine('Switches & Power','Power Supply',{name:'Power Supply'},powerSupplyNeeded,240);
-  addLine('Switches & Power','UPS',ups,(inp.ups==='Not Included'?0:1),ups?.price||0);
-  addLine('Switches & Power','Ventilation',ventilation,numberOfPanels,ventilation?.price||0);
+  addLine('Switches & Power','Network Switches Managed','swManaged',eligSwManaged,swManaged,networkSwitchesManaged,swManaged?.price||0);
+  addLine('Switches & Power','Network Switches Unmanaged','swUnmanaged',eligSwUnmanaged,swUnmanaged,networkSwitchesUnmanaged,swUnmanaged?.price||0);
+  addLine('Switches & Power','Power Distribution','powerDist',eligPowerDist,powerDist,numberOfPanels,powerDist?.price||0);
+  addLine('Switches & Power','Power Supply',null,null,{name:'Power Supply'},powerSupplyNeeded,240);
+  addLine('Switches & Power','UPS','ups',eligUps,ups,(inp.ups==='Not Included'?0:1),ups?.price||0);
+  addLine('Switches & Power','Ventilation','ventilation',eligVentilation,ventilation,numberOfPanels,ventilation?.price||0);
 
-  addLine('Drives Without Brake','VFD 0.75KW - Centralized',vfdCent075,int(inp.m075NoBrake),vfdCent075?.price||0);
-  addLine('Drives Without Brake','VFD 1.5KW - Centralized',vfdCent15,int(inp.m15NoBrake),vfdCent15?.price||0);
-  addLine('Drives Without Brake','VFD 2.2KW - Centralized',vfdCent22,int(inp.m22NoBrake),vfdCent22?.price||0);
-  addLine('Drives With Brakes','VFD 0.75KW - Centralized',vfdCent075,int(inp.m075Brake),(vfdCent075?.price||0)+100);
-  addLine('Drives With Brakes','VFD 1.5KW - Centralized',vfdCent15,int(inp.m15Brake),(vfdCent15?.price||0)+100);
-  addLine('Drives With Brakes','VFD 2.2KW - Centralized',vfdCent22,int(inp.m22Brake),(vfdCent22?.price||0)+100);
-  addLine('Distributed Drives','VFD 0.75KW - Distributed',vfdDist075,int(inp.dec075),vfdDist075?.price||0);
-  addLine('Distributed Drives','VFD 1.5KW - Distributed',vfdDist15,int(inp.dec15),vfdDist15?.price||0);
-  addLine('Distributed Drives','VFD 2.2KW - Distributed',vfdDist22,int(inp.dec22),vfdDist22?.price||0);
-  addLine('Servo Drives','Servo Drives 0.75KW',servo075,int(inp.s075),servo075?.price||0);
-  addLine('Servo Drives','Servo Drives 1.5KW',servo15,int(inp.s15),servo15?.price||0);
-  addLine('Servo Drives','Servo Drives 2.2KW',servo22,int(inp.s22),servo22?.price||0);
+  addLine('Drives Without Brake','VFD 0.75KW - Centralized','vfdCent075',eligVfdCent075,vfdCent075,int(inp.m075NoBrake),vfdCent075?.price||0);
+  addLine('Drives Without Brake','VFD 1.5KW - Centralized','vfdCent15',eligVfdCent15,vfdCent15,int(inp.m15NoBrake),vfdCent15?.price||0);
+  addLine('Drives Without Brake','VFD 2.2KW - Centralized','vfdCent22',eligVfdCent22,vfdCent22,int(inp.m22NoBrake),vfdCent22?.price||0);
+  addLine('Drives With Brakes','VFD 0.75KW - Centralized','vfdCent075',eligVfdCent075,vfdCent075,int(inp.m075Brake),(vfdCent075?.price||0)+100);
+  addLine('Drives With Brakes','VFD 1.5KW - Centralized','vfdCent15',eligVfdCent15,vfdCent15,int(inp.m15Brake),(vfdCent15?.price||0)+100);
+  addLine('Drives With Brakes','VFD 2.2KW - Centralized','vfdCent22',eligVfdCent22,vfdCent22,int(inp.m22Brake),(vfdCent22?.price||0)+100);
+  addLine('Distributed Drives','VFD 0.75KW - Distributed','vfdDist075',eligVfdDist075,vfdDist075,int(inp.dec075),vfdDist075?.price||0);
+  addLine('Distributed Drives','VFD 1.5KW - Distributed','vfdDist15',eligVfdDist15,vfdDist15,int(inp.dec15),vfdDist15?.price||0);
+  addLine('Distributed Drives','VFD 2.2KW - Distributed','vfdDist22',eligVfdDist22,vfdDist22,int(inp.dec22),vfdDist22?.price||0);
+  addLine('Servo Drives','Servo Drives 0.75KW','servo075',eligServo075,servo075,int(inp.s075),servo075?.price||0);
+  addLine('Servo Drives','Servo Drives 1.5KW','servo15',eligServo15,servo15,int(inp.s15),servo15?.price||0);
+  addLine('Servo Drives','Servo Drives 2.2KW','servo22',eligServo22,servo22,int(inp.s22),servo22?.price||0);
 
-  addLine('Panels','Enclosures - Panel',panel,numberOfPanels,panel?(panel.price/numberOfPanels):0);
-  addLine('Panels','Enclosures - JB',junctionBox,numberOfJunctionBox,junctionBox?.price||0);
-  addLine('Panels','PDB',pdb,numberOfPDBs,pdb?.price||0);
+  addLine('Panels','Enclosures - Panel','panel',eligPanel,panel,numberOfPanels,panel?(panel.price/numberOfPanels):0);
+  addLine('Panels','Enclosures - JB','junctionBox',eligJunctionBox,junctionBox,numberOfJunctionBox,junctionBox?.price||0);
+  addLine('Panels','PDB','pdb',eligPdb,pdb,numberOfPDBs,pdb?.price||0);
 
-  addLine('Sensors','PhotoElectric sensor',photoSensor,int(inp.photoSensors),photoSensor?.price||0);
-  addLine('Sensors','Transparent Sensors',transparentSensor,int(inp.transparentSensors),transparentSensor?.price||0);
-  addLine('Sensors','Proximity Sensor',proximitySensor,int(inp.proximitySensors),proximitySensor?.price||0);
-  addLine('Sensors','Distance Analog Sensor',distanceSensor,int(inp.distanceSensors),distanceSensor?.price||0);
-  addLine('Sensors','Barcode Scanner 2D basic',scanner2dBasicItem,int(inp.scanner2dBasic),scanner2dBasicItem?.price||0);
-  addLine('Sensors','Barcode Scanner 2D Advance',scanner2dAdvItem,int(inp.scanner2dAdvanced),scanner2dAdvItem?.price||0);
-  addLine('Sensors','Camera Scanner 3D',scanner3dItem,int(inp.scanner3d),scanner3dItem?.price||0);
-  addLine('Sensors','Vacuum Switches',{name:'Vacuum Switches'},int(inp.vacuumSwitches),costingData.factory.vacuumSwitchPrice);
+  addLine('Sensors','PhotoElectric sensor','photoSensor',eligPhoto,photoSensor,int(inp.photoSensors),photoSensor?.price||0);
+  addLine('Sensors','Transparent Sensors','transparentSensor',eligTransparent,transparentSensor,int(inp.transparentSensors),transparentSensor?.price||0);
+  addLine('Sensors','Proximity Sensor','proximitySensor',eligProximity,proximitySensor,int(inp.proximitySensors),proximitySensor?.price||0);
+  addLine('Sensors','Distance Analog Sensor','distanceSensor',eligDistance,distanceSensor,int(inp.distanceSensors),distanceSensor?.price||0);
+  addLine('Sensors','Barcode Scanner 2D basic','scanner2dBasic',eligScanner2dBasic,scanner2dBasicItem,int(inp.scanner2dBasic),scanner2dBasicItem?.price||0);
+  addLine('Sensors','Barcode Scanner 2D Advance','scanner2dAdv',eligScanner2dAdv,scanner2dAdvItem,int(inp.scanner2dAdvanced),scanner2dAdvItem?.price||0);
+  addLine('Sensors','Camera Scanner 3D','scanner3d',eligScanner3d,scanner3dItem,int(inp.scanner3d),scanner3dItem?.price||0);
+  addLine('Sensors','Vacuum Switches',null,null,{name:'Vacuum Switches'},int(inp.vacuumSwitches),costingData.factory.vacuumSwitchPrice);
 
-  addLine('Safety','Light Barrier - hands',lbBody,lbHandsN,lbBody?.price||0);
-  addLine('Safety','Light Barrier - Finger',lbHandsItem,lbFingerN,lbHandsItem?.price||0);
-  addLine('Safety','Emergency Stops Buttons',eStopBtnItem,eStopButtons,eStopBtnItem?.price||0);
-  addLine('Safety','Emergency Stop - Ropes',eStopRopeItem,int(inp.eStopRopes),eStopRopeItem?.price||0);
-  addLine('Safety','Guard Switch',guardSwitchItem,int(inp.guardSwitch),guardSwitchItem?.price||0);
-  addLine('Safety','Laser Scanner',laserScannerItem,int(inp.laserScanner),laserScannerItem?.price||0);
+  addLine('Safety','Light Barrier - hands','lbBody',eligLbBody,lbBody,lbHandsN,lbBody?.price||0);
+  addLine('Safety','Light Barrier - Finger','lbHands',eligLbHands,lbHandsItem,lbFingerN,lbHandsItem?.price||0);
+  addLine('Safety','Emergency Stops Buttons','eStopBtn',eligEStopBtn,eStopBtnItem,eStopButtons,eStopBtnItem?.price||0);
+  addLine('Safety','Emergency Stop - Ropes','eStopRope',eligEStopRope,eStopRopeItem,int(inp.eStopRopes),eStopRopeItem?.price||0);
+  addLine('Safety','Guard Switch','guardSwitch',eligGuardSwitch,guardSwitchItem,int(inp.guardSwitch),guardSwitchItem?.price||0);
+  addLine('Safety','Laser Scanner','laserScanner',eligLaserScanner,laserScannerItem,int(inp.laserScanner),laserScannerItem?.price||0);
 
   const cableStd = inp.standard;
   const jbRunSpacing = layoutLength/(numberOfJunctionBox+1);
   const controlCableQty = numberOfJunctionBox*5 + jbRunSpacing*(numberOfJunctionBox*(numberOfJunctionBox+1)/2);
-  addLine('Cables',"Cables 4G2.5",{name:'4G2.5'},cable4G25Total,costingData.factory.cablePrice['4G2.5'][cableStd]);
-  addLine('Cables',"Cables 4G4",{name:'4G4'},cable4G4Total,costingData.factory.cablePrice['4G4'][cableStd]);
-  addLine('Cables',"Control Cable 25x0.75",{name:'Control Cable 25x0.75'},controlCableQty,costingData.factory.controlCable2575Price);
-  addLine('Cables',"Ethernet",{name:'Ethernet'},ethernetDecTotal,costingData.factory.ethernetCablePrice);
-  addLine('Glands',inp.glandsType,{name:inp.glandsType},
+  addLine('Cables',"Cables 4G2.5",null,null,{name:'4G2.5'},cable4G25Total,costingData.factory.cablePrice['4G2.5'][cableStd]);
+  addLine('Cables',"Cables 4G4",null,null,{name:'4G4'},cable4G4Total,costingData.factory.cablePrice['4G4'][cableStd]);
+  addLine('Cables',"Control Cable 25x0.75",null,null,{name:'Control Cable 25x0.75'},controlCableQty,costingData.factory.controlCable2575Price);
+  addLine('Cables',"Ethernet",null,null,{name:'Ethernet'},ethernetDecTotal,costingData.factory.ethernetCablePrice);
+  addLine('Glands',inp.glandsType,null,null,{name:inp.glandsType},
     totalCentMotors*4+(int(inp.dec075)+int(inp.dec15)+int(inp.dec22))*4+(numberOfPDBs*2+numberOfPDBs*7+numberOfPDBs*2)+(numberOfJunctionBox*2+numberOfJunctionBox*30),
     costingData.factory.glandPrice[inp.glandsType]);
 
-  addLine('Operator Panel','Operator Panel',{name:'Operator Panel SS With HMI'},opPanelQty,2940);
-  addLine('Communication Module','Remote IO',{name:'SIG Communication Module'},numRobots+Math.ceil(int(inp.vacuumSwitches)/8),costingData.factory.commModulePrice);
+  addLine('Operator Panel','Operator Panel',null,null,{name:'Operator Panel SS With HMI'},opPanelQty,2940);
+  addLine('Communication Module','Remote IO',null,null,{name:'SIG Communication Module'},numRobots+Math.ceil(int(inp.vacuumSwitches)/8),costingData.factory.commModulePrice);
 
   const materialFromBom = bom.reduce((s,l) => s+l.total, 0);
   const isUL = inp.standard === 'UL';
@@ -3365,15 +3420,26 @@ function calcCabinetPage() {
 
   const bomBody = document.getElementById('cab-bom-body');
   if (bomBody) {
-    bomBody.innerHTML = r.bom.map(l => `
+    bomBody.innerHTML = r.bom.map(l => {
+      let productCell;
+      if (l.slotKey && l.eligibleList && l.eligibleList.length > 1) {
+        const options = l.eligibleList.map(opt =>
+          `<option value="${opt.itemNo}"${opt.itemNo===l.selectedItemNo?' selected':''}>${opt.name}</option>`
+        ).join('');
+        productCell = `<select class="esel" style="width:100%" onchange="changeCabinetOverride('${l.slotKey}', this.value)">${options}</select>`;
+      } else {
+        productCell = l.name || '<span class="dim">—</span>';
+      }
+      return `
       <tr>
         <td class="dim">${l.category}</td>
         <td>${l.item}</td>
-        <td>${l.name || '<span class="dim">—</span>'}</td>
+        <td>${productCell}</td>
         <td>${(Math.round(l.qty*100)/100).toLocaleString()}</td>
         <td class="n">${fmt(l.unitPrice)}</td>
         <td class="n">${fmt(l.total)}</td>
-      </tr>`).join('') || `<tr><td colspan="6" class="dim" style="text-align:center;padding:20px">Fill in the Configurator to see the Bill of Materials.</td></tr>`;
+      </tr>`;
+    }).join('') || `<tr><td colspan="6" class="dim" style="text-align:center;padding:20px">Fill in the Configurator to see the Bill of Materials.</td></tr>`;
   }
 
   const warnCard = document.getElementById('cab-warnings-card');
