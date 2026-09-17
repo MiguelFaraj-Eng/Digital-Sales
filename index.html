@@ -3918,12 +3918,15 @@ function renderMaterialForPR(r, inp) {
   r.bom.forEach(l => {
     if (l.slotKey === 'powerDist') {
       // Explode the bundle into its real sub-components — a PR needs the
-      // actual part, not "one Power Distribution bundle".
+      // actual part, not "one Power Distribution bundle". Each panel needs
+      // its own complete setup, so multiply by l.qty (= numberOfPanels),
+      // matching the bundle line's own quantity exactly.
       const outputRelayQty = 8 + 8*((Number(inp.actuatorsMono)||0) + 2*(Number(inp.actuatorsBi)||0));
       const parts = getPowerDistDetailItems(l.bundleBrand, l.bundleStandard, outputRelayQty);
       parts.forEach(p => {
         const unitPrice = getReferencePrice(p.lookupName, p.catalogPrice);
-        rows.push({ category: 'Power Distribution', item: p.item, qty: p.qty, unitPrice, total: unitPrice*p.qty, lookupName: p.lookupName });
+        const qty = p.qty * l.qty;
+        rows.push({ category: 'Power Distribution', item: p.item, qty, unitPrice, total: unitPrice*qty, lookupName: p.lookupName });
       });
       return;
     }
@@ -4013,7 +4016,8 @@ function calcCabinetPage() {
       if (!hasDetail) return mainRow;
 
       const detailOutputRelayQty = 8 + 8*((Number(inp.actuatorsMono)||0) + 2*(Number(inp.actuatorsBi)||0));
-      const parts = getPowerDistDetailItems(l.bundleBrand, l.bundleStandard, detailOutputRelayQty);
+      const parts = getPowerDistDetailItems(l.bundleBrand, l.bundleStandard, detailOutputRelayQty)
+        .map(p => ({ ...p, qty: p.qty * l.qty })); // each panel needs its own complete setup
       const partsRows = parts.map(p => {
         const price = getReferencePrice(p.lookupName, p.catalogPrice);
         return `<div style="display:flex;justify-content:space-between;padding:3px 0;font-size:12px">
@@ -4108,19 +4112,18 @@ const CABINET_CATALOG_TO_SUPPLIER_CATEGORY = {
   safety: 'Safety & Emergency Stop', operatorPanel: 'Operator Panels',
 };
 
-// The two "Detailed" sheets (powerDistDetailedCE / powerDistDetailedUL) aren't
-// a flat list — each is really two brand-specific parts lists back-to-back
-// (Siemens block, then an Allen Bradley block, identified by these itemNo
-// ranges), plus a few blank placeholder rows in the UL sheet that fall
-// outside both ranges and get skipped naturally. 16 part names (e.g. "MCB -
-// 100A") appear in both the CE and UL sheets at different prices, so each
-// imported name is suffixed with (Brand, Standard) to keep them distinct —
-// without that, the plain-name importer would treat the second one as an
-// already-tracked duplicate and silently drop it.
-const POWER_DIST_DETAIL_RANGES = {
-  powerDistDetailedCE: { standard: 'CE', blocks: [{brand:'Siemens', min:1, max:14}, {brand:'Allen Bradley', min:20, max:34}] },
-  powerDistDetailedUL: { standard: 'UL', blocks: [{brand:'Siemens', min:1, max:16}, {brand:'Allen Bradley', min:20, max:37}] },
-};
+// powerDistDetailedCE/UL are deliberately NOT imported. They're a separate,
+// disconnected reference sheet in the source workbook that doesn't match the
+// live embedded formula the Configurator actually uses (verified: every
+// single sub-component price differs, e.g. Disconnect - 100A is $55 live
+// (with the Siemens 1.1x markup) vs $50 in that sheet). Importing them once
+// caused a real, confirmed bug: per-component supplier lookup in the
+// Power Distribution detail view and Material for PR started silently
+// preferring this stale data over the verified formula, so the exploded
+// total stopped matching the bundle total. Track real supplier quotes for
+// these parts by adding them manually instead — the disambiguated names
+// (e.g. "Disconnect - 100A (Siemens, CE)") already match what the
+// Configurator looks up.
 
 function importCabinetCatalogToSuppliers() {
   if (!cabinetCatalog) { alert("The Electrical Cabinet catalog hasn't loaded yet — try again in a moment."); return; }
@@ -4140,28 +4143,6 @@ function importCabinetCatalogToSuppliers() {
         category, item: importName, supplier: item.brand || '', email: '',
         cost: item.price || 0, latestPrice: item.price || 0, updated: today,
         description: item.description || item.spec || '',
-      });
-      added++;
-    });
-  });
-
-  const pdCategory = 'Power Distribution Components';
-  Object.entries(POWER_DIST_DETAIL_RANGES).forEach(([family, { standard, blocks }]) => {
-    if (!suppliersData.categories.includes(pdCategory)) { suppliersData.categories.push(pdCategory); categoriesAdded++; }
-    (cabinetCatalog[family] || []).forEach(item => {
-      if (!item.name || item.itemNo == null) return;
-      const block = blocks.find(b => item.itemNo >= b.min && item.itemNo <= b.max);
-      if (!block) return; // blank placeholder rows fall outside every range
-      const uniqueName = `${item.name} (${block.brand}, ${standard})`;
-      const key = uniqueName.trim().toLowerCase();
-      if (existingNames.has(key)) return;
-      existingNames.add(key);
-      suppliersData.entries.push({
-        id: 'sup-cab-' + family + '-' + item.itemNo + '-' + Date.now().toString(36) + Math.random().toString(36).slice(2,5),
-        category: pdCategory, item: uniqueName, supplier: item.brand || '', email: '',
-        cost: item.price || 0, latestPrice: item.price || 0, updated: today,
-        description: `${item.category || ''} — part of the ${block.brand} ${standard} Power Distribution bundle`.trim(),
-        bundleBrand: block.brand, bundleStandard: standard,
       });
       added++;
     });
