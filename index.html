@@ -150,6 +150,20 @@ hr{border:none;border-top:1px solid var(--b1);margin:16px 0}
 
 /* LOGIN OVERLAY */
 .login-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.7);backdrop-filter:blur(6px);z-index:9999;display:flex;align-items:center;justify-content:center}
+
+.projects-home{position:fixed;inset:0;background:var(--s1);z-index:9000;display:flex;flex-direction:column;padding:32px 48px;overflow-y:auto}
+.ph-home-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:32px;padding-bottom:20px;border-bottom:1px solid var(--b1)}
+.ph-home-title{font-size:22px;font-weight:600;color:var(--t1);margin-top:2px}
+.ph-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px}
+.ph-card{background:var(--s2);border:1px solid var(--b1);border-radius:var(--r);padding:18px;cursor:pointer;transition:all .15s}
+.ph-card:hover{border-color:var(--blue);transform:translateY(-2px);box-shadow:0 4px 16px rgba(0,0,0,.2)}
+.ph-card-name{font-size:15px;font-weight:600;color:var(--t1);margin-bottom:6px}
+.ph-card-client{font-size:12px;color:var(--t2);margin-bottom:12px;min-height:16px}
+.ph-card-meta{display:flex;justify-content:space-between;font-size:11px;color:var(--t3);font-family:'IBM Plex Mono',monospace;padding-top:10px;border-top:1px solid var(--b1)}
+.current-project-box{margin:0 16px 16px;padding:12px;background:var(--s2);border:1px solid var(--b1);border-radius:var(--r)}
+.cp-label{font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--t3);margin-bottom:4px}
+.cp-name{font-size:13px;font-weight:600;color:var(--t1);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.cp-owner{font-size:10px;color:var(--t3)}
 [data-theme="light"] .login-overlay{background:rgba(200,205,215,0.7)}
 .login-box{background:var(--s1);border:1px solid var(--b2);border-radius:16px;padding:36px 40px;width:360px;box-shadow:0 24px 60px rgba(0,0,0,0.4)}
 .login-logo{font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--blue);margin-bottom:4px}
@@ -263,10 +277,65 @@ body.role-procurement button[onclick="exportOffer()"] { display:none; }
   </div>
 </div>
 
+<!-- PROJECTS HOME -->
+<div id="projects-home" class="projects-home" style="display:none">
+  <div class="ph-home-header">
+    <div>
+      <div class="logo-eyebrow">Smart Factory</div>
+      <div class="ph-home-title">Projects</div>
+    </div>
+    <div style="display:flex;align-items:center;gap:14px">
+      <div class="theme-toggle" onclick="toggleTheme()" style="border:none;padding:0">
+        <div class="toggle-track"><div class="toggle-thumb"></div></div>
+        <span id="theme-label-ph">Light mode</span>
+      </div>
+      <span class="user-logout" onclick="doLogout()" style="font-size:12px">Sign out</span>
+    </div>
+  </div>
+
+  <div id="ph-connect-row" style="display:none;max-width:440px;margin:60px auto">
+    <div class="card">
+      <div class="card-head">☁ Connect to Cloud</div>
+      <div class="note" style="margin-bottom:12px">One-time setup on this device — paste your access key to see and manage shared projects.</div>
+      <input id="gh-token" type="password" placeholder="Paste your cloud access key" oninput="persistGitHubSyncPrefs()">
+      <button class="btn btn-primary" style="margin-top:12px;width:100%" onclick="connectProjectsHome()">Connect</button>
+    </div>
+  </div>
+
+  <div id="ph-list-area" style="display:none">
+    <div class="card" style="margin-bottom:20px">
+      <div class="card-head">Create a New Project</div>
+      <div class="g2">
+        <div class="fg"><label class="fl">Project Name</label>
+          <input type="text" id="ph-new-name" placeholder="e.g. Acme Corp — Line 3"></div>
+        <div class="fg" style="justify-content:flex-end"><label class="fl">&nbsp;</label>
+          <button class="btn btn-primary" id="ph-create-btn" onclick="createNewProject()">+ Create Project</button></div>
+      </div>
+    </div>
+
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;gap:12px;flex-wrap:wrap">
+      <input type="text" id="ph-search" placeholder="🔍 Search projects, clients, owners…" style="max-width:340px" oninput="renderProjectsGrid(allProjectsCache)">
+      <button class="btn btn-ghost" onclick="loadProjectsHomeList()">↺ Refresh</button>
+    </div>
+
+    <div class="ph-grid" id="ph-grid"></div>
+  </div>
+</div>
+
 <aside class="sidebar">
   <div class="logo">
     <div class="logo-eyebrow">Smart Factory</div>
     <div class="logo-title">SCADA Budget</div>
+  </div>
+  <div class="current-project-box">
+    <div class="cp-label">Current Project</div>
+    <div class="cp-name" id="current-project-name">—</div>
+    <div class="cp-owner" id="current-project-owner"></div>
+    <div style="display:flex;gap:6px;margin-top:8px">
+      <button class="btn btn-primary" style="flex:1;padding:6px 8px;font-size:11px" onclick="saveCurrentProject()">💾 Save</button>
+      <button class="btn btn-ghost" style="padding:6px 8px;font-size:11px" onclick="returnToProjectsHome()" title="Back to Projects">📁</button>
+    </div>
+    <div id="project-save-status" style="display:none;font-size:10px;margin-top:6px;text-align:center"></div>
   </div>
   <nav class="nav">
     <div class="nav-group">Overview</div>
@@ -318,9 +387,6 @@ body.role-procurement button[onclick="exportOffer()"] { display:none; }
   <div class="ph">
     <div><div class="ph-title">Budget Dashboard</div><div class="ph-sub">All values update live as you edit</div></div>
     <div style="display:flex;align-items:center;gap:8px">
-      <button class="btn btn-ghost" onclick="triggerLoadProject()">📂 Load Project</button>
-      <input id="load-project-input" type="file" accept="application/json" style="display:none" onchange="handleLoadProjectFile(this)">
-      <button class="btn btn-ghost" onclick="saveProject()">💾 Save Project</button>
       <button class="btn btn-primary" onclick="exportOffer()">⬇ Print / Export</button>
     </div>
   </div>
@@ -353,34 +419,6 @@ body.role-procurement button[onclick="exportOffer()"] { display:none; }
   <div class="card" id="card-cost-breakdown">
     <div class="card-head">Cost Breakdown</div>
     <div id="breakdown-bars"></div>
-  </div>
-
-  <div class="card" id="gh-sync-card">
-    <div class="card-head">☁ Save to Cloud</div>
-
-    <div id="cloud-connect-row">
-      <div class="fg"><label class="fl">Access Key</label>
-        <input id="gh-token" type="password" placeholder="Paste your cloud access key" oninput="persistGitHubSyncPrefs()"></div>
-      <div class="note" style="margin-top:8px;margin-bottom:14px">One-time setup — paste your access key once. It's remembered on this device after your first successful save.</div>
-    </div>
-    <div id="cloud-connected-row" style="display:none;align-items:center;gap:10px;margin-bottom:14px">
-      <span style="display:inline-flex;align-items:center;gap:6px;font-size:12px;color:var(--green);font-weight:500">🟢 Connected to Cloud</span>
-      <button class="btn btn-ghost" style="padding:4px 10px;font-size:11px" onclick="disconnectCloud()">Disconnect</button>
-    </div>
-
-    <div class="g2">
-      <div class="fg"><label class="fl">Project name</label>
-        <input id="gh-project-name" type="text" placeholder="e.g. SOT023"></div>
-      <div class="fg"><label class="fl">Previously saved (by you)</label>
-        <select id="gh-project-list" onchange="if(this.value){document.getElementById('gh-project-name').value=this.value;}"><option value="">— pick a saved project —</option></select></div>
-    </div>
-    <div style="display:flex;align-items:center;gap:14px;margin-top:12px;flex-wrap:wrap">
-      <span style="flex:1"></span>
-      <button class="btn btn-ghost" style="padding:6px 12px;font-size:12px" onclick="refreshGitHubProjectList()">🔄 Refresh list</button>
-      <button class="btn btn-ghost" style="padding:6px 12px;font-size:12px" onclick="loadFromGitHub()">📂 Load from Cloud</button>
-      <button class="btn btn-primary" style="padding:6px 14px;font-size:12px" onclick="saveToGitHub()">☁ Save to Cloud</button>
-    </div>
-    <div class="note" id="gh-status" style="margin-top:10px;display:none"></div>
   </div>
 </div>
 
@@ -2122,12 +2160,14 @@ function doLogin() {
   refreshSupplierPricingLinks();
 
   err.textContent = '';
-  refreshGitHubProjectList();
+  showProjectsHome();
 }
 function doLogout() {
   currentUser = null;
+  currentProject = null;
   document.getElementById('user-badge').style.display = 'none';
   document.getElementById('login-overlay').style.display = 'flex';
+  document.getElementById('projects-home').style.display = 'none';
   ['login-user','login-pass'].forEach(id => document.getElementById(id).value='');
   document.getElementById('login-err').textContent='';
   document.body.className = document.body.className.replace(/\brole-\S+/g, '').trim();
@@ -2639,9 +2679,36 @@ function findVendorProductForBlockId(blockId) {
   return null;
 }
 
+// Every Configurator field is prefixed cab-* by convention, so this captures
+// all of them generically (including any added later) rather than needing a
+// hand-maintained field list that drifts out of sync.
+function buildCabinetSnapshot() {
+  const fields = {};
+  document.querySelectorAll('[id^="cab-"]').forEach(el => {
+    if (!el.matches('input, select, textarea')) return;
+    fields[el.id] = el.type === 'checkbox' ? el.checked : el.value;
+  });
+  return {
+    fields,
+    overrides: { ...cabinetOverrides },
+    manualAdds: { ...cabinetManualAdds },
+  };
+}
+function applyCabinetSnapshot(snap) {
+  if (!snap) return;
+  Object.entries(snap.fields || {}).forEach(([id, val]) => {
+    const el = document.getElementById(id);
+    if (!el) return;
+    if (el.type === 'checkbox') el.checked = !!val; else el.value = val;
+  });
+  cabinetOverrides = { ...(snap.overrides || {}) };
+  cabinetManualAdds = { ...(snap.manualAdds || {}) };
+  calcCabinetPage();
+}
+
 function buildProjectSnapshot() {
   const snap = {
-    version: 1,
+    version: 2,
     savedAt: new Date().toISOString(),
     fields: {},
     equipment: { technica: captureEquipTable('equip-t-body'), supplier: captureEquipTable('equip-s-body') },
@@ -2650,7 +2717,8 @@ function buildProjectSnapshot() {
       rows: { 'hw-server': captureRows('hw-server'), 'hw-op': captureRows('hw-op'), 'hw-com': captureRows('hw-com'), 'hw-net': captureRows('hw-net') }
     },
     license: { selection: { ...licenseSelection }, blocks: [] },
-    mandays: { rows: { 'md-eng-body': captureRows('md-eng-body'), 'md-travel-body': captureRows('md-travel-body') } }
+    mandays: { rows: { 'md-eng-body': captureRows('md-eng-body'), 'md-travel-body': captureRows('md-travel-body') } },
+    cabinet: buildCabinetSnapshot(),
   };
 
   ['#page-general', '#page-production'].forEach(sel => {
@@ -2672,6 +2740,7 @@ function buildProjectSnapshot() {
 function applyProjectSnapshot(snap) {
   if (!snap || typeof snap !== 'object' || !snap.fields) { alert('This file does not look like a valid project save.'); return; }
   if (!hwCatalog || !licenseCatalog) { alert('Catalogs are still loading — wait a second and try loading the file again.'); return; }
+  if (!cabinetCatalog || !cabinetCosting) { alert('The Electrical Cabinet catalog is still loading — wait a second and try again.'); return; }
 
   Object.entries(snap.fields || {}).forEach(([id, val]) => {
     const el = document.getElementById(id);
@@ -2714,6 +2783,8 @@ function applyProjectSnapshot(snap) {
   renderLicenseModules();
 
   ['md-eng-body','md-travel-body'].forEach(id => restoreRows(id, snap.mandays?.rows?.[id]));
+
+  if (snap.cabinet) applyCabinetSnapshot(snap.cabinet);
 
   recalcAll();
 }
@@ -2885,6 +2956,232 @@ async function loadFromGitHub() {
   } catch (err) {
     ghSetStatus('Load failed: ' + (err.message === 'File not found.' ? 'No saved project found with that name.' : err.message), true);
   }
+}
+
+// ════════════════════════════════════════════════════════════════
+//  PROJECTS HOME
+//  Replaces the old per-page Save/Load + "Save to Cloud" card with a
+//  single shared workspace: every signed-in user sees every project
+//  (owner labeled), can create a new one or open an existing one, and
+//  the app only reveals its normal sidebar+pages once a project is
+//  actually open. One project = one combined snapshot covering both
+//  the SCADA budgeting data and the Electrical Cabinet Configurator.
+// ════════════════════════════════════════════════════════════════
+
+let currentProject = null; // { owner, name, path }
+let allProjectsCache = [];
+
+function projectPath(owner, name) {
+  const safeOwner = owner.replace(/[^a-zA-Z0-9_-]+/g, '-');
+  const safeName = name.trim().replace(/[^a-zA-Z0-9_-]+/g, '-');
+  return `Projects/${safeOwner}/${safeName}.json`;
+}
+
+async function listAllProjects() {
+  const { repo, token } = ghConfig();
+  if (!repo) throw new Error('Could not determine where to look — open this tool from its published cloud URL.');
+  if (!token) throw new Error('NEEDS_CONNECT');
+  const headers = { 'Authorization': `Bearer ${token}`, 'Accept': 'application/vnd.github+json' };
+
+  const rootRes = await fetch(`https://api.github.com/repos/${repo}/contents/Projects`, { headers });
+  if (rootRes.status === 404) return [];
+  if (!rootRes.ok) throw new Error(`Could not list projects (HTTP ${rootRes.status})`);
+  const rootItems = await rootRes.json();
+  const userFolders = (Array.isArray(rootItems) ? rootItems : []).filter(f => f.type === 'dir');
+
+  const fileRefs = [];
+  await Promise.all(userFolders.map(async folder => {
+    const res = await fetch(`https://api.github.com/repos/${repo}/contents/Projects/${folder.name}`, { headers });
+    if (!res.ok) return;
+    const files = await res.json();
+    (Array.isArray(files) ? files : []).filter(f => f.name.endsWith('.json')).forEach(f => {
+      fileRefs.push({ owner: folder.name, name: f.name.replace(/\.json$/, ''), path: f.path });
+    });
+  }));
+
+  const projects = await Promise.all(fileRefs.map(async ref => {
+    try {
+      const content = await readFileFromGitHub(ref.path);
+      const data = JSON.parse(content);
+      return {
+        owner: ref.owner, name: data.projectName || ref.name, path: ref.path,
+        client: data.fields?.['g-name'] || '',
+        savedAt: data.savedAt || null,
+      };
+    } catch (e) {
+      return { owner: ref.owner, name: ref.name, path: ref.path, client: '', savedAt: null, broken: true };
+    }
+  }));
+  return projects.sort((a,b) => (b.savedAt||'').localeCompare(a.savedAt||''));
+}
+
+function showProjectsHome() {
+  document.getElementById('projects-home').style.display = 'flex';
+  document.querySelector('.sidebar').style.display = 'none';
+  document.querySelector('.main').style.display = 'none';
+  currentProject = null;
+  loadProjectsHomeList();
+}
+function hideProjectsHome() {
+  document.getElementById('projects-home').style.display = 'none';
+  document.querySelector('.sidebar').style.display = '';
+  document.querySelector('.main').style.display = '';
+}
+
+async function loadProjectsHomeList() {
+  const { token } = ghConfig();
+  const connectRow = document.getElementById('ph-connect-row');
+  const listArea = document.getElementById('ph-list-area');
+  if (!token) {
+    connectRow.style.display = 'block';
+    listArea.style.display = 'none';
+    return;
+  }
+  connectRow.style.display = 'none';
+  listArea.style.display = 'block';
+  const grid = document.getElementById('ph-grid');
+  grid.innerHTML = `<div class="dim" style="padding:40px;text-align:center">Loading projects…</div>`;
+  try {
+    allProjectsCache = await listAllProjects();
+    renderProjectsGrid(allProjectsCache);
+  } catch (err) {
+    if (err.message === 'NEEDS_CONNECT') {
+      connectRow.style.display = 'block';
+      listArea.style.display = 'none';
+    } else {
+      grid.innerHTML = `<div style="padding:40px;text-align:center;color:var(--red)">⚠ ${err.message}</div>`;
+    }
+  }
+}
+
+function connectProjectsHome() {
+  persistGitHubSyncPrefs();
+  loadProjectsHomeList();
+}
+
+function renderProjectsGrid(projects) {
+  const grid = document.getElementById('ph-grid');
+  const search = (document.getElementById('ph-search')?.value || '').trim().toLowerCase();
+  const filtered = projects.filter(p =>
+    !search || p.name.toLowerCase().includes(search) || p.owner.toLowerCase().includes(search) || (p.client||'').toLowerCase().includes(search)
+  );
+  if (!filtered.length) {
+    grid.innerHTML = `<div class="dim" style="padding:50px;text-align:center;grid-column:1/-1">
+      ${projects.length ? 'No projects match your search.' : 'No projects yet — create the first one above.'}
+    </div>`;
+    return;
+  }
+  grid.innerHTML = filtered.map(p => {
+    const date = p.savedAt ? new Date(p.savedAt).toLocaleDateString(undefined, {year:'numeric',month:'short',day:'numeric'}) : '—';
+    return `
+    <div class="ph-card" onclick="openProject('${p.owner.replace(/'/g,"\\'")}','${p.name.replace(/'/g,"\\'")}')">
+      <div class="ph-card-name">${p.name}</div>
+      <div class="ph-card-client">${p.client || '<span class="dim">No client set</span>'}</div>
+      <div class="ph-card-meta">
+        <span>👤 ${p.owner}</span>
+        <span>🕐 ${date}</span>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+async function createNewProject() {
+  const name = (document.getElementById('ph-new-name').value || '').trim();
+  if (!name) { alert('Give the project a name first.'); return; }
+  const { token } = ghConfig();
+  if (!token) { alert('Connect to Cloud first.'); return; }
+  const path = projectPath(currentUser.name, name);
+  const btn = document.getElementById('ph-create-btn');
+  btn.disabled = true; btn.textContent = 'Creating…';
+  try {
+    // Reset the whole app to a blank slate before capturing — otherwise a
+    // brand new project would inherit whatever happens to be on screen.
+    resetAppToBlank();
+    const snap = buildProjectSnapshot();
+    snap.projectName = name;
+    await writeFileToGitHub(path, JSON.stringify(snap, null, 2), `Create project ${name}`);
+    currentProject = { owner: currentUser.name, name, path };
+    document.getElementById('ph-new-name').value = '';
+    enterProject();
+  } catch (err) {
+    alert('Could not create project: ' + err.message);
+  }
+  btn.disabled = false; btn.textContent = '+ Create Project';
+}
+
+async function openProject(owner, name) {
+  const path = projectPath(owner, name);
+  const grid = document.getElementById('ph-grid');
+  const prevHtml = grid.innerHTML;
+  grid.style.opacity = '0.5';
+  try {
+    const content = await readFileFromGitHub(path);
+    const snap = JSON.parse(content);
+    resetAppToBlank();
+    applyProjectSnapshot(snap);
+    currentProject = { owner, name, path };
+    enterProject();
+  } catch (err) {
+    alert('Could not open this project: ' + err.message);
+    grid.style.opacity = '1';
+  }
+}
+
+function enterProject() {
+  hideProjectsHome();
+  updateCurrentProjectBadge();
+  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById('page-dashboard').classList.add('active');
+  document.querySelector('.nav-item[data-p="dashboard"]')?.classList.add('active');
+}
+
+function updateCurrentProjectBadge() {
+  const el = document.getElementById('current-project-name');
+  if (el) el.textContent = currentProject ? currentProject.name : '';
+  const ownerEl = document.getElementById('current-project-owner');
+  if (ownerEl) ownerEl.textContent = currentProject ? `by ${currentProject.owner}` : '';
+}
+
+async function saveCurrentProject() {
+  if (!currentProject) return;
+  const { token } = ghConfig();
+  if (!token) { alert('Connect to Cloud first — see the Projects screen.'); return; }
+  const statusEl = document.getElementById('project-save-status');
+  if (statusEl) { statusEl.style.display = 'inline'; statusEl.textContent = 'Saving…'; statusEl.style.color = 'var(--t3)'; }
+  try {
+    const snap = buildProjectSnapshot();
+    snap.projectName = currentProject.name;
+    await writeFileToGitHub(currentProject.path, JSON.stringify(snap, null, 2), `Update project ${currentProject.name}`);
+    if (statusEl) { statusEl.textContent = 'Saved ✓'; statusEl.style.color = 'var(--green)'; setTimeout(() => statusEl.style.display='none', 2500); }
+  } catch (err) {
+    if (statusEl) { statusEl.textContent = 'Save failed'; statusEl.style.color = 'var(--red)'; }
+    alert('Save failed: ' + err.message);
+  }
+}
+
+function returnToProjectsHome() {
+  showProjectsHome();
+}
+
+// Clears every project-scoped field back to a blank slate — used before
+// creating a new project (so it doesn't inherit whatever's on screen from a
+// previous session) and before opening one (so stale fields from the last
+// project don't bleed into fields the new snapshot doesn't happen to set).
+function resetAppToBlank() {
+  document.querySelectorAll('#page-general input, #page-general select, #page-production input, #page-production select').forEach(el => {
+    if (el.type === 'checkbox') el.checked = false; else if (el.tagName === 'SELECT') el.selectedIndex = 0; else el.value = '';
+  });
+  ['equip-t-body','equip-s-body'].forEach(id => { const tb = document.getElementById(id); if (tb) tb.innerHTML = ''; });
+  cabinetOverrides = {};
+  cabinetManualAdds = {};
+  document.querySelectorAll('[id^="cab-"]').forEach(el => {
+    if (el.tagName === 'SELECT') el.selectedIndex = 0;
+    else if (el.type === 'checkbox') el.checked = false;
+    else if (el.type === 'number') el.value = el.id === 'cab-skus' ? '1' : (el.id === 'cab-layout-length' ? '10' : '0');
+  });
+  recalcAll();
+  calcCabinetPage();
 }
 
 async function refreshGitHubProjectList() {
