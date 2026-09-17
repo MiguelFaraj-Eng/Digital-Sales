@@ -29,21 +29,23 @@
       "category": "PLCs",
       "item": "Compact GuardLogix5380 L320ERS2",
       "supplier": "Allen Bradley",
-      "email": "",
       "cost": 3050,
       "latestPrice": 3050,
       "updated": "2026-09-17",
-      "description": "Compact GuardLogix5380 Safety Controller, SIL2/PLd, 2.0MB Standard & 1.0MB Safety Memory, 40 nodes, 16 I/Os"
+      "email": "",
+      "description": "Controller, Compact GuardLogix 5380 Safety, SIL2/PLd, 2.0MB Standard & 1.0MB Safety Memory, 40 nodes, 16 I/Os",
+      "pdfPath": "data/supplier-docs/sup-cab-plc-9-un1s3.pdf",
+      "pdfName": "a43bf7f9-095c-49da-ae0e-0797648b04a1.pdf"
     },
     {
       "id": "sup-cab-plc-11-qld8u",
       "category": "PLCs",
       "item": "Compact GuardLogix5380 L320ERMS2",
       "supplier": "Allen Bradley",
-      "email": "",
       "cost": 3900,
       "latestPrice": 3900,
       "updated": "2026-09-17",
+      "email": "",
       "description": "Compact GuardLogix5380 Safety Controller, SIL2/PLd, 2.0MB Standard 1.0MB Safety Memory, 40 nodes, 16 I/Os, 8 axis"
     },
     {
@@ -51,10 +53,10 @@
       "category": "PLCs",
       "item": "Compact GuardLogix5380 L350ERS2",
       "supplier": "Allen Bradley",
-      "email": "",
       "cost": 7800,
       "latestPrice": 7800,
       "updated": "2026-09-17",
+      "email": "",
       "description": "Compact GuardLogix5380 Safety Controller, SIL2/PLd, 5.0MB Standard & 2.5MB Safety Memory, 120 nodes, 31 I/Os"
     },
     {
@@ -62,10 +64,10 @@
       "category": "PLCs",
       "item": "Compact GuardLogix5380 L350ERMS2",
       "supplier": "Allen Bradley",
-      "email": "",
       "cost": 9200,
       "latestPrice": 9200,
       "updated": "2026-09-17",
+      "email": "",
       "description": "Compact GuardLogix5380 Safety Controller, SIL2/PLd, 5.0MB Standard & 2.5MB Safety Memory, 120 nodes, 31 I/Os, 24 axis"
     },
     {
@@ -73,10 +75,10 @@
       "category": "PLCs",
       "item": "SIMATIC S7-1200, CPU 1214C",
       "supplier": "Siemens",
-      "email": "",
       "cost": 621.5,
       "latestPrice": 621.5,
       "updated": "2026-09-17",
+      "email": "",
       "description": "SIMATIC S7-1200, CPU 1214C, COMPACT CPU, DC/DC/DC, ONBOARD I/O: 14 DI 24V DC, 10 DO 24 V DC, 2 AI 0 - 10V DC, POWER SUPPLY: DC 20.4 - 28.8 V DC,PROGRAM/DATA MEMORY: 75 KB"
     },
     {
@@ -84,21 +86,21 @@
       "category": "PLCs",
       "item": "SIMATIC S7-1500, CPU 1513-1 PN",
       "supplier": "Siemens",
-      "email": "",
       "cost": 2277,
       "latestPrice": 2277,
       "updated": "2026-09-17",
-      "description": "SIMATIC S7-1500, CPU 1513-1 PN, central processing unit with work memory 600 KB for program and 2.5 MB for data, 1st interface: PROFINET IRT with 2-port switch, 25 ns bit performance, SIMATIC Memory Card required "
+      "email": "",
+      "description": "SIMATIC S7-1500, CPU 1513-1 PN, central processing unit with work memory 600 KB for program and 2.5 MB for data, 1st interface: PROFINET IRT with 2-port switch, 25 ns bit performance, SIMATIC Memory Card required"
     },
     {
       "id": "sup-cab-plc-5-pvtt2",
       "category": "PLCs",
       "item": "SIMATIC S7-1500F, CPU 1513F-1 PN",
       "supplier": "Siemens",
-      "email": "",
       "cost": 2475,
       "latestPrice": 2475,
       "updated": "2026-09-17",
+      "email": "",
       "description": "SIMATIC S7-1500F, CPU 1513F-1 PN, central processing unit with work memory 900 KB for program and 2.5 MB for data, 1st interface: PROFINET IRT with 2-port switch, 25 ns bit performance, SIMATIC Memory Card required"
     },
     {
@@ -106,10 +108,10 @@
       "category": "PLCs",
       "item": "SIMATIC S7-1500, CPU 1515-2 PN",
       "supplier": "Siemens",
-      "email": "",
       "cost": 2860,
       "latestPrice": 2860,
       "updated": "2026-09-17",
+      "email": "",
       "description": "SIMATIC S7-1500, CPU 1515-2 PN, central processing unit with work memory 1 MB for program and 4.5 MB for data, 1st interface: PROFINET IRT with 2-port switch, 2nd interface: PROFINET RT, 6 ns bit performance, SIMATIC Memory Card required"
     },
     {
@@ -117,10 +119,10 @@
       "category": "PLCs",
       "item": "SIMATIC S7-1500F, CPU 1515F-2 PN",
       "supplier": "Siemens",
-      "email": "",
-      "cost": 3630.0,
-      "latestPrice": 3630.0,
+      "cost": 3630,
+      "latestPrice": 3630,
       "updated": "2026-09-17",
+      "email": "",
       "description": "SIMATIC S7-1500F, CPU 1515F-2 PN, central processing unit with 1.5 MB work memory for program and 4.5 MB for data, 1st interface: PROFINET IRT with 2-port switch, 2nd interface: PROFINET RT, 6 ns bit performance, SIMATIC Memory Card required"
     },
     {
@@ -128,10 +130,10 @@
       "category": "PLCs",
       "item": "SIMATIC S7-1500, CPU 1516-3 PN/DP",
       "supplier": "Siemens",
-      "email": "",
       "cost": 4180,
       "latestPrice": 4180,
       "updated": "2026-09-17",
+      "email": "",
       "description": "SIMATIC S7-1500, CPU 1516-3 PN/DP, central processing unit with 2 MB work memory for program and 7.5 MB for data 1st interface: PROFINET IRT with 2-port switch, 2nd interface: PROFINET RT, 3rd interface: PROFIBUS, 6 ns bit performance, SIMATIC Memory Card required"
     },
     {
@@ -139,10 +141,10 @@
       "category": "PLCs",
       "item": "SIMATIC S7-1500T, CPU 1515T-2 PN",
       "supplier": "Siemens",
-      "email": "",
       "cost": 4180,
       "latestPrice": 4180,
       "updated": "2026-09-17",
+      "email": "",
       "description": "SIMATIC S7-1500T, CPU 1515T-2 PN, central processing unit with 1.5 MB work memory for program and 4.5 MB for data, 1st interface: PROFINET IRT with 2-port switch, 2nd interface: PROFINET RT, 6 ns bit performance, SIMATIC Memory Card required"
     },
     {
@@ -150,10 +152,10 @@
       "category": "PLCs",
       "item": "SIMATIC S7-1500F, CPU 1517F-3 PN/DP",
       "supplier": "Siemens",
-      "email": "",
-      "cost": 6424.0,
-      "latestPrice": 6424.0,
+      "cost": 6424,
+      "latestPrice": 6424,
       "updated": "2026-09-17",
+      "email": "",
       "description": "SIMATIC S7-1500F, CPU 1517F-3 PN/DP, central processing unit with work memory 3 MB for program and 8 MB for data, 1st interface: PROFINET IRT with 2-port switch, 2nd interface: PROFINET RT, 3rd interface: PROFIBUS, 2 ns bit performance, SIMATIC Memory Card required."
     },
     {
@@ -161,10 +163,10 @@
       "category": "PLC I/O & Accessories",
       "item": "1734 Series, DI 8",
       "supplier": "Allen Bradley",
-      "email": "",
       "cost": 68,
       "latestPrice": 68,
       "updated": "2026-09-17",
+      "email": "",
       "description": "POINT I/O 8 Point Digital Input Module"
     },
     {
@@ -172,10 +174,10 @@
       "category": "PLC I/O & Accessories",
       "item": "1734 Series, DQ 8",
       "supplier": "Allen Bradley",
-      "email": "",
       "cost": 134,
       "latestPrice": 134,
       "updated": "2026-09-17",
+      "email": "",
       "description": "POINT I/O 8 Point Digital Output Module"
     },
     {
@@ -183,10 +185,10 @@
       "category": "PLC I/O & Accessories",
       "item": "SIMATIC ET 200SP, DI 8",
       "supplier": "Siemens",
-      "email": "",
       "cost": 94.6,
       "latestPrice": 94.6,
       "updated": "2026-09-17",
+      "email": "",
       "description": "SIMATIC DP, Electronics module for ET 200SP,DI 8x 24 V DC ST"
     },
     {
@@ -194,10 +196,10 @@
       "category": "PLC I/O & Accessories",
       "item": "1734 Series, Power Module",
       "supplier": "Allen Bradley",
-      "email": "",
       "cost": 100,
       "latestPrice": 100,
       "updated": "2026-09-17",
+      "email": "",
       "description": "Expansion Power Module, POINT I/O, 400ma @24VDC Input, 1.3 A @5VDC Output to POINTBus, Open Style, DIN Mounted"
     },
     {
@@ -205,10 +207,10 @@
       "category": "PLC I/O & Accessories",
       "item": "SIMATIC ET 200SP, DQ 8",
       "supplier": "Siemens",
-      "email": "",
       "cost": 167.1,
       "latestPrice": 167.1,
       "updated": "2026-09-17",
+      "email": "",
       "description": "SIMATIC DP, Electronics module for ET 200SP,DQ 8x 24 V DC ST"
     },
     {
@@ -216,10 +218,10 @@
       "category": "PLC I/O & Accessories",
       "item": "SIMATIC ET 200SP, AI 4",
       "supplier": "Siemens",
-      "email": "",
       "cost": 254.1,
       "latestPrice": 254.1,
       "updated": "2026-09-17",
+      "email": "",
       "description": "SIMATIC ET 200SP, ANALOG INPUT MODULE, AI 4XU/I 2-WIRE STANDARD, PACKING UNIT: 1 PIECE, FITS TO BU-TYPE A0, A1, COLOR CODE CC03, MODULE DIAGNOSIS, 16BIT, +/-0,3%"
     },
     {
@@ -227,10 +229,10 @@
       "category": "PLC I/O & Accessories",
       "item": "SIMATIC ET 200SP, F-DI 8",
       "supplier": "Siemens",
-      "email": "",
       "cost": 292.6,
       "latestPrice": 292.6,
       "updated": "2026-09-17",
+      "email": "",
       "description": "SIMATIC DP, Electronics module for ET 200SP, F-DI 8x 24 V DC HF"
     },
     {
@@ -238,10 +240,10 @@
       "category": "PLC I/O & Accessories",
       "item": "1734 Series, AI 4",
       "supplier": "Allen Bradley",
-      "email": "",
       "cost": 268,
       "latestPrice": 268,
       "updated": "2026-09-17",
+      "email": "",
       "description": "4-Channel High Density Analog Current Input Module"
     },
     {
@@ -249,10 +251,10 @@
       "category": "PLC I/O & Accessories",
       "item": "SIMATIC ET 200SP, IM155-6 PN",
       "supplier": "Siemens",
-      "email": "",
       "cost": 302.5,
       "latestPrice": 302.5,
       "updated": "2026-09-17",
+      "email": "",
       "description": "SIMATIC ET 200SP, PROFINET bundle IM, IM 155-6PN ST, max. 32 I/O modules and 16 ET 200AL modules, single hot swap, bundle consists of: Interface module (6ES7155-6AU01-0BN0), Server module (6ES7193-6PA00-0AA0), BusAdapter BA 2xRJ45 (6ES7193-6AR00-0AA0)"
     },
     {
@@ -260,10 +262,10 @@
       "category": "PLC I/O & Accessories",
       "item": "1734 Series, F-DI 8",
       "supplier": "Allen Bradley",
-      "email": "",
       "cost": 332,
       "latestPrice": 332,
       "updated": "2026-09-17",
+      "email": "",
       "description": "DC Input Module, 8 Points, Safety, IP20, POINT, 24VDC, Sinking"
     },
     {
@@ -271,10 +273,10 @@
       "category": "PLC I/O & Accessories",
       "item": "SIMATIC ET 200SP, F-DQ 8",
       "supplier": "Siemens",
-      "email": "",
       "cost": 317.5,
       "latestPrice": 317.5,
       "updated": "2026-09-17",
+      "email": "",
       "description": "SIMATIC DP, Electronics module ET 200SP, F-DQ 8XDC 24V0.5A PP"
     },
     {
@@ -282,10 +284,10 @@
       "category": "PLC I/O & Accessories",
       "item": "1734 Series, Point I/O",
       "supplier": "Allen Bradley",
-      "email": "",
       "cost": 310,
       "latestPrice": 310,
       "updated": "2026-09-17",
+      "email": "",
       "description": "POINT I/O, Dual Port, Ethernet Network Adapter, EtherNet/IP, 63 Module Capacity on POINTBus, DIN Mounted"
     },
     {
@@ -293,10 +295,10 @@
       "category": "PLC I/O & Accessories",
       "item": "1734 Series, F-DQ 8",
       "supplier": "Allen Bradley",
-      "email": "",
       "cost": 372,
       "latestPrice": 372,
       "updated": "2026-09-17",
+      "email": "",
       "description": "DC Output Module, 8 Points, Safety, IP20, POINT, 24VDC, Sourcing"
     },
     {
@@ -304,10 +306,10 @@
       "category": "PLC I/O & Accessories",
       "item": "1734 Series, BaseUnit",
       "supplier": "Allen Bradley",
-      "email": "",
       "cost": 8,
       "latestPrice": 8,
       "updated": "2026-09-17",
+      "email": "",
       "description": "POINT I/O One-piece Terminal Base with Spring Clamp, 8 Terminations"
     },
     {
@@ -315,10 +317,10 @@
       "category": "PLC I/O & Accessories",
       "item": "SIMATIC ET 200SP, BaseUnit",
       "supplier": "Siemens",
-      "email": "",
       "cost": 28.6,
       "latestPrice": 28.6,
       "updated": "2026-09-17",
+      "email": "",
       "description": "SIMATIC ET 200SP, BaseUnit BU15-P16+A0+2D, BU type A0, push-in terminals, without aux. terminals, new load group, WxH: 15x 117 mm"
     },
     {
@@ -326,10 +328,10 @@
       "category": "PLC I/O & Accessories",
       "item": "SIMATIC S7 Memory Card 12 MB",
       "supplier": "Siemens",
-      "email": "",
       "cost": 181.5,
       "latestPrice": 181.5,
       "updated": "2026-09-17",
+      "email": "",
       "description": "SIMATIC S7, memory cards for S7-1x 00 CPU/SINAMICS, 3, 3V Flash, 12 MB"
     },
     {
@@ -337,10 +339,10 @@
       "category": "PLC I/O & Accessories",
       "item": "SIMATIC S7 Memory Card 24 MB",
       "supplier": "Siemens",
-      "email": "",
       "cost": 330,
       "latestPrice": 330,
       "updated": "2026-09-17",
+      "email": "",
       "description": "SIMATIC S7, memory cards for S7-1x 00 CPU/SINAMICS, 3, 3V Flash, 24 MB"
     },
     {
@@ -348,10 +350,10 @@
       "category": "HMI",
       "item": "SIMATIC HMI KTP900 Basic",
       "supplier": "Siemens",
-      "email": "",
       "cost": 1100,
       "latestPrice": 1100,
       "updated": "2026-09-17",
+      "email": "",
       "description": "SIMATIC HMI, KTP900 Basic, Basic Panel, Key/touch operation, 9\" TFT display, 65536 colors, PROFINET interface, configurable from WinCC Basic V13/ STEP 7 Basic V13, contains open-source software, which is provided free of charge see enclosed CD"
     },
     {
@@ -359,10 +361,10 @@
       "category": "HMI",
       "item": "SIMATIC HMI TP1200 Comfort",
       "supplier": "Siemens",
-      "email": "",
       "cost": 3106.4,
       "latestPrice": 3106.4,
       "updated": "2026-09-17",
+      "email": "",
       "description": "SIMATIC HMI TP1200 Comfort, Comfort Panel, touch operation, 12\" widescreen TFT display, 16 million colors, PROFINET interface, MPI/PROFIBUS DP interface, 12 MB configuration memory, Windows CE 6.0, configurable from WinCC Comfort V11"
     },
     {
@@ -370,10 +372,10 @@
       "category": "HMI",
       "item": "PVP7 Standard 10.4 in",
       "supplier": "Allen Bradley",
-      "email": "",
       "cost": 2300,
       "latestPrice": 2300,
       "updated": "2026-09-17",
+      "email": "",
       "description": "PanelView Plus 7 Standard Terminal, Touch Screen, 10.4 inches, TFT Color, Single Ethernet, 24V DC, Windows CE OS License, Standard Model"
     },
     {
@@ -381,10 +383,10 @@
       "category": "HMI",
       "item": "PVP7 Standard 12 in",
       "supplier": "Allen Bradley",
-      "email": "",
       "cost": 2700,
       "latestPrice": 2700,
       "updated": "2026-09-17",
+      "email": "",
       "description": "PanelView Plus 7 Standard Terminal, Touch Screen, 12 inches, Wide aspect ratio Color, Single Ethernet, 24V DC, Windows CE OS License, Standard Model"
     },
     {
@@ -392,10 +394,10 @@
       "category": "Networking",
       "item": "Unmanaged 8-port (Siemens)",
       "supplier": "Siemens",
-      "email": "",
-      "cost": 220.0,
-      "latestPrice": 220.0,
+      "cost": 220,
+      "latestPrice": 220,
       "updated": "2026-09-17",
+      "email": "",
       "description": "SCALANCE XB008 Unmanaged Industrial Ethernet Switch for 10/100 Mbit/s for setting up small star and line topologies; LED diagnostics, IP20, 24 V AC/DC power supply, with 8x 10/100 Mbit/s twisted pair ports with RJ45 sockets"
     },
     {
@@ -403,21 +405,21 @@
       "category": "Networking",
       "item": "Managed 8-port",
       "supplier": "Siemens",
-      "email": "",
       "cost": 660,
       "latestPrice": 660,
       "updated": "2026-09-17",
-      "description": "SCALANCE XC208 manageable Layer 2 IE switch; IEC 62443-4-2 certified; 8x 10/100 Mbit/s RJ45 ports; 1x console port; diagnostics LED; redundant power supply; temperature range -40 \u00b0C to +70 \u00b0C; assembly: DIN rail/S7 mounting rail/wall Office redundancy functions features (RSTP, VLAN,...); PROFINET IO device Ethernet/IP-compliant C-plug slot;"
+      "email": "",
+      "description": "SCALANCE XC208 manageable Layer 2 IE switch; IEC 62443-4-2 certified; 8x 10/100 Mbit/s RJ45 ports; 1x console port; diagnostics LED; redundant power supply; temperature range -40 °C to +70 °C; assembly: DIN rail/S7 mounting rail/wall Office redundancy functions features (RSTP, VLAN,...); PROFINET IO device Ethernet/IP-compliant C-plug slot;"
     },
     {
       "id": "sup-cab-switches-3-6vu7z",
       "category": "Networking",
       "item": "Unmanaged 8-port (Allen Bradley)",
       "supplier": "Allen Bradley",
-      "email": "",
       "cost": 200,
       "latestPrice": 200,
       "updated": "2026-09-17",
+      "email": "",
       "description": "Stratix 2000 Switch, Unmanaged, 8 Copper Ports"
     },
     {
@@ -425,10 +427,10 @@
       "category": "Networking",
       "item": "Lightly Managed 8-port",
       "supplier": "Allen Bradley",
-      "email": "",
       "cost": 700,
       "latestPrice": 700,
       "updated": "2026-09-17",
+      "email": "",
       "description": "Stratix 2500 Switch, Lightly Managed with 8x10/100BaseT, 8 port"
     },
     {
@@ -436,10 +438,10 @@
       "category": "Networking",
       "item": "Managed 8-port, NAT",
       "supplier": "Allen Bradley",
-      "email": "",
       "cost": 2600,
       "latestPrice": 2600,
       "updated": "2026-09-17",
+      "email": "",
       "description": "Stratix 5200 Switch, 8 Copper 100/1000 Ports, 2 Combo 100/1000 Ports, Full FW, DLR, PRP, NAT"
     },
     {
@@ -447,10 +449,10 @@
       "category": "Networking",
       "item": "Unmanaged 16 ports (Siemens)",
       "supplier": "Siemens",
-      "email": "",
       "cost": 524.7,
       "latestPrice": 524.7,
       "updated": "2026-09-17",
+      "email": "",
       "description": "SCALANCE XB116 unmanaged IE switch, 16x 10/100 Mbit/s RJ45 ports; for setting up small star and line topologies; LED diagnostics, IP20, Redundant power supply, 24 V AC/DC"
     },
     {
@@ -458,21 +460,21 @@
       "category": "Networking",
       "item": "Managed 16 ports (Siemens)",
       "supplier": "Siemens",
-      "email": "",
       "cost": 1166,
       "latestPrice": 1166,
       "updated": "2026-09-17",
-      "description": "SCALANCE XC216 manageable Layer 2 IE switch; IEC 62443-4-2 certified; 16X 10/100 Mbit/s RJ45 ports; 1x console port, diagnostics LED; redundant power supply; temperature range -40 \u00b0C to +70 \u00b0C; assembly: DIN rail/S7 mounting rail/wall Office redundancy functions features (RSTP, VLAN,...); PROFINET IO device; Ethernet/IP-compliant; C-plug slot"
+      "email": "",
+      "description": "SCALANCE XC216 manageable Layer 2 IE switch; IEC 62443-4-2 certified; 16X 10/100 Mbit/s RJ45 ports; 1x console port, diagnostics LED; redundant power supply; temperature range -40 °C to +70 °C; assembly: DIN rail/S7 mounting rail/wall Office redundancy functions features (RSTP, VLAN,...); PROFINET IO device; Ethernet/IP-compliant; C-plug slot"
     },
     {
       "id": "sup-cab-switches-8-d1opq",
       "category": "Networking",
       "item": "Unmanaged 16 ports (Allen Bradley)",
       "supplier": "Allen Bradley",
-      "email": "",
-      "cost": 1059.0,
-      "latestPrice": 1059.0,
+      "cost": 1059,
+      "latestPrice": 1059,
       "updated": "2026-09-17",
+      "email": "",
       "description": "Stratix 2000 unmanaged switch, 16 copper 10/100 ports"
     },
     {
@@ -480,10 +482,10 @@
       "category": "Networking",
       "item": "Managed 16 ports (Allen Bradley)",
       "supplier": "Allen Bradley",
-      "email": "",
       "cost": 3500,
       "latestPrice": 3500,
       "updated": "2026-09-17",
+      "email": "",
       "description": "Stratix 5700, 16 copper 10/100 ports, 2 combo(copper or SFP slot) 10/100 ports, 2 SFP 10/100 slots, lite FW"
     },
     {
@@ -491,10 +493,10 @@
       "category": "UPS",
       "item": "UPS 20A (Allen Bradley)",
       "supplier": "Allen Bradley",
-      "email": "",
       "cost": 430,
       "latestPrice": 430,
       "updated": "2026-09-17",
+      "email": "",
       "description": "Uninterruptible power supply (UPS) controller 1606-XLS480-UPS is an addition to standard 24V power supplies to bridge power failures or voltage fluctuations"
     },
     {
@@ -502,10 +504,10 @@
       "category": "UPS",
       "item": "UPS 20A (Siemens)",
       "supplier": "Siemens",
-      "email": "",
       "cost": 533.5,
       "latestPrice": 533.5,
       "updated": "2026-09-17",
+      "email": "",
       "description": "SITOP UPS1600 20 A uninterruptible power supply input: 24 V DC output: 24 V DC/20 A"
     },
     {
@@ -513,10 +515,10 @@
       "category": "Ventilation",
       "item": "Seifert Ventilation - Fan & Filter (Seifert, CE)",
       "supplier": "Seifert",
-      "email": "",
       "cost": 73,
       "latestPrice": 73,
       "updated": "2026-09-17",
+      "email": "",
       "description": "FAN FL-4620A 230/270 m3/h + FILTER FF-4000"
     },
     {
@@ -524,10 +526,10 @@
       "category": "Ventilation",
       "item": "Seifert Ventilation - Fan & Filter (Seifert, UL)",
       "supplier": "Seifert",
-      "email": "",
       "cost": 163,
       "latestPrice": 163,
       "updated": "2026-09-17",
+      "email": "",
       "description": "FAN FL-4620A 230/270 m3/h + FILTER FF-4000"
     },
     {
@@ -535,10 +537,10 @@
       "category": "Ventilation",
       "item": "Seifert Ventilation - AC 750W- Painted Steel",
       "supplier": "Seifert",
-      "email": "",
       "cost": 680,
       "latestPrice": 680,
       "updated": "2026-09-17",
+      "email": "",
       "description": "KG 4308-Combi, 750W"
     },
     {
@@ -546,10 +548,10 @@
       "category": "Ventilation",
       "item": "Seifert Ventilation - AC 670W - Stainless Steel (Seifert, CE)",
       "supplier": "Seifert",
-      "email": "",
       "cost": 1078.07,
       "latestPrice": 1078.07,
       "updated": "2026-09-17",
+      "email": "",
       "description": "KG 8506-230V SS, 670 W"
     },
     {
@@ -557,10 +559,10 @@
       "category": "Ventilation",
       "item": "Seifert Ventilation - AC 750W - Painted Steel",
       "supplier": "Seifert",
-      "email": "",
       "cost": 770,
       "latestPrice": 770,
       "updated": "2026-09-17",
+      "email": "",
       "description": "KG 4308-Combi, 750W"
     },
     {
@@ -568,10 +570,10 @@
       "category": "Ventilation",
       "item": "Seifert Ventilation - AC 670W - Stainless Steel (Seifert, UL)",
       "supplier": "Seifert",
-      "email": "",
       "cost": 1168.07,
       "latestPrice": 1168.07,
       "updated": "2026-09-17",
+      "email": "",
       "description": "KG 8506-230V SS, 670 W"
     },
     {
@@ -579,10 +581,10 @@
       "category": "VFDs & Drives",
       "item": "SEW - VFD 0.75 kW CE",
       "supplier": "SEW",
-      "email": "",
       "cost": 421.08,
       "latestPrice": 421.08,
       "updated": "2026-09-17",
+      "email": "",
       "description": "MOVITRAC LTE-B, IP20, with filter, 0.75 KW, 3 phases x AC 380-480V, 50/60Hz, 2.2 A"
     },
     {
@@ -590,10 +592,10 @@
       "category": "VFDs & Drives",
       "item": "SEW - VFD 0.75 kW UL",
       "supplier": "SEW",
-      "email": "",
       "cost": 554.78,
       "latestPrice": 554.78,
       "updated": "2026-09-17",
+      "email": "",
       "description": "MOVITRAC LTE-B, IP20, with filter, 0.75 KW, 3 phases x AC 380-480V, 50/60Hz, 2.2 A"
     },
     {
@@ -601,10 +603,10 @@
       "category": "VFDs & Drives",
       "item": "SEW - VFD 1.5 kW CE",
       "supplier": "SEW",
-      "email": "",
       "cost": 505.27,
       "latestPrice": 505.27,
       "updated": "2026-09-17",
+      "email": "",
       "description": "MOVITRAC LTE-B, IP20, with filter, 1.5 KW, 3 phases x AC 380-480V, 50/60Hz, 4.1 A"
     },
     {
@@ -612,10 +614,10 @@
       "category": "VFDs & Drives",
       "item": "SEW - VFD 1.5 kW UL",
       "supplier": "SEW",
-      "email": "",
       "cost": 638.97,
       "latestPrice": 638.97,
       "updated": "2026-09-17",
+      "email": "",
       "description": "MOVITRAC LTE-B, IP20, with filter, 1.5 KW, 3 phases x AC 380-480V, 50/60Hz, 4.1 A"
     },
     {
@@ -623,10 +625,10 @@
       "category": "VFDs & Drives",
       "item": "SEW - VFD 2.2 kW CE",
       "supplier": "SEW",
-      "email": "",
       "cost": 586.08,
       "latestPrice": 586.08,
       "updated": "2026-09-17",
+      "email": "",
       "description": "MOVITRAC LTE-B IP20 with filter, 4 quadrants 2.2KW"
     },
     {
@@ -634,10 +636,10 @@
       "category": "VFDs & Drives",
       "item": "SEW - VFD 2.2 kW UL",
       "supplier": "SEW",
-      "email": "",
       "cost": 719.78,
       "latestPrice": 719.78,
       "updated": "2026-09-17",
+      "email": "",
       "description": "MOVITRAC LTE-B IP20 with filter, 4 quadrants 2.2KW"
     },
     {
@@ -645,10 +647,10 @@
       "category": "VFDs & Drives",
       "item": "AB - VFD 0.75 kW CE",
       "supplier": "Allen Bradley",
-      "email": "",
       "cost": 769.8,
       "latestPrice": 769.8,
       "updated": "2026-09-17",
+      "email": "",
       "description": "PowerFlex 525 AC Drive, with Embedded EtherNet/IP and Safety, 480 VAC, 3 Phase, 1.0 HP, 0.75 kW Normal Duty,1.0 HP, 0.75 kW Heavy Duty, Frame A, IP20 NEMA / Open Type, Filter"
     },
     {
@@ -656,10 +658,10 @@
       "category": "VFDs & Drives",
       "item": "AB - VFD 0.75 kW UL",
       "supplier": "Allen Bradley",
-      "email": "",
       "cost": 903.5,
       "latestPrice": 903.5,
       "updated": "2026-09-17",
+      "email": "",
       "description": "PowerFlex 525 AC Drive, with Embedded EtherNet/IP and Safety, 480 VAC, 3 Phase, 1.0 HP, 0.75 kW Normal Duty,1.0 HP, 0.75 kW Heavy Duty, Frame A, IP20 NEMA / Open Type, Filter"
     },
     {
@@ -667,10 +669,10 @@
       "category": "VFDs & Drives",
       "item": "AB - VFD 1.5 kW CE",
       "supplier": "Allen Bradley",
-      "email": "",
       "cost": 816.62,
       "latestPrice": 816.62,
       "updated": "2026-09-17",
+      "email": "",
       "description": "PowerFlex 525 AC Drive, with Embedded EtherNet/IP and Safety, 480 VAC, 3 Phase, 2 HP, 1.5 kW Normal Duty, 2 HP, 1.5 kW Heavy Duty, Frame A, IP20 NEMA / Open Type, Filter"
     },
     {
@@ -678,10 +680,10 @@
       "category": "VFDs & Drives",
       "item": "AB - VFD 1.5 kW UL",
       "supplier": "Allen Bradley",
-      "email": "",
       "cost": 950.32,
       "latestPrice": 950.32,
       "updated": "2026-09-17",
+      "email": "",
       "description": "PowerFlex 525 AC Drive, with Embedded EtherNet/IP and Safety, 480 VAC, 3 Phase, 2 HP, 1.5 kW Normal Duty, 2 HP, 1.5 kW Heavy Duty, Frame A, IP20 NEMA / Open Type, Filter"
     },
     {
@@ -689,32 +691,32 @@
       "category": "VFDs & Drives",
       "item": "AB - VFD 2.2 kW CE",
       "supplier": "Allen Bradley",
-      "email": "",
       "cost": 956.58,
       "latestPrice": 956.58,
       "updated": "2026-09-17",
-      "description": "\u00a0PowerFlex 525 AC Drive, with Embedded EtherNet/IP and Safety, 480V AC, 3 Phase, 3 Hp, 2.2 kW Normal Duty; 3 Hp, 2.2 kW Heavy Duty, Frame A, IP20 NEMA / Open Type, Filter"
+      "email": "",
+      "description": "PowerFlex 525 AC Drive, with Embedded EtherNet/IP and Safety, 480V AC, 3 Phase, 3 Hp, 2.2 kW Normal Duty; 3 Hp, 2.2 kW Heavy Duty, Frame A, IP20 NEMA / Open Type, Filter"
     },
     {
       "id": "sup-cab-vfdCentralized-12-nz0c3",
       "category": "VFDs & Drives",
       "item": "AB - VFD 2.2 kW UL",
       "supplier": "Allen Bradley",
-      "email": "",
       "cost": 1090.28,
       "latestPrice": 1090.28,
       "updated": "2026-09-17",
-      "description": "\u00a0PowerFlex 525 AC Drive, with Embedded EtherNet/IP and Safety, 480V AC, 3 Phase, 3 Hp, 2.2 kW Normal Duty; 3 Hp, 2.2 kW Heavy Duty, Frame A, IP20 NEMA / Open Type, Filter"
+      "email": "",
+      "description": "PowerFlex 525 AC Drive, with Embedded EtherNet/IP and Safety, 480V AC, 3 Phase, 3 Hp, 2.2 kW Normal Duty; 3 Hp, 2.2 kW Heavy Duty, Frame A, IP20 NEMA / Open Type, Filter"
     },
     {
       "id": "sup-cab-vfdCentralized-13-z925u",
       "category": "VFDs & Drives",
       "item": "Siemens - VFD 0.75 kW CE",
       "supplier": "Siemens",
-      "email": "",
       "cost": 465.3,
       "latestPrice": 465.3,
       "updated": "2026-09-17",
+      "email": "",
       "description": "SINAMICS G120C RATED POWER 0.75KW WITH 150% OVERLOAD FOR 3 SEC 3AC380-480V +10/-20% 47-63HZ INTEGRATED FILTER CLASS A I/O-INTERFACE: 6DI, 2DO,1AI,1AO SAFE TORQUE OFF INTEGRATED FIELDBUS: PROFINET-PN PROTECTION: IP20/ UL OPEN TYPE SIZE: FSAA 173X73X178(HXWXD) EXTERNAL 24V"
     },
     {
@@ -722,10 +724,10 @@
       "category": "VFDs & Drives",
       "item": "Siemens - VFD 0.75 kW UL",
       "supplier": "Siemens",
-      "email": "",
       "cost": 612,
       "latestPrice": 612,
       "updated": "2026-09-17",
+      "email": "",
       "description": "SINAMICS G120C RATED POWER 0.75KW WITH 150% OVERLOAD FOR 3 SEC 3AC380-480V +10/-20% 47-63HZ INTEGRATED FILTER CLASS A I/O-INTERFACE: 6DI, 2DO,1AI,1AO SAFE TORQUE OFF INTEGRATED FIELDBUS: PROFINET-PN PROTECTION: IP20/ UL OPEN TYPE SIZE: FSAA 173X73X178(HXWXD) EXTERNAL 24V"
     },
     {
@@ -733,10 +735,10 @@
       "category": "VFDs & Drives",
       "item": "Siemens - VFD 1.5 kW CE",
       "supplier": "Siemens",
-      "email": "",
       "cost": 597.3,
       "latestPrice": 597.3,
       "updated": "2026-09-17",
+      "email": "",
       "description": "SINAMICS G120C RATED POWER 1.5KW WITH 150% OVERLOAD FOR 3 SEC 3AC380-480V +10/-20% 47-63HZ INTEGRATED FILTER CLASS A I/O-INTERFACE: 6DI, 2DO,1AI,1AO SAFE TORQUE OFF INTEGRATED FIELDBUS: PROFINET-PN PROTECTION: IP20/ UL OPEN TYPE SIZE: FSAA 173X73X178(HXWXD) EXTERNAL 24V"
     },
     {
@@ -744,10 +746,10 @@
       "category": "VFDs & Drives",
       "item": "Siemens - VFD 1.5 kW UL",
       "supplier": "Siemens",
-      "email": "",
       "cost": 744,
       "latestPrice": 744,
       "updated": "2026-09-17",
+      "email": "",
       "description": "SINAMICS G120C RATED POWER 1.5KW WITH 150% OVERLOAD FOR 3 SEC 3AC380-480V +10/-20% 47-63HZ INTEGRATED FILTER CLASS A I/O-INTERFACE: 6DI, 2DO,1AI,1AO SAFE TORQUE OFF INTEGRATED FIELDBUS: PROFINET-PN PROTECTION: IP20/ UL OPEN TYPE SIZE: FSAA 173X73X178(HXWXD) EXTERNAL 24V"
     },
     {
@@ -755,10 +757,10 @@
       "category": "VFDs & Drives",
       "item": "Siemens - VFD 2.2 kW CE",
       "supplier": "Siemens",
-      "email": "",
       "cost": 652.3,
       "latestPrice": 652.3,
       "updated": "2026-09-17",
+      "email": "",
       "description": "SINAMICS G120C RATED POWER 2.2KW WITH 150% OVERLOAD FOR 3 SEC 3AC380-480V +10/-20% 47-63HZ INTEGRATED FILTER CLASS A I/O-INTERFACE: 6DI, 2DO,1AI,1AO SAFE TORQUE OFF INTEGRATED FIELDBUS: PROFINET-PN PROTECTION: IP20/ UL OPEN TYPE SIZE: FSAA 173X73X178(HXWXD) EXTERNAL 24V"
     },
     {
@@ -766,10 +768,10 @@
       "category": "VFDs & Drives",
       "item": "Siemens - VFD 2.2 kW UL",
       "supplier": "Siemens",
-      "email": "",
       "cost": 799,
       "latestPrice": 799,
       "updated": "2026-09-17",
+      "email": "",
       "description": "SINAMICS G120C RATED POWER 2.2KW WITH 150% OVERLOAD FOR 3 SEC 3AC380-480V +10/-20% 47-63HZ INTEGRATED FILTER CLASS A I/O-INTERFACE: 6DI, 2DO,1AI,1AO SAFE TORQUE OFF INTEGRATED FIELDBUS: PROFINET-PN PROTECTION: IP20/ UL OPEN TYPE SIZE: FSAA 173X73X178(HXWXD) EXTERNAL 24V"
     },
     {
@@ -777,87 +779,87 @@
       "category": "VFDs & Drives",
       "item": "Danfoss - VFD 0.75 kW CE",
       "supplier": "Danfoss",
-      "email": "",
       "cost": 1198.2,
       "latestPrice": 1198.2,
       "updated": "2026-09-17",
-      "description": "131B0028 \u2013 FC-302PK75T5E20H1XXXXXXSXXXXAXBXCXXXXDX (without Control Panel)\n\n130B1107 \u2013 LCP102 Control Panel for FC100/200/300"
+      "email": "",
+      "description": "131B0028 – FC-302PK75T5E20H1XXXXXXSXXXXAXBXCXXXXDX (without Control Panel)\n\n130B1107 – LCP102 Control Panel for FC100/200/300"
     },
     {
       "id": "sup-cab-vfdCentralized-20-e4hl3",
       "category": "VFDs & Drives",
       "item": "Danfoss - VFD 0.75 kW UL",
       "supplier": "Danfoss",
-      "email": "",
       "cost": 1331.9,
       "latestPrice": 1331.9,
       "updated": "2026-09-17",
-      "description": "131B0028 \u2013 FC-302PK75T5E20H1XXXXXXSXXXXAXBXCXXXXDX (without Control Panel)\n\n130B1107 \u2013 LCP102 Control Panel for FC100/200/300"
+      "email": "",
+      "description": "131B0028 – FC-302PK75T5E20H1XXXXXXSXXXXAXBXCXXXXDX (without Control Panel)\n\n130B1107 – LCP102 Control Panel for FC100/200/300"
     },
     {
       "id": "sup-cab-vfdCentralized-21-gp624",
       "category": "VFDs & Drives",
       "item": "Danfoss - VFD 1.5 kW CE",
       "supplier": "Danfoss",
-      "email": "",
       "cost": 1506.18,
       "latestPrice": 1506.18,
       "updated": "2026-09-17",
-      "description": "131B0030 \u2013 FC-302P1K5T5E20H1XXXXXXSXXXXAXBXCXXXXDX (without Control Panel)\n\n130B1107 \u2013 LCP102 Control Panel for FC100/200/300"
+      "email": "",
+      "description": "131B0030 – FC-302P1K5T5E20H1XXXXXXSXXXXAXBXCXXXXDX (without Control Panel)\n\n130B1107 – LCP102 Control Panel for FC100/200/300"
     },
     {
       "id": "sup-cab-vfdCentralized-22-vz2tc",
       "category": "VFDs & Drives",
       "item": "Danfoss - VFD 2.2 kW CE",
       "supplier": "Danfoss",
-      "email": "",
       "cost": 2005.56,
       "latestPrice": 2005.56,
       "updated": "2026-09-17",
-      "description": "VLT\u00ae AutomationDrive FC 300 2.2 KW / 3.0 \nHP, 380 - 480 VAC, IP20 / Chassis, RFI \nClass A2 (C3), Brake chopper hs code \n85044090"
+      "email": "",
+      "description": "VLT® AutomationDrive FC 300 2.2 KW / 3.0 \nHP, 380 - 480 VAC, IP20 / Chassis, RFI \nClass A2 (C3), Brake chopper hs code \n85044090"
     },
     {
       "id": "sup-cab-vfdCentralized-23-n2qc3",
       "category": "VFDs & Drives",
       "item": "Danfoss - VFD 1.5 kW UL",
       "supplier": "Danfoss",
-      "email": "",
       "cost": 1639.88,
       "latestPrice": 1639.88,
       "updated": "2026-09-17",
-      "description": "131B0030 \u2013 FC-302P1K5T5E20H1XXXXXXSXXXXAXBXCXXXXDX (without Control Panel)\n\n130B1107 \u2013 LCP102 Control Panel for FC100/200/300"
+      "email": "",
+      "description": "131B0030 – FC-302P1K5T5E20H1XXXXXXSXXXXAXBXCXXXXDX (without Control Panel)\n\n130B1107 – LCP102 Control Panel for FC100/200/300"
     },
     {
       "id": "sup-cab-vfdCentralized-24-dpw8p",
       "category": "VFDs & Drives",
       "item": "Danfoss - VFD 2.2 kW UL",
       "supplier": "Danfoss",
-      "email": "",
       "cost": 2139.26,
       "latestPrice": 2139.26,
       "updated": "2026-09-17",
-      "description": "VLT\u00ae AutomationDrive FC 300 2.2 KW / 3.0 \nHP, 380 - 480 VAC, IP20 / Chassis, RFI \nClass A2 (C3), Brake chopper hs code \n85044090"
+      "email": "",
+      "description": "VLT® AutomationDrive FC 300 2.2 KW / 3.0 \nHP, 380 - 480 VAC, IP20 / Chassis, RFI \nClass A2 (C3), Brake chopper hs code \n85044090"
     },
     {
       "id": "sup-cab-vfdDistributed-1-bulgt",
       "category": "VFDs & Drives",
       "item": "SEW - Drives MMF1 0.75 kW CE",
       "supplier": "SEW",
-      "email": "",
       "cost": 1199.7,
       "latestPrice": 1199.7,
       "updated": "2026-09-17",
-      "description": "MOVIMOT Flexible MMF1 Electrical Regulation: UL/CE Unit version : V1 Performance class : 2,5A / 0,75kW Nominal output current [A]: 2.50 Maximum nominal output current [A]: 7.50 Communication type : DFC \u2013 PROFINET Communication : M12-Stecker Application level : 0 Safe communication : Yes Functional safety: CSB51a International efficiency class : IE2 Relative apparent power loss at performance point (90;100) [%]: 2.50 Additional feature and Options Brake control: /B - integrated HV brake control for AC brakes Integrated braking resistor: BW1"
+      "email": "",
+      "description": "MOVIMOT Flexible MMF1 Electrical Regulation: UL/CE Unit version : V1 Performance class : 2,5A / 0,75kW Nominal output current [A]: 2.50 Maximum nominal output current [A]: 7.50 Communication type : DFC – PROFINET Communication : M12-Stecker Application level : 0 Safe communication : Yes Functional safety: CSB51a International efficiency class : IE2 Relative apparent power loss at performance point (90;100) [%]: 2.50 Additional feature and Options Brake control: /B - integrated HV brake control for AC brakes Integrated braking resistor: BW1"
     },
     {
       "id": "sup-cab-vfdDistributed-3-i06kh",
       "category": "VFDs & Drives",
       "item": "SEW - Drives MMF1 1.5 kW CE",
       "supplier": "SEW",
-      "email": "",
       "cost": 1304,
       "latestPrice": 1304,
       "updated": "2026-09-17",
+      "email": "",
       "description": ""
     },
     {
@@ -865,32 +867,32 @@
       "category": "VFDs & Drives",
       "item": "SEW - Drives MMF1 0.75 kW UL",
       "supplier": "SEW",
-      "email": "",
       "cost": 1333.2,
       "latestPrice": 1333.2,
       "updated": "2026-09-17",
-      "description": "MOVIMOT Flexible MMF1 Electrical Regulation: UL/CE Unit version : V1 Performance class : 2,5A / 0,75kW Nominal output current [A]: 2.50 Maximum nominal output current [A]: 7.50 Communication type : DFC \u2013 PROFINET Communication : M12-Stecker Application level : 0 Safe communication : Yes Functional safety: CSB51a International efficiency class : IE2 Relative apparent power loss at performance point (90;100) [%]: 2.50 Additional feature and Options Brake control: /B - integrated HV brake control for AC brakes Integrated braking resistor: BW1"
+      "email": "",
+      "description": "MOVIMOT Flexible MMF1 Electrical Regulation: UL/CE Unit version : V1 Performance class : 2,5A / 0,75kW Nominal output current [A]: 2.50 Maximum nominal output current [A]: 7.50 Communication type : DFC – PROFINET Communication : M12-Stecker Application level : 0 Safe communication : Yes Functional safety: CSB51a International efficiency class : IE2 Relative apparent power loss at performance point (90;100) [%]: 2.50 Additional feature and Options Brake control: /B - integrated HV brake control for AC brakes Integrated braking resistor: BW1"
     },
     {
       "id": "sup-cab-vfdDistributed-5-ogdws",
       "category": "VFDs & Drives",
       "item": "SEW - Drives MMF1 2.2 kW CE",
       "supplier": "SEW",
-      "email": "",
       "cost": 1429.7,
       "latestPrice": 1429.7,
       "updated": "2026-09-17",
-      "description": "MOVIMOT Flexible MMF1 Electrical Regulation: UL/CE Unit version : V1 Performance class : 5,5A / 2,2kW Nominal output current [A]: 5.50 Maximum nominal output current [A]: 16.50 Communication type : DFC..A \u2013 PROFINET Communication : M12-Stecker Application level : 0 Safe communication : Yes International efficiency class : IE2 Relative apparent power loss at performance point (90;100) [%]: 2.10 Additional Features & Options: Brake control 24V: Control module brake rectifier /BES. Connection variant motor connector: KD1 - plug connector for digital motor integration - M23 straight. Connector 24V backup voltage connection variant: 2xM12 (L-coded), DC 24 V backup voltage, connector position IN: 3, connector position OUT: 3."
+      "email": "",
+      "description": "MOVIMOT Flexible MMF1 Electrical Regulation: UL/CE Unit version : V1 Performance class : 5,5A / 2,2kW Nominal output current [A]: 5.50 Maximum nominal output current [A]: 16.50 Communication type : DFC..A – PROFINET Communication : M12-Stecker Application level : 0 Safe communication : Yes International efficiency class : IE2 Relative apparent power loss at performance point (90;100) [%]: 2.10 Additional Features & Options: Brake control 24V: Control module brake rectifier /BES. Connection variant motor connector: KD1 - plug connector for digital motor integration - M23 straight. Connector 24V backup voltage connection variant: 2xM12 (L-coded), DC 24 V backup voltage, connector position IN: 3, connector position OUT: 3."
     },
     {
       "id": "sup-cab-vfdDistributed-4-rsdyx",
       "category": "VFDs & Drives",
       "item": "SEW - Drives MMF1 1.5 kW UL",
       "supplier": "SEW",
-      "email": "",
       "cost": 1454,
       "latestPrice": 1454,
       "updated": "2026-09-17",
+      "email": "",
       "description": ""
     },
     {
@@ -898,21 +900,21 @@
       "category": "VFDs & Drives",
       "item": "SEW - Drives MMF1 2.2 kW UL",
       "supplier": "SEW",
-      "email": "",
       "cost": 1563.2,
       "latestPrice": 1563.2,
       "updated": "2026-09-17",
-      "description": "MOVIMOT Flexible MMF1 Electrical Regulation: UL/CE Unit version : V1 Performance class : 5,5A / 2,2kW Nominal output current [A]: 5.50 Maximum nominal output current [A]: 16.50 Communication type : DFC..A \u2013 PROFINET Communication : M12-Stecker Application level : 0 Safe communication : Yes International efficiency class : IE2 Relative apparent power loss at performance point (90;100) [%]: 2.10 Additional Features & Options: Brake control 24V: Control module brake rectifier /BES. Connection variant motor connector: KD1 - plug connector for digital motor integration - M23 straight. Connector 24V backup voltage connection variant: 2xM12 (L-coded), DC 24 V backup voltage, connector position IN: 3, connector position OUT: 3."
+      "email": "",
+      "description": "MOVIMOT Flexible MMF1 Electrical Regulation: UL/CE Unit version : V1 Performance class : 5,5A / 2,2kW Nominal output current [A]: 5.50 Maximum nominal output current [A]: 16.50 Communication type : DFC..A – PROFINET Communication : M12-Stecker Application level : 0 Safe communication : Yes International efficiency class : IE2 Relative apparent power loss at performance point (90;100) [%]: 2.10 Additional Features & Options: Brake control 24V: Control module brake rectifier /BES. Connection variant motor connector: KD1 - plug connector for digital motor integration - M23 straight. Connector 24V backup voltage connection variant: 2xM12 (L-coded), DC 24 V backup voltage, connector position IN: 3, connector position OUT: 3."
     },
     {
       "id": "sup-cab-vfdDistributed-7-13n2h",
       "category": "VFDs & Drives",
       "item": "AB - Armor powerflex 0.75 kW CE",
       "supplier": "Allen Bradley",
-      "email": "",
       "cost": 3365.53,
       "latestPrice": 3365.53,
       "updated": "2026-09-17",
+      "email": "",
       "description": "35S-6D1-P101 \n35-LG1-AB\n35-SPS-AB\n280-PWRM35A-M10\n280-M35F-M1 \n357-PWRM29A-M2"
     },
     {
@@ -920,10 +922,10 @@
       "category": "VFDs & Drives",
       "item": "AB - Armor powerflex 0.75 kW UL",
       "supplier": "Allen Bradley",
-      "email": "",
       "cost": 3495.53,
       "latestPrice": 3495.53,
       "updated": "2026-09-17",
+      "email": "",
       "description": "35S-6D1-P101 \n35-LG1-AB\n35-SPS-AB\n280-PWRM35A-M10\n280-M35F-M1 \n357-PWRM29A-M2"
     },
     {
@@ -931,10 +933,10 @@
       "category": "VFDs & Drives",
       "item": "AB - Armor powerflex 1.5 kW CE (#9)",
       "supplier": "Allen Bradley",
-      "email": "",
       "cost": 3657.17,
       "latestPrice": 3657.17,
       "updated": "2026-09-17",
+      "email": "",
       "description": "35S-6D2-P101\n35-LG1-AB\n35-SPS-AB\n280-PWRM35A-M10\n280-M35F-M1 \n357-PWRM29A-M2"
     },
     {
@@ -942,10 +944,10 @@
       "category": "VFDs & Drives",
       "item": "AB - Armor powerflex 1.5 kW CE (#10)",
       "supplier": "Allen Bradley",
-      "email": "",
       "cost": 3787.17,
       "latestPrice": 3787.17,
       "updated": "2026-09-17",
+      "email": "",
       "description": "35S-6D2-P101\n35-LG1-AB\n35-SPS-AB\n280-PWRM35A-M10\n280-M35F-M1 \n357-PWRM29A-M2"
     },
     {
@@ -953,10 +955,10 @@
       "category": "VFDs & Drives",
       "item": "AB - Armor powerflex 1.5 kW CE (#11)",
       "supplier": "Allen Bradley",
-      "email": "",
       "cost": 4057.17,
       "latestPrice": 4057.17,
       "updated": "2026-09-17",
+      "email": "",
       "description": "35S-6D2-P101\n35-LG1-AB\n35-SPS-AB\n280-PWRM35A-M10\n280-M35F-M1 \n357-PWRM29A-M2"
     },
     {
@@ -964,10 +966,10 @@
       "category": "VFDs & Drives",
       "item": "AB - Armor powerflex 1.5 kW CE (#12)",
       "supplier": "Allen Bradley",
-      "email": "",
       "cost": 4187.17,
       "latestPrice": 4187.17,
       "updated": "2026-09-17",
+      "email": "",
       "description": "35S-6D2-P101\n35-LG1-AB\n35-SPS-AB\n280-PWRM35A-M10\n280-M35F-M1 \n357-PWRM29A-M2"
     },
     {
@@ -975,10 +977,10 @@
       "category": "VFDs & Drives",
       "item": "CB - 3P 6A (#1)",
       "supplier": "Siemens",
-      "email": "",
       "cost": 22,
       "latestPrice": 22,
       "updated": "2026-09-17",
+      "email": "",
       "description": "Miniature circuit breaker 400 V 6kA, 3-pole, C, 6A"
     },
     {
@@ -986,10 +988,10 @@
       "category": "VFDs & Drives",
       "item": "CB - 3P 6A (#2)",
       "supplier": "Siemens",
-      "email": "",
       "cost": 165,
       "latestPrice": 165,
       "updated": "2026-09-17",
+      "email": "",
       "description": "Circuit breaker 10kA, 3-pole, C, 6A according to UL 489-480Y/277V"
     },
     {
@@ -997,10 +999,10 @@
       "category": "VFDs & Drives",
       "item": "MS for Motors",
       "supplier": "Siemens",
-      "email": "",
       "cost": 77,
       "latestPrice": 77,
       "updated": "2026-09-17",
+      "email": "",
       "description": "SENTRON, Switch disconnector 3LD, main switch, 3-pole, Iu: 32 A, Operating power / at AC-23 A at 400 V: 11.5 kW, molded-plastic encapsulation for metric cable gland, rotary operating mechanism, black"
     },
     {
@@ -1008,43 +1010,43 @@
       "category": "VFDs & Drives",
       "item": "Power Cable 4G2.5",
       "supplier": "Helukabel",
-      "email": "",
       "cost": 3.3,
       "latestPrice": 3.3,
       "updated": "2026-09-17",
-      "description": "TOPFLEX\u00ae-EMV-UV-2YSLCYK-J, Motor Power Supply Cable, Black, PVC, Double Screened, 600/1000 V, Stranded, 4 G 2.5 mm2"
+      "email": "",
+      "description": "TOPFLEX®-EMV-UV-2YSLCYK-J, Motor Power Supply Cable, Black, PVC, Double Screened, 600/1000 V, Stranded, 4 G 2.5 mm2"
     },
     {
       "id": "sup-cab-vfdServoAccessories-5-s8lf8",
       "category": "VFDs & Drives",
       "item": "Power Cable 14AWG",
       "supplier": "Helukabel",
-      "email": "",
       "cost": 7,
       "latestPrice": 7,
       "updated": "2026-09-17",
-      "description": "TOPFLEX\u00ae 600 VFD black 4 x AWG 14"
+      "email": "",
+      "description": "TOPFLEX® 600 VFD black 4 x AWG 14"
     },
     {
       "id": "sup-cab-vfdServoAccessories-6-am3re",
       "category": "VFDs & Drives",
       "item": "Power Cable 4G4",
       "supplier": "Helukabel",
-      "email": "",
       "cost": 5.7,
       "latestPrice": 5.7,
       "updated": "2026-09-17",
-      "description": "TOPFLEX\u00ae-EMV-UV-2YSLCYK-J, Motor Power Supply Cable, Black, PVC, Double Screened, 600/1000 V, Stranded, 4 G 4 mm2"
+      "email": "",
+      "description": "TOPFLEX®-EMV-UV-2YSLCYK-J, Motor Power Supply Cable, Black, PVC, Double Screened, 600/1000 V, Stranded, 4 G 4 mm2"
     },
     {
       "id": "sup-cab-vfdServoAccessories-7-78daz",
       "category": "VFDs & Drives",
       "item": "Power Cable 12AWG",
       "supplier": "Helukabel",
-      "email": "",
       "cost": 9.2,
       "latestPrice": 9.2,
       "updated": "2026-09-17",
+      "email": "",
       "description": "TOPFLEX 600 VFD black 4C AWG12"
     },
     {
@@ -1052,10 +1054,10 @@
       "category": "VFDs & Drives",
       "item": "Servo Power Cable",
       "supplier": "Helukabel",
-      "email": "",
       "cost": 6.5,
       "latestPrice": 6.5,
       "updated": "2026-09-17",
+      "email": "",
       "description": "TOPSERV 121 PUR, high flexible motor and servo cable for drag chain, Orange, PUR, 0.6/1kV, Screened, Stranded,  (4 G 1.5 + 2 x (2 x 1.0)) mm2"
     },
     {
@@ -1063,10 +1065,10 @@
       "category": "VFDs & Drives",
       "item": "Servo Encoder Servo",
       "supplier": "Helukabel",
-      "email": "",
       "cost": 4.8,
       "latestPrice": 4.8,
       "updated": "2026-09-17",
+      "email": "",
       "description": "TOPGEBER 512 PUR, high flexible feedback cable for drag chain, Green, PUR, Screened, (5 x 2 x 0.38 + 2 x 0.5) mm2"
     },
     {
@@ -1074,10 +1076,10 @@
       "category": "VFDs & Drives",
       "item": "Braking Resistor 100 Ohm",
       "supplier": "SEW",
-      "email": "",
       "cost": 120,
       "latestPrice": 120,
       "updated": "2026-09-17",
+      "email": "",
       "description": "Braking resistor, Flat type IP20"
     },
     {
@@ -1085,10 +1087,10 @@
       "category": "VFDs & Drives",
       "item": "Encoder Card for Servo MDX",
       "supplier": "SEW",
-      "email": "",
       "cost": 155,
       "latestPrice": 155,
       "updated": "2026-09-17",
+      "email": "",
       "description": "Encoder connection card resolver"
     },
     {
@@ -1096,10 +1098,10 @@
       "category": "VFDs & Drives",
       "item": "Power Plug for Servo MDX",
       "supplier": "SEW",
-      "email": "",
       "cost": 55,
       "latestPrice": 55,
       "updated": "2026-09-17",
+      "email": "",
       "description": "power plug SB11 connection type for 4*1.5mm2+2*1mm2"
     },
     {
@@ -1107,10 +1109,10 @@
       "category": "VFDs & Drives",
       "item": "Signal Plug for Servo MDX",
       "supplier": "SEW",
-      "email": "",
       "cost": 45,
       "latestPrice": 45,
       "updated": "2026-09-17",
+      "email": "",
       "description": "signal plug connector 5*2*0.25mm2"
     },
     {
@@ -1118,10 +1120,10 @@
       "category": "VFDs & Drives",
       "item": "Brake Control for Servo MDX",
       "supplier": "SEW",
-      "email": "",
       "cost": 130,
       "latestPrice": 130,
       "updated": "2026-09-17",
+      "email": "",
       "description": "Brake control unit with electronic switching, DC24V control input and fast cut-off"
     },
     {
@@ -1129,10 +1131,10 @@
       "category": "VFDs & Drives",
       "item": "Line Filter for 5100",
       "supplier": "Allen Bradley",
-      "email": "",
       "cost": 310,
       "latestPrice": 310,
       "updated": "2026-09-17",
+      "email": "",
       "description": "AC line filter, 3 phase, 18.4 amps, 460 volts"
     },
     {
@@ -1140,10 +1142,10 @@
       "category": "VFDs & Drives",
       "item": "Connector Kit for 5100",
       "supplier": "Allen Bradley",
-      "email": "",
       "cost": 60,
       "latestPrice": 60,
       "updated": "2026-09-17",
+      "email": "",
       "description": "Kinetix 5100 Feedback Connector Kit"
     },
     {
@@ -1151,10 +1153,10 @@
       "category": "VFDs & Drives",
       "item": "Power Cable for 5100",
       "supplier": "Allen Bradley",
-      "email": "",
       "cost": 85,
       "latestPrice": 85,
       "updated": "2026-09-17",
+      "email": "",
       "description": "Power, 3m, connector connector, flex type: Continuous Flex"
     },
     {
@@ -1162,10 +1164,10 @@
       "category": "VFDs & Drives",
       "item": "Feedback Cable for 5100",
       "supplier": "Allen Bradley",
-      "email": "",
       "cost": 140,
       "latestPrice": 140,
       "updated": "2026-09-17",
+      "email": "",
       "description": "Feedback, 3m, connector connector, flex type: Continuous Flex"
     },
     {
@@ -1173,10 +1175,10 @@
       "category": "Servo Motors & Drives",
       "item": "AB - Servo 0.75 kW CE",
       "supplier": "Allen Bradley",
-      "email": "",
       "cost": 3340,
       "latestPrice": 3340,
       "updated": "2026-09-17",
+      "email": "",
       "description": "Kinetix 5100 Servo Drive 1.6 Amps"
     },
     {
@@ -1184,10 +1186,10 @@
       "category": "Servo Motors & Drives",
       "item": "AB - Servo 0.75 kW UL",
       "supplier": "Allen Bradley",
-      "email": "",
       "cost": 3470,
       "latestPrice": 3470,
       "updated": "2026-09-17",
+      "email": "",
       "description": "Kinetix 5100 Servo Drive 1.6 Amps"
     },
     {
@@ -1195,10 +1197,10 @@
       "category": "Servo Motors & Drives",
       "item": "AB - Servo 1.5 kW  CE",
       "supplier": "Allen Bradley",
-      "email": "",
       "cost": 3505,
       "latestPrice": 3505,
       "updated": "2026-09-17",
+      "email": "",
       "description": "Kinetix 5100 Servo Drive 3.19 Amps"
     },
     {
@@ -1206,10 +1208,10 @@
       "category": "Servo Motors & Drives",
       "item": "AB - Servo 1.5 kW UL",
       "supplier": "Allen Bradley",
-      "email": "",
       "cost": 3635,
       "latestPrice": 3635,
       "updated": "2026-09-17",
+      "email": "",
       "description": "Kinetix 5100 Servo Drive 3.19 Amps"
     },
     {
@@ -1217,10 +1219,10 @@
       "category": "Servo Motors & Drives",
       "item": "AB - Servo 2.2 kW CE",
       "supplier": "Allen Bradley",
-      "email": "",
       "cost": 4640,
       "latestPrice": 4640,
       "updated": "2026-09-17",
+      "email": "",
       "description": "Kinetix 5500 Servo Drive, 20 Amps"
     },
     {
@@ -1228,10 +1230,10 @@
       "category": "Servo Motors & Drives",
       "item": "AB - Servo 2.2 kW UL",
       "supplier": "Allen Bradley",
-      "email": "",
       "cost": 4770,
       "latestPrice": 4770,
       "updated": "2026-09-17",
+      "email": "",
       "description": "Kinetix 5500 Servo Drive, 20 Amps"
     },
     {
@@ -1239,10 +1241,10 @@
       "category": "Servo Motors & Drives",
       "item": "AB - Servo 5 kW CE",
       "supplier": "Allen Bradley",
-      "email": "",
       "cost": 5240,
       "latestPrice": 5240,
       "updated": "2026-09-17",
+      "email": "",
       "description": "Kinetix 5500 Servo Drive, 32.5 Amps"
     },
     {
@@ -1250,10 +1252,10 @@
       "category": "Servo Motors & Drives",
       "item": "AB - Servo 5 kW UL",
       "supplier": "Allen Bradley",
-      "email": "",
       "cost": 5370,
       "latestPrice": 5370,
       "updated": "2026-09-17",
+      "email": "",
       "description": "Kinetix 5500 Servo Drive, 32.5 Amps"
     },
     {
@@ -1261,10 +1263,10 @@
       "category": "Servo Motors & Drives",
       "item": "SEW - Servo 0.75 kW CE",
       "supplier": "SEW",
-      "email": "",
       "cost": 863,
       "latestPrice": 863,
       "updated": "2026-09-17",
+      "email": "",
       "description": "MOVIDRIVE B frequency inverter 0.75KW"
     },
     {
@@ -1272,10 +1274,10 @@
       "category": "Servo Motors & Drives",
       "item": "SEW - Servo 0.75 kW UL",
       "supplier": "SEW",
-      "email": "",
       "cost": 993,
       "latestPrice": 993,
       "updated": "2026-09-17",
+      "email": "",
       "description": "MOVIDRIVE B frequency inverter 0.75KW"
     },
     {
@@ -1283,10 +1285,10 @@
       "category": "Servo Motors & Drives",
       "item": "SEW - Servo 1.5 kW  CE",
       "supplier": "SEW",
-      "email": "",
       "cost": 1083,
       "latestPrice": 1083,
       "updated": "2026-09-17",
+      "email": "",
       "description": "MOVIDRIVE B frequency inverter 1.5KW"
     },
     {
@@ -1294,10 +1296,10 @@
       "category": "Servo Motors & Drives",
       "item": "SEW - Servo 1.5 kW UL",
       "supplier": "SEW",
-      "email": "",
       "cost": 1213,
       "latestPrice": 1213,
       "updated": "2026-09-17",
+      "email": "",
       "description": "MOVIDRIVE B frequency inverter 1.5KW"
     },
     {
@@ -1305,10 +1307,10 @@
       "category": "Servo Motors & Drives",
       "item": "SEW - Servo 2.2 kW CE",
       "supplier": "SEW",
-      "email": "",
       "cost": 1533,
       "latestPrice": 1533,
       "updated": "2026-09-17",
+      "email": "",
       "description": "MOVIDRIVE B frequency inverter 2.2KW"
     },
     {
@@ -1316,10 +1318,10 @@
       "category": "Servo Motors & Drives",
       "item": "SEW - Servo 2.2 kW UL",
       "supplier": "SEW",
-      "email": "",
       "cost": 1663,
       "latestPrice": 1663,
       "updated": "2026-09-17",
+      "email": "",
       "description": "MOVIDRIVE B frequency inverter 2.2KW"
     },
     {
@@ -1327,10 +1329,10 @@
       "category": "Cabinet Panels",
       "item": "Technica Painted Steel",
       "supplier": "Technica",
-      "email": "",
       "cost": 1014,
       "latestPrice": 1014,
       "updated": "2026-09-17",
+      "email": "",
       "description": ""
     },
     {
@@ -1338,21 +1340,21 @@
       "category": "Cabinet Panels",
       "item": "Technica Stainless Steel",
       "supplier": "Technica",
-      "email": "",
       "cost": 1446,
       "latestPrice": 1446,
       "updated": "2026-09-17",
+      "email": "",
       "description": ""
     },
     {
       "id": "sup-cab-panels-4-mhxb2",
       "category": "Cabinet Panels",
-      "item": "Local Painted Steel ",
+      "item": "Local Painted Steel",
       "supplier": "Local",
-      "email": "",
       "cost": 1435,
       "latestPrice": 1435,
       "updated": "2026-09-17",
+      "email": "",
       "description": "Reference SOT341-23 (800x1800x600)"
     },
     {
@@ -1360,10 +1362,10 @@
       "category": "Cabinet Panels",
       "item": "Local Stainless Steel (Tekpan)",
       "supplier": "Local",
-      "email": "",
       "cost": 2312.36,
       "latestPrice": 2312.36,
       "updated": "2026-09-17",
+      "email": "",
       "description": "Tekpan PO33215"
     },
     {
@@ -1371,10 +1373,10 @@
       "category": "Cabinet Panels",
       "item": "Rittal Painted Steel",
       "supplier": "Rittal",
-      "email": "",
       "cost": 4000,
       "latestPrice": 4000,
       "updated": "2026-09-17",
+      "email": "",
       "description": "Reference SOT134-24 (800x1800x500)"
     },
     {
@@ -1382,10 +1384,10 @@
       "category": "Cabinet Panels",
       "item": "Rittal Stainless Steel",
       "supplier": "Rittal",
-      "email": "",
       "cost": 8500,
       "latestPrice": 8500,
       "updated": "2026-09-17",
+      "email": "",
       "description": "Reference 15S041 (800x2000x600)"
     },
     {
@@ -1393,10 +1395,10 @@
       "category": "Junction Boxes",
       "item": "Technica Painted",
       "supplier": "Technica",
-      "email": "",
       "cost": 33.75,
       "latestPrice": 33.75,
       "updated": "2026-09-17",
+      "email": "",
       "description": ""
     },
     {
@@ -1404,10 +1406,10 @@
       "category": "Junction Boxes",
       "item": "Plastic Gewiss",
       "supplier": "Gewiss",
-      "email": "",
       "cost": 35.84,
       "latestPrice": 35.84,
       "updated": "2026-09-17",
+      "email": "",
       "description": "300x220x120 shallow plastic junctions box"
     },
     {
@@ -1415,10 +1417,10 @@
       "category": "Junction Boxes",
       "item": "Technica Stainless",
       "supplier": "Technica",
-      "email": "",
       "cost": 47.25,
       "latestPrice": 47.25,
       "updated": "2026-09-17",
+      "email": "",
       "description": ""
     },
     {
@@ -1426,10 +1428,10 @@
       "category": "Junction Boxes",
       "item": "Rittal Painted",
       "supplier": "Rittal",
-      "email": "",
       "cost": 50,
       "latestPrice": 50,
       "updated": "2026-09-17",
+      "email": "",
       "description": "Terminal box KX, sheet steel, with gland plate"
     },
     {
@@ -1437,10 +1439,10 @@
       "category": "Junction Boxes",
       "item": "Rittal Stainless",
       "supplier": "Rittal",
-      "email": "",
       "cost": 65,
       "latestPrice": 65,
       "updated": "2026-09-17",
+      "email": "",
       "description": "Terminal box KX Stainless steel"
     },
     {
@@ -1448,10 +1450,10 @@
       "category": "Sensors & Instrumentation",
       "item": "Proximity Sensor IMB12",
       "supplier": "Sick",
-      "email": "",
       "cost": 37,
       "latestPrice": 37,
       "updated": "2026-09-17",
+      "email": "",
       "description": "Inductive proximity sensors: IMB - Male connector M12, 4-pin, Sensing Range 8mm, NO"
     },
     {
@@ -1459,10 +1461,10 @@
       "category": "Sensors & Instrumentation",
       "item": "Proximity Sensor IMB18",
       "supplier": "Sick",
-      "email": "",
       "cost": 40,
       "latestPrice": 40,
       "updated": "2026-09-17",
+      "email": "",
       "description": "Inductive proximity sensors: IMB - Sensing Range: 12mm - Non-flush - Output function NO - Male connector M12, 4-pin"
     },
     {
@@ -1470,10 +1472,10 @@
       "category": "Sensors & Instrumentation",
       "item": "PhotoElectric sensor",
       "supplier": "Sick",
-      "email": "",
       "cost": 70,
       "latestPrice": 70,
       "updated": "2026-09-17",
+      "email": "",
       "description": "Photoelectric retro-reflective sensor - 0.03m...6.5m - PinPoint LED - Response time 0.5 ms - Male connector M12, 4-pin - Out 1: light switching - Out 2: dark switching."
     },
     {
@@ -1481,10 +1483,10 @@
       "category": "Sensors & Instrumentation",
       "item": "Transparent Sensors",
       "supplier": "Sick",
-      "email": "",
       "cost": 96.5,
       "latestPrice": 96.5,
       "updated": "2026-09-17",
+      "email": "",
       "description": "Photoelectric retro-reflective sensor, Autocollimation, ClearSens"
     },
     {
@@ -1492,10 +1494,10 @@
       "category": "Sensors & Instrumentation",
       "item": "Distance Analog Sensor Ultrasonic sensor UC4",
       "supplier": "Sick",
-      "email": "",
       "cost": 276,
       "latestPrice": 276,
       "updated": "2026-09-17",
+      "email": "",
       "description": "Ultrasonic sensor UC4, 13 mm ... 150 mm, max 250 mm, Male connector, M8, 3-pin"
     },
     {
@@ -1503,10 +1505,10 @@
       "category": "Sensors & Instrumentation",
       "item": "Distance Analog Sensor Ultrasonic sensor UM30",
       "supplier": "Sick",
-      "email": "",
       "cost": 437,
       "latestPrice": 437,
       "updated": "2026-09-17",
+      "email": "",
       "description": "Ultrasonic sensor M30, 1 PNP, 1 Analog Output, 600 mm ... 6,000 mm, 8,000 mm, Range M12, 5-Pin"
     },
     {
@@ -1514,10 +1516,10 @@
       "category": "Sensors & Instrumentation",
       "item": "Barcode Scanner 2D basic",
       "supplier": "Keyence",
-      "email": "",
       "cost": 2500,
       "latestPrice": 2500,
       "updated": "2026-09-17",
+      "email": "",
       "description": ""
     },
     {
@@ -1525,10 +1527,10 @@
       "category": "Sensors & Instrumentation",
       "item": "Barcode Scanner 2D Advance",
       "supplier": "Keyence",
-      "email": "",
       "cost": 17000,
       "latestPrice": 17000,
       "updated": "2026-09-17",
+      "email": "",
       "description": ""
     },
     {
@@ -1536,10 +1538,10 @@
       "category": "Sensors & Instrumentation",
       "item": "Camera Scanner 3D",
       "supplier": "Keyence",
-      "email": "",
       "cost": 21000,
       "latestPrice": 21000,
       "updated": "2026-09-17",
+      "email": "",
       "description": ""
     },
     {
@@ -1547,10 +1549,10 @@
       "category": "Power Distribution",
       "item": "PDB",
       "supplier": "Technica",
-      "email": "",
       "cost": 1203,
       "latestPrice": 1203,
       "updated": "2026-09-17",
+      "email": "",
       "description": ""
     },
     {
@@ -1558,10 +1560,10 @@
       "category": "Safety & Emergency Stop",
       "item": "Guard Switch Not Lockable",
       "supplier": "Sick",
-      "email": "",
       "cost": 35,
       "latestPrice": 35,
       "updated": "2026-09-17",
+      "email": "",
       "description": "Not lockable Guard Switch i16"
     },
     {
@@ -1569,10 +1571,10 @@
       "category": "Safety & Emergency Stop",
       "item": "Emergency Stop - Buttons",
       "supplier": "Sick",
-      "email": "",
       "cost": 45,
       "latestPrice": 45,
       "updated": "2026-09-17",
+      "email": "",
       "description": "Standalone Emergency Button 2NC"
     },
     {
@@ -1580,10 +1582,10 @@
       "category": "Safety & Emergency Stop",
       "item": "Guard Switch Lockable",
       "supplier": "Sick",
-      "email": "",
       "cost": 165,
       "latestPrice": 165,
       "updated": "2026-09-17",
+      "email": "",
       "description": "Lockable Guard Switch i14"
     },
     {
@@ -1591,10 +1593,10 @@
       "category": "Safety & Emergency Stop",
       "item": "Emergency Stop - Ropes",
       "supplier": "Sick",
-      "email": "",
       "cost": 330,
       "latestPrice": 330,
       "updated": "2026-09-17",
+      "email": "",
       "description": "Emergency Rope 1NO + 3NC"
     },
     {
@@ -1602,10 +1604,10 @@
       "category": "Safety & Emergency Stop",
       "item": "Keytrap for 1 Door",
       "supplier": "Allen Bradley",
-      "email": "",
       "cost": 1150,
       "latestPrice": 1150,
       "updated": "2026-09-17",
+      "email": "",
       "description": "440T - Reference SOT134-24"
     },
     {
@@ -1613,10 +1615,10 @@
       "category": "Safety & Emergency Stop",
       "item": "Light Barrier - Body",
       "supplier": "Sick",
-      "email": "",
       "cost": 1250,
       "latestPrice": 1250,
       "updated": "2026-09-17",
+      "email": "",
       "description": "deTem L-muting + accessories"
     },
     {
@@ -1624,10 +1626,10 @@
       "category": "Safety & Emergency Stop",
       "item": "Light Barrier - Hands",
       "supplier": "Sick",
-      "email": "",
       "cost": 2200,
       "latestPrice": 2200,
       "updated": "2026-09-17",
+      "email": "",
       "description": "deTec / deTec4 + accessories"
     },
     {
@@ -1635,10 +1637,10 @@
       "category": "Safety & Emergency Stop",
       "item": "Keytrap for 2 Door",
       "supplier": "Allen Bradley",
-      "email": "",
       "cost": 2440,
       "latestPrice": 2440,
       "updated": "2026-09-17",
+      "email": "",
       "description": "440T - Reference SOT134-24"
     },
     {
@@ -1646,10 +1648,10 @@
       "category": "Safety & Emergency Stop",
       "item": "Keytrap for 3 Doors",
       "supplier": "Allen Bradley",
-      "email": "",
       "cost": 2900,
       "latestPrice": 2900,
       "updated": "2026-09-17",
+      "email": "",
       "description": "440T - Reference SOT134-24"
     },
     {
@@ -1657,10 +1659,10 @@
       "category": "Safety & Emergency Stop",
       "item": "Sick Laser Scanner",
       "supplier": "Sick",
-      "email": "",
       "cost": 3096,
       "latestPrice": 3096,
       "updated": "2026-09-17",
+      "email": "",
       "description": "Safety laser scanners microScan3"
     },
     {
@@ -1668,10 +1670,10 @@
       "category": "Safety & Emergency Stop",
       "item": "Keyence Laser Scanner",
       "supplier": "Keyence",
-      "email": "",
       "cost": 3129.72,
       "latestPrice": 3129.72,
       "updated": "2026-09-17",
+      "email": "",
       "description": ""
     },
     {
@@ -1679,10 +1681,10 @@
       "category": "Safety & Emergency Stop",
       "item": "Radar System",
       "supplier": "Sick",
-      "email": "",
       "cost": 5330,
       "latestPrice": 5330,
       "updated": "2026-09-17",
+      "email": "",
       "description": "safeRS3 - Reference SOT134-24"
     },
     {
@@ -1690,10 +1692,10 @@
       "category": "Operator Panels",
       "item": "Operator Panel SS With HMI",
       "supplier": "Technica",
-      "email": "",
       "cost": 2940,
       "latestPrice": 2940,
       "updated": "2026-09-17",
+      "email": "",
       "description": ""
     },
     {
@@ -1701,10 +1703,10 @@
       "category": "Operator Panels",
       "item": "Operator Panel SS Without HMI",
       "supplier": "Technica",
-      "email": "",
       "cost": 245,
       "latestPrice": 245,
       "updated": "2026-09-17",
+      "email": "",
       "description": ""
     },
     {
@@ -1712,793 +1714,671 @@
       "category": "Power Distribution Components",
       "item": "Disconnect - 100A (Siemens, CE)",
       "supplier": "Siemens",
-      "email": "",
       "cost": 50,
       "latestPrice": 50,
       "updated": "2026-09-17",
-      "description": "Disconnect Switch \u2014 reference only; NOT the live-used breakdown (see Configurator's Power Distribution detail view for the actual formula)",
-      "bundleBrand": "Siemens",
-      "bundleStandard": "CE"
+      "email": "",
+      "description": "Disconnect Switch — reference only; NOT the live-used breakdown (see Configurator's Power Distribution detail view for the actual formula)"
     },
     {
       "id": "sup-cab-powerDistDetailedCE-2-aw533",
       "category": "Power Distribution Components",
       "item": "Contactor - 110A (Siemens, CE)",
       "supplier": "Siemens",
-      "email": "",
       "cost": 230,
       "latestPrice": 230,
       "updated": "2026-09-17",
-      "description": "Contactor \u2014 reference only; NOT the live-used breakdown (see Configurator's Power Distribution detail view for the actual formula)",
-      "bundleBrand": "Siemens",
-      "bundleStandard": "CE"
+      "email": "",
+      "description": "Contactor — reference only; NOT the live-used breakdown (see Configurator's Power Distribution detail view for the actual formula)"
     },
     {
       "id": "sup-cab-powerDistDetailedCE-3-8sby5",
       "category": "Power Distribution Components",
       "item": "Power Supply - 20A (Siemens, CE)",
       "supplier": "Siemens",
-      "email": "",
       "cost": 330,
       "latestPrice": 330,
       "updated": "2026-09-17",
-      "description": "Power Supply \u2014 reference only; NOT the live-used breakdown (see Configurator's Power Distribution detail view for the actual formula)",
-      "bundleBrand": "Siemens",
-      "bundleStandard": "CE"
+      "email": "",
+      "description": "Power Supply — reference only; NOT the live-used breakdown (see Configurator's Power Distribution detail view for the actual formula)"
     },
     {
       "id": "sup-cab-powerDistDetailedCE-4-4l9ol",
       "category": "Power Distribution Components",
       "item": "DB - 125A (Siemens, CE)",
       "supplier": "Schneider Electric",
-      "email": "",
       "cost": 35,
       "latestPrice": 35,
       "updated": "2026-09-17",
-      "description": "Distribution Block \u2014 reference only; NOT the live-used breakdown (see Configurator's Power Distribution detail view for the actual formula)",
-      "bundleBrand": "Siemens",
-      "bundleStandard": "CE"
+      "email": "",
+      "description": "Distribution Block — reference only; NOT the live-used breakdown (see Configurator's Power Distribution detail view for the actual formula)"
     },
     {
       "id": "sup-cab-powerDistDetailedCE-5-u0tfc",
       "category": "Power Distribution Components",
       "item": "Voltage Relay (Siemens, CE)",
       "supplier": "Siemens",
-      "email": "",
       "cost": 110,
       "latestPrice": 110,
       "updated": "2026-09-17",
-      "description": "Voltage Relay \u2014 reference only; NOT the live-used breakdown (see Configurator's Power Distribution detail view for the actual formula)",
-      "bundleBrand": "Siemens",
-      "bundleStandard": "CE"
+      "email": "",
+      "description": "Voltage Relay — reference only; NOT the live-used breakdown (see Configurator's Power Distribution detail view for the actual formula)"
     },
     {
       "id": "sup-cab-powerDistDetailedCE-6-s7ntr",
       "category": "Power Distribution Components",
       "item": "MCB - 100A (Siemens, CE)",
       "supplier": "Siemens",
-      "email": "",
       "cost": 130,
       "latestPrice": 130,
       "updated": "2026-09-17",
-      "description": "Circuit Breaker \u2014 reference only; NOT the live-used breakdown (see Configurator's Power Distribution detail view for the actual formula)",
-      "bundleBrand": "Siemens",
-      "bundleStandard": "CE"
+      "email": "",
+      "description": "Circuit Breaker — reference only; NOT the live-used breakdown (see Configurator's Power Distribution detail view for the actual formula)"
     },
     {
       "id": "sup-cab-powerDistDetailedCE-7-89lt4",
       "category": "Power Distribution Components",
       "item": "CB - 1P 1A (Siemens, CE)",
       "supplier": "Siemens",
-      "email": "",
       "cost": 3,
       "latestPrice": 3,
       "updated": "2026-09-17",
-      "description": "Circuit Breaker \u2014 reference only; NOT the live-used breakdown (see Configurator's Power Distribution detail view for the actual formula)",
-      "bundleBrand": "Siemens",
-      "bundleStandard": "CE"
+      "email": "",
+      "description": "Circuit Breaker — reference only; NOT the live-used breakdown (see Configurator's Power Distribution detail view for the actual formula)"
     },
     {
       "id": "sup-cab-powerDistDetailedCE-8-4iamm",
       "category": "Power Distribution Components",
       "item": "CB - 3P 6A (Siemens, CE)",
       "supplier": "Siemens",
-      "email": "",
       "cost": 20,
       "latestPrice": 20,
       "updated": "2026-09-17",
-      "description": "Circuit Breaker \u2014 reference only; NOT the live-used breakdown (see Configurator's Power Distribution detail view for the actual formula)",
-      "bundleBrand": "Siemens",
-      "bundleStandard": "CE"
+      "email": "",
+      "description": "Circuit Breaker — reference only; NOT the live-used breakdown (see Configurator's Power Distribution detail view for the actual formula)"
     },
     {
       "id": "sup-cab-powerDistDetailedCE-9-2yhlq",
       "category": "Power Distribution Components",
       "item": "CB - 2P 6A (Siemens, CE)",
       "supplier": "Siemens",
-      "email": "",
       "cost": 10,
       "latestPrice": 10,
       "updated": "2026-09-17",
-      "description": "Circuit Breaker \u2014 reference only; NOT the live-used breakdown (see Configurator's Power Distribution detail view for the actual formula)",
-      "bundleBrand": "Siemens",
-      "bundleStandard": "CE"
+      "email": "",
+      "description": "Circuit Breaker — reference only; NOT the live-used breakdown (see Configurator's Power Distribution detail view for the actual formula)"
     },
     {
       "id": "sup-cab-powerDistDetailedCE-10-j74eq",
       "category": "Power Distribution Components",
       "item": "CB - 1P 2A (Siemens, CE)",
       "supplier": "Siemens",
-      "email": "",
       "cost": 3,
       "latestPrice": 3,
       "updated": "2026-09-17",
-      "description": "Circuit Breaker \u2014 reference only; NOT the live-used breakdown (see Configurator's Power Distribution detail view for the actual formula)",
-      "bundleBrand": "Siemens",
-      "bundleStandard": "CE"
+      "email": "",
+      "description": "Circuit Breaker — reference only; NOT the live-used breakdown (see Configurator's Power Distribution detail view for the actual formula)"
     },
     {
       "id": "sup-cab-powerDistDetailedCE-11-f248p",
       "category": "Power Distribution Components",
       "item": "RCD - 2P 25A (Siemens, CE)",
       "supplier": "Siemens",
-      "email": "",
       "cost": 120,
       "latestPrice": 120,
       "updated": "2026-09-17",
-      "description": "Circuit Breaker \u2014 reference only; NOT the live-used breakdown (see Configurator's Power Distribution detail view for the actual formula)",
-      "bundleBrand": "Siemens",
-      "bundleStandard": "CE"
+      "email": "",
+      "description": "Circuit Breaker — reference only; NOT the live-used breakdown (see Configurator's Power Distribution detail view for the actual formula)"
     },
     {
       "id": "sup-cab-powerDistDetailedCE-12-pv8tq",
       "category": "Power Distribution Components",
       "item": "Fuse - 3P 32A (Siemens, CE)",
       "supplier": "Siemens",
-      "email": "",
       "cost": 8,
       "latestPrice": 8,
       "updated": "2026-09-17",
-      "description": "Circuit Breaker \u2014 reference only; NOT the live-used breakdown (see Configurator's Power Distribution detail view for the actual formula)",
-      "bundleBrand": "Siemens",
-      "bundleStandard": "CE"
+      "email": "",
+      "description": "Circuit Breaker — reference only; NOT the live-used breakdown (see Configurator's Power Distribution detail view for the actual formula)"
     },
     {
       "id": "sup-cab-powerDistDetailedCE-13-dg5hx",
       "category": "Power Distribution Components",
       "item": "Output Relay (Siemens, CE)",
       "supplier": "Siemens",
-      "email": "",
       "cost": 12,
       "latestPrice": 12,
       "updated": "2026-09-17",
-      "description": "Output Relays \u2014 reference only; NOT the live-used breakdown (see Configurator's Power Distribution detail view for the actual formula)",
-      "bundleBrand": "Siemens",
-      "bundleStandard": "CE"
+      "email": "",
+      "description": "Output Relays — reference only; NOT the live-used breakdown (see Configurator's Power Distribution detail view for the actual formula)"
     },
     {
       "id": "sup-cab-powerDistDetailedCE-14-qeh83",
       "category": "Power Distribution Components",
       "item": "ECB (Siemens, CE)",
       "supplier": "Murr",
-      "email": "",
       "cost": 180,
       "latestPrice": 180,
       "updated": "2026-09-17",
-      "description": "Electronic Circuit Breaker \u2014 reference only; NOT the live-used breakdown (see Configurator's Power Distribution detail view for the actual formula)",
-      "bundleBrand": "Siemens",
-      "bundleStandard": "CE"
+      "email": "",
+      "description": "Electronic Circuit Breaker — reference only; NOT the live-used breakdown (see Configurator's Power Distribution detail view for the actual formula)"
     },
     {
       "id": "sup-cab-powerDistDetailedCE-20-h1ude",
       "category": "Power Distribution Components",
       "item": "Disconnect - 100A (Allen Bradley, CE)",
       "supplier": "Allen Bradley",
-      "email": "",
       "cost": 65,
       "latestPrice": 65,
       "updated": "2026-09-17",
-      "description": "Disconnect Switch \u2014 reference only; NOT the live-used breakdown (see Configurator's Power Distribution detail view for the actual formula)",
-      "bundleBrand": "Allen Bradley",
-      "bundleStandard": "CE"
+      "email": "",
+      "description": "Disconnect Switch — reference only; NOT the live-used breakdown (see Configurator's Power Distribution detail view for the actual formula)"
     },
     {
       "id": "sup-cab-powerDistDetailedCE-21-62lzn",
       "category": "Power Distribution Components",
       "item": "Contactor - 97A (Allen Bradley, CE)",
       "supplier": "Allen Bradley",
-      "email": "",
       "cost": 240,
       "latestPrice": 240,
       "updated": "2026-09-17",
-      "description": "Contactor \u2014 reference only; NOT the live-used breakdown (see Configurator's Power Distribution detail view for the actual formula)",
-      "bundleBrand": "Allen Bradley",
-      "bundleStandard": "CE"
+      "email": "",
+      "description": "Contactor — reference only; NOT the live-used breakdown (see Configurator's Power Distribution detail view for the actual formula)"
     },
     {
       "id": "sup-cab-powerDistDetailedCE-22-wxfzr",
       "category": "Power Distribution Components",
       "item": "Power Supply - 20A (Allen Bradley, CE)",
       "supplier": "Allen Bradley",
-      "email": "",
       "cost": 380,
       "latestPrice": 380,
       "updated": "2026-09-17",
-      "description": "Power Supply \u2014 reference only; NOT the live-used breakdown (see Configurator's Power Distribution detail view for the actual formula)",
-      "bundleBrand": "Allen Bradley",
-      "bundleStandard": "CE"
+      "email": "",
+      "description": "Power Supply — reference only; NOT the live-used breakdown (see Configurator's Power Distribution detail view for the actual formula)"
     },
     {
       "id": "sup-cab-powerDistDetailedCE-23-8elt9",
       "category": "Power Distribution Components",
       "item": "DB - 125A (Allen Bradley, CE)",
       "supplier": "Schneider Electric",
-      "email": "",
       "cost": 35,
       "latestPrice": 35,
       "updated": "2026-09-17",
-      "description": "Distribution Block \u2014 reference only; NOT the live-used breakdown (see Configurator's Power Distribution detail view for the actual formula)",
-      "bundleBrand": "Allen Bradley",
-      "bundleStandard": "CE"
+      "email": "",
+      "description": "Distribution Block — reference only; NOT the live-used breakdown (see Configurator's Power Distribution detail view for the actual formula)"
     },
     {
       "id": "sup-cab-powerDistDetailedCE-24-thvkd",
       "category": "Power Distribution Components",
       "item": "Voltage Relay (Allen Bradley, CE)",
       "supplier": "Allen Bradley",
-      "email": "",
       "cost": 150,
       "latestPrice": 150,
       "updated": "2026-09-17",
-      "description": "Voltage Relay \u2014 reference only; NOT the live-used breakdown (see Configurator's Power Distribution detail view for the actual formula)",
-      "bundleBrand": "Allen Bradley",
-      "bundleStandard": "CE"
+      "email": "",
+      "description": "Voltage Relay — reference only; NOT the live-used breakdown (see Configurator's Power Distribution detail view for the actual formula)"
     },
     {
       "id": "sup-cab-powerDistDetailedCE-25-fen67",
       "category": "Power Distribution Components",
       "item": "MCB - 100A (Allen Bradley, CE)",
       "supplier": "Allen Bradley",
-      "email": "",
       "cost": 235,
       "latestPrice": 235,
       "updated": "2026-09-17",
-      "description": "Circuit Breaker \u2014 reference only; NOT the live-used breakdown (see Configurator's Power Distribution detail view for the actual formula)",
-      "bundleBrand": "Allen Bradley",
-      "bundleStandard": "CE"
+      "email": "",
+      "description": "Circuit Breaker — reference only; NOT the live-used breakdown (see Configurator's Power Distribution detail view for the actual formula)"
     },
     {
       "id": "sup-cab-powerDistDetailedCE-26-5zex0",
       "category": "Power Distribution Components",
       "item": "CB - 1P 2A (Allen Bradley, CE)",
       "supplier": "Allen Bradley",
-      "email": "",
       "cost": 5,
       "latestPrice": 5,
       "updated": "2026-09-17",
-      "description": "Circuit Breaker \u2014 reference only; NOT the live-used breakdown (see Configurator's Power Distribution detail view for the actual formula)",
-      "bundleBrand": "Allen Bradley",
-      "bundleStandard": "CE"
+      "email": "",
+      "description": "Circuit Breaker — reference only; NOT the live-used breakdown (see Configurator's Power Distribution detail view for the actual formula)"
     },
     {
       "id": "sup-cab-powerDistDetailedCE-27-yeq1f",
       "category": "Power Distribution Components",
       "item": "CB - 3P 6A (Allen Bradley, CE)",
       "supplier": "Allen Bradley",
-      "email": "",
       "cost": 17,
       "latestPrice": 17,
       "updated": "2026-09-17",
-      "description": "Circuit Breaker \u2014 reference only; NOT the live-used breakdown (see Configurator's Power Distribution detail view for the actual formula)",
-      "bundleBrand": "Allen Bradley",
-      "bundleStandard": "CE"
+      "email": "",
+      "description": "Circuit Breaker — reference only; NOT the live-used breakdown (see Configurator's Power Distribution detail view for the actual formula)"
     },
     {
       "id": "sup-cab-powerDistDetailedCE-28-3kdul",
       "category": "Power Distribution Components",
       "item": "CB - 2P 6A (Allen Bradley, CE)",
       "supplier": "Allen Bradley",
-      "email": "",
       "cost": 17,
       "latestPrice": 17,
       "updated": "2026-09-17",
-      "description": "Circuit Breaker \u2014 reference only; NOT the live-used breakdown (see Configurator's Power Distribution detail view for the actual formula)",
-      "bundleBrand": "Allen Bradley",
-      "bundleStandard": "CE"
+      "email": "",
+      "description": "Circuit Breaker — reference only; NOT the live-used breakdown (see Configurator's Power Distribution detail view for the actual formula)"
     },
     {
       "id": "sup-cab-powerDistDetailedCE-30-rskj3",
       "category": "Power Distribution Components",
       "item": "RCD - 2P 25A (Allen Bradley, CE)",
       "supplier": "Allen Bradley",
-      "email": "",
       "cost": 80,
       "latestPrice": 80,
       "updated": "2026-09-17",
-      "description": "Circuit Breaker \u2014 reference only; NOT the live-used breakdown (see Configurator's Power Distribution detail view for the actual formula)",
-      "bundleBrand": "Allen Bradley",
-      "bundleStandard": "CE"
+      "email": "",
+      "description": "Circuit Breaker — reference only; NOT the live-used breakdown (see Configurator's Power Distribution detail view for the actual formula)"
     },
     {
       "id": "sup-cab-powerDistDetailedCE-31-4pwvo",
       "category": "Power Distribution Components",
       "item": "Fuse - 3P 32A (Allen Bradley, CE)",
       "supplier": "Allen Bradley",
-      "email": "",
       "cost": 30,
       "latestPrice": 30,
       "updated": "2026-09-17",
-      "description": "Circuit Breaker \u2014 reference only; NOT the live-used breakdown (see Configurator's Power Distribution detail view for the actual formula)",
-      "bundleBrand": "Allen Bradley",
-      "bundleStandard": "CE"
+      "email": "",
+      "description": "Circuit Breaker — reference only; NOT the live-used breakdown (see Configurator's Power Distribution detail view for the actual formula)"
     },
     {
       "id": "sup-cab-powerDistDetailedCE-32-6gx6z",
       "category": "Power Distribution Components",
       "item": "Output Relay (Allen Bradley, CE)",
       "supplier": "Allen Bradley",
-      "email": "",
       "cost": 13,
       "latestPrice": 13,
       "updated": "2026-09-17",
-      "description": "Output Relays \u2014 reference only; NOT the live-used breakdown (see Configurator's Power Distribution detail view for the actual formula)",
-      "bundleBrand": "Allen Bradley",
-      "bundleStandard": "CE"
+      "email": "",
+      "description": "Output Relays — reference only; NOT the live-used breakdown (see Configurator's Power Distribution detail view for the actual formula)"
     },
     {
       "id": "sup-cab-powerDistDetailedCE-33-n311e",
       "category": "Power Distribution Components",
       "item": "Disconnect - 100A accessories (Allen Bradley, CE)",
       "supplier": "Allen Bradley",
-      "email": "",
       "cost": 13,
       "latestPrice": 13,
       "updated": "2026-09-17",
-      "description": "Disconnect Switch Accessories \u2014 reference only; NOT the live-used breakdown (see Configurator's Power Distribution detail view for the actual formula)",
-      "bundleBrand": "Allen Bradley",
-      "bundleStandard": "CE"
+      "email": "",
+      "description": "Disconnect Switch Accessories — reference only; NOT the live-used breakdown (see Configurator's Power Distribution detail view for the actual formula)"
     },
     {
       "id": "sup-cab-powerDistDetailedCE-34-1cryr",
       "category": "Power Distribution Components",
       "item": "ECB (Allen Bradley, CE)",
       "supplier": "Murr",
-      "email": "",
       "cost": 180,
       "latestPrice": 180,
       "updated": "2026-09-17",
-      "description": "Electronic Circuit Breaker \u2014 reference only; NOT the live-used breakdown (see Configurator's Power Distribution detail view for the actual formula)",
-      "bundleBrand": "Allen Bradley",
-      "bundleStandard": "CE"
+      "email": "",
+      "description": "Electronic Circuit Breaker — reference only; NOT the live-used breakdown (see Configurator's Power Distribution detail view for the actual formula)"
     },
     {
       "id": "sup-cab-powerDistDetailedUL-1-nb2v3",
       "category": "Power Distribution Components",
       "item": "Disconnect - 100A (Siemens, UL)",
       "supplier": "Siemens",
-      "email": "",
       "cost": 50,
       "latestPrice": 50,
       "updated": "2026-09-17",
-      "description": "Disconnect Switch \u2014 reference only; NOT the live-used breakdown (see Configurator's Power Distribution detail view for the actual formula)",
-      "bundleBrand": "Siemens",
-      "bundleStandard": "UL"
+      "email": "",
+      "description": "Disconnect Switch — reference only; NOT the live-used breakdown (see Configurator's Power Distribution detail view for the actual formula)"
     },
     {
       "id": "sup-cab-powerDistDetailedUL-2-kk3us",
       "category": "Power Distribution Components",
       "item": "Contactor - 110A (Siemens, UL)",
       "supplier": "Siemens",
-      "email": "",
       "cost": 230,
       "latestPrice": 230,
       "updated": "2026-09-17",
-      "description": "Contactor \u2014 reference only; NOT the live-used breakdown (see Configurator's Power Distribution detail view for the actual formula)",
-      "bundleBrand": "Siemens",
-      "bundleStandard": "UL"
+      "email": "",
+      "description": "Contactor — reference only; NOT the live-used breakdown (see Configurator's Power Distribution detail view for the actual formula)"
     },
     {
       "id": "sup-cab-powerDistDetailedUL-3-97ysx",
       "category": "Power Distribution Components",
       "item": "Power Supply - 20A (Siemens, UL)",
       "supplier": "Siemens",
-      "email": "",
       "cost": 330,
       "latestPrice": 330,
       "updated": "2026-09-17",
-      "description": "Power Supply \u2014 reference only; NOT the live-used breakdown (see Configurator's Power Distribution detail view for the actual formula)",
-      "bundleBrand": "Siemens",
-      "bundleStandard": "UL"
+      "email": "",
+      "description": "Power Supply — reference only; NOT the live-used breakdown (see Configurator's Power Distribution detail view for the actual formula)"
     },
     {
       "id": "sup-cab-powerDistDetailedUL-4-q3pck",
       "category": "Power Distribution Components",
       "item": "DB - 125A (Siemens, UL)",
       "supplier": "Schneider Electric",
-      "email": "",
       "cost": 340,
       "latestPrice": 340,
       "updated": "2026-09-17",
-      "description": "Distribution Block \u2014 reference only; NOT the live-used breakdown (see Configurator's Power Distribution detail view for the actual formula)",
-      "bundleBrand": "Siemens",
-      "bundleStandard": "UL"
+      "email": "",
+      "description": "Distribution Block — reference only; NOT the live-used breakdown (see Configurator's Power Distribution detail view for the actual formula)"
     },
     {
       "id": "sup-cab-powerDistDetailedUL-5-6bbmj",
       "category": "Power Distribution Components",
       "item": "Voltage Relay (Siemens, UL)",
       "supplier": "Siemens",
-      "email": "",
       "cost": 110,
       "latestPrice": 110,
       "updated": "2026-09-17",
-      "description": "Voltage Relay \u2014 reference only; NOT the live-used breakdown (see Configurator's Power Distribution detail view for the actual formula)",
-      "bundleBrand": "Siemens",
-      "bundleStandard": "UL"
+      "email": "",
+      "description": "Voltage Relay — reference only; NOT the live-used breakdown (see Configurator's Power Distribution detail view for the actual formula)"
     },
     {
       "id": "sup-cab-powerDistDetailedUL-6-ao0hj",
       "category": "Power Distribution Components",
       "item": "MCB - 100A (Siemens, UL)",
       "supplier": "Siemens",
-      "email": "",
       "cost": 585,
       "latestPrice": 585,
       "updated": "2026-09-17",
-      "description": "Circuit Breaker \u2014 reference only; NOT the live-used breakdown (see Configurator's Power Distribution detail view for the actual formula)",
-      "bundleBrand": "Siemens",
-      "bundleStandard": "UL"
+      "email": "",
+      "description": "Circuit Breaker — reference only; NOT the live-used breakdown (see Configurator's Power Distribution detail view for the actual formula)"
     },
     {
       "id": "sup-cab-powerDistDetailedUL-7-7we9s",
       "category": "Power Distribution Components",
       "item": "CB - 1P 1A (Siemens, UL)",
       "supplier": "Siemens",
-      "email": "",
       "cost": 90,
       "latestPrice": 90,
       "updated": "2026-09-17",
-      "description": "Circuit Breaker \u2014 reference only; NOT the live-used breakdown (see Configurator's Power Distribution detail view for the actual formula)",
-      "bundleBrand": "Siemens",
-      "bundleStandard": "UL"
+      "email": "",
+      "description": "Circuit Breaker — reference only; NOT the live-used breakdown (see Configurator's Power Distribution detail view for the actual formula)"
     },
     {
       "id": "sup-cab-powerDistDetailedUL-8-8p4a0",
       "category": "Power Distribution Components",
       "item": "CB - 3P 6A (Siemens, UL)",
       "supplier": "Siemens",
-      "email": "",
       "cost": 150,
       "latestPrice": 150,
       "updated": "2026-09-17",
-      "description": "Circuit Breaker \u2014 reference only; NOT the live-used breakdown (see Configurator's Power Distribution detail view for the actual formula)",
-      "bundleBrand": "Siemens",
-      "bundleStandard": "UL"
+      "email": "",
+      "description": "Circuit Breaker — reference only; NOT the live-used breakdown (see Configurator's Power Distribution detail view for the actual formula)"
     },
     {
       "id": "sup-cab-powerDistDetailedUL-9-mmhlc",
       "category": "Power Distribution Components",
       "item": "CB - 2P 6A (Siemens, UL)",
       "supplier": "Siemens",
-      "email": "",
       "cost": 95,
       "latestPrice": 95,
       "updated": "2026-09-17",
-      "description": "Circuit Breaker \u2014 reference only; NOT the live-used breakdown (see Configurator's Power Distribution detail view for the actual formula)",
-      "bundleBrand": "Siemens",
-      "bundleStandard": "UL"
+      "email": "",
+      "description": "Circuit Breaker — reference only; NOT the live-used breakdown (see Configurator's Power Distribution detail view for the actual formula)"
     },
     {
       "id": "sup-cab-powerDistDetailedUL-10-9e2d0",
       "category": "Power Distribution Components",
       "item": "CB - 1P 2A (Siemens, UL)",
       "supplier": "Siemens",
-      "email": "",
       "cost": 90,
       "latestPrice": 90,
       "updated": "2026-09-17",
-      "description": "Circuit Breaker \u2014 reference only; NOT the live-used breakdown (see Configurator's Power Distribution detail view for the actual formula)",
-      "bundleBrand": "Siemens",
-      "bundleStandard": "UL"
+      "email": "",
+      "description": "Circuit Breaker — reference only; NOT the live-used breakdown (see Configurator's Power Distribution detail view for the actual formula)"
     },
     {
       "id": "sup-cab-powerDistDetailedUL-11-54jhx",
       "category": "Power Distribution Components",
       "item": "RCD - 2P 25A (Siemens, UL)",
       "supplier": "Siemens",
-      "email": "",
       "cost": 120,
       "latestPrice": 120,
       "updated": "2026-09-17",
-      "description": "Circuit Breaker \u2014 reference only; NOT the live-used breakdown (see Configurator's Power Distribution detail view for the actual formula)",
-      "bundleBrand": "Siemens",
-      "bundleStandard": "UL"
+      "email": "",
+      "description": "Circuit Breaker — reference only; NOT the live-used breakdown (see Configurator's Power Distribution detail view for the actual formula)"
     },
     {
       "id": "sup-cab-powerDistDetailedUL-12-h3ve5",
       "category": "Power Distribution Components",
       "item": "Fuse - 3P 32A (Siemens, UL)",
       "supplier": "Siemens",
-      "email": "",
       "cost": 65,
       "latestPrice": 65,
       "updated": "2026-09-17",
-      "description": "Circuit Breaker \u2014 reference only; NOT the live-used breakdown (see Configurator's Power Distribution detail view for the actual formula)",
-      "bundleBrand": "Siemens",
-      "bundleStandard": "UL"
+      "email": "",
+      "description": "Circuit Breaker — reference only; NOT the live-used breakdown (see Configurator's Power Distribution detail view for the actual formula)"
     },
     {
       "id": "sup-cab-powerDistDetailedUL-13-86772",
       "category": "Power Distribution Components",
       "item": "Output Relay (Siemens, UL)",
       "supplier": "Siemens",
-      "email": "",
       "cost": 12,
       "latestPrice": 12,
       "updated": "2026-09-17",
-      "description": "Output Relays \u2014 reference only; NOT the live-used breakdown (see Configurator's Power Distribution detail view for the actual formula)",
-      "bundleBrand": "Siemens",
-      "bundleStandard": "UL"
+      "email": "",
+      "description": "Output Relays — reference only; NOT the live-used breakdown (see Configurator's Power Distribution detail view for the actual formula)"
     },
     {
       "id": "sup-cab-powerDistDetailedUL-14-4iuee",
       "category": "Power Distribution Components",
       "item": "Trans -1000VA (Siemens, UL)",
       "supplier": "Murr",
-      "email": "",
       "cost": 300,
       "latestPrice": 300,
       "updated": "2026-09-17",
-      "description": "Transformer \u2014 reference only; NOT the live-used breakdown (see Configurator's Power Distribution detail view for the actual formula)",
-      "bundleBrand": "Siemens",
-      "bundleStandard": "UL"
+      "email": "",
+      "description": "Transformer — reference only; NOT the live-used breakdown (see Configurator's Power Distribution detail view for the actual formula)"
     },
     {
       "id": "sup-cab-powerDistDetailedUL-15-tqzmt",
       "category": "Power Distribution Components",
       "item": "MPCB - 6.3A (Siemens, UL)",
       "supplier": "Siemens",
-      "email": "",
       "cost": 85,
       "latestPrice": 85,
       "updated": "2026-09-17",
-      "description": "Circuit Breaker \u2014 reference only; NOT the live-used breakdown (see Configurator's Power Distribution detail view for the actual formula)",
-      "bundleBrand": "Siemens",
-      "bundleStandard": "UL"
+      "email": "",
+      "description": "Circuit Breaker — reference only; NOT the live-used breakdown (see Configurator's Power Distribution detail view for the actual formula)"
     },
     {
       "id": "sup-cab-powerDistDetailedUL-16-lvkip",
       "category": "Power Distribution Components",
       "item": "ECB (Siemens, UL)",
       "supplier": "Murr",
-      "email": "",
       "cost": 180,
       "latestPrice": 180,
       "updated": "2026-09-17",
-      "description": "Electronic Circuit Breaker \u2014 reference only; NOT the live-used breakdown (see Configurator's Power Distribution detail view for the actual formula)",
-      "bundleBrand": "Siemens",
-      "bundleStandard": "UL"
+      "email": "",
+      "description": "Electronic Circuit Breaker — reference only; NOT the live-used breakdown (see Configurator's Power Distribution detail view for the actual formula)"
     },
     {
       "id": "sup-cab-powerDistDetailedUL-20-m0n74",
       "category": "Power Distribution Components",
       "item": "Disconnect - 100A (Allen Bradley, UL)",
       "supplier": "Allen Bradley",
-      "email": "",
       "cost": 65,
       "latestPrice": 65,
       "updated": "2026-09-17",
-      "description": "Disconnect Switch \u2014 reference only; NOT the live-used breakdown (see Configurator's Power Distribution detail view for the actual formula)",
-      "bundleBrand": "Allen Bradley",
-      "bundleStandard": "UL"
+      "email": "",
+      "description": "Disconnect Switch — reference only; NOT the live-used breakdown (see Configurator's Power Distribution detail view for the actual formula)"
     },
     {
       "id": "sup-cab-powerDistDetailedUL-22-zrzc7",
       "category": "Power Distribution Components",
       "item": "Contactor - 97A (Allen Bradley, UL)",
       "supplier": "Allen Bradley",
-      "email": "",
       "cost": 240,
       "latestPrice": 240,
       "updated": "2026-09-17",
-      "description": "Contactor \u2014 reference only; NOT the live-used breakdown (see Configurator's Power Distribution detail view for the actual formula)",
-      "bundleBrand": "Allen Bradley",
-      "bundleStandard": "UL"
+      "email": "",
+      "description": "Contactor — reference only; NOT the live-used breakdown (see Configurator's Power Distribution detail view for the actual formula)"
     },
     {
       "id": "sup-cab-powerDistDetailedUL-23-4om6y",
       "category": "Power Distribution Components",
       "item": "Power Supply - 20A (Allen Bradley, UL)",
       "supplier": "Allen Bradley",
-      "email": "",
       "cost": 380,
       "latestPrice": 380,
       "updated": "2026-09-17",
-      "description": "Power Supply \u2014 reference only; NOT the live-used breakdown (see Configurator's Power Distribution detail view for the actual formula)",
-      "bundleBrand": "Allen Bradley",
-      "bundleStandard": "UL"
+      "email": "",
+      "description": "Power Supply — reference only; NOT the live-used breakdown (see Configurator's Power Distribution detail view for the actual formula)"
     },
     {
       "id": "sup-cab-powerDistDetailedUL-24-shxyw",
       "category": "Power Distribution Components",
       "item": "DB - 125A (Allen Bradley, UL)",
       "supplier": "Schneider Electric",
-      "email": "",
       "cost": 340,
       "latestPrice": 340,
       "updated": "2026-09-17",
-      "description": "Distribution Block \u2014 reference only; NOT the live-used breakdown (see Configurator's Power Distribution detail view for the actual formula)",
-      "bundleBrand": "Allen Bradley",
-      "bundleStandard": "UL"
+      "email": "",
+      "description": "Distribution Block — reference only; NOT the live-used breakdown (see Configurator's Power Distribution detail view for the actual formula)"
     },
     {
       "id": "sup-cab-powerDistDetailedUL-25-y3a7s",
       "category": "Power Distribution Components",
       "item": "Voltage Relay (Allen Bradley, UL)",
       "supplier": "Allen Bradley",
-      "email": "",
       "cost": 150,
       "latestPrice": 150,
       "updated": "2026-09-17",
-      "description": "Voltage Relay \u2014 reference only; NOT the live-used breakdown (see Configurator's Power Distribution detail view for the actual formula)",
-      "bundleBrand": "Allen Bradley",
-      "bundleStandard": "UL"
+      "email": "",
+      "description": "Voltage Relay — reference only; NOT the live-used breakdown (see Configurator's Power Distribution detail view for the actual formula)"
     },
     {
       "id": "sup-cab-powerDistDetailedUL-26-00jr1",
       "category": "Power Distribution Components",
       "item": "MCB - 100A (Allen Bradley, UL)",
       "supplier": "Allen Bradley",
-      "email": "",
       "cost": 235,
       "latestPrice": 235,
       "updated": "2026-09-17",
-      "description": "Circuit Breaker \u2014 reference only; NOT the live-used breakdown (see Configurator's Power Distribution detail view for the actual formula)",
-      "bundleBrand": "Allen Bradley",
-      "bundleStandard": "UL"
+      "email": "",
+      "description": "Circuit Breaker — reference only; NOT the live-used breakdown (see Configurator's Power Distribution detail view for the actual formula)"
     },
     {
       "id": "sup-cab-powerDistDetailedUL-27-owmn0",
       "category": "Power Distribution Components",
       "item": "CB - 1P 1A (Allen Bradley, UL)",
       "supplier": "Allen Bradley",
-      "email": "",
       "cost": 50,
       "latestPrice": 50,
       "updated": "2026-09-17",
-      "description": "Circuit Breaker \u2014 reference only; NOT the live-used breakdown (see Configurator's Power Distribution detail view for the actual formula)",
-      "bundleBrand": "Allen Bradley",
-      "bundleStandard": "UL"
+      "email": "",
+      "description": "Circuit Breaker — reference only; NOT the live-used breakdown (see Configurator's Power Distribution detail view for the actual formula)"
     },
     {
       "id": "sup-cab-powerDistDetailedUL-28-f5bjl",
       "category": "Power Distribution Components",
       "item": "CB - 3P 6A (Allen Bradley, UL)",
       "supplier": "Allen Bradley",
-      "email": "",
       "cost": 70,
       "latestPrice": 70,
       "updated": "2026-09-17",
-      "description": "Circuit Breaker \u2014 reference only; NOT the live-used breakdown (see Configurator's Power Distribution detail view for the actual formula)",
-      "bundleBrand": "Allen Bradley",
-      "bundleStandard": "UL"
+      "email": "",
+      "description": "Circuit Breaker — reference only; NOT the live-used breakdown (see Configurator's Power Distribution detail view for the actual formula)"
     },
     {
       "id": "sup-cab-powerDistDetailedUL-29-m5bsy",
       "category": "Power Distribution Components",
       "item": "CB - 2P 6A (Allen Bradley, UL)",
       "supplier": "Allen Bradley",
-      "email": "",
       "cost": 50,
       "latestPrice": 50,
       "updated": "2026-09-17",
-      "description": "Circuit Breaker \u2014 reference only; NOT the live-used breakdown (see Configurator's Power Distribution detail view for the actual formula)",
-      "bundleBrand": "Allen Bradley",
-      "bundleStandard": "UL"
+      "email": "",
+      "description": "Circuit Breaker — reference only; NOT the live-used breakdown (see Configurator's Power Distribution detail view for the actual formula)"
     },
     {
       "id": "sup-cab-powerDistDetailedUL-30-bk2z7",
       "category": "Power Distribution Components",
       "item": "CB - 1P 2A (Allen Bradley, UL)",
       "supplier": "Allen Bradley",
-      "email": "",
       "cost": 50,
       "latestPrice": 50,
       "updated": "2026-09-17",
-      "description": "Circuit Breaker \u2014 reference only; NOT the live-used breakdown (see Configurator's Power Distribution detail view for the actual formula)",
-      "bundleBrand": "Allen Bradley",
-      "bundleStandard": "UL"
+      "email": "",
+      "description": "Circuit Breaker — reference only; NOT the live-used breakdown (see Configurator's Power Distribution detail view for the actual formula)"
     },
     {
       "id": "sup-cab-powerDistDetailedUL-31-8fsmh",
       "category": "Power Distribution Components",
       "item": "RCD - 2P 25A (Allen Bradley, UL)",
       "supplier": "Allen Bradley",
-      "email": "",
       "cost": 80,
       "latestPrice": 80,
       "updated": "2026-09-17",
-      "description": "Circuit Breaker \u2014 reference only; NOT the live-used breakdown (see Configurator's Power Distribution detail view for the actual formula)",
-      "bundleBrand": "Allen Bradley",
-      "bundleStandard": "UL"
+      "email": "",
+      "description": "Circuit Breaker — reference only; NOT the live-used breakdown (see Configurator's Power Distribution detail view for the actual formula)"
     },
     {
       "id": "sup-cab-powerDistDetailedUL-32-gfspt",
       "category": "Power Distribution Components",
       "item": "Fuse - 3P 32A (Allen Bradley, UL)",
       "supplier": "Allen Bradley",
-      "email": "",
       "cost": 30,
       "latestPrice": 30,
       "updated": "2026-09-17",
-      "description": "Circuit Breaker \u2014 reference only; NOT the live-used breakdown (see Configurator's Power Distribution detail view for the actual formula)",
-      "bundleBrand": "Allen Bradley",
-      "bundleStandard": "UL"
+      "email": "",
+      "description": "Circuit Breaker — reference only; NOT the live-used breakdown (see Configurator's Power Distribution detail view for the actual formula)"
     },
     {
       "id": "sup-cab-powerDistDetailedUL-33-z213q",
       "category": "Power Distribution Components",
       "item": "Output Relay (Allen Bradley, UL)",
       "supplier": "Allen Bradley",
-      "email": "",
       "cost": 13,
       "latestPrice": 13,
       "updated": "2026-09-17",
-      "description": "Output Relays \u2014 reference only; NOT the live-used breakdown (see Configurator's Power Distribution detail view for the actual formula)",
-      "bundleBrand": "Allen Bradley",
-      "bundleStandard": "UL"
+      "email": "",
+      "description": "Output Relays — reference only; NOT the live-used breakdown (see Configurator's Power Distribution detail view for the actual formula)"
     },
     {
       "id": "sup-cab-powerDistDetailedUL-34-94dlh",
       "category": "Power Distribution Components",
       "item": "Trans -1000VA (Allen Bradley, UL)",
       "supplier": "Allen Bradley",
-      "email": "",
       "cost": 340,
       "latestPrice": 340,
       "updated": "2026-09-17",
-      "description": "Transformer \u2014 reference only; NOT the live-used breakdown (see Configurator's Power Distribution detail view for the actual formula)",
-      "bundleBrand": "Allen Bradley",
-      "bundleStandard": "UL"
+      "email": "",
+      "description": "Transformer — reference only; NOT the live-used breakdown (see Configurator's Power Distribution detail view for the actual formula)"
     },
     {
       "id": "sup-cab-powerDistDetailedUL-35-nhdnq",
       "category": "Power Distribution Components",
       "item": "CB - 2P 2A (Allen Bradley, UL)",
       "supplier": "Allen Bradley",
-      "email": "",
       "cost": 50,
       "latestPrice": 50,
       "updated": "2026-09-17",
-      "description": "Circuit Breaker \u2014 reference only; NOT the live-used breakdown (see Configurator's Power Distribution detail view for the actual formula)",
-      "bundleBrand": "Allen Bradley",
-      "bundleStandard": "UL"
+      "email": "",
+      "description": "Circuit Breaker — reference only; NOT the live-used breakdown (see Configurator's Power Distribution detail view for the actual formula)"
     },
     {
       "id": "sup-cab-powerDistDetailedUL-36-b25o3",
       "category": "Power Distribution Components",
       "item": "Disconnect - 100A accessories (Allen Bradley, UL)",
       "supplier": "Allen Bradley",
-      "email": "",
       "cost": 13,
       "latestPrice": 13,
       "updated": "2026-09-17",
-      "description": "Disconnect Switch Accessories \u2014 reference only; NOT the live-used breakdown (see Configurator's Power Distribution detail view for the actual formula)",
-      "bundleBrand": "Allen Bradley",
-      "bundleStandard": "UL"
+      "email": "",
+      "description": "Disconnect Switch Accessories — reference only; NOT the live-used breakdown (see Configurator's Power Distribution detail view for the actual formula)"
     },
     {
       "id": "sup-cab-powerDistDetailedUL-37-xkaoq",
       "category": "Power Distribution Components",
       "item": "Murr ECB (Allen Bradley, UL)",
       "supplier": "Murr",
-      "email": "",
       "cost": 180,
       "latestPrice": 180,
       "updated": "2026-09-17",
-      "description": "Electronic Circuit Breaker \u2014 reference only; NOT the live-used breakdown (see Configurator's Power Distribution detail view for the actual formula)",
-      "bundleBrand": "Allen Bradley",
-      "bundleStandard": "UL"
+      "email": "",
+      "description": "Electronic Circuit Breaker — reference only; NOT the live-used breakdown (see Configurator's Power Distribution detail view for the actual formula)"
     }
   ]
 }
