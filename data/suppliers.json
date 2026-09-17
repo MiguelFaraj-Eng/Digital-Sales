@@ -15,17 +15,17 @@
     "Sensors & Instrumentation",
     "PLC I/O & Accessories",
     "HMI",
-    "Power Distribution",
     "Ventilation",
     "VFDs & Drives",
     "Junction Boxes",
+    "Power Distribution",
     "Safety & Emergency Stop",
     "Operator Panels",
     "Power Distribution Components"
   ],
   "entries": [
     {
-      "id": "sup-cab-plc-9-wyf4g",
+      "id": "sup-cab-plc-9-un1s3",
       "category": "PLCs",
       "item": "Compact GuardLogix5380 L320ERS2",
       "supplier": "Allen Bradley",
@@ -36,7 +36,7 @@
       "description": "Compact GuardLogix5380 Safety Controller, SIL2/PLd, 2.0MB Standard & 1.0MB Safety Memory, 40 nodes, 16 I/Os"
     },
     {
-      "id": "sup-cab-plc-11-dhjn7",
+      "id": "sup-cab-plc-11-qld8u",
       "category": "PLCs",
       "item": "Compact GuardLogix5380 L320ERMS2",
       "supplier": "Allen Bradley",
@@ -47,7 +47,7 @@
       "description": "Compact GuardLogix5380 Safety Controller, SIL2/PLd, 2.0MB Standard 1.0MB Safety Memory, 40 nodes, 16 I/Os, 8 axis"
     },
     {
-      "id": "sup-cab-plc-10-gqpho",
+      "id": "sup-cab-plc-10-rzwqy",
       "category": "PLCs",
       "item": "Compact GuardLogix5380 L350ERS2",
       "supplier": "Allen Bradley",
@@ -58,7 +58,7 @@
       "description": "Compact GuardLogix5380 Safety Controller, SIL2/PLd, 5.0MB Standard & 2.5MB Safety Memory, 120 nodes, 31 I/Os"
     },
     {
-      "id": "sup-cab-plc-12-g7nxr",
+      "id": "sup-cab-plc-12-4744a",
       "category": "PLCs",
       "item": "Compact GuardLogix5380 L350ERMS2",
       "supplier": "Allen Bradley",
@@ -69,7 +69,7 @@
       "description": "Compact GuardLogix5380 Safety Controller, SIL2/PLd, 5.0MB Standard & 2.5MB Safety Memory, 120 nodes, 31 I/Os, 24 axis"
     },
     {
-      "id": "sup-cab-plc-1-z2a53",
+      "id": "sup-cab-plc-1-2fjoc",
       "category": "PLCs",
       "item": "SIMATIC S7-1200, CPU 1214C",
       "supplier": "Siemens",
@@ -80,7 +80,7 @@
       "description": "SIMATIC S7-1200, CPU 1214C, COMPACT CPU, DC/DC/DC, ONBOARD I/O: 14 DI 24V DC, 10 DO 24 V DC, 2 AI 0 - 10V DC, POWER SUPPLY: DC 20.4 - 28.8 V DC,PROGRAM/DATA MEMORY: 75 KB"
     },
     {
-      "id": "sup-cab-plc-2-xaueg",
+      "id": "sup-cab-plc-2-itkko",
       "category": "PLCs",
       "item": "SIMATIC S7-1500, CPU 1513-1 PN",
       "supplier": "Siemens",
@@ -91,7 +91,7 @@
       "description": "SIMATIC S7-1500, CPU 1513-1 PN, central processing unit with work memory 600 KB for program and 2.5 MB for data, 1st interface: PROFINET IRT with 2-port switch, 25 ns bit performance, SIMATIC Memory Card required "
     },
     {
-      "id": "sup-cab-plc-5-qcxbc",
+      "id": "sup-cab-plc-5-pvtt2",
       "category": "PLCs",
       "item": "SIMATIC S7-1500F, CPU 1513F-1 PN",
       "supplier": "Siemens",
@@ -102,7 +102,7 @@
       "description": "SIMATIC S7-1500F, CPU 1513F-1 PN, central processing unit with work memory 900 KB for program and 2.5 MB for data, 1st interface: PROFINET IRT with 2-port switch, 25 ns bit performance, SIMATIC Memory Card required"
     },
     {
-      "id": "sup-cab-plc-3-rvv9r",
+      "id": "sup-cab-plc-3-kmtp1",
       "category": "PLCs",
       "item": "SIMATIC S7-1500, CPU 1515-2 PN",
       "supplier": "Siemens",
@@ -113,7 +113,7 @@
       "description": "SIMATIC S7-1500, CPU 1515-2 PN, central processing unit with work memory 1 MB for program and 4.5 MB for data, 1st interface: PROFINET IRT with 2-port switch, 2nd interface: PROFINET RT, 6 ns bit performance, SIMATIC Memory Card required"
     },
     {
-      "id": "sup-cab-plc-6-3hh0q",
+      "id": "sup-cab-plc-6-2sui9",
       "category": "PLCs",
       "item": "SIMATIC S7-1500F, CPU 1515F-2 PN",
       "supplier": "Siemens",
@@ -124,7 +124,7 @@
       "description": "SIMATIC S7-1500F, CPU 1515F-2 PN, central processing unit with 1.5 MB work memory for program and 4.5 MB for data, 1st interface: PROFINET IRT with 2-port switch, 2nd interface: PROFINET RT, 6 ns bit performance, SIMATIC Memory Card required"
     },
     {
-      "id": "sup-cab-plc-4-x2fes",
+      "id": "sup-cab-plc-4-tvjqb",
       "category": "PLCs",
       "item": "SIMATIC S7-1500, CPU 1516-3 PN/DP",
       "supplier": "Siemens",
@@ -135,7 +135,7 @@
       "description": "SIMATIC S7-1500, CPU 1516-3 PN/DP, central processing unit with 2 MB work memory for program and 7.5 MB for data 1st interface: PROFINET IRT with 2-port switch, 2nd interface: PROFINET RT, 3rd interface: PROFIBUS, 6 ns bit performance, SIMATIC Memory Card required"
     },
     {
-      "id": "sup-cab-plc-8-o4bnp",
+      "id": "sup-cab-plc-8-fkc4e",
       "category": "PLCs",
       "item": "SIMATIC S7-1500T, CPU 1515T-2 PN",
       "supplier": "Siemens",
@@ -146,7 +146,7 @@
       "description": "SIMATIC S7-1500T, CPU 1515T-2 PN, central processing unit with 1.5 MB work memory for program and 4.5 MB for data, 1st interface: PROFINET IRT with 2-port switch, 2nd interface: PROFINET RT, 6 ns bit performance, SIMATIC Memory Card required"
     },
     {
-      "id": "sup-cab-plc-7-9ji9x",
+      "id": "sup-cab-plc-7-3depf",
       "category": "PLCs",
       "item": "SIMATIC S7-1500F, CPU 1517F-3 PN/DP",
       "supplier": "Siemens",
@@ -157,7 +157,7 @@
       "description": "SIMATIC S7-1500F, CPU 1517F-3 PN/DP, central processing unit with work memory 3 MB for program and 8 MB for data, 1st interface: PROFINET IRT with 2-port switch, 2nd interface: PROFINET RT, 3rd interface: PROFIBUS, 2 ns bit performance, SIMATIC Memory Card required."
     },
     {
-      "id": "sup-cab-plcIO-11-tuec0",
+      "id": "sup-cab-plcIO-11-yb1tc",
       "category": "PLC I/O & Accessories",
       "item": "1734 Series, DI 8",
       "supplier": "Allen Bradley",
@@ -168,7 +168,7 @@
       "description": "POINT I/O 8 Point Digital Input Module"
     },
     {
-      "id": "sup-cab-plcIO-12-p40z1",
+      "id": "sup-cab-plcIO-12-dgyn0",
       "category": "PLC I/O & Accessories",
       "item": "1734 Series, DQ 8",
       "supplier": "Allen Bradley",
@@ -179,7 +179,7 @@
       "description": "POINT I/O 8 Point Digital Output Module"
     },
     {
-      "id": "sup-cab-plcIO-4-7bm7i",
+      "id": "sup-cab-plcIO-4-kvptb",
       "category": "PLC I/O & Accessories",
       "item": "SIMATIC ET 200SP, DI 8",
       "supplier": "Siemens",
@@ -190,7 +190,7 @@
       "description": "SIMATIC DP, Electronics module for ET 200SP,DI 8x 24 V DC ST"
     },
     {
-      "id": "sup-cab-plcIO-8-ktm8m",
+      "id": "sup-cab-plcIO-8-8msu4",
       "category": "PLC I/O & Accessories",
       "item": "1734 Series, Power Module",
       "supplier": "Allen Bradley",
@@ -201,7 +201,7 @@
       "description": "Expansion Power Module, POINT I/O, 400ma @24VDC Input, 1.3 A @5VDC Output to POINTBus, Open Style, DIN Mounted"
     },
     {
-      "id": "sup-cab-plcIO-5-tqzm2",
+      "id": "sup-cab-plcIO-5-z715b",
       "category": "PLC I/O & Accessories",
       "item": "SIMATIC ET 200SP, DQ 8",
       "supplier": "Siemens",
@@ -212,7 +212,7 @@
       "description": "SIMATIC DP, Electronics module for ET 200SP,DQ 8x 24 V DC ST"
     },
     {
-      "id": "sup-cab-plcIO-6-zxhrh",
+      "id": "sup-cab-plcIO-6-utci1",
       "category": "PLC I/O & Accessories",
       "item": "SIMATIC ET 200SP, AI 4",
       "supplier": "Siemens",
@@ -223,7 +223,7 @@
       "description": "SIMATIC ET 200SP, ANALOG INPUT MODULE, AI 4XU/I 2-WIRE STANDARD, PACKING UNIT: 1 PIECE, FITS TO BU-TYPE A0, A1, COLOR CODE CC03, MODULE DIAGNOSIS, 16BIT, +/-0,3%"
     },
     {
-      "id": "sup-cab-plcIO-2-72idu",
+      "id": "sup-cab-plcIO-2-2q0ir",
       "category": "PLC I/O & Accessories",
       "item": "SIMATIC ET 200SP, F-DI 8",
       "supplier": "Siemens",
@@ -234,7 +234,7 @@
       "description": "SIMATIC DP, Electronics module for ET 200SP, F-DI 8x 24 V DC HF"
     },
     {
-      "id": "sup-cab-plcIO-13-kzocf",
+      "id": "sup-cab-plcIO-13-itiyq",
       "category": "PLC I/O & Accessories",
       "item": "1734 Series, AI 4",
       "supplier": "Allen Bradley",
@@ -245,7 +245,7 @@
       "description": "4-Channel High Density Analog Current Input Module"
     },
     {
-      "id": "sup-cab-plcIO-1-4gq0w",
+      "id": "sup-cab-plcIO-1-xzqvj",
       "category": "PLC I/O & Accessories",
       "item": "SIMATIC ET 200SP, IM155-6 PN",
       "supplier": "Siemens",
@@ -256,7 +256,7 @@
       "description": "SIMATIC ET 200SP, PROFINET bundle IM, IM 155-6PN ST, max. 32 I/O modules and 16 ET 200AL modules, single hot swap, bundle consists of: Interface module (6ES7155-6AU01-0BN0), Server module (6ES7193-6PA00-0AA0), BusAdapter BA 2xRJ45 (6ES7193-6AR00-0AA0)"
     },
     {
-      "id": "sup-cab-plcIO-9-opud4",
+      "id": "sup-cab-plcIO-9-tyldp",
       "category": "PLC I/O & Accessories",
       "item": "1734 Series, F-DI 8",
       "supplier": "Allen Bradley",
@@ -267,7 +267,7 @@
       "description": "DC Input Module, 8 Points, Safety, IP20, POINT, 24VDC, Sinking"
     },
     {
-      "id": "sup-cab-plcIO-3-u4okp",
+      "id": "sup-cab-plcIO-3-jrrl6",
       "category": "PLC I/O & Accessories",
       "item": "SIMATIC ET 200SP, F-DQ 8",
       "supplier": "Siemens",
@@ -278,7 +278,7 @@
       "description": "SIMATIC DP, Electronics module ET 200SP, F-DQ 8XDC 24V0.5A PP"
     },
     {
-      "id": "sup-cab-plcIO-7-h08yi",
+      "id": "sup-cab-plcIO-7-23dmv",
       "category": "PLC I/O & Accessories",
       "item": "1734 Series, Point I/O",
       "supplier": "Allen Bradley",
@@ -289,7 +289,7 @@
       "description": "POINT I/O, Dual Port, Ethernet Network Adapter, EtherNet/IP, 63 Module Capacity on POINTBus, DIN Mounted"
     },
     {
-      "id": "sup-cab-plcIO-10-y11cn",
+      "id": "sup-cab-plcIO-10-c9ytu",
       "category": "PLC I/O & Accessories",
       "item": "1734 Series, F-DQ 8",
       "supplier": "Allen Bradley",
@@ -300,7 +300,7 @@
       "description": "DC Output Module, 8 Points, Safety, IP20, POINT, 24VDC, Sourcing"
     },
     {
-      "id": "sup-cab-plcIOAccessories-4-l5ahk",
+      "id": "sup-cab-plcIOAccessories-4-nyrci",
       "category": "PLC I/O & Accessories",
       "item": "1734 Series, BaseUnit",
       "supplier": "Allen Bradley",
@@ -311,7 +311,7 @@
       "description": "POINT I/O One-piece Terminal Base with Spring Clamp, 8 Terminations"
     },
     {
-      "id": "sup-cab-plcIOAccessories-3-3l77q",
+      "id": "sup-cab-plcIOAccessories-3-kye7l",
       "category": "PLC I/O & Accessories",
       "item": "SIMATIC ET 200SP, BaseUnit",
       "supplier": "Siemens",
@@ -322,7 +322,7 @@
       "description": "SIMATIC ET 200SP, BaseUnit BU15-P16+A0+2D, BU type A0, push-in terminals, without aux. terminals, new load group, WxH: 15x 117 mm"
     },
     {
-      "id": "sup-cab-plcIOAccessories-1-b920s",
+      "id": "sup-cab-plcIOAccessories-1-n6fs5",
       "category": "PLC I/O & Accessories",
       "item": "SIMATIC S7 Memory Card 12 MB",
       "supplier": "Siemens",
@@ -333,7 +333,7 @@
       "description": "SIMATIC S7, memory cards for S7-1x 00 CPU/SINAMICS, 3, 3V Flash, 12 MB"
     },
     {
-      "id": "sup-cab-plcIOAccessories-2-3e0ey",
+      "id": "sup-cab-plcIOAccessories-2-9imum",
       "category": "PLC I/O & Accessories",
       "item": "SIMATIC S7 Memory Card 24 MB",
       "supplier": "Siemens",
@@ -344,7 +344,7 @@
       "description": "SIMATIC S7, memory cards for S7-1x 00 CPU/SINAMICS, 3, 3V Flash, 24 MB"
     },
     {
-      "id": "sup-cab-hmi-1-v92v9",
+      "id": "sup-cab-hmi-1-botk1",
       "category": "HMI",
       "item": "SIMATIC HMI KTP900 Basic",
       "supplier": "Siemens",
@@ -355,7 +355,7 @@
       "description": "SIMATIC HMI, KTP900 Basic, Basic Panel, Key/touch operation, 9\" TFT display, 65536 colors, PROFINET interface, configurable from WinCC Basic V13/ STEP 7 Basic V13, contains open-source software, which is provided free of charge see enclosed CD"
     },
     {
-      "id": "sup-cab-hmi-2-8x9xq",
+      "id": "sup-cab-hmi-2-h1209",
       "category": "HMI",
       "item": "SIMATIC HMI TP1200 Comfort",
       "supplier": "Siemens",
@@ -366,7 +366,7 @@
       "description": "SIMATIC HMI TP1200 Comfort, Comfort Panel, touch operation, 12\" widescreen TFT display, 16 million colors, PROFINET interface, MPI/PROFIBUS DP interface, 12 MB configuration memory, Windows CE 6.0, configurable from WinCC Comfort V11"
     },
     {
-      "id": "sup-cab-hmi-3-hb1l3",
+      "id": "sup-cab-hmi-3-36z8k",
       "category": "HMI",
       "item": "PVP7 Standard 10.4 in",
       "supplier": "Allen Bradley",
@@ -377,7 +377,7 @@
       "description": "PanelView Plus 7 Standard Terminal, Touch Screen, 10.4 inches, TFT Color, Single Ethernet, 24V DC, Windows CE OS License, Standard Model"
     },
     {
-      "id": "sup-cab-hmi-4-2hyf1",
+      "id": "sup-cab-hmi-4-lf773",
       "category": "HMI",
       "item": "PVP7 Standard 12 in",
       "supplier": "Allen Bradley",
@@ -388,7 +388,7 @@
       "description": "PanelView Plus 7 Standard Terminal, Touch Screen, 12 inches, Wide aspect ratio Color, Single Ethernet, 24V DC, Windows CE OS License, Standard Model"
     },
     {
-      "id": "sup-cab-switches-1-s8zz2",
+      "id": "sup-cab-switches-1-3yxrd",
       "category": "Networking",
       "item": "Unmanaged 8-port (Siemens)",
       "supplier": "Siemens",
@@ -399,7 +399,7 @@
       "description": "SCALANCE XB008 Unmanaged Industrial Ethernet Switch for 10/100 Mbit/s for setting up small star and line topologies; LED diagnostics, IP20, 24 V AC/DC power supply, with 8x 10/100 Mbit/s twisted pair ports with RJ45 sockets"
     },
     {
-      "id": "sup-cab-switches-2-8c85f",
+      "id": "sup-cab-switches-2-72px6",
       "category": "Networking",
       "item": "Managed 8-port",
       "supplier": "Siemens",
@@ -410,7 +410,7 @@
       "description": "SCALANCE XC208 manageable Layer 2 IE switch; IEC 62443-4-2 certified; 8x 10/100 Mbit/s RJ45 ports; 1x console port; diagnostics LED; redundant power supply; temperature range -40 \u00b0C to +70 \u00b0C; assembly: DIN rail/S7 mounting rail/wall Office redundancy functions features (RSTP, VLAN,...); PROFINET IO device Ethernet/IP-compliant C-plug slot;"
     },
     {
-      "id": "sup-cab-switches-3-xz8dj",
+      "id": "sup-cab-switches-3-6vu7z",
       "category": "Networking",
       "item": "Unmanaged 8-port (Allen Bradley)",
       "supplier": "Allen Bradley",
@@ -421,7 +421,7 @@
       "description": "Stratix 2000 Switch, Unmanaged, 8 Copper Ports"
     },
     {
-      "id": "sup-cab-switches-4-lwbti",
+      "id": "sup-cab-switches-4-ms78c",
       "category": "Networking",
       "item": "Lightly Managed 8-port",
       "supplier": "Allen Bradley",
@@ -432,7 +432,7 @@
       "description": "Stratix 2500 Switch, Lightly Managed with 8x10/100BaseT, 8 port"
     },
     {
-      "id": "sup-cab-switches-5-j87we",
+      "id": "sup-cab-switches-5-e9btr",
       "category": "Networking",
       "item": "Managed 8-port, NAT",
       "supplier": "Allen Bradley",
@@ -443,7 +443,7 @@
       "description": "Stratix 5200 Switch, 8 Copper 100/1000 Ports, 2 Combo 100/1000 Ports, Full FW, DLR, PRP, NAT"
     },
     {
-      "id": "sup-cab-switches-6-gd50t",
+      "id": "sup-cab-switches-6-wvvj5",
       "category": "Networking",
       "item": "Unmanaged 16 ports (Siemens)",
       "supplier": "Siemens",
@@ -454,7 +454,7 @@
       "description": "SCALANCE XB116 unmanaged IE switch, 16x 10/100 Mbit/s RJ45 ports; for setting up small star and line topologies; LED diagnostics, IP20, Redundant power supply, 24 V AC/DC"
     },
     {
-      "id": "sup-cab-switches-7-tu42c",
+      "id": "sup-cab-switches-7-hvulk",
       "category": "Networking",
       "item": "Managed 16 ports (Siemens)",
       "supplier": "Siemens",
@@ -465,7 +465,7 @@
       "description": "SCALANCE XC216 manageable Layer 2 IE switch; IEC 62443-4-2 certified; 16X 10/100 Mbit/s RJ45 ports; 1x console port, diagnostics LED; redundant power supply; temperature range -40 \u00b0C to +70 \u00b0C; assembly: DIN rail/S7 mounting rail/wall Office redundancy functions features (RSTP, VLAN,...); PROFINET IO device; Ethernet/IP-compliant; C-plug slot"
     },
     {
-      "id": "sup-cab-switches-8-d9sak",
+      "id": "sup-cab-switches-8-d1opq",
       "category": "Networking",
       "item": "Unmanaged 16 ports (Allen Bradley)",
       "supplier": "Allen Bradley",
@@ -476,7 +476,7 @@
       "description": "Stratix 2000 unmanaged switch, 16 copper 10/100 ports"
     },
     {
-      "id": "sup-cab-switches-9-ly81n",
+      "id": "sup-cab-switches-9-z6cd1",
       "category": "Networking",
       "item": "Managed 16 ports (Allen Bradley)",
       "supplier": "Allen Bradley",
@@ -487,7 +487,7 @@
       "description": "Stratix 5700, 16 copper 10/100 ports, 2 combo(copper or SFP slot) 10/100 ports, 2 SFP 10/100 slots, lite FW"
     },
     {
-      "id": "sup-cab-ups-2-oxv0q",
+      "id": "sup-cab-ups-2-q0n32",
       "category": "UPS",
       "item": "UPS 20A (Allen Bradley)",
       "supplier": "Allen Bradley",
@@ -498,7 +498,7 @@
       "description": "Uninterruptible power supply (UPS) controller 1606-XLS480-UPS is an addition to standard 24V power supplies to bridge power failures or voltage fluctuations"
     },
     {
-      "id": "sup-cab-ups-1-t2149",
+      "id": "sup-cab-ups-1-m3vig",
       "category": "UPS",
       "item": "UPS 20A (Siemens)",
       "supplier": "Siemens",
@@ -509,7 +509,7 @@
       "description": "SITOP UPS1600 20 A uninterruptible power supply input: 24 V DC output: 24 V DC/20 A"
     },
     {
-      "id": "sup-cab-ventilation-1-e6dqt",
+      "id": "sup-cab-ventilation-1-r47q5",
       "category": "Ventilation",
       "item": "Seifert Ventilation - Fan & Filter (Seifert, CE)",
       "supplier": "Seifert",
@@ -520,7 +520,7 @@
       "description": "FAN FL-4620A 230/270 m3/h + FILTER FF-4000"
     },
     {
-      "id": "sup-cab-ventilation-2-gnlfk",
+      "id": "sup-cab-ventilation-2-t7aeh",
       "category": "Ventilation",
       "item": "Seifert Ventilation - Fan & Filter (Seifert, UL)",
       "supplier": "Seifert",
@@ -531,7 +531,7 @@
       "description": "FAN FL-4620A 230/270 m3/h + FILTER FF-4000"
     },
     {
-      "id": "sup-cab-ventilation-3-vghpv",
+      "id": "sup-cab-ventilation-3-4z9j9",
       "category": "Ventilation",
       "item": "Seifert Ventilation - AC 750W- Painted Steel",
       "supplier": "Seifert",
@@ -542,7 +542,7 @@
       "description": "KG 4308-Combi, 750W"
     },
     {
-      "id": "sup-cab-ventilation-5-h03jt",
+      "id": "sup-cab-ventilation-5-vl1dp",
       "category": "Ventilation",
       "item": "Seifert Ventilation - AC 670W - Stainless Steel (Seifert, CE)",
       "supplier": "Seifert",
@@ -553,7 +553,7 @@
       "description": "KG 8506-230V SS, 670 W"
     },
     {
-      "id": "sup-cab-ventilation-4-dr1rq",
+      "id": "sup-cab-ventilation-4-wa1r1",
       "category": "Ventilation",
       "item": "Seifert Ventilation - AC 750W - Painted Steel",
       "supplier": "Seifert",
@@ -564,7 +564,7 @@
       "description": "KG 4308-Combi, 750W"
     },
     {
-      "id": "sup-cab-ventilation-6-76cgo",
+      "id": "sup-cab-ventilation-6-slc35",
       "category": "Ventilation",
       "item": "Seifert Ventilation - AC 670W - Stainless Steel (Seifert, UL)",
       "supplier": "Seifert",
@@ -575,7 +575,7 @@
       "description": "KG 8506-230V SS, 670 W"
     },
     {
-      "id": "sup-cab-vfdCentralized-1-k7oba",
+      "id": "sup-cab-vfdCentralized-1-5j16q",
       "category": "VFDs & Drives",
       "item": "SEW - VFD 0.75 kW CE",
       "supplier": "SEW",
@@ -586,7 +586,7 @@
       "description": "MOVITRAC LTE-B, IP20, with filter, 0.75 KW, 3 phases x AC 380-480V, 50/60Hz, 2.2 A"
     },
     {
-      "id": "sup-cab-vfdCentralized-2-s4ey2",
+      "id": "sup-cab-vfdCentralized-2-tpxod",
       "category": "VFDs & Drives",
       "item": "SEW - VFD 0.75 kW UL",
       "supplier": "SEW",
@@ -597,7 +597,7 @@
       "description": "MOVITRAC LTE-B, IP20, with filter, 0.75 KW, 3 phases x AC 380-480V, 50/60Hz, 2.2 A"
     },
     {
-      "id": "sup-cab-vfdCentralized-3-zsg91",
+      "id": "sup-cab-vfdCentralized-3-6tbcm",
       "category": "VFDs & Drives",
       "item": "SEW - VFD 1.5 kW CE",
       "supplier": "SEW",
@@ -608,7 +608,7 @@
       "description": "MOVITRAC LTE-B, IP20, with filter, 1.5 KW, 3 phases x AC 380-480V, 50/60Hz, 4.1 A"
     },
     {
-      "id": "sup-cab-vfdCentralized-4-dim78",
+      "id": "sup-cab-vfdCentralized-4-pyg4s",
       "category": "VFDs & Drives",
       "item": "SEW - VFD 1.5 kW UL",
       "supplier": "SEW",
@@ -619,7 +619,7 @@
       "description": "MOVITRAC LTE-B, IP20, with filter, 1.5 KW, 3 phases x AC 380-480V, 50/60Hz, 4.1 A"
     },
     {
-      "id": "sup-cab-vfdCentralized-5-888b9",
+      "id": "sup-cab-vfdCentralized-5-is22i",
       "category": "VFDs & Drives",
       "item": "SEW - VFD 2.2 kW CE",
       "supplier": "SEW",
@@ -630,7 +630,7 @@
       "description": "MOVITRAC LTE-B IP20 with filter, 4 quadrants 2.2KW"
     },
     {
-      "id": "sup-cab-vfdCentralized-6-ibydj",
+      "id": "sup-cab-vfdCentralized-6-amtwl",
       "category": "VFDs & Drives",
       "item": "SEW - VFD 2.2 kW UL",
       "supplier": "SEW",
@@ -641,7 +641,7 @@
       "description": "MOVITRAC LTE-B IP20 with filter, 4 quadrants 2.2KW"
     },
     {
-      "id": "sup-cab-vfdCentralized-7-o4m13",
+      "id": "sup-cab-vfdCentralized-7-mcrck",
       "category": "VFDs & Drives",
       "item": "AB - VFD 0.75 kW CE",
       "supplier": "Allen Bradley",
@@ -652,7 +652,7 @@
       "description": "PowerFlex 525 AC Drive, with Embedded EtherNet/IP and Safety, 480 VAC, 3 Phase, 1.0 HP, 0.75 kW Normal Duty,1.0 HP, 0.75 kW Heavy Duty, Frame A, IP20 NEMA / Open Type, Filter"
     },
     {
-      "id": "sup-cab-vfdCentralized-8-d7g71",
+      "id": "sup-cab-vfdCentralized-8-ajatj",
       "category": "VFDs & Drives",
       "item": "AB - VFD 0.75 kW UL",
       "supplier": "Allen Bradley",
@@ -663,7 +663,7 @@
       "description": "PowerFlex 525 AC Drive, with Embedded EtherNet/IP and Safety, 480 VAC, 3 Phase, 1.0 HP, 0.75 kW Normal Duty,1.0 HP, 0.75 kW Heavy Duty, Frame A, IP20 NEMA / Open Type, Filter"
     },
     {
-      "id": "sup-cab-vfdCentralized-9-1ih2x",
+      "id": "sup-cab-vfdCentralized-9-qjy0e",
       "category": "VFDs & Drives",
       "item": "AB - VFD 1.5 kW CE",
       "supplier": "Allen Bradley",
@@ -674,7 +674,7 @@
       "description": "PowerFlex 525 AC Drive, with Embedded EtherNet/IP and Safety, 480 VAC, 3 Phase, 2 HP, 1.5 kW Normal Duty, 2 HP, 1.5 kW Heavy Duty, Frame A, IP20 NEMA / Open Type, Filter"
     },
     {
-      "id": "sup-cab-vfdCentralized-10-tc8ja",
+      "id": "sup-cab-vfdCentralized-10-adiav",
       "category": "VFDs & Drives",
       "item": "AB - VFD 1.5 kW UL",
       "supplier": "Allen Bradley",
@@ -685,7 +685,7 @@
       "description": "PowerFlex 525 AC Drive, with Embedded EtherNet/IP and Safety, 480 VAC, 3 Phase, 2 HP, 1.5 kW Normal Duty, 2 HP, 1.5 kW Heavy Duty, Frame A, IP20 NEMA / Open Type, Filter"
     },
     {
-      "id": "sup-cab-vfdCentralized-11-ow2c0",
+      "id": "sup-cab-vfdCentralized-11-5ouck",
       "category": "VFDs & Drives",
       "item": "AB - VFD 2.2 kW CE",
       "supplier": "Allen Bradley",
@@ -696,7 +696,7 @@
       "description": "\u00a0PowerFlex 525 AC Drive, with Embedded EtherNet/IP and Safety, 480V AC, 3 Phase, 3 Hp, 2.2 kW Normal Duty; 3 Hp, 2.2 kW Heavy Duty, Frame A, IP20 NEMA / Open Type, Filter"
     },
     {
-      "id": "sup-cab-vfdCentralized-12-9528s",
+      "id": "sup-cab-vfdCentralized-12-nz0c3",
       "category": "VFDs & Drives",
       "item": "AB - VFD 2.2 kW UL",
       "supplier": "Allen Bradley",
@@ -707,7 +707,7 @@
       "description": "\u00a0PowerFlex 525 AC Drive, with Embedded EtherNet/IP and Safety, 480V AC, 3 Phase, 3 Hp, 2.2 kW Normal Duty; 3 Hp, 2.2 kW Heavy Duty, Frame A, IP20 NEMA / Open Type, Filter"
     },
     {
-      "id": "sup-cab-vfdCentralized-13-9usoy",
+      "id": "sup-cab-vfdCentralized-13-z925u",
       "category": "VFDs & Drives",
       "item": "Siemens - VFD 0.75 kW CE",
       "supplier": "Siemens",
@@ -718,7 +718,7 @@
       "description": "SINAMICS G120C RATED POWER 0.75KW WITH 150% OVERLOAD FOR 3 SEC 3AC380-480V +10/-20% 47-63HZ INTEGRATED FILTER CLASS A I/O-INTERFACE: 6DI, 2DO,1AI,1AO SAFE TORQUE OFF INTEGRATED FIELDBUS: PROFINET-PN PROTECTION: IP20/ UL OPEN TYPE SIZE: FSAA 173X73X178(HXWXD) EXTERNAL 24V"
     },
     {
-      "id": "sup-cab-vfdCentralized-14-1scqf",
+      "id": "sup-cab-vfdCentralized-14-y6xg4",
       "category": "VFDs & Drives",
       "item": "Siemens - VFD 0.75 kW UL",
       "supplier": "Siemens",
@@ -729,7 +729,7 @@
       "description": "SINAMICS G120C RATED POWER 0.75KW WITH 150% OVERLOAD FOR 3 SEC 3AC380-480V +10/-20% 47-63HZ INTEGRATED FILTER CLASS A I/O-INTERFACE: 6DI, 2DO,1AI,1AO SAFE TORQUE OFF INTEGRATED FIELDBUS: PROFINET-PN PROTECTION: IP20/ UL OPEN TYPE SIZE: FSAA 173X73X178(HXWXD) EXTERNAL 24V"
     },
     {
-      "id": "sup-cab-vfdCentralized-15-jua2h",
+      "id": "sup-cab-vfdCentralized-15-dlkpw",
       "category": "VFDs & Drives",
       "item": "Siemens - VFD 1.5 kW CE",
       "supplier": "Siemens",
@@ -740,7 +740,7 @@
       "description": "SINAMICS G120C RATED POWER 1.5KW WITH 150% OVERLOAD FOR 3 SEC 3AC380-480V +10/-20% 47-63HZ INTEGRATED FILTER CLASS A I/O-INTERFACE: 6DI, 2DO,1AI,1AO SAFE TORQUE OFF INTEGRATED FIELDBUS: PROFINET-PN PROTECTION: IP20/ UL OPEN TYPE SIZE: FSAA 173X73X178(HXWXD) EXTERNAL 24V"
     },
     {
-      "id": "sup-cab-vfdCentralized-16-e89i5",
+      "id": "sup-cab-vfdCentralized-16-dbc1x",
       "category": "VFDs & Drives",
       "item": "Siemens - VFD 1.5 kW UL",
       "supplier": "Siemens",
@@ -751,7 +751,7 @@
       "description": "SINAMICS G120C RATED POWER 1.5KW WITH 150% OVERLOAD FOR 3 SEC 3AC380-480V +10/-20% 47-63HZ INTEGRATED FILTER CLASS A I/O-INTERFACE: 6DI, 2DO,1AI,1AO SAFE TORQUE OFF INTEGRATED FIELDBUS: PROFINET-PN PROTECTION: IP20/ UL OPEN TYPE SIZE: FSAA 173X73X178(HXWXD) EXTERNAL 24V"
     },
     {
-      "id": "sup-cab-vfdCentralized-17-xdmpm",
+      "id": "sup-cab-vfdCentralized-17-bci0d",
       "category": "VFDs & Drives",
       "item": "Siemens - VFD 2.2 kW CE",
       "supplier": "Siemens",
@@ -762,7 +762,7 @@
       "description": "SINAMICS G120C RATED POWER 2.2KW WITH 150% OVERLOAD FOR 3 SEC 3AC380-480V +10/-20% 47-63HZ INTEGRATED FILTER CLASS A I/O-INTERFACE: 6DI, 2DO,1AI,1AO SAFE TORQUE OFF INTEGRATED FIELDBUS: PROFINET-PN PROTECTION: IP20/ UL OPEN TYPE SIZE: FSAA 173X73X178(HXWXD) EXTERNAL 24V"
     },
     {
-      "id": "sup-cab-vfdCentralized-18-wbjad",
+      "id": "sup-cab-vfdCentralized-18-n0z4k",
       "category": "VFDs & Drives",
       "item": "Siemens - VFD 2.2 kW UL",
       "supplier": "Siemens",
@@ -773,7 +773,7 @@
       "description": "SINAMICS G120C RATED POWER 2.2KW WITH 150% OVERLOAD FOR 3 SEC 3AC380-480V +10/-20% 47-63HZ INTEGRATED FILTER CLASS A I/O-INTERFACE: 6DI, 2DO,1AI,1AO SAFE TORQUE OFF INTEGRATED FIELDBUS: PROFINET-PN PROTECTION: IP20/ UL OPEN TYPE SIZE: FSAA 173X73X178(HXWXD) EXTERNAL 24V"
     },
     {
-      "id": "sup-cab-vfdCentralized-19-3s0pa",
+      "id": "sup-cab-vfdCentralized-19-b0uos",
       "category": "VFDs & Drives",
       "item": "Danfoss - VFD 0.75 kW CE",
       "supplier": "Danfoss",
@@ -784,7 +784,7 @@
       "description": "131B0028 \u2013 FC-302PK75T5E20H1XXXXXXSXXXXAXBXCXXXXDX (without Control Panel)\n\n130B1107 \u2013 LCP102 Control Panel for FC100/200/300"
     },
     {
-      "id": "sup-cab-vfdCentralized-20-18ot0",
+      "id": "sup-cab-vfdCentralized-20-e4hl3",
       "category": "VFDs & Drives",
       "item": "Danfoss - VFD 0.75 kW UL",
       "supplier": "Danfoss",
@@ -795,7 +795,7 @@
       "description": "131B0028 \u2013 FC-302PK75T5E20H1XXXXXXSXXXXAXBXCXXXXDX (without Control Panel)\n\n130B1107 \u2013 LCP102 Control Panel for FC100/200/300"
     },
     {
-      "id": "sup-cab-vfdCentralized-21-vqckq",
+      "id": "sup-cab-vfdCentralized-21-gp624",
       "category": "VFDs & Drives",
       "item": "Danfoss - VFD 1.5 kW CE",
       "supplier": "Danfoss",
@@ -806,7 +806,7 @@
       "description": "131B0030 \u2013 FC-302P1K5T5E20H1XXXXXXSXXXXAXBXCXXXXDX (without Control Panel)\n\n130B1107 \u2013 LCP102 Control Panel for FC100/200/300"
     },
     {
-      "id": "sup-cab-vfdCentralized-22-yvxpi",
+      "id": "sup-cab-vfdCentralized-22-vz2tc",
       "category": "VFDs & Drives",
       "item": "Danfoss - VFD 2.2 kW CE",
       "supplier": "Danfoss",
@@ -817,7 +817,7 @@
       "description": "VLT\u00ae AutomationDrive FC 300 2.2 KW / 3.0 \nHP, 380 - 480 VAC, IP20 / Chassis, RFI \nClass A2 (C3), Brake chopper hs code \n85044090"
     },
     {
-      "id": "sup-cab-vfdCentralized-23-k4aiw",
+      "id": "sup-cab-vfdCentralized-23-n2qc3",
       "category": "VFDs & Drives",
       "item": "Danfoss - VFD 1.5 kW UL",
       "supplier": "Danfoss",
@@ -828,7 +828,7 @@
       "description": "131B0030 \u2013 FC-302P1K5T5E20H1XXXXXXSXXXXAXBXCXXXXDX (without Control Panel)\n\n130B1107 \u2013 LCP102 Control Panel for FC100/200/300"
     },
     {
-      "id": "sup-cab-vfdCentralized-24-tl4ea",
+      "id": "sup-cab-vfdCentralized-24-dpw8p",
       "category": "VFDs & Drives",
       "item": "Danfoss - VFD 2.2 kW UL",
       "supplier": "Danfoss",
@@ -839,7 +839,7 @@
       "description": "VLT\u00ae AutomationDrive FC 300 2.2 KW / 3.0 \nHP, 380 - 480 VAC, IP20 / Chassis, RFI \nClass A2 (C3), Brake chopper hs code \n85044090"
     },
     {
-      "id": "sup-cab-vfdDistributed-1-rz1b3",
+      "id": "sup-cab-vfdDistributed-1-bulgt",
       "category": "VFDs & Drives",
       "item": "SEW - Drives MMF1 0.75 kW CE",
       "supplier": "SEW",
@@ -850,7 +850,7 @@
       "description": "MOVIMOT Flexible MMF1 Electrical Regulation: UL/CE Unit version : V1 Performance class : 2,5A / 0,75kW Nominal output current [A]: 2.50 Maximum nominal output current [A]: 7.50 Communication type : DFC \u2013 PROFINET Communication : M12-Stecker Application level : 0 Safe communication : Yes Functional safety: CSB51a International efficiency class : IE2 Relative apparent power loss at performance point (90;100) [%]: 2.50 Additional feature and Options Brake control: /B - integrated HV brake control for AC brakes Integrated braking resistor: BW1"
     },
     {
-      "id": "sup-cab-vfdDistributed-3-wq16w",
+      "id": "sup-cab-vfdDistributed-3-i06kh",
       "category": "VFDs & Drives",
       "item": "SEW - Drives MMF1 1.5 kW CE",
       "supplier": "SEW",
@@ -861,7 +861,7 @@
       "description": ""
     },
     {
-      "id": "sup-cab-vfdDistributed-2-k6ora",
+      "id": "sup-cab-vfdDistributed-2-w0rje",
       "category": "VFDs & Drives",
       "item": "SEW - Drives MMF1 0.75 kW UL",
       "supplier": "SEW",
@@ -872,7 +872,7 @@
       "description": "MOVIMOT Flexible MMF1 Electrical Regulation: UL/CE Unit version : V1 Performance class : 2,5A / 0,75kW Nominal output current [A]: 2.50 Maximum nominal output current [A]: 7.50 Communication type : DFC \u2013 PROFINET Communication : M12-Stecker Application level : 0 Safe communication : Yes Functional safety: CSB51a International efficiency class : IE2 Relative apparent power loss at performance point (90;100) [%]: 2.50 Additional feature and Options Brake control: /B - integrated HV brake control for AC brakes Integrated braking resistor: BW1"
     },
     {
-      "id": "sup-cab-vfdDistributed-5-etq5z",
+      "id": "sup-cab-vfdDistributed-5-ogdws",
       "category": "VFDs & Drives",
       "item": "SEW - Drives MMF1 2.2 kW CE",
       "supplier": "SEW",
@@ -883,7 +883,7 @@
       "description": "MOVIMOT Flexible MMF1 Electrical Regulation: UL/CE Unit version : V1 Performance class : 5,5A / 2,2kW Nominal output current [A]: 5.50 Maximum nominal output current [A]: 16.50 Communication type : DFC..A \u2013 PROFINET Communication : M12-Stecker Application level : 0 Safe communication : Yes International efficiency class : IE2 Relative apparent power loss at performance point (90;100) [%]: 2.10 Additional Features & Options: Brake control 24V: Control module brake rectifier /BES. Connection variant motor connector: KD1 - plug connector for digital motor integration - M23 straight. Connector 24V backup voltage connection variant: 2xM12 (L-coded), DC 24 V backup voltage, connector position IN: 3, connector position OUT: 3."
     },
     {
-      "id": "sup-cab-vfdDistributed-4-4y0vi",
+      "id": "sup-cab-vfdDistributed-4-rsdyx",
       "category": "VFDs & Drives",
       "item": "SEW - Drives MMF1 1.5 kW UL",
       "supplier": "SEW",
@@ -894,7 +894,7 @@
       "description": ""
     },
     {
-      "id": "sup-cab-vfdDistributed-6-c18k1",
+      "id": "sup-cab-vfdDistributed-6-teuip",
       "category": "VFDs & Drives",
       "item": "SEW - Drives MMF1 2.2 kW UL",
       "supplier": "SEW",
@@ -905,7 +905,7 @@
       "description": "MOVIMOT Flexible MMF1 Electrical Regulation: UL/CE Unit version : V1 Performance class : 5,5A / 2,2kW Nominal output current [A]: 5.50 Maximum nominal output current [A]: 16.50 Communication type : DFC..A \u2013 PROFINET Communication : M12-Stecker Application level : 0 Safe communication : Yes International efficiency class : IE2 Relative apparent power loss at performance point (90;100) [%]: 2.10 Additional Features & Options: Brake control 24V: Control module brake rectifier /BES. Connection variant motor connector: KD1 - plug connector for digital motor integration - M23 straight. Connector 24V backup voltage connection variant: 2xM12 (L-coded), DC 24 V backup voltage, connector position IN: 3, connector position OUT: 3."
     },
     {
-      "id": "sup-cab-vfdDistributed-7-qgajx",
+      "id": "sup-cab-vfdDistributed-7-13n2h",
       "category": "VFDs & Drives",
       "item": "AB - Armor powerflex 0.75 kW CE",
       "supplier": "Allen Bradley",
@@ -916,7 +916,7 @@
       "description": "35S-6D1-P101 \n35-LG1-AB\n35-SPS-AB\n280-PWRM35A-M10\n280-M35F-M1 \n357-PWRM29A-M2"
     },
     {
-      "id": "sup-cab-vfdDistributed-8-t59mt",
+      "id": "sup-cab-vfdDistributed-8-urcr6",
       "category": "VFDs & Drives",
       "item": "AB - Armor powerflex 0.75 kW UL",
       "supplier": "Allen Bradley",
@@ -927,7 +927,7 @@
       "description": "35S-6D1-P101 \n35-LG1-AB\n35-SPS-AB\n280-PWRM35A-M10\n280-M35F-M1 \n357-PWRM29A-M2"
     },
     {
-      "id": "sup-cab-vfdDistributed-9-rwij1",
+      "id": "sup-cab-vfdDistributed-9-2mhbm",
       "category": "VFDs & Drives",
       "item": "AB - Armor powerflex 1.5 kW CE (#9)",
       "supplier": "Allen Bradley",
@@ -938,7 +938,7 @@
       "description": "35S-6D2-P101\n35-LG1-AB\n35-SPS-AB\n280-PWRM35A-M10\n280-M35F-M1 \n357-PWRM29A-M2"
     },
     {
-      "id": "sup-cab-vfdDistributed-10-022q7",
+      "id": "sup-cab-vfdDistributed-10-o0dlh",
       "category": "VFDs & Drives",
       "item": "AB - Armor powerflex 1.5 kW CE (#10)",
       "supplier": "Allen Bradley",
@@ -949,7 +949,7 @@
       "description": "35S-6D2-P101\n35-LG1-AB\n35-SPS-AB\n280-PWRM35A-M10\n280-M35F-M1 \n357-PWRM29A-M2"
     },
     {
-      "id": "sup-cab-vfdDistributed-11-rzxrx",
+      "id": "sup-cab-vfdDistributed-11-4nsh8",
       "category": "VFDs & Drives",
       "item": "AB - Armor powerflex 1.5 kW CE (#11)",
       "supplier": "Allen Bradley",
@@ -960,7 +960,7 @@
       "description": "35S-6D2-P101\n35-LG1-AB\n35-SPS-AB\n280-PWRM35A-M10\n280-M35F-M1 \n357-PWRM29A-M2"
     },
     {
-      "id": "sup-cab-vfdDistributed-12-jdvmr",
+      "id": "sup-cab-vfdDistributed-12-7wa64",
       "category": "VFDs & Drives",
       "item": "AB - Armor powerflex 1.5 kW CE (#12)",
       "supplier": "Allen Bradley",
@@ -971,7 +971,7 @@
       "description": "35S-6D2-P101\n35-LG1-AB\n35-SPS-AB\n280-PWRM35A-M10\n280-M35F-M1 \n357-PWRM29A-M2"
     },
     {
-      "id": "sup-cab-vfdServoAccessories-1-pe55r",
+      "id": "sup-cab-vfdServoAccessories-1-wy0un",
       "category": "VFDs & Drives",
       "item": "CB - 3P 6A (#1)",
       "supplier": "Siemens",
@@ -982,7 +982,7 @@
       "description": "Miniature circuit breaker 400 V 6kA, 3-pole, C, 6A"
     },
     {
-      "id": "sup-cab-vfdServoAccessories-2-0l5j4",
+      "id": "sup-cab-vfdServoAccessories-2-krx5p",
       "category": "VFDs & Drives",
       "item": "CB - 3P 6A (#2)",
       "supplier": "Siemens",
@@ -993,7 +993,7 @@
       "description": "Circuit breaker 10kA, 3-pole, C, 6A according to UL 489-480Y/277V"
     },
     {
-      "id": "sup-cab-vfdServoAccessories-3-wkdar",
+      "id": "sup-cab-vfdServoAccessories-3-1mufl",
       "category": "VFDs & Drives",
       "item": "MS for Motors",
       "supplier": "Siemens",
@@ -1004,7 +1004,7 @@
       "description": "SENTRON, Switch disconnector 3LD, main switch, 3-pole, Iu: 32 A, Operating power / at AC-23 A at 400 V: 11.5 kW, molded-plastic encapsulation for metric cable gland, rotary operating mechanism, black"
     },
     {
-      "id": "sup-cab-vfdServoAccessories-4-idr7a",
+      "id": "sup-cab-vfdServoAccessories-4-8093z",
       "category": "VFDs & Drives",
       "item": "Power Cable 4G2.5",
       "supplier": "Helukabel",
@@ -1015,7 +1015,7 @@
       "description": "TOPFLEX\u00ae-EMV-UV-2YSLCYK-J, Motor Power Supply Cable, Black, PVC, Double Screened, 600/1000 V, Stranded, 4 G 2.5 mm2"
     },
     {
-      "id": "sup-cab-vfdServoAccessories-5-fehz2",
+      "id": "sup-cab-vfdServoAccessories-5-s8lf8",
       "category": "VFDs & Drives",
       "item": "Power Cable 14AWG",
       "supplier": "Helukabel",
@@ -1026,7 +1026,7 @@
       "description": "TOPFLEX\u00ae 600 VFD black 4 x AWG 14"
     },
     {
-      "id": "sup-cab-vfdServoAccessories-6-b3h9m",
+      "id": "sup-cab-vfdServoAccessories-6-am3re",
       "category": "VFDs & Drives",
       "item": "Power Cable 4G4",
       "supplier": "Helukabel",
@@ -1037,7 +1037,7 @@
       "description": "TOPFLEX\u00ae-EMV-UV-2YSLCYK-J, Motor Power Supply Cable, Black, PVC, Double Screened, 600/1000 V, Stranded, 4 G 4 mm2"
     },
     {
-      "id": "sup-cab-vfdServoAccessories-7-r26tn",
+      "id": "sup-cab-vfdServoAccessories-7-78daz",
       "category": "VFDs & Drives",
       "item": "Power Cable 12AWG",
       "supplier": "Helukabel",
@@ -1048,7 +1048,7 @@
       "description": "TOPFLEX 600 VFD black 4C AWG12"
     },
     {
-      "id": "sup-cab-vfdServoAccessories-8-efwze",
+      "id": "sup-cab-vfdServoAccessories-8-3jqms",
       "category": "VFDs & Drives",
       "item": "Servo Power Cable",
       "supplier": "Helukabel",
@@ -1059,7 +1059,7 @@
       "description": "TOPSERV 121 PUR, high flexible motor and servo cable for drag chain, Orange, PUR, 0.6/1kV, Screened, Stranded,  (4 G 1.5 + 2 x (2 x 1.0)) mm2"
     },
     {
-      "id": "sup-cab-vfdServoAccessories-9-gr90p",
+      "id": "sup-cab-vfdServoAccessories-9-hu7le",
       "category": "VFDs & Drives",
       "item": "Servo Encoder Servo",
       "supplier": "Helukabel",
@@ -1070,7 +1070,7 @@
       "description": "TOPGEBER 512 PUR, high flexible feedback cable for drag chain, Green, PUR, Screened, (5 x 2 x 0.38 + 2 x 0.5) mm2"
     },
     {
-      "id": "sup-cab-vfdServoAccessories-10-mj9vd",
+      "id": "sup-cab-vfdServoAccessories-10-qjjbx",
       "category": "VFDs & Drives",
       "item": "Braking Resistor 100 Ohm",
       "supplier": "SEW",
@@ -1081,7 +1081,7 @@
       "description": "Braking resistor, Flat type IP20"
     },
     {
-      "id": "sup-cab-vfdServoAccessories-11-hf68j",
+      "id": "sup-cab-vfdServoAccessories-11-2w0d7",
       "category": "VFDs & Drives",
       "item": "Encoder Card for Servo MDX",
       "supplier": "SEW",
@@ -1092,7 +1092,7 @@
       "description": "Encoder connection card resolver"
     },
     {
-      "id": "sup-cab-vfdServoAccessories-12-rg4hs",
+      "id": "sup-cab-vfdServoAccessories-12-lyajp",
       "category": "VFDs & Drives",
       "item": "Power Plug for Servo MDX",
       "supplier": "SEW",
@@ -1103,7 +1103,7 @@
       "description": "power plug SB11 connection type for 4*1.5mm2+2*1mm2"
     },
     {
-      "id": "sup-cab-vfdServoAccessories-13-vd6z0",
+      "id": "sup-cab-vfdServoAccessories-13-f4kkc",
       "category": "VFDs & Drives",
       "item": "Signal Plug for Servo MDX",
       "supplier": "SEW",
@@ -1114,7 +1114,7 @@
       "description": "signal plug connector 5*2*0.25mm2"
     },
     {
-      "id": "sup-cab-vfdServoAccessories-14-fh72e",
+      "id": "sup-cab-vfdServoAccessories-14-ops5q",
       "category": "VFDs & Drives",
       "item": "Brake Control for Servo MDX",
       "supplier": "SEW",
@@ -1125,7 +1125,7 @@
       "description": "Brake control unit with electronic switching, DC24V control input and fast cut-off"
     },
     {
-      "id": "sup-cab-vfdServoAccessories-15-l8zis",
+      "id": "sup-cab-vfdServoAccessories-15-w3gz1",
       "category": "VFDs & Drives",
       "item": "Line Filter for 5100",
       "supplier": "Allen Bradley",
@@ -1136,7 +1136,7 @@
       "description": "AC line filter, 3 phase, 18.4 amps, 460 volts"
     },
     {
-      "id": "sup-cab-vfdServoAccessories-16-u503c",
+      "id": "sup-cab-vfdServoAccessories-16-8s5ru",
       "category": "VFDs & Drives",
       "item": "Connector Kit for 5100",
       "supplier": "Allen Bradley",
@@ -1147,7 +1147,7 @@
       "description": "Kinetix 5100 Feedback Connector Kit"
     },
     {
-      "id": "sup-cab-vfdServoAccessories-17-fh2gq",
+      "id": "sup-cab-vfdServoAccessories-17-5s0k4",
       "category": "VFDs & Drives",
       "item": "Power Cable for 5100",
       "supplier": "Allen Bradley",
@@ -1158,7 +1158,7 @@
       "description": "Power, 3m, connector connector, flex type: Continuous Flex"
     },
     {
-      "id": "sup-cab-vfdServoAccessories-18-ycdug",
+      "id": "sup-cab-vfdServoAccessories-18-idn22",
       "category": "VFDs & Drives",
       "item": "Feedback Cable for 5100",
       "supplier": "Allen Bradley",
@@ -1169,7 +1169,7 @@
       "description": "Feedback, 3m, connector connector, flex type: Continuous Flex"
     },
     {
-      "id": "sup-cab-servo-7-wa1bb",
+      "id": "sup-cab-servo-7-ir97q",
       "category": "Servo Motors & Drives",
       "item": "AB - Servo 0.75 kW CE",
       "supplier": "Allen Bradley",
@@ -1180,7 +1180,7 @@
       "description": "Kinetix 5100 Servo Drive 1.6 Amps"
     },
     {
-      "id": "sup-cab-servo-8-oe8x3",
+      "id": "sup-cab-servo-8-4hox8",
       "category": "Servo Motors & Drives",
       "item": "AB - Servo 0.75 kW UL",
       "supplier": "Allen Bradley",
@@ -1191,7 +1191,7 @@
       "description": "Kinetix 5100 Servo Drive 1.6 Amps"
     },
     {
-      "id": "sup-cab-servo-9-mrb6b",
+      "id": "sup-cab-servo-9-wi31g",
       "category": "Servo Motors & Drives",
       "item": "AB - Servo 1.5 kW  CE",
       "supplier": "Allen Bradley",
@@ -1202,7 +1202,7 @@
       "description": "Kinetix 5100 Servo Drive 3.19 Amps"
     },
     {
-      "id": "sup-cab-servo-10-xzk0s",
+      "id": "sup-cab-servo-10-3hlpo",
       "category": "Servo Motors & Drives",
       "item": "AB - Servo 1.5 kW UL",
       "supplier": "Allen Bradley",
@@ -1213,7 +1213,7 @@
       "description": "Kinetix 5100 Servo Drive 3.19 Amps"
     },
     {
-      "id": "sup-cab-servo-11-ck372",
+      "id": "sup-cab-servo-11-htb6r",
       "category": "Servo Motors & Drives",
       "item": "AB - Servo 2.2 kW CE",
       "supplier": "Allen Bradley",
@@ -1224,7 +1224,7 @@
       "description": "Kinetix 5500 Servo Drive, 20 Amps"
     },
     {
-      "id": "sup-cab-servo-12-npuhx",
+      "id": "sup-cab-servo-12-vkes9",
       "category": "Servo Motors & Drives",
       "item": "AB - Servo 2.2 kW UL",
       "supplier": "Allen Bradley",
@@ -1235,7 +1235,7 @@
       "description": "Kinetix 5500 Servo Drive, 20 Amps"
     },
     {
-      "id": "sup-cab-servo-13-xgvha",
+      "id": "sup-cab-servo-13-4ba26",
       "category": "Servo Motors & Drives",
       "item": "AB - Servo 5 kW CE",
       "supplier": "Allen Bradley",
@@ -1246,7 +1246,7 @@
       "description": "Kinetix 5500 Servo Drive, 32.5 Amps"
     },
     {
-      "id": "sup-cab-servo-14-1g1o2",
+      "id": "sup-cab-servo-14-jz8mf",
       "category": "Servo Motors & Drives",
       "item": "AB - Servo 5 kW UL",
       "supplier": "Allen Bradley",
@@ -1257,7 +1257,7 @@
       "description": "Kinetix 5500 Servo Drive, 32.5 Amps"
     },
     {
-      "id": "sup-cab-servo-1-352jj",
+      "id": "sup-cab-servo-1-yckru",
       "category": "Servo Motors & Drives",
       "item": "SEW - Servo 0.75 kW CE",
       "supplier": "SEW",
@@ -1268,7 +1268,7 @@
       "description": "MOVIDRIVE B frequency inverter 0.75KW"
     },
     {
-      "id": "sup-cab-servo-2-wy41j",
+      "id": "sup-cab-servo-2-94z6m",
       "category": "Servo Motors & Drives",
       "item": "SEW - Servo 0.75 kW UL",
       "supplier": "SEW",
@@ -1279,7 +1279,7 @@
       "description": "MOVIDRIVE B frequency inverter 0.75KW"
     },
     {
-      "id": "sup-cab-servo-3-i5kwm",
+      "id": "sup-cab-servo-3-cfpq6",
       "category": "Servo Motors & Drives",
       "item": "SEW - Servo 1.5 kW  CE",
       "supplier": "SEW",
@@ -1290,7 +1290,7 @@
       "description": "MOVIDRIVE B frequency inverter 1.5KW"
     },
     {
-      "id": "sup-cab-servo-4-3dvw9",
+      "id": "sup-cab-servo-4-i03si",
       "category": "Servo Motors & Drives",
       "item": "SEW - Servo 1.5 kW UL",
       "supplier": "SEW",
@@ -1301,7 +1301,7 @@
       "description": "MOVIDRIVE B frequency inverter 1.5KW"
     },
     {
-      "id": "sup-cab-servo-5-748b0",
+      "id": "sup-cab-servo-5-tqncs",
       "category": "Servo Motors & Drives",
       "item": "SEW - Servo 2.2 kW CE",
       "supplier": "SEW",
@@ -1312,7 +1312,7 @@
       "description": "MOVIDRIVE B frequency inverter 2.2KW"
     },
     {
-      "id": "sup-cab-servo-6-w4hd6",
+      "id": "sup-cab-servo-6-bwmv5",
       "category": "Servo Motors & Drives",
       "item": "SEW - Servo 2.2 kW UL",
       "supplier": "SEW",
@@ -1323,7 +1323,7 @@
       "description": "MOVIDRIVE B frequency inverter 2.2KW"
     },
     {
-      "id": "sup-cab-panels-2-z5x7l",
+      "id": "sup-cab-panels-2-pns41",
       "category": "Cabinet Panels",
       "item": "Technica Painted Steel",
       "supplier": "Technica",
@@ -1334,7 +1334,7 @@
       "description": ""
     },
     {
-      "id": "sup-cab-panels-1-xyyqq",
+      "id": "sup-cab-panels-1-h3v84",
       "category": "Cabinet Panels",
       "item": "Technica Stainless Steel",
       "supplier": "Technica",
@@ -1345,7 +1345,7 @@
       "description": ""
     },
     {
-      "id": "sup-cab-panels-4-duwd8",
+      "id": "sup-cab-panels-4-mhxb2",
       "category": "Cabinet Panels",
       "item": "Local Painted Steel ",
       "supplier": "Local",
@@ -1356,7 +1356,7 @@
       "description": "Reference SOT341-23 (800x1800x600)"
     },
     {
-      "id": "sup-cab-panels-3-e2q63",
+      "id": "sup-cab-panels-3-8ze98",
       "category": "Cabinet Panels",
       "item": "Local Stainless Steel (Tekpan)",
       "supplier": "Local",
@@ -1367,7 +1367,7 @@
       "description": "Tekpan PO33215"
     },
     {
-      "id": "sup-cab-panels-6-5iuoi",
+      "id": "sup-cab-panels-6-hpfu0",
       "category": "Cabinet Panels",
       "item": "Rittal Painted Steel",
       "supplier": "Rittal",
@@ -1378,7 +1378,7 @@
       "description": "Reference SOT134-24 (800x1800x500)"
     },
     {
-      "id": "sup-cab-panels-5-qs023",
+      "id": "sup-cab-panels-5-vejfm",
       "category": "Cabinet Panels",
       "item": "Rittal Stainless Steel",
       "supplier": "Rittal",
@@ -1389,7 +1389,7 @@
       "description": "Reference 15S041 (800x2000x600)"
     },
     {
-      "id": "sup-cab-junctionBox-2-68pm3",
+      "id": "sup-cab-junctionBox-2-kczpk",
       "category": "Junction Boxes",
       "item": "Technica Painted",
       "supplier": "Technica",
@@ -1400,7 +1400,7 @@
       "description": ""
     },
     {
-      "id": "sup-cab-junctionBox-5-deu76",
+      "id": "sup-cab-junctionBox-5-qrgbq",
       "category": "Junction Boxes",
       "item": "Plastic Gewiss",
       "supplier": "Gewiss",
@@ -1411,7 +1411,7 @@
       "description": "300x220x120 shallow plastic junctions box"
     },
     {
-      "id": "sup-cab-junctionBox-1-f2j5w",
+      "id": "sup-cab-junctionBox-1-rek0r",
       "category": "Junction Boxes",
       "item": "Technica Stainless",
       "supplier": "Technica",
@@ -1422,7 +1422,7 @@
       "description": ""
     },
     {
-      "id": "sup-cab-junctionBox-4-mk2pz",
+      "id": "sup-cab-junctionBox-4-dgt3i",
       "category": "Junction Boxes",
       "item": "Rittal Painted",
       "supplier": "Rittal",
@@ -1433,7 +1433,7 @@
       "description": "Terminal box KX, sheet steel, with gland plate"
     },
     {
-      "id": "sup-cab-junctionBox-3-8nwoj",
+      "id": "sup-cab-junctionBox-3-c9wib",
       "category": "Junction Boxes",
       "item": "Rittal Stainless",
       "supplier": "Rittal",
@@ -1444,7 +1444,7 @@
       "description": "Terminal box KX Stainless steel"
     },
     {
-      "id": "sup-cab-sensors-3-7905g",
+      "id": "sup-cab-sensors-3-k9kd2",
       "category": "Sensors & Instrumentation",
       "item": "Proximity Sensor IMB12",
       "supplier": "Sick",
@@ -1455,7 +1455,7 @@
       "description": "Inductive proximity sensors: IMB - Male connector M12, 4-pin, Sensing Range 8mm, NO"
     },
     {
-      "id": "sup-cab-sensors-9-ylx4p",
+      "id": "sup-cab-sensors-9-frf5i",
       "category": "Sensors & Instrumentation",
       "item": "Proximity Sensor IMB18",
       "supplier": "Sick",
@@ -1466,7 +1466,7 @@
       "description": "Inductive proximity sensors: IMB - Sensing Range: 12mm - Non-flush - Output function NO - Male connector M12, 4-pin"
     },
     {
-      "id": "sup-cab-sensors-1-trqxi",
+      "id": "sup-cab-sensors-1-rch1m",
       "category": "Sensors & Instrumentation",
       "item": "PhotoElectric sensor",
       "supplier": "Sick",
@@ -1477,7 +1477,7 @@
       "description": "Photoelectric retro-reflective sensor - 0.03m...6.5m - PinPoint LED - Response time 0.5 ms - Male connector M12, 4-pin - Out 1: light switching - Out 2: dark switching."
     },
     {
-      "id": "sup-cab-sensors-2-3368s",
+      "id": "sup-cab-sensors-2-z3opu",
       "category": "Sensors & Instrumentation",
       "item": "Transparent Sensors",
       "supplier": "Sick",
@@ -1488,7 +1488,7 @@
       "description": "Photoelectric retro-reflective sensor, Autocollimation, ClearSens"
     },
     {
-      "id": "sup-cab-sensors-8-1q63s",
+      "id": "sup-cab-sensors-8-6ygl5",
       "category": "Sensors & Instrumentation",
       "item": "Distance Analog Sensor Ultrasonic sensor UC4",
       "supplier": "Sick",
@@ -1499,7 +1499,7 @@
       "description": "Ultrasonic sensor UC4, 13 mm ... 150 mm, max 250 mm, Male connector, M8, 3-pin"
     },
     {
-      "id": "sup-cab-sensors-4-2ajw2",
+      "id": "sup-cab-sensors-4-ow50n",
       "category": "Sensors & Instrumentation",
       "item": "Distance Analog Sensor Ultrasonic sensor UM30",
       "supplier": "Sick",
@@ -1510,7 +1510,7 @@
       "description": "Ultrasonic sensor M30, 1 PNP, 1 Analog Output, 600 mm ... 6,000 mm, 8,000 mm, Range M12, 5-Pin"
     },
     {
-      "id": "sup-cab-sensors-5-89cob",
+      "id": "sup-cab-sensors-5-iduit",
       "category": "Sensors & Instrumentation",
       "item": "Barcode Scanner 2D basic",
       "supplier": "Keyence",
@@ -1521,7 +1521,7 @@
       "description": ""
     },
     {
-      "id": "sup-cab-sensors-6-sokoc",
+      "id": "sup-cab-sensors-6-d0uml",
       "category": "Sensors & Instrumentation",
       "item": "Barcode Scanner 2D Advance",
       "supplier": "Keyence",
@@ -1532,7 +1532,7 @@
       "description": ""
     },
     {
-      "id": "sup-cab-sensors-7-hzzq1",
+      "id": "sup-cab-sensors-7-loxfp",
       "category": "Sensors & Instrumentation",
       "item": "Camera Scanner 3D",
       "supplier": "Keyence",
@@ -1543,7 +1543,7 @@
       "description": ""
     },
     {
-      "id": "sup-cab-pdb-1-ixt8r",
+      "id": "sup-cab-pdb-1-e5iuh",
       "category": "Power Distribution",
       "item": "PDB",
       "supplier": "Technica",
@@ -1554,7 +1554,7 @@
       "description": ""
     },
     {
-      "id": "sup-cab-safety-6-1jkh6",
+      "id": "sup-cab-safety-6-4wonw",
       "category": "Safety & Emergency Stop",
       "item": "Guard Switch Not Lockable",
       "supplier": "Sick",
@@ -1565,7 +1565,7 @@
       "description": "Not lockable Guard Switch i16"
     },
     {
-      "id": "sup-cab-safety-3-eyeai",
+      "id": "sup-cab-safety-3-v38gd",
       "category": "Safety & Emergency Stop",
       "item": "Emergency Stop - Buttons",
       "supplier": "Sick",
@@ -1576,7 +1576,7 @@
       "description": "Standalone Emergency Button 2NC"
     },
     {
-      "id": "sup-cab-safety-5-uch0y",
+      "id": "sup-cab-safety-5-64ywl",
       "category": "Safety & Emergency Stop",
       "item": "Guard Switch Lockable",
       "supplier": "Sick",
@@ -1587,7 +1587,7 @@
       "description": "Lockable Guard Switch i14"
     },
     {
-      "id": "sup-cab-safety-4-8n8kg",
+      "id": "sup-cab-safety-4-sblc8",
       "category": "Safety & Emergency Stop",
       "item": "Emergency Stop - Ropes",
       "supplier": "Sick",
@@ -1598,7 +1598,7 @@
       "description": "Emergency Rope 1NO + 3NC"
     },
     {
-      "id": "sup-cab-safety-7-zsv8q",
+      "id": "sup-cab-safety-7-5ci0y",
       "category": "Safety & Emergency Stop",
       "item": "Keytrap for 1 Door",
       "supplier": "Allen Bradley",
@@ -1609,7 +1609,7 @@
       "description": "440T - Reference SOT134-24"
     },
     {
-      "id": "sup-cab-safety-1-vk483",
+      "id": "sup-cab-safety-1-7x9v7",
       "category": "Safety & Emergency Stop",
       "item": "Light Barrier - Body",
       "supplier": "Sick",
@@ -1620,7 +1620,7 @@
       "description": "deTem L-muting + accessories"
     },
     {
-      "id": "sup-cab-safety-2-skofz",
+      "id": "sup-cab-safety-2-6hko9",
       "category": "Safety & Emergency Stop",
       "item": "Light Barrier - Hands",
       "supplier": "Sick",
@@ -1631,7 +1631,7 @@
       "description": "deTec / deTec4 + accessories"
     },
     {
-      "id": "sup-cab-safety-8-5mhcu",
+      "id": "sup-cab-safety-8-qb0am",
       "category": "Safety & Emergency Stop",
       "item": "Keytrap for 2 Door",
       "supplier": "Allen Bradley",
@@ -1642,7 +1642,7 @@
       "description": "440T - Reference SOT134-24"
     },
     {
-      "id": "sup-cab-safety-9-twcz3",
+      "id": "sup-cab-safety-9-qpgd8",
       "category": "Safety & Emergency Stop",
       "item": "Keytrap for 3 Doors",
       "supplier": "Allen Bradley",
@@ -1653,7 +1653,7 @@
       "description": "440T - Reference SOT134-24"
     },
     {
-      "id": "sup-cab-safety-11-0x0hr",
+      "id": "sup-cab-safety-11-f39iz",
       "category": "Safety & Emergency Stop",
       "item": "Sick Laser Scanner",
       "supplier": "Sick",
@@ -1664,7 +1664,7 @@
       "description": "Safety laser scanners microScan3"
     },
     {
-      "id": "sup-cab-safety-12-36mxp",
+      "id": "sup-cab-safety-12-wsmmt",
       "category": "Safety & Emergency Stop",
       "item": "Keyence Laser Scanner",
       "supplier": "Keyence",
@@ -1675,7 +1675,7 @@
       "description": ""
     },
     {
-      "id": "sup-cab-safety-10-37nsz",
+      "id": "sup-cab-safety-10-yq6cz",
       "category": "Safety & Emergency Stop",
       "item": "Radar System",
       "supplier": "Sick",
@@ -1686,7 +1686,7 @@
       "description": "safeRS3 - Reference SOT134-24"
     },
     {
-      "id": "sup-cab-operatorPanel-1-fll3x",
+      "id": "sup-cab-operatorPanel-1-nmsy6",
       "category": "Operator Panels",
       "item": "Operator Panel SS With HMI",
       "supplier": "Technica",
@@ -1697,7 +1697,7 @@
       "description": ""
     },
     {
-      "id": "sup-cab-operatorPanel-2-dmmpu",
+      "id": "sup-cab-operatorPanel-2-6o6y3",
       "category": "Operator Panels",
       "item": "Operator Panel SS Without HMI",
       "supplier": "Technica",
@@ -1708,7 +1708,7 @@
       "description": ""
     },
     {
-      "id": "sup-cab-powerDistDetailedCE-1-340r7",
+      "id": "sup-cab-powerDistDetailedCE-1-vk4hb",
       "category": "Power Distribution Components",
       "item": "Disconnect - 100A (Siemens, CE)",
       "supplier": "Siemens",
@@ -1721,7 +1721,7 @@
       "bundleStandard": "CE"
     },
     {
-      "id": "sup-cab-powerDistDetailedCE-2-tvvhy",
+      "id": "sup-cab-powerDistDetailedCE-2-aw533",
       "category": "Power Distribution Components",
       "item": "Contactor - 110A (Siemens, CE)",
       "supplier": "Siemens",
@@ -1734,7 +1734,7 @@
       "bundleStandard": "CE"
     },
     {
-      "id": "sup-cab-powerDistDetailedCE-3-w0e5p",
+      "id": "sup-cab-powerDistDetailedCE-3-8sby5",
       "category": "Power Distribution Components",
       "item": "Power Supply - 20A (Siemens, CE)",
       "supplier": "Siemens",
@@ -1747,7 +1747,7 @@
       "bundleStandard": "CE"
     },
     {
-      "id": "sup-cab-powerDistDetailedCE-4-0k12e",
+      "id": "sup-cab-powerDistDetailedCE-4-4l9ol",
       "category": "Power Distribution Components",
       "item": "DB - 125A (Siemens, CE)",
       "supplier": "Schneider Electric",
@@ -1760,7 +1760,7 @@
       "bundleStandard": "CE"
     },
     {
-      "id": "sup-cab-powerDistDetailedCE-5-anm4m",
+      "id": "sup-cab-powerDistDetailedCE-5-u0tfc",
       "category": "Power Distribution Components",
       "item": "Voltage Relay (Siemens, CE)",
       "supplier": "Siemens",
@@ -1773,7 +1773,7 @@
       "bundleStandard": "CE"
     },
     {
-      "id": "sup-cab-powerDistDetailedCE-6-t452z",
+      "id": "sup-cab-powerDistDetailedCE-6-s7ntr",
       "category": "Power Distribution Components",
       "item": "MCB - 100A (Siemens, CE)",
       "supplier": "Siemens",
@@ -1786,7 +1786,7 @@
       "bundleStandard": "CE"
     },
     {
-      "id": "sup-cab-powerDistDetailedCE-7-v78gn",
+      "id": "sup-cab-powerDistDetailedCE-7-89lt4",
       "category": "Power Distribution Components",
       "item": "CB - 1P 1A (Siemens, CE)",
       "supplier": "Siemens",
@@ -1799,7 +1799,7 @@
       "bundleStandard": "CE"
     },
     {
-      "id": "sup-cab-powerDistDetailedCE-8-x0vov",
+      "id": "sup-cab-powerDistDetailedCE-8-4iamm",
       "category": "Power Distribution Components",
       "item": "CB - 3P 6A (Siemens, CE)",
       "supplier": "Siemens",
@@ -1812,7 +1812,7 @@
       "bundleStandard": "CE"
     },
     {
-      "id": "sup-cab-powerDistDetailedCE-9-zeo8c",
+      "id": "sup-cab-powerDistDetailedCE-9-2yhlq",
       "category": "Power Distribution Components",
       "item": "CB - 2P 6A (Siemens, CE)",
       "supplier": "Siemens",
@@ -1825,7 +1825,7 @@
       "bundleStandard": "CE"
     },
     {
-      "id": "sup-cab-powerDistDetailedCE-10-pztkq",
+      "id": "sup-cab-powerDistDetailedCE-10-j74eq",
       "category": "Power Distribution Components",
       "item": "CB - 1P 2A (Siemens, CE)",
       "supplier": "Siemens",
@@ -1838,7 +1838,7 @@
       "bundleStandard": "CE"
     },
     {
-      "id": "sup-cab-powerDistDetailedCE-11-ag6xo",
+      "id": "sup-cab-powerDistDetailedCE-11-f248p",
       "category": "Power Distribution Components",
       "item": "RCD - 2P 25A (Siemens, CE)",
       "supplier": "Siemens",
@@ -1851,7 +1851,7 @@
       "bundleStandard": "CE"
     },
     {
-      "id": "sup-cab-powerDistDetailedCE-12-3hazi",
+      "id": "sup-cab-powerDistDetailedCE-12-pv8tq",
       "category": "Power Distribution Components",
       "item": "Fuse - 3P 32A (Siemens, CE)",
       "supplier": "Siemens",
@@ -1864,7 +1864,7 @@
       "bundleStandard": "CE"
     },
     {
-      "id": "sup-cab-powerDistDetailedCE-13-r9o8u",
+      "id": "sup-cab-powerDistDetailedCE-13-dg5hx",
       "category": "Power Distribution Components",
       "item": "Output Relay (Siemens, CE)",
       "supplier": "Siemens",
@@ -1877,7 +1877,7 @@
       "bundleStandard": "CE"
     },
     {
-      "id": "sup-cab-powerDistDetailedCE-14-txeok",
+      "id": "sup-cab-powerDistDetailedCE-14-qeh83",
       "category": "Power Distribution Components",
       "item": "ECB (Siemens, CE)",
       "supplier": "Murr",
@@ -1890,7 +1890,7 @@
       "bundleStandard": "CE"
     },
     {
-      "id": "sup-cab-powerDistDetailedCE-20-8jyyd",
+      "id": "sup-cab-powerDistDetailedCE-20-h1ude",
       "category": "Power Distribution Components",
       "item": "Disconnect - 100A (Allen Bradley, CE)",
       "supplier": "Allen Bradley",
@@ -1903,7 +1903,7 @@
       "bundleStandard": "CE"
     },
     {
-      "id": "sup-cab-powerDistDetailedCE-21-8wclv",
+      "id": "sup-cab-powerDistDetailedCE-21-62lzn",
       "category": "Power Distribution Components",
       "item": "Contactor - 97A (Allen Bradley, CE)",
       "supplier": "Allen Bradley",
@@ -1916,7 +1916,7 @@
       "bundleStandard": "CE"
     },
     {
-      "id": "sup-cab-powerDistDetailedCE-22-gfb2k",
+      "id": "sup-cab-powerDistDetailedCE-22-wxfzr",
       "category": "Power Distribution Components",
       "item": "Power Supply - 20A (Allen Bradley, CE)",
       "supplier": "Allen Bradley",
@@ -1929,7 +1929,7 @@
       "bundleStandard": "CE"
     },
     {
-      "id": "sup-cab-powerDistDetailedCE-23-wh7t6",
+      "id": "sup-cab-powerDistDetailedCE-23-8elt9",
       "category": "Power Distribution Components",
       "item": "DB - 125A (Allen Bradley, CE)",
       "supplier": "Schneider Electric",
@@ -1942,7 +1942,7 @@
       "bundleStandard": "CE"
     },
     {
-      "id": "sup-cab-powerDistDetailedCE-24-hfqvj",
+      "id": "sup-cab-powerDistDetailedCE-24-thvkd",
       "category": "Power Distribution Components",
       "item": "Voltage Relay (Allen Bradley, CE)",
       "supplier": "Allen Bradley",
@@ -1955,7 +1955,7 @@
       "bundleStandard": "CE"
     },
     {
-      "id": "sup-cab-powerDistDetailedCE-25-n5i62",
+      "id": "sup-cab-powerDistDetailedCE-25-fen67",
       "category": "Power Distribution Components",
       "item": "MCB - 100A (Allen Bradley, CE)",
       "supplier": "Allen Bradley",
@@ -1968,7 +1968,7 @@
       "bundleStandard": "CE"
     },
     {
-      "id": "sup-cab-powerDistDetailedCE-26-2evdp",
+      "id": "sup-cab-powerDistDetailedCE-26-5zex0",
       "category": "Power Distribution Components",
       "item": "CB - 1P 2A (Allen Bradley, CE)",
       "supplier": "Allen Bradley",
@@ -1981,7 +1981,7 @@
       "bundleStandard": "CE"
     },
     {
-      "id": "sup-cab-powerDistDetailedCE-27-qmsl9",
+      "id": "sup-cab-powerDistDetailedCE-27-yeq1f",
       "category": "Power Distribution Components",
       "item": "CB - 3P 6A (Allen Bradley, CE)",
       "supplier": "Allen Bradley",
@@ -1994,7 +1994,7 @@
       "bundleStandard": "CE"
     },
     {
-      "id": "sup-cab-powerDistDetailedCE-28-09qa7",
+      "id": "sup-cab-powerDistDetailedCE-28-3kdul",
       "category": "Power Distribution Components",
       "item": "CB - 2P 6A (Allen Bradley, CE)",
       "supplier": "Allen Bradley",
@@ -2007,7 +2007,7 @@
       "bundleStandard": "CE"
     },
     {
-      "id": "sup-cab-powerDistDetailedCE-30-fmrkf",
+      "id": "sup-cab-powerDistDetailedCE-30-rskj3",
       "category": "Power Distribution Components",
       "item": "RCD - 2P 25A (Allen Bradley, CE)",
       "supplier": "Allen Bradley",
@@ -2020,7 +2020,7 @@
       "bundleStandard": "CE"
     },
     {
-      "id": "sup-cab-powerDistDetailedCE-31-k5rwl",
+      "id": "sup-cab-powerDistDetailedCE-31-4pwvo",
       "category": "Power Distribution Components",
       "item": "Fuse - 3P 32A (Allen Bradley, CE)",
       "supplier": "Allen Bradley",
@@ -2033,7 +2033,7 @@
       "bundleStandard": "CE"
     },
     {
-      "id": "sup-cab-powerDistDetailedCE-32-laipj",
+      "id": "sup-cab-powerDistDetailedCE-32-6gx6z",
       "category": "Power Distribution Components",
       "item": "Output Relay (Allen Bradley, CE)",
       "supplier": "Allen Bradley",
@@ -2046,7 +2046,7 @@
       "bundleStandard": "CE"
     },
     {
-      "id": "sup-cab-powerDistDetailedCE-33-jh92c",
+      "id": "sup-cab-powerDistDetailedCE-33-n311e",
       "category": "Power Distribution Components",
       "item": "Disconnect - 100A accessories (Allen Bradley, CE)",
       "supplier": "Allen Bradley",
@@ -2059,7 +2059,7 @@
       "bundleStandard": "CE"
     },
     {
-      "id": "sup-cab-powerDistDetailedCE-34-18x7h",
+      "id": "sup-cab-powerDistDetailedCE-34-1cryr",
       "category": "Power Distribution Components",
       "item": "ECB (Allen Bradley, CE)",
       "supplier": "Murr",
@@ -2072,7 +2072,7 @@
       "bundleStandard": "CE"
     },
     {
-      "id": "sup-cab-powerDistDetailedUL-1-zui11",
+      "id": "sup-cab-powerDistDetailedUL-1-nb2v3",
       "category": "Power Distribution Components",
       "item": "Disconnect - 100A (Siemens, UL)",
       "supplier": "Siemens",
@@ -2085,7 +2085,7 @@
       "bundleStandard": "UL"
     },
     {
-      "id": "sup-cab-powerDistDetailedUL-2-m8m1o",
+      "id": "sup-cab-powerDistDetailedUL-2-kk3us",
       "category": "Power Distribution Components",
       "item": "Contactor - 110A (Siemens, UL)",
       "supplier": "Siemens",
@@ -2098,7 +2098,7 @@
       "bundleStandard": "UL"
     },
     {
-      "id": "sup-cab-powerDistDetailedUL-3-zxmot",
+      "id": "sup-cab-powerDistDetailedUL-3-97ysx",
       "category": "Power Distribution Components",
       "item": "Power Supply - 20A (Siemens, UL)",
       "supplier": "Siemens",
@@ -2111,7 +2111,7 @@
       "bundleStandard": "UL"
     },
     {
-      "id": "sup-cab-powerDistDetailedUL-4-bbhtc",
+      "id": "sup-cab-powerDistDetailedUL-4-q3pck",
       "category": "Power Distribution Components",
       "item": "DB - 125A (Siemens, UL)",
       "supplier": "Schneider Electric",
@@ -2124,7 +2124,7 @@
       "bundleStandard": "UL"
     },
     {
-      "id": "sup-cab-powerDistDetailedUL-5-xypfp",
+      "id": "sup-cab-powerDistDetailedUL-5-6bbmj",
       "category": "Power Distribution Components",
       "item": "Voltage Relay (Siemens, UL)",
       "supplier": "Siemens",
@@ -2137,7 +2137,7 @@
       "bundleStandard": "UL"
     },
     {
-      "id": "sup-cab-powerDistDetailedUL-6-7vyh7",
+      "id": "sup-cab-powerDistDetailedUL-6-ao0hj",
       "category": "Power Distribution Components",
       "item": "MCB - 100A (Siemens, UL)",
       "supplier": "Siemens",
@@ -2150,7 +2150,7 @@
       "bundleStandard": "UL"
     },
     {
-      "id": "sup-cab-powerDistDetailedUL-7-lqhxx",
+      "id": "sup-cab-powerDistDetailedUL-7-7we9s",
       "category": "Power Distribution Components",
       "item": "CB - 1P 1A (Siemens, UL)",
       "supplier": "Siemens",
@@ -2163,7 +2163,7 @@
       "bundleStandard": "UL"
     },
     {
-      "id": "sup-cab-powerDistDetailedUL-8-azaob",
+      "id": "sup-cab-powerDistDetailedUL-8-8p4a0",
       "category": "Power Distribution Components",
       "item": "CB - 3P 6A (Siemens, UL)",
       "supplier": "Siemens",
@@ -2176,7 +2176,7 @@
       "bundleStandard": "UL"
     },
     {
-      "id": "sup-cab-powerDistDetailedUL-9-j49uz",
+      "id": "sup-cab-powerDistDetailedUL-9-mmhlc",
       "category": "Power Distribution Components",
       "item": "CB - 2P 6A (Siemens, UL)",
       "supplier": "Siemens",
@@ -2189,7 +2189,7 @@
       "bundleStandard": "UL"
     },
     {
-      "id": "sup-cab-powerDistDetailedUL-10-ep9w4",
+      "id": "sup-cab-powerDistDetailedUL-10-9e2d0",
       "category": "Power Distribution Components",
       "item": "CB - 1P 2A (Siemens, UL)",
       "supplier": "Siemens",
@@ -2202,7 +2202,7 @@
       "bundleStandard": "UL"
     },
     {
-      "id": "sup-cab-powerDistDetailedUL-11-ecpyw",
+      "id": "sup-cab-powerDistDetailedUL-11-54jhx",
       "category": "Power Distribution Components",
       "item": "RCD - 2P 25A (Siemens, UL)",
       "supplier": "Siemens",
@@ -2215,7 +2215,7 @@
       "bundleStandard": "UL"
     },
     {
-      "id": "sup-cab-powerDistDetailedUL-12-pggkr",
+      "id": "sup-cab-powerDistDetailedUL-12-h3ve5",
       "category": "Power Distribution Components",
       "item": "Fuse - 3P 32A (Siemens, UL)",
       "supplier": "Siemens",
@@ -2228,7 +2228,7 @@
       "bundleStandard": "UL"
     },
     {
-      "id": "sup-cab-powerDistDetailedUL-13-cd5m8",
+      "id": "sup-cab-powerDistDetailedUL-13-86772",
       "category": "Power Distribution Components",
       "item": "Output Relay (Siemens, UL)",
       "supplier": "Siemens",
@@ -2241,7 +2241,7 @@
       "bundleStandard": "UL"
     },
     {
-      "id": "sup-cab-powerDistDetailedUL-14-i6l97",
+      "id": "sup-cab-powerDistDetailedUL-14-4iuee",
       "category": "Power Distribution Components",
       "item": "Trans -1000VA (Siemens, UL)",
       "supplier": "Murr",
@@ -2254,7 +2254,7 @@
       "bundleStandard": "UL"
     },
     {
-      "id": "sup-cab-powerDistDetailedUL-15-a3wuk",
+      "id": "sup-cab-powerDistDetailedUL-15-tqzmt",
       "category": "Power Distribution Components",
       "item": "MPCB - 6.3A (Siemens, UL)",
       "supplier": "Siemens",
@@ -2267,7 +2267,7 @@
       "bundleStandard": "UL"
     },
     {
-      "id": "sup-cab-powerDistDetailedUL-16-k4pb1",
+      "id": "sup-cab-powerDistDetailedUL-16-lvkip",
       "category": "Power Distribution Components",
       "item": "ECB (Siemens, UL)",
       "supplier": "Murr",
@@ -2280,7 +2280,7 @@
       "bundleStandard": "UL"
     },
     {
-      "id": "sup-cab-powerDistDetailedUL-20-zp248",
+      "id": "sup-cab-powerDistDetailedUL-20-m0n74",
       "category": "Power Distribution Components",
       "item": "Disconnect - 100A (Allen Bradley, UL)",
       "supplier": "Allen Bradley",
@@ -2293,7 +2293,7 @@
       "bundleStandard": "UL"
     },
     {
-      "id": "sup-cab-powerDistDetailedUL-22-3g4e4",
+      "id": "sup-cab-powerDistDetailedUL-22-zrzc7",
       "category": "Power Distribution Components",
       "item": "Contactor - 97A (Allen Bradley, UL)",
       "supplier": "Allen Bradley",
@@ -2306,7 +2306,7 @@
       "bundleStandard": "UL"
     },
     {
-      "id": "sup-cab-powerDistDetailedUL-23-10ntv",
+      "id": "sup-cab-powerDistDetailedUL-23-4om6y",
       "category": "Power Distribution Components",
       "item": "Power Supply - 20A (Allen Bradley, UL)",
       "supplier": "Allen Bradley",
@@ -2319,7 +2319,7 @@
       "bundleStandard": "UL"
     },
     {
-      "id": "sup-cab-powerDistDetailedUL-24-uyai1",
+      "id": "sup-cab-powerDistDetailedUL-24-shxyw",
       "category": "Power Distribution Components",
       "item": "DB - 125A (Allen Bradley, UL)",
       "supplier": "Schneider Electric",
@@ -2332,7 +2332,7 @@
       "bundleStandard": "UL"
     },
     {
-      "id": "sup-cab-powerDistDetailedUL-25-4h1f9",
+      "id": "sup-cab-powerDistDetailedUL-25-y3a7s",
       "category": "Power Distribution Components",
       "item": "Voltage Relay (Allen Bradley, UL)",
       "supplier": "Allen Bradley",
@@ -2345,7 +2345,7 @@
       "bundleStandard": "UL"
     },
     {
-      "id": "sup-cab-powerDistDetailedUL-26-oz7ji",
+      "id": "sup-cab-powerDistDetailedUL-26-00jr1",
       "category": "Power Distribution Components",
       "item": "MCB - 100A (Allen Bradley, UL)",
       "supplier": "Allen Bradley",
@@ -2358,7 +2358,7 @@
       "bundleStandard": "UL"
     },
     {
-      "id": "sup-cab-powerDistDetailedUL-27-5q3z6",
+      "id": "sup-cab-powerDistDetailedUL-27-owmn0",
       "category": "Power Distribution Components",
       "item": "CB - 1P 1A (Allen Bradley, UL)",
       "supplier": "Allen Bradley",
@@ -2371,7 +2371,7 @@
       "bundleStandard": "UL"
     },
     {
-      "id": "sup-cab-powerDistDetailedUL-28-ak10w",
+      "id": "sup-cab-powerDistDetailedUL-28-f5bjl",
       "category": "Power Distribution Components",
       "item": "CB - 3P 6A (Allen Bradley, UL)",
       "supplier": "Allen Bradley",
@@ -2384,7 +2384,7 @@
       "bundleStandard": "UL"
     },
     {
-      "id": "sup-cab-powerDistDetailedUL-29-zggfs",
+      "id": "sup-cab-powerDistDetailedUL-29-m5bsy",
       "category": "Power Distribution Components",
       "item": "CB - 2P 6A (Allen Bradley, UL)",
       "supplier": "Allen Bradley",
@@ -2397,7 +2397,7 @@
       "bundleStandard": "UL"
     },
     {
-      "id": "sup-cab-powerDistDetailedUL-30-ba6q1",
+      "id": "sup-cab-powerDistDetailedUL-30-bk2z7",
       "category": "Power Distribution Components",
       "item": "CB - 1P 2A (Allen Bradley, UL)",
       "supplier": "Allen Bradley",
@@ -2410,7 +2410,7 @@
       "bundleStandard": "UL"
     },
     {
-      "id": "sup-cab-powerDistDetailedUL-31-cbwma",
+      "id": "sup-cab-powerDistDetailedUL-31-8fsmh",
       "category": "Power Distribution Components",
       "item": "RCD - 2P 25A (Allen Bradley, UL)",
       "supplier": "Allen Bradley",
@@ -2423,7 +2423,7 @@
       "bundleStandard": "UL"
     },
     {
-      "id": "sup-cab-powerDistDetailedUL-32-ylou6",
+      "id": "sup-cab-powerDistDetailedUL-32-gfspt",
       "category": "Power Distribution Components",
       "item": "Fuse - 3P 32A (Allen Bradley, UL)",
       "supplier": "Allen Bradley",
@@ -2436,7 +2436,7 @@
       "bundleStandard": "UL"
     },
     {
-      "id": "sup-cab-powerDistDetailedUL-33-trylz",
+      "id": "sup-cab-powerDistDetailedUL-33-z213q",
       "category": "Power Distribution Components",
       "item": "Output Relay (Allen Bradley, UL)",
       "supplier": "Allen Bradley",
@@ -2449,7 +2449,7 @@
       "bundleStandard": "UL"
     },
     {
-      "id": "sup-cab-powerDistDetailedUL-34-cx9gv",
+      "id": "sup-cab-powerDistDetailedUL-34-94dlh",
       "category": "Power Distribution Components",
       "item": "Trans -1000VA (Allen Bradley, UL)",
       "supplier": "Allen Bradley",
@@ -2462,7 +2462,7 @@
       "bundleStandard": "UL"
     },
     {
-      "id": "sup-cab-powerDistDetailedUL-35-90y0l",
+      "id": "sup-cab-powerDistDetailedUL-35-nhdnq",
       "category": "Power Distribution Components",
       "item": "CB - 2P 2A (Allen Bradley, UL)",
       "supplier": "Allen Bradley",
@@ -2475,7 +2475,7 @@
       "bundleStandard": "UL"
     },
     {
-      "id": "sup-cab-powerDistDetailedUL-36-nzks2",
+      "id": "sup-cab-powerDistDetailedUL-36-b25o3",
       "category": "Power Distribution Components",
       "item": "Disconnect - 100A accessories (Allen Bradley, UL)",
       "supplier": "Allen Bradley",
@@ -2488,7 +2488,7 @@
       "bundleStandard": "UL"
     },
     {
-      "id": "sup-cab-powerDistDetailedUL-37-kkm4k",
+      "id": "sup-cab-powerDistDetailedUL-37-xkaoq",
       "category": "Power Distribution Components",
       "item": "Murr ECB (Allen Bradley, UL)",
       "supplier": "Murr",
