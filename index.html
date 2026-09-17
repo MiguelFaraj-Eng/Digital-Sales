@@ -1036,13 +1036,16 @@ body.role-procurement button[onclick="exportOffer()"] { display:none; }
   </div>
 
   <div class="card">
-    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;flex-wrap:wrap;gap:8px">
       <div class="card-head" style="margin-bottom:0">Selected Equipment</div>
-      <button class="btn btn-ghost" style="padding:4px 10px;font-size:11px" onclick="resetCabinetOverrides()">↺ Reset to Auto-Selected</button>
+      <div style="display:flex;gap:8px">
+        <button class="btn btn-ghost" style="padding:4px 10px;font-size:11px" onclick="resetCabinetManualAdds()">↺ Clear Manual Additions</button>
+        <button class="btn btn-ghost" style="padding:4px 10px;font-size:11px" onclick="resetCabinetOverrides()">↺ Reset to Auto-Selected</button>
+      </div>
     </div>
-    <div class="note" style="margin-bottom:14px">Rows with more than one acceptable product show a dropdown — pick any of them, same as swapping the selection in the original spreadsheet.</div>
+    <div class="note" style="margin-bottom:14px">Rows with more than one acceptable product show a dropdown. <strong>Reference Price</strong> comes from the Suppliers Directory when a matching item is tracked there (🔗), otherwise the catalog price. <strong>Manually Added</strong> is yours to type in on top — Unit Price is always Reference Price + Manually Added.</div>
     <div class="tbl-wrap"><table>
-      <thead><tr><th>Category</th><th>Item</th><th>Selected Product</th><th>Qty</th><th>Unit Price</th><th>Total</th></tr></thead>
+      <thead><tr><th>Category</th><th>Item</th><th>Selected Product</th><th>Qty</th><th>Reference Price</th><th>Manually Added</th><th>Unit Price</th><th>Total</th></tr></thead>
       <tbody id="cab-bom-body"></tbody>
     </table></div>
   </div>
@@ -1103,6 +1106,12 @@ body.role-procurement button[onclick="exportOffer()"] { display:none; }
         <input type="text" id="supplier-new-category" placeholder="e.g. Pneumatics"></div>
       <button class="btn btn-ghost" onclick="addSupplierCategory()">+ Add Category</button>
     </div>
+  </div>
+
+  <div class="card" style="border-color:var(--blue);background:var(--blue-bg)">
+    <div class="card-head">Import from Electrical Cabinet Catalog</div>
+    <div class="note" style="margin-bottom:12px">Pulls in every component the Cabinet Configurator can select — PLCs, drives, sensors, safety devices, and more — as trackable supplier entries. Items already tracked here (matched by name) are left untouched; nothing gets overwritten. Nothing is saved to the cloud until you review below and click "Save Suppliers to Cloud".</div>
+    <button class="btn btn-primary" onclick="importCabinetCatalogToSuppliers()">⇩ Import Cabinet Catalog</button>
   </div>
 
   <div class="card">
@@ -3147,6 +3156,39 @@ function resetCabinetOverrides() {
   calcCabinetPage();
 }
 
+// Manual price additions: { "category|item": amount }. Layered on top of the
+// Reference Price for that line — Unit Price = Reference Price + Manually Added.
+let cabinetManualAdds = {};
+function changeCabinetManualAdd(manualKey, valueStr) {
+  const v = Number(valueStr) || 0;
+  if (v === 0) delete cabinetManualAdds[manualKey];
+  else cabinetManualAdds[manualKey] = v;
+  calcCabinetPage();
+}
+function resetCabinetManualAdds() {
+  cabinetManualAdds = {};
+  calcCabinetPage();
+}
+
+// Reference Price: the live Suppliers Directory's latest price for a product,
+// falling back to the catalog price when nothing's tracked there yet. Same
+// name-match + most-recently-updated resolution as the pricing-page badges.
+function getReferencePrice(itemName, catalogPrice) {
+  if (itemName && suppliersData && suppliersData.entries) {
+    const matches = suppliersData.entries.filter(e => (e.item||'').trim().toLowerCase() === itemName.trim().toLowerCase());
+    if (matches.length) {
+      const best = matches.slice().sort((a,b) => (b.updated||'').localeCompare(a.updated||''))[0];
+      const p = best.latestPrice || best.cost;
+      if (p) return p;
+    }
+  }
+  return catalogPrice;
+}
+function hasSupplierPrice(itemName) {
+  if (!itemName || !suppliersData || !suppliersData.entries) return false;
+  return suppliersData.entries.some(e => (e.item||'').trim().toLowerCase() === itemName.trim().toLowerCase() && (e.latestPrice || e.cost));
+}
+
 function calcCabinet(inp, catalog, costingData) {
   const int = v => Math.trunc(Number(v) || 0);
   const num = v => Number(v) || 0;
@@ -3295,11 +3337,16 @@ function calcCabinet(inp, catalog, costingData) {
 
   const bom = [];
   const warnings = [];
-  const addLine = (category, item, slotKey, eligibleList, prod, qty, unitPrice) => {
+  const addLine = (category, item, slotKey, eligibleList, prod, qty, fallbackBase, surcharge=0, skipLookup=false) => {
+    const referencePrice = (skipLookup ? fallbackBase : getReferencePrice(prod?.name, fallbackBase)) + surcharge;
+    const manualKey = category + '|' + item;
+    const manualAdd = cabinetManualAdds[manualKey] || 0;
+    const unitPrice = referencePrice + manualAdd;
     if (qty > 0 && !prod) warnings.push(`${item}: no matching product for ${inp.plcBrand==='Allen Bradley'&&(category.includes('Drive')||category==='Servo Drives')?inp.driveBrand+'/'+inp.servoBrand:'the selected brand'} in the catalog — priced at $0, check manually.`);
     const total = qty * unitPrice;
     if (qty !== 0 || category==='Special Items') {
-      bom.push({ category, item, slotKey, eligibleList: eligibleList||[], selectedItemNo: prod?.itemNo, name: prod?.name, qty, unitPrice, total });
+      bom.push({ category, item, slotKey, eligibleList: eligibleList||[], selectedItemNo: prod?.itemNo, name: prod?.name,
+        qty, referencePrice, manualAdd, manualKey, unitPrice, total });
     }
     return total;
   };
@@ -3323,9 +3370,9 @@ function calcCabinet(inp, catalog, costingData) {
   addLine('Drives Without Brake','VFD 0.75KW - Centralized','vfdCent075',eligVfdCent075,vfdCent075,int(inp.m075NoBrake),vfdCent075?.price||0);
   addLine('Drives Without Brake','VFD 1.5KW - Centralized','vfdCent15',eligVfdCent15,vfdCent15,int(inp.m15NoBrake),vfdCent15?.price||0);
   addLine('Drives Without Brake','VFD 2.2KW - Centralized','vfdCent22',eligVfdCent22,vfdCent22,int(inp.m22NoBrake),vfdCent22?.price||0);
-  addLine('Drives With Brakes','VFD 0.75KW - Centralized','vfdCent075',eligVfdCent075,vfdCent075,int(inp.m075Brake),(vfdCent075?.price||0)+100);
-  addLine('Drives With Brakes','VFD 1.5KW - Centralized','vfdCent15',eligVfdCent15,vfdCent15,int(inp.m15Brake),(vfdCent15?.price||0)+100);
-  addLine('Drives With Brakes','VFD 2.2KW - Centralized','vfdCent22',eligVfdCent22,vfdCent22,int(inp.m22Brake),(vfdCent22?.price||0)+100);
+  addLine('Drives With Brakes','VFD 0.75KW - Centralized','vfdCent075',eligVfdCent075,vfdCent075,int(inp.m075Brake),vfdCent075?.price||0,100);
+  addLine('Drives With Brakes','VFD 1.5KW - Centralized','vfdCent15',eligVfdCent15,vfdCent15,int(inp.m15Brake),vfdCent15?.price||0,100);
+  addLine('Drives With Brakes','VFD 2.2KW - Centralized','vfdCent22',eligVfdCent22,vfdCent22,int(inp.m22Brake),vfdCent22?.price||0,100);
   addLine('Distributed Drives','VFD 0.75KW - Distributed','vfdDist075',eligVfdDist075,vfdDist075,int(inp.dec075),vfdDist075?.price||0);
   addLine('Distributed Drives','VFD 1.5KW - Distributed','vfdDist15',eligVfdDist15,vfdDist15,int(inp.dec15),vfdDist15?.price||0);
   addLine('Distributed Drives','VFD 2.2KW - Distributed','vfdDist22',eligVfdDist22,vfdDist22,int(inp.dec22),vfdDist22?.price||0);
@@ -3333,7 +3380,11 @@ function calcCabinet(inp, catalog, costingData) {
   addLine('Servo Drives','Servo Drives 1.5KW','servo15',eligServo15,servo15,int(inp.s15),servo15?.price||0);
   addLine('Servo Drives','Servo Drives 2.2KW','servo22',eligServo22,servo22,int(inp.s22),servo22?.price||0);
 
-  addLine('Panels','Enclosures - Panel','panel',eligPanel,panel,numberOfPanels,panel?(panel.price/numberOfPanels):0);
+  // Panel is priced per-panel by dividing the catalog/supplier price across
+  // numberOfPanels — the division must apply AFTER supplier-alignment, not
+  // before, or a tracked supplier price would silently skip the division.
+  const panelRefPerUnit = panel ? getReferencePrice(panel.name, panel.price||0) / numberOfPanels : 0;
+  addLine('Panels','Enclosures - Panel','panel',eligPanel,panel,numberOfPanels,panelRefPerUnit,0,true);
   addLine('Panels','Enclosures - JB','junctionBox',eligJunctionBox,junctionBox,numberOfJunctionBox,junctionBox?.price||0);
   addLine('Panels','PDB','pdb',eligPdb,pdb,numberOfPDBs,pdb?.price||0);
 
@@ -3430,16 +3481,21 @@ function calcCabinetPage() {
       } else {
         productCell = l.name || '<span class="dim">—</span>';
       }
+      const fromSupplier = l.name && hasSupplierPrice(l.name);
+      const refCell = (fromSupplier ? '<span style="color:var(--blue)" title="From the Suppliers Directory">🔗 </span>' : '') + fmt(l.referencePrice);
+      const manualKeyEsc = l.manualKey.replace(/'/g,"\\'");
       return `
       <tr>
         <td class="dim">${l.category}</td>
         <td>${l.item}</td>
         <td>${productCell}</td>
         <td>${(Math.round(l.qty*100)/100).toLocaleString()}</td>
+        <td class="n">${refCell}</td>
+        <td><input class="en" type="number" style="width:100%;text-align:right" value="${l.manualAdd || ''}" placeholder="0" onchange="changeCabinetManualAdd('${manualKeyEsc}', this.value)"></td>
         <td class="n">${fmt(l.unitPrice)}</td>
         <td class="n">${fmt(l.total)}</td>
       </tr>`;
-    }).join('') || `<tr><td colspan="6" class="dim" style="text-align:center;padding:20px">Fill in the Configurator to see the Bill of Materials.</td></tr>`;
+    }).join('') || `<tr><td colspan="8" class="dim" style="text-align:center;padding:20px">Fill in the Configurator to see the Bill of Materials.</td></tr>`;
   }
 
   const warnCard = document.getElementById('cab-warnings-card');
@@ -3490,6 +3546,48 @@ function renderSupplierCategoryChips() {
       ${cat}
       <span style="color:var(--red);cursor:pointer;font-weight:600;padding:0 4px" onclick="removeSupplierCategory('${cat.replace(/'/g,"\\'")}')" title="Remove category">×</span>
     </span>`).join('') || '<span class="dim" style="font-size:12px">No categories yet — add one below.</span>';
+}
+
+// Pulls every item from the Electrical Cabinet catalog into the Suppliers
+// Directory as trackable entries, so Reference Price on the BOM has real
+// data to align against. Purely additive — matches by item name and skips
+// anything already tracked, so it's safe to click more than once and never
+// touches or overwrites an existing entry (including its email/description/PDF).
+const CABINET_CATALOG_TO_SUPPLIER_CATEGORY = {
+  plc: 'PLCs', plcIO: 'PLC I/O & Accessories', plcIOAccessories: 'PLC I/O & Accessories',
+  hmi: 'HMI', switches: 'Networking', powerDist: 'Power Distribution',
+  ups: 'UPS', ventilation: 'Ventilation',
+  vfdCentralized: 'VFDs & Drives', vfdDistributed: 'VFDs & Drives', vfdServoAccessories: 'VFDs & Drives',
+  servo: 'Servo Motors & Drives', panels: 'Cabinet Panels', junctionBox: 'Junction Boxes',
+  sensors: 'Sensors & Instrumentation', pdb: 'Power Distribution',
+  safety: 'Safety & Emergency Stop', operatorPanel: 'Operator Panels',
+};
+function importCabinetCatalogToSuppliers() {
+  if (!cabinetCatalog) { alert("The Electrical Cabinet catalog hasn't loaded yet — try again in a moment."); return; }
+  const existingNames = new Set(suppliersData.entries.map(e => (e.item||'').trim().toLowerCase()));
+  const today = new Date().toISOString().slice(0,10);
+  let added = 0, categoriesAdded = 0;
+  Object.entries(CABINET_CATALOG_TO_SUPPLIER_CATEGORY).forEach(([family, category]) => {
+    if (!suppliersData.categories.includes(category)) { suppliersData.categories.push(category); categoriesAdded++; }
+    (cabinetCatalog[family] || []).forEach(item => {
+      if (!item.name) return;
+      const key = item.name.trim().toLowerCase();
+      if (existingNames.has(key)) return;
+      existingNames.add(key);
+      suppliersData.entries.push({
+        id: 'sup-cab-' + family + '-' + item.itemNo + '-' + Date.now().toString(36) + Math.random().toString(36).slice(2,5),
+        category, item: item.name, supplier: item.brand || '', email: '',
+        cost: item.price || 0, latestPrice: item.price || 0, updated: today,
+        description: item.description || item.spec || '',
+      });
+      added++;
+    });
+  });
+  renderSuppliersPage();
+  calcCabinetPage();  // Reference Price may now resolve against the newly-imported entries
+  suppliersSetStatus(added
+    ? `Imported ${added} new item${added===1?'':'s'}${categoriesAdded?` (added ${categoriesAdded} new categor${categoriesAdded===1?'y':'ies'})`:''} ✓ — review below, then "Save Suppliers to Cloud" when ready.`
+    : 'Nothing new to import — every Cabinet catalog item is already tracked here.');
 }
 
 function addSupplierCategory() {
@@ -3850,6 +3948,7 @@ function syncSupplierData() {
   updateSupplierStats();  // also refreshes category bars, attention list, recent changes
   renderVendorsTable();
   renderPriceHistory();
+  calcCabinetPage();  // Reference Price on the Cabinet BOM depends on supplier data too
 }
 
 function collectVisibleSupplierRows() {
