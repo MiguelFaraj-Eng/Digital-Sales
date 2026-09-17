@@ -3238,9 +3238,14 @@ function hasSupplierPrice(itemName) {
   if (!itemName || !suppliersData || !suppliersData.entries) return false;
   return suppliersData.entries.some(e => (e.item||'').trim().toLowerCase() === itemName.trim().toLowerCase() && (e.latestPrice || e.cost));
 }
-function getPowerDistDetailItems(bundleBrand, bundleStandard) {
-  if (!suppliersData || !suppliersData.entries) return [];
-  return suppliersData.entries.filter(e => e.category === 'Power Distribution Components' && e.bundleBrand === bundleBrand && e.bundleStandard === bundleStandard);
+function getPowerDistDetailItems(bundleBrand, bundleStandard, outputRelayQty) {
+  if (!cabinetCosting || !cabinetCosting.powerDistBreakdown) return [];
+  const items = cabinetCosting.powerDistBreakdown[`${bundleBrand}|${bundleStandard}`] || [];
+  return items.map(it => ({
+    item: it.item,
+    qty: it.qtyFormula === 'outputRelay' ? outputRelayQty : (it.qty ?? 1),
+    catalogPrice: it.price,
+  }));
 }
 function toggleCabinetDetail(id) {
   const el = document.getElementById(id);
@@ -3294,6 +3299,18 @@ function calcCabinet(inp, catalog, costingData) {
   const swManaged = pickFromEligible('swManaged', eligSwManaged), swUnmanaged = pickFromEligible('swUnmanaged', eligSwUnmanaged);
   const eligPowerDist = catalog.powerDist.filter(pd => pd.brand === inp.plcBrand && pd.category === (inp.standard === 'CE' ? 'Power Distribution CE' : 'Power Distribution UL'));
   const powerDist = pickFromEligible('powerDist', eligPowerDist);
+  // The catalog's static PPU is only a cached snapshot — the real Excel PPU is
+  // a live sum of ~14-17 sub-components (verified against all 4 cached totals
+  // exactly), including a Siemens-specific 1.1x markup and an Output Relay
+  // quantity that itself depends on actuator counts. Compute it live instead
+  // of trusting the static number, which silently misses that dependency.
+  const powerDistKey = powerDist ? `${powerDist.brand}|${inp.standard}` : null;
+  const powerDistItems = powerDistKey ? (costingData.powerDistBreakdown[powerDistKey] || []) : [];
+  const outputRelayQty = 8 + 8*(int(inp.actuatorsMono) + 2*int(inp.actuatorsBi));
+  const powerDistLiveCatalogPrice = powerDistItems.reduce((s, it) => {
+    const qty = it.qtyFormula === 'outputRelay' ? outputRelayQty : (it.qty ?? 1);
+    return s + qty * it.price;
+  }, 0);
   const eligUps = catalog.ups.filter(u => u.brand === inp.plcBrand);
   const ups = pickFromEligible('ups', eligUps);
   const eligVentilation = catalog.ventilation.filter(v => v.category === (inp.ac === 'Not Included' ? 'Fans & Filters' : 'Air Conditioner') && v.brand === 'Seifert');
@@ -3439,7 +3456,7 @@ function calcCabinet(inp, catalog, costingData) {
 
   addLine('Switches & Power','Network Switches Managed','swManaged',eligSwManaged,swManaged,networkSwitchesManaged,swManaged?.price||0);
   addLine('Switches & Power','Network Switches Unmanaged','swUnmanaged',eligSwUnmanaged,swUnmanaged,networkSwitchesUnmanaged,swUnmanaged?.price||0);
-  addLine('Switches & Power','Power Distribution','powerDist',eligPowerDist,powerDist,numberOfPanels,powerDist?.price||0);
+  addLine('Switches & Power','Power Distribution','powerDist',eligPowerDist,powerDist,numberOfPanels,powerDistLiveCatalogPrice);
   addLine('Switches & Power','Power Supply',null,null,{name:'Power Supply'},powerSupplyNeeded,240);
   addLine('Switches & Power','UPS','ups',eligUps,ups,(inp.ups==='Not Included'?0:1),ups?.price||0);
   addLine('Switches & Power','Ventilation','ventilation',eligVentilation,ventilation,numberOfPanels,ventilation?.price||0);
@@ -3463,8 +3480,18 @@ function calcCabinet(inp, catalog, costingData) {
   // back to the same total). Displaying it as qty=1 at the full price (rather
   // than qty=N at a fractional per-unit price) keeps the same total while
   // reading clearly instead of looking like a division error.
-  const panelFullRef = panel ? getReferencePrice(dispName('panels', panel), panel.price||0) : 0;
-  addLine('Panels','Enclosures - Panel','panel',eligPanel,panel,1,panelFullRef,0,true);
+  // The panel PPU isn't a flat catalog number either — it's Qty1*UnitPrice1 +
+  // Qty2*UnitPrice2, where Qty1 = numberOfPanels itself and Qty2 is an "extra
+  // door" surcharge count. Verified against all 6 brand/type cached totals
+  // exactly. My earlier fix (locking this to a flat price) was based on an
+  // incomplete read of the formula chain — the total genuinely scales with
+  // panel count, it doesn't cancel out to a constant.
+  const panelKey = panel ? `${panel.brand}|${panel.category}` : null;
+  const panelFormula = panelKey ? costingData.panelsFormula[panelKey] : null;
+  const extraDoorQty = Math.ceil(Math.max(0, extraDoorCalc - numberOfPanels*10)/10);
+  const panelBaseRef = panel ? getReferencePrice(dispName('panels', panel), panelFormula ? panelFormula.basePrice : (panel.price||0)) : 0;
+  const panelLiveCatalogPrice = panelFormula ? (numberOfPanels*panelBaseRef + extraDoorQty*panelFormula.extraDoorPrice) : 0;
+  addLine('Panels','Enclosures - Panel','panel',eligPanel,panel,1,panelLiveCatalogPrice,0,true);
   addLine('Panels','Enclosures - JB','junctionBox',eligJunctionBox,junctionBox,numberOfJunctionBox,junctionBox?.price||0);
   addLine('Panels','PDB','pdb',eligPdb,pdb,numberOfPDBs,pdb?.price||0);
 
@@ -3587,19 +3614,20 @@ function calcCabinetPage() {
 
       if (!hasDetail) return mainRow;
 
-      const parts = getPowerDistDetailItems(l.bundleBrand, l.bundleStandard);
+      const detailOutputRelayQty = 8 + 8*((Number(inp.actuatorsMono)||0) + 2*(Number(inp.actuatorsBi)||0));
+      const parts = getPowerDistDetailItems(l.bundleBrand, l.bundleStandard, detailOutputRelayQty);
       const partsRows = parts.map(p => {
-        const price = getReferencePrice(p.item, p.cost || 0);
+        const price = getReferencePrice(p.item, p.catalogPrice);
         return `<div style="display:flex;justify-content:space-between;padding:3px 0;font-size:12px">
-          <span>${p.item}</span><span class="dim">${fmt(price)}</span>
+          <span>${p.item}${p.qty !== 1 ? ` <span class="dim">×${p.qty}</span>` : ''}</span><span class="dim">${fmt(price*p.qty)}</span>
         </div>`;
       }).join('');
-      const partsSum = parts.reduce((s, p) => s + getReferencePrice(p.item, p.cost || 0), 0);
+      const partsSum = parts.reduce((s, p) => s + getReferencePrice(p.item, p.catalogPrice)*p.qty, 0);
       const detailRow = `
       <tr class="sup-detail-row" id="${detailId}" style="display:none">
         <td colspan="8" style="background:var(--s2);padding:12px 20px 14px 34px">
-          <div class="note" style="margin-bottom:8px">What's inside this bundle (for reference — the line above is still priced as one bundled item, this doesn't change its total):</div>
-          ${partsRows || '<span class="dim" style="font-size:12px">No component breakdown tracked yet for this brand/standard — import it from the Suppliers Directory.</span>'}
+          <div class="note" style="margin-bottom:8px">What's inside this bundle — this is the live breakdown the bundle price above is actually computed from, including the Siemens 1.1x markup and the Output Relay quantity, which scales with your Actuator counts:</div>
+          ${partsRows || '<span class="dim" style="font-size:12px">No component breakdown available for this brand/standard.</span>'}
           ${parts.length ? `<div style="display:flex;justify-content:space-between;padding-top:6px;margin-top:6px;border-top:1px solid var(--b1);font-size:12px;font-weight:500"><span>Sum of parts</span><span>${fmt(partsSum)}</span></div>` : ''}
         </td>
       </tr>`;
@@ -3662,9 +3690,17 @@ function renderSupplierCategoryChips() {
 // data to align against. Purely additive — matches by item name and skips
 // anything already tracked, so it's safe to click more than once and never
 // touches or overwrites an existing entry (including its email/description/PDF).
+// Power Distribution is deliberately excluded here — its price is now a live
+// formula-driven sum of ~14 sub-components (see calcCabinet), not a static
+// catalog number. Importing a snapshot of the old bundle price would let a
+// stale tracked "supplier" entry silently override that live calculation,
+// which defeats the point of computing it dynamically. Track real supplier
+// quotes for the individual sub-components instead (visible in the
+// Configurator's Power Distribution detail view, which does support
+// per-component supplier alignment).
 const CABINET_CATALOG_TO_SUPPLIER_CATEGORY = {
   plc: 'PLCs', plcIO: 'PLC I/O & Accessories', plcIOAccessories: 'PLC I/O & Accessories',
-  hmi: 'HMI', switches: 'Networking', powerDist: 'Power Distribution',
+  hmi: 'HMI', switches: 'Networking',
   ups: 'UPS', ventilation: 'Ventilation',
   vfdCentralized: 'VFDs & Drives', vfdDistributed: 'VFDs & Drives', vfdServoAccessories: 'VFDs & Drives',
   servo: 'Servo Motors & Drives', panels: 'Cabinet Panels', junctionBox: 'Junction Boxes',
