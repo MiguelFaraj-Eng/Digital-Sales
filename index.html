@@ -3277,6 +3277,10 @@ function getPowerDistDetailItems(bundleBrand, bundleStandard, outputRelayQty) {
   const items = cabinetCosting.powerDistBreakdown[`${bundleBrand}|${bundleStandard}`] || [];
   return items.map(it => ({
     item: it.item,
+    // Matches exactly how these were imported into Suppliers (name + brand +
+    // standard) — the plain item name alone collides across CE/UL sheets, so
+    // that's not what got stored, and a plain-name lookup would never find them.
+    lookupName: `${it.item} (${bundleBrand}, ${bundleStandard})`,
     qty: it.qtyFormula === 'outputRelay' ? outputRelayQty : (it.qty ?? 1),
     catalogPrice: it.price,
   }));
@@ -3621,8 +3625,8 @@ function renderMaterialForPR(r, inp) {
       const outputRelayQty = 8 + 8*((Number(inp.actuatorsMono)||0) + 2*(Number(inp.actuatorsBi)||0));
       const parts = getPowerDistDetailItems(l.bundleBrand, l.bundleStandard, outputRelayQty);
       parts.forEach(p => {
-        const unitPrice = getReferencePrice(p.item, p.catalogPrice);
-        rows.push({ category: 'Power Distribution', item: p.item, qty: p.qty, unitPrice, total: unitPrice*p.qty, lookupName: p.item });
+        const unitPrice = getReferencePrice(p.lookupName, p.catalogPrice);
+        rows.push({ category: 'Power Distribution', item: p.item, qty: p.qty, unitPrice, total: unitPrice*p.qty, lookupName: p.lookupName });
       });
       return;
     }
@@ -3714,12 +3718,12 @@ function calcCabinetPage() {
       const detailOutputRelayQty = 8 + 8*((Number(inp.actuatorsMono)||0) + 2*(Number(inp.actuatorsBi)||0));
       const parts = getPowerDistDetailItems(l.bundleBrand, l.bundleStandard, detailOutputRelayQty);
       const partsRows = parts.map(p => {
-        const price = getReferencePrice(p.item, p.catalogPrice);
+        const price = getReferencePrice(p.lookupName, p.catalogPrice);
         return `<div style="display:flex;justify-content:space-between;padding:3px 0;font-size:12px">
           <span>${p.item}${p.qty !== 1 ? ` <span class="dim">×${p.qty}</span>` : ''}</span><span class="dim">${fmt(price*p.qty)}</span>
         </div>`;
       }).join('');
-      const partsSum = parts.reduce((s, p) => s + getReferencePrice(p.item, p.catalogPrice)*p.qty, 0);
+      const partsSum = parts.reduce((s, p) => s + getReferencePrice(p.lookupName, p.catalogPrice)*p.qty, 0);
       const detailRow = `
       <tr class="sup-detail-row" id="${detailId}" style="display:none">
         <td colspan="8" style="background:var(--s2);padding:12px 20px 14px 34px">
