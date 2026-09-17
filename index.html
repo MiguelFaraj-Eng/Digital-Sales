@@ -3457,11 +3457,14 @@ function calcCabinet(inp, catalog, costingData) {
   addLine('Servo Drives','Servo Drives 1.5KW','servo15',eligServo15,servo15,int(inp.s15),servo15?.price||0);
   addLine('Servo Drives','Servo Drives 2.2KW','servo22',eligServo22,servo22,int(inp.s22),servo22?.price||0);
 
-  // Panel is priced per-panel by dividing the catalog/supplier price across
-  // numberOfPanels — the division must apply AFTER supplier-alignment, not
-  // before, or a tracked supplier price would silently skip the division.
-  const panelRefPerUnit = panel ? getReferencePrice(dispName('panels', panel), panel.price||0) / numberOfPanels : 0;
-  addLine('Panels','Enclosures - Panel','panel',eligPanel,panel,numberOfPanels,panelRefPerUnit,0,true);
+  // Panel enclosure is one shared bundled cost covering however many panels
+  // are needed — total stays fixed regardless of count, matching the Excel
+  // exactly (confirmed: O34=VLOOKUP(...)/N34, P34=N34*O34, always cancels
+  // back to the same total). Displaying it as qty=1 at the full price (rather
+  // than qty=N at a fractional per-unit price) keeps the same total while
+  // reading clearly instead of looking like a division error.
+  const panelFullRef = panel ? getReferencePrice(dispName('panels', panel), panel.price||0) : 0;
+  addLine('Panels','Enclosures - Panel','panel',eligPanel,panel,1,panelFullRef,0,true);
   addLine('Panels','Enclosures - JB','junctionBox',eligJunctionBox,junctionBox,numberOfJunctionBox,junctionBox?.price||0);
   addLine('Panels','PDB','pdb',eligPdb,pdb,numberOfPDBs,pdb?.price||0);
 
