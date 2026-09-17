@@ -1,0 +1,154 @@
+{
+  "designTestingMatrix": [
+    {
+      "type": "Conveying",
+      "level": "Low",
+      "design": 1950,
+      "costFirstSku": 450,
+      "additionalSku": 360
+    },
+    {
+      "type": "Conveying",
+      "level": "Medium",
+      "design": 3525,
+      "costFirstSku": 900,
+      "additionalSku": 900
+    },
+    {
+      "type": "Conveying",
+      "level": "High",
+      "design": 4125,
+      "costFirstSku": 900,
+      "additionalSku": 1800
+    },
+    {
+      "type": "Robot cell",
+      "level": "Low",
+      "design": 3150,
+      "costFirstSku": 1800,
+      "additionalSku": 540
+    },
+    {
+      "type": "Robot cell",
+      "level": "Medium",
+      "design": 4725,
+      "costFirstSku": 2700,
+      "additionalSku": 540
+    },
+    {
+      "type": "Robot cell",
+      "level": "High",
+      "design": 6300,
+      "costFirstSku": 3600,
+      "additionalSku": 540
+    },
+    {
+      "type": "Equipment",
+      "level": "Low",
+      "design": 3150,
+      "costFirstSku": 1800,
+      "additionalSku": 540
+    },
+    {
+      "type": "Equipment",
+      "level": "Medium",
+      "design": 4800,
+      "costFirstSku": 2250,
+      "additionalSku": 540
+    },
+    {
+      "type": "Equipment",
+      "level": "High",
+      "design": 7800,
+      "costFirstSku": 2700,
+      "additionalSku": 540
+    },
+    {
+      "type": "Delta Robot",
+      "level": "Low",
+      "design": 4050,
+      "costFirstSku": 2700,
+      "additionalSku": 540
+    },
+    {
+      "type": "Delta Robot",
+      "level": "Medium",
+      "design": 5475,
+      "costFirstSku": 3600,
+      "additionalSku": 540
+    },
+    {
+      "type": "Delta Robot",
+      "level": "High",
+      "design": 7050,
+      "costFirstSku": 3600,
+      "additionalSku": 540
+    }
+  ],
+  "factory": {
+    "doorCost": {
+      "twoDoors": 6.5,
+      "oneDoor": 1.5
+    },
+    "factoryDayCostPerHour": 120,
+    "glandPrice": {
+      "Plastic": 3,
+      "Stainless": 10,
+      "Flexible with plastic": 7
+    },
+    "cablePrice": {
+      "4G2.5": {
+        "CE": 3.5,
+        "UL": 6
+      },
+      "4G4": {
+        "CE": 7.5,
+        "UL": 9.5
+      }
+    },
+    "internalCablePrice": {
+      "0.5mm": {
+        "CE": 50,
+        "UL": 75
+      },
+      "2.5mm": {
+        "CE": 65,
+        "UL": 120
+      },
+      "6mm": {
+        "CE": 140,
+        "UL": 180
+      },
+      "25mm": {
+        "CE": 6,
+        "UL": 10
+      }
+    },
+    "railOmegaPrice": {
+      "CE": 2.5,
+      "UL": 2.5
+    },
+    "cacheCablePrice": {
+      "CE": 7,
+      "UL": 7
+    },
+    "junctionPrice": {
+      "CE": 2,
+      "UL": 2
+    },
+    "fusePrice": {
+      "CE": 3,
+      "UL": 3
+    },
+    "cableTieDetectablePrice": 1.635,
+    "numberingPrice": {
+      "CE": 48,
+      "UL": 48
+    },
+    "controlCable2575Price": 6.786,
+    "ethernetCablePrice": 2,
+    "vacuumSwitchPrice": 134,
+    "commModulePrice": 348,
+    "factoryBaseHours": 3
+  }
+}
