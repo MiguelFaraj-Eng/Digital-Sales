@@ -68,6 +68,7 @@ body{font-family:'IBM Plex Sans',sans-serif;background:var(--bg);color:var(--t1)
 /* GRID 2 */
 .g2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
 .g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
+.g4{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:12px}
 .full{grid-column:1/-1}
 
 /* FORM */
@@ -280,6 +281,9 @@ body.role-procurement button[onclick="exportOffer()"] { display:none; }
     <div class="nav-item" data-p="hardware"><span class="nav-dot"></span>Hardware</div>
     <div class="nav-item" data-p="mandays"><span class="nav-dot"></span>Mandays</div>
     <div class="nav-item" data-p="brief"><span class="nav-dot"></span>Budget Brief</div>
+    <div class="nav-group">Electrical Cabinet</div>
+    <div class="nav-item" data-p="cabinet-config"><span class="nav-dot"></span>Configurator</div>
+    <div class="nav-item" data-p="cabinet-bom"><span class="nav-dot"></span>Bill of Materials</div>
     <div class="nav-group">Suppliers</div>
     <div class="nav-item" data-p="suppliers-overview" id="nav-item-suppliers-overview" style="display:none"><span class="nav-dot"></span>Overview</div>
     <div class="nav-item" data-p="suppliers" id="nav-item-suppliers" style="display:none"><span class="nav-dot"></span>Directory</div>
@@ -879,7 +883,179 @@ body.role-procurement button[onclick="exportOffer()"] { display:none; }
   </div>
 </div>
 
-<!-- ═══ SUPPLIERS OVERVIEW ═══ -->
+<!-- ═══ ELECTRICAL CABINET — CONFIGURATOR ═══ -->
+<div id="page-cabinet-config" class="page">
+  <div class="ph"><div><div class="ph-title">Electrical Cabinet Configurator</div><div class="ph-sub">Answer this once — the Bill of Materials auto-selects and sizes every component</div></div></div>
+
+  <div class="card">
+    <div class="card-head">Standards &amp; Brands</div>
+    <div class="g4">
+      <div class="fg"><label class="fl">Standard</label><select id="cab-standard" onchange="calcCabinetPage()"><option>CE</option><option>UL</option></select></div>
+      <div class="fg"><label class="fl">PLC Brand</label><select id="cab-plc-brand" onchange="calcCabinetPage()"><option>Siemens</option><option>Allen Bradley</option></select></div>
+      <div class="fg"><label class="fl">Drive Brand</label><select id="cab-drive-brand" onchange="calcCabinetPage()"><option>SEW</option><option>Siemens</option><option>Allen Bradley</option></select></div>
+      <div class="fg"><label class="fl">Servo Brand</label><select id="cab-servo-brand" onchange="calcCabinetPage()"><option>SEW</option><option>Siemens</option><option>Allen Bradley</option></select></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-head">Enclosure &amp; Panel Hardware</div>
+    <div class="g3">
+      <div class="fg"><label class="fl">Enclosure Type</label><select id="cab-enclosure-type" onchange="calcCabinetPage()"><option>Painted Steel</option><option>Stainless Steel</option></select></div>
+      <div class="fg"><label class="fl">Enclosure Brand</label><select id="cab-enclosure-brand" onchange="calcCabinetPage()"><option>Local</option><option>Technica</option><option>Rittal</option></select></div>
+      <div class="fg"><label class="fl">Glands Type</label><select id="cab-glands-type" onchange="calcCabinetPage()"><option>Plastic</option><option>Stainless</option><option>Flexible with plastic</option></select></div>
+      <div class="fg"><label class="fl">Junction Box Type</label><select id="cab-jb-type" onchange="calcCabinetPage()"><option>Plastic</option><option>Painted Steel</option><option>Stainless Steel</option></select></div>
+      <div class="fg"><label class="fl">Junction Box Brand</label><select id="cab-jb-brand" onchange="calcCabinetPage()"><option>Gewiss</option><option>Technica</option><option>Rittal</option></select></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-head">Application</div>
+    <div class="g3">
+      <div class="fg"><label class="fl">Application</label><select id="cab-application" onchange="calcCabinetPage()"><option>Conveying</option><option>Robot cell</option><option>Delta Robot</option><option>Equipment</option></select></div>
+      <div class="fg"><label class="fl">Complexity</label><select id="cab-complexity" onchange="calcCabinetPage()"><option>Low</option><option>Medium</option><option>High</option></select></div>
+      <div class="fg"><label class="fl">Number of SKUs</label><input type="number" id="cab-skus" value="1" min="1" oninput="calcCabinetPage()"></div>
+      <div class="fg"><label class="fl">Number of Robots</label><input type="number" id="cab-robots" value="0" min="0" oninput="calcCabinetPage()"></div>
+      <div class="fg"><label class="fl">Layout Length (m)</label><input type="number" id="cab-layout-length" value="10" min="0" oninput="calcCabinetPage()"></div>
+      <div class="fg"><label class="fl">Number of Safety Zones</label><input type="number" id="cab-safety-zones" value="0" min="0" oninput="calcCabinetPage()"></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-head">Options</div>
+    <div class="g4">
+      <div class="fg"><label class="fl">AC</label><select id="cab-ac" onchange="calcCabinetPage()"><option>Not Included</option><option>Included</option></select></div>
+      <div class="fg"><label class="fl">UPS</label><select id="cab-ups" onchange="calcCabinetPage()"><option>Not Included</option><option>Included</option></select></div>
+      <div class="fg"><label class="fl">Safety PLC Required</label><select id="cab-safety-plc" onchange="calcCabinetPage()"><option>No</option><option>Yes</option></select></div>
+      <div class="fg"><label class="fl">PackML</label><select id="cab-packml" onchange="calcCabinetPage()"><option>No</option><option>Yes</option></select></div>
+      <div class="fg"><label class="fl">HMI Size</label><select id="cab-hmi-size" onchange="calcCabinetPage()"><option>No Specification</option><option value="9">9"</option><option value="12">12"</option><option>Not Included</option></select></div>
+      <div class="fg"><label class="fl">Operator Panels Qty</label><input type="number" id="cab-op-panel-qty" value="0" min="0" oninput="calcCabinetPage()"></div>
+    </div>
+    <div class="note" style="margin-top:10px">Safety PLC auto-switches to required if there's more than 1 safety zone, or if any drives are distributed/decentralized — regardless of what's picked here.</div>
+  </div>
+
+  <div class="card">
+    <div class="card-head">Motors — Centralized</div>
+    <div class="note" style="margin-bottom:10px">Without brake</div>
+    <div class="g3">
+      <div class="fg"><label class="fl">0.75 kW — Qty</label><input type="number" id="cab-m075-nobrake" value="0" min="0" oninput="calcCabinetPage()"></div>
+      <div class="fg"><label class="fl">1.5 kW — Qty</label><input type="number" id="cab-m15-nobrake" value="0" min="0" oninput="calcCabinetPage()"></div>
+      <div class="fg"><label class="fl">2.2 kW — Qty</label><input type="number" id="cab-m22-nobrake" value="0" min="0" oninput="calcCabinetPage()"></div>
+    </div>
+    <div class="note" style="margin:14px 0 10px">With brake</div>
+    <div class="g3">
+      <div class="fg"><label class="fl">0.75 kW — Qty</label><input type="number" id="cab-m075-brake" value="0" min="0" oninput="calcCabinetPage()"></div>
+      <div class="fg"><label class="fl">1.5 kW — Qty</label><input type="number" id="cab-m15-brake" value="0" min="0" oninput="calcCabinetPage()"></div>
+      <div class="fg"><label class="fl">2.2 kW — Qty</label><input type="number" id="cab-m22-brake" value="0" min="0" oninput="calcCabinetPage()"></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-head">Motors — Distributed &amp; Servo</div>
+    <div class="note" style="margin-bottom:10px">Distributed drives (any qty here switches the whole cabinet to Distributed topology)</div>
+    <div class="g3">
+      <div class="fg"><label class="fl">0.75 kW — Qty</label><input type="number" id="cab-dec075" value="0" min="0" oninput="calcCabinetPage()"></div>
+      <div class="fg"><label class="fl">1.5 kW — Qty</label><input type="number" id="cab-dec15" value="0" min="0" oninput="calcCabinetPage()"></div>
+      <div class="fg"><label class="fl">2.2 kW — Qty</label><input type="number" id="cab-dec22" value="0" min="0" oninput="calcCabinetPage()"></div>
+    </div>
+    <div class="note" style="margin:14px 0 10px">Servo motors (centralized)</div>
+    <div class="g3">
+      <div class="fg"><label class="fl">0.75 kW — Qty</label><input type="number" id="cab-s075" value="0" min="0" oninput="calcCabinetPage()"></div>
+      <div class="fg"><label class="fl">1.5 kW — Qty</label><input type="number" id="cab-s15" value="0" min="0" oninput="calcCabinetPage()"></div>
+      <div class="fg"><label class="fl">2.2 kW — Qty</label><input type="number" id="cab-s22" value="0" min="0" oninput="calcCabinetPage()"></div>
+    </div>
+    <div class="g2" style="margin-top:14px">
+      <div class="fg"><label class="fl">Number of MDR Motors</label><input type="number" id="cab-mdr" value="0" min="0" oninput="calcCabinetPage()"></div>
+      <div class="fg"><label class="fl">Vacuum Switches</label><input type="number" id="cab-vacuum" value="0" min="0" oninput="calcCabinetPage()"></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-head">Sensors</div>
+    <div class="g4">
+      <div class="fg"><label class="fl">Photoelectric</label><input type="number" id="cab-photo" value="0" min="0" oninput="calcCabinetPage()"></div>
+      <div class="fg"><label class="fl">Transparent</label><input type="number" id="cab-transparent" value="0" min="0" oninput="calcCabinetPage()"></div>
+      <div class="fg"><label class="fl">Proximity</label><input type="number" id="cab-proximity" value="0" min="0" oninput="calcCabinetPage()"></div>
+      <div class="fg"><label class="fl">Distance (analog)</label><input type="number" id="cab-distance" value="0" min="0" oninput="calcCabinetPage()"></div>
+      <div class="fg"><label class="fl">Scanner 2D Basic</label><input type="number" id="cab-scanner2d-basic" value="0" min="0" oninput="calcCabinetPage()"></div>
+      <div class="fg"><label class="fl">Scanner 2D Advanced</label><input type="number" id="cab-scanner2d-adv" value="0" min="0" oninput="calcCabinetPage()"></div>
+      <div class="fg"><label class="fl">Scanner 3D (Camera)</label><input type="number" id="cab-scanner3d" value="0" min="0" oninput="calcCabinetPage()"></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-head">Actuators</div>
+    <div class="g2">
+      <div class="fg"><label class="fl">Monostable — Qty</label><input type="number" id="cab-act-mono" value="0" min="0" oninput="calcCabinetPage()"></div>
+      <div class="fg"><label class="fl">Bistable — Qty</label><input type="number" id="cab-act-bi" value="0" min="0" oninput="calcCabinetPage()"></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-head">Safety Devices</div>
+    <div class="g3">
+      <div class="fg"><label class="fl">Light Barrier — Hands</label><input type="number" id="cab-lb-hands" value="0" min="0" oninput="calcCabinetPage()"></div>
+      <div class="fg"><label class="fl">Light Barrier — Finger</label><input type="number" id="cab-lb-finger" value="0" min="0" oninput="calcCabinetPage()"></div>
+      <div class="fg"><label class="fl">Emergency Stop — Buttons</label><input type="number" id="cab-estop-btn" value="0" min="0" oninput="calcCabinetPage()"></div>
+      <div class="fg"><label class="fl">Emergency Stop — Ropes</label><input type="number" id="cab-estop-rope" value="0" min="0" oninput="calcCabinetPage()"></div>
+      <div class="fg"><label class="fl">Guard Switch</label><input type="number" id="cab-guard-switch" value="0" min="0" oninput="calcCabinetPage()"></div>
+      <div class="fg"><label class="fl">Laser Scanner</label><input type="number" id="cab-laser-scanner" value="0" min="0" oninput="calcCabinetPage()"></div>
+    </div>
+    <div class="g2" style="margin-top:14px">
+      <div class="fg"><label class="fl">Metal-Detectable Cable Ties Needed?</label><select id="cab-cabletie-detect" onchange="calcCabinetPage()"><option>No</option><option>Yes</option></select></div>
+      <div class="fg"><label class="fl">Cable Tie Run Length (m)</label><input type="number" id="cab-cabletie-length" value="0" min="0" oninput="calcCabinetPage()"></div>
+    </div>
+  </div>
+
+  <div class="card" style="border-color:var(--blue);background:var(--blue-bg)">
+    <div class="card-head">Live Total</div>
+    <div class="g3">
+      <div><div class="stat-label">Estimated Total</div><div style="font-size:22px;font-weight:600;color:var(--green)" id="cab-live-total">$0</div></div>
+      <div><div class="stat-label">Panels Needed</div><div style="font-size:22px;font-weight:600" id="cab-live-panels">1</div></div>
+      <div><div class="stat-label">Topology</div><div style="font-size:22px;font-weight:600" id="cab-live-topology">Centralised</div></div>
+    </div>
+    <button class="btn btn-primary" style="margin-top:14px" onclick="document.querySelector('.nav-item[data-p=\'cabinet-bom\']').click()">View Full Bill of Materials →</button>
+  </div>
+</div>
+
+<!-- ═══ ELECTRICAL CABINET — BILL OF MATERIALS ═══ -->
+<div id="page-cabinet-bom" class="page">
+  <div class="ph"><div><div class="ph-title">Electrical Cabinet — Bill of Materials</div><div class="ph-sub">Auto-generated from the Configurator — edit answers there to update this</div></div></div>
+
+  <div class="stat-grid">
+    <div class="stat"><div class="stat-label">Material</div><div class="stat-value c-blue" id="cab-sum-material">$0</div><div class="stat-sub">Selected components</div></div>
+    <div class="stat"><div class="stat-label">Design + Testing</div><div class="stat-value" id="cab-sum-designtest">$0</div><div class="stat-sub">Engineering</div></div>
+    <div class="stat"><div class="stat-label">Factory (Labor + Material)</div><div class="stat-value c-amber" id="cab-sum-factory">$0</div><div class="stat-sub">Assembly</div></div>
+    <div class="stat"><div class="stat-label">Total Cost</div><div class="stat-value c-green" id="cab-sum-total">$0</div><div class="stat-sub">All-in</div></div>
+  </div>
+
+  <div class="card" id="cab-warnings-card" style="display:none;border-color:var(--red);background:rgba(239,68,68,.08)">
+    <div class="card-head" style="color:var(--red)">⚠ Needs Attention</div>
+    <div id="cab-warnings-list"></div>
+  </div>
+
+  <div class="card">
+    <div class="card-head">Selected Equipment</div>
+    <div class="tbl-wrap"><table>
+      <thead><tr><th>Category</th><th>Item</th><th>Selected Product</th><th>Qty</th><th>Unit Price</th><th>Total</th></tr></thead>
+      <tbody id="cab-bom-body"></tbody>
+    </table></div>
+  </div>
+
+  <div class="card">
+    <div class="card-head">Cost Breakdown</div>
+    <table style="width:100%">
+      <tbody>
+        <tr><td style="padding:6px 0">Material</td><td class="n" id="cab-detail-material">$0</td></tr>
+        <tr><td style="padding:6px 0">Design</td><td class="n" id="cab-detail-design">$0</td></tr>
+        <tr><td style="padding:6px 0">Testing</td><td class="n" id="cab-detail-testing">$0</td></tr>
+        <tr><td style="padding:6px 0">Factory Personnel (labor)</td><td class="n" id="cab-detail-factorylabor">$0</td></tr>
+        <tr><td style="padding:6px 0">Factory Material (cabling/hardware)</td><td class="n" id="cab-detail-factorymat">$0</td></tr>
+        <tr style="border-top:1px solid var(--b2)"><td style="padding:8px 0;font-weight:600">TOTAL</td><td class="n" style="font-weight:600;color:var(--green)" id="cab-detail-total">$0</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
 <div id="page-suppliers-overview" class="page">
   <div class="ph"><div><div class="ph-title">Suppliers Overview</div><div class="ph-sub">Vendor coverage, pricing freshness &amp; recent changes — Procurement, Administrator, and Super Admin only</div></div></div>
 
@@ -2865,6 +3041,328 @@ async function saveUsersToCloud() {
 
 let suppliersData = { categories: [], entries: [] };
 let suppliersLoaded = false;
+
+// ════════════════════════════════════════════════════════════════
+//  ELECTRICAL CABINET CONFIGURATOR
+//  Direct translation of Electrical_Cabinet.xltm's BackGround +
+//  Filling Data formula graph. Validated against the workbook's own
+//  cached baseline (all-default inputs -> Total $11,726 exactly)
+//  before being wired into the UI.
+// ════════════════════════════════════════════════════════════════
+
+let cabinetCatalog = null;
+let cabinetCosting = null;
+
+async function loadCabinetData() {
+  try {
+    const [catRes, costRes] = await Promise.all([
+      fetch('data/cabinet-catalog.json', {cache:'no-store'}),
+      fetch('data/cabinet-costing.json', {cache:'no-store'}),
+    ]);
+    cabinetCatalog = await catRes.json();
+    cabinetCosting = await costRes.json();
+    calcCabinetPage();
+  } catch (e) {
+    console.error('Failed to load electrical cabinet data:', e);
+  }
+}
+loadCabinetData();
+
+function readCabinetInputs() {
+  const g = id => document.getElementById(id);
+  const v = id => g(id)?.value;
+  const n = id => Number(g(id)?.value) || 0;
+  return {
+    standard: v('cab-standard'), plcBrand: v('cab-plc-brand'), driveBrand: v('cab-drive-brand'), servoBrand: v('cab-servo-brand'),
+    enclosureType: v('cab-enclosure-type'), enclosureBrand: v('cab-enclosure-brand'),
+    jbType: v('cab-jb-type'), jbBrand: v('cab-jb-brand'), glandsType: v('cab-glands-type'),
+    application: v('cab-application'), complexity: v('cab-complexity'),
+    numSkus: n('cab-skus'), numRobots: n('cab-robots'), layoutLength: n('cab-layout-length'), safetyZones: n('cab-safety-zones'),
+    ac: v('cab-ac'), ups: v('cab-ups'), safetyPlcRequired: v('cab-safety-plc'), packml: v('cab-packml'),
+    hmiSize: g('cab-hmi-size')?.selectedOptions[0]?.value || 'No Specification', opPanelQty: n('cab-op-panel-qty'),
+    m075NoBrake: n('cab-m075-nobrake'), m15NoBrake: n('cab-m15-nobrake'), m22NoBrake: n('cab-m22-nobrake'),
+    m075Brake: n('cab-m075-brake'), m15Brake: n('cab-m15-brake'), m22Brake: n('cab-m22-brake'),
+    dec075: n('cab-dec075'), dec15: n('cab-dec15'), dec22: n('cab-dec22'),
+    s075: n('cab-s075'), s15: n('cab-s15'), s22: n('cab-s22'),
+    mdrMotors: n('cab-mdr'), vacuumSwitches: n('cab-vacuum'),
+    photoSensors: n('cab-photo'), transparentSensors: n('cab-transparent'), proximitySensors: n('cab-proximity'), distanceSensors: n('cab-distance'),
+    scanner2dBasic: n('cab-scanner2d-basic'), scanner2dAdvanced: n('cab-scanner2d-adv'), scanner3d: n('cab-scanner3d'),
+    actuatorsMono: n('cab-act-mono'), actuatorsBi: n('cab-act-bi'),
+    lbHands: n('cab-lb-hands'), lbFinger: n('cab-lb-finger'), eStopButtons: n('cab-estop-btn'), eStopRopes: n('cab-estop-rope'),
+    guardSwitch: n('cab-guard-switch'), laserScanner: n('cab-laser-scanner'),
+    cableTiesDetectable: v('cab-cabletie-detect'), cableTiesLength: n('cab-cabletie-length'),
+  };
+}
+
+function calcCabinet(inp, catalog, costingData) {
+  const int = v => Math.trunc(Number(v) || 0);
+  const num = v => Number(v) || 0;
+
+  const topology = (int(inp.dec075) + int(inp.dec15) + int(inp.dec22)) > 0 ? 'Distributed' : 'Centralised';
+  const totalVFDs = ['m075NoBrake','m15NoBrake','m22NoBrake','m075Brake','m15Brake','m22Brake','dec075','dec15','dec22']
+    .reduce((s,k) => s + int(inp[k]), 0);
+  const totalServos = int(inp.s075) + int(inp.s15) + int(inp.s22);
+  const safetyZones = int(inp.safetyZones);
+  const safetyPlcRequired = (safetyZones > 1 || topology === 'Distributed') ? true : (inp.safetyPlcRequired === 'Yes');
+  const numSkus = Math.max(1, int(inp.numSkus));
+  const numRobots = int(inp.numRobots);
+
+  const plc = catalog.plc.find(p =>
+    p.brand === inp.plcBrand &&
+    (safetyPlcRequired ? p.safety === 'Yes' : true) &&
+    (inp.application === 'Conveying' ? p.conveying === 'Yes' : true) &&
+    (inp.application === 'Delta Robot' ? p.robot2d === 'Yes' : true) &&
+    (inp.application === 'Robot cell' ? p.robot3d === 'Yes' : true) &&
+    num(p.maxVfds) >= totalVFDs && num(p.maxRobots) >= numRobots
+  );
+  const isS71200 = plc && plc.name === 'SIMATIC S7-1200, CPU 1214C';
+
+  const ioSlave = catalog.plcIO.find(io => io.brand === inp.plcBrand && io.category === 'Slave');
+  const ioDI = catalog.plcIO.find(io => io.brand === inp.plcBrand && io.category === 'DI');
+  const ioDQ = catalog.plcIO.find(io => io.brand === inp.plcBrand && io.category === 'DQ');
+  const ioFDI = catalog.plcIO.find(io => io.brand === inp.plcBrand && io.category === 'F-DI');
+  const ioFDQ = catalog.plcIO.find(io => io.brand === inp.plcBrand && io.category === 'F-DQ');
+  const ioAI = catalog.plcIO.find(io => io.brand === inp.plcBrand && io.category === 'AI');
+
+  const hmiSizeReq = (inp.hmiSize === 'No Specification' || inp.hmiSize === 'Not Included') ? 0 : int(inp.hmiSize);
+  const hmi = catalog.hmi.find(h => h.brand === inp.plcBrand && num(h.size) >= hmiSizeReq && (inp.packml === 'Yes' ? h.packml === 'yes' : true));
+
+  const swManaged = catalog.switches.find(s => s.brand === inp.plcBrand && s.category === 'Managed');
+  const swUnmanaged = catalog.switches.find(s => s.brand === inp.plcBrand && s.category === 'Unmanaged');
+  const powerDist = catalog.powerDist.find(pd => pd.brand === inp.plcBrand && pd.category === (inp.standard === 'CE' ? 'Power Distribution CE' : 'Power Distribution UL'));
+  const ups = catalog.ups.find(u => u.brand === inp.plcBrand);
+  const ventilation = catalog.ventilation.find(v => v.category === (inp.ac === 'Not Included' ? 'Fans & Filters' : 'Air Conditioner') && v.brand === 'Seifert');
+
+  const findVfdCent = size => catalog.vfdCentralized.find(v => v.brand === inp.driveBrand && num(v.size) === size && (inp.standard === 'UL' ? v.ul === 'YES' : v.ul === 'NO'));
+  const vfdCent075 = findVfdCent(0.75), vfdCent15 = findVfdCent(1.5), vfdCent22 = findVfdCent(2.2);
+  const findVfdDist = size => catalog.vfdDistributed.find(v => v.brand === inp.driveBrand && num(v.size) === size && (inp.standard === 'UL' ? v.ul === 'YES' : v.ul === 'NO'));
+  const vfdDist075 = findVfdDist(0.75), vfdDist15 = findVfdDist(1.5), vfdDist22 = findVfdDist(2.2);
+  const findServo = size => catalog.servo.find(v => v.brand === inp.servoBrand && num(v.size) === size && (inp.standard === 'UL' ? v.ul === 'YES' : v.ul === 'NO'));
+  const servo075 = findServo(0.75), servo15 = findServo(1.5), servo22 = findServo(2.2);
+
+  const panel = catalog.panels.find(p => p.brand === inp.enclosureBrand && p.category === inp.enclosureType);
+  const junctionBox = catalog.junctionBox.find(j => j.brand === inp.jbBrand && j.category === inp.jbType);
+  const pdb = catalog.pdb[0];
+  const photoSensor = catalog.sensors.find(s => s.category === 'PhotoElectric sensor');
+  const transparentSensor = catalog.sensors.find(s => s.category === 'Transparent Sensors');
+  const proximitySensor = catalog.sensors.find(s => s.category === 'Proximity Sensor');
+  const distanceSensor = catalog.sensors.find(s => s.category === 'Distance Analog Sensor');
+  const scanner2dBasicItem = catalog.sensors.find(s => s.category === 'Barcode Scanner 2D basic');
+  const scanner2dAdvItem = catalog.sensors.find(s => s.category === 'Barcode Scanner 2D Advance');
+  const scanner3dItem = catalog.sensors.find(s => s.category === 'Camera Scanner 3D');
+  const lbBody = catalog.safety.find(s => s.category === 'Light Barrier - body') || catalog.safety.find(s => s.category === 'Light Barrier - Body');
+  const lbHandsItem = catalog.safety.find(s => s.category === 'Light Barrier - Hands');
+  const eStopBtnItem = catalog.safety.find(s => s.category === 'Emergency Stops Buttons');
+  const eStopRopeItem = catalog.safety.find(s => s.category === 'Emergency Stop - Ropes');
+  const guardSwitchItem = catalog.safety.find(s => s.category === 'Guard Switch');
+  const laserScannerItem = catalog.safety.find(s => s.category === 'Laser Scanner');
+
+  const layoutLength = int(inp.layoutLength);
+  const cableRunCost = n2 => n2 === 0 ? 0 : (n2*5 + ((n2-1)*n2/2) * (layoutLength / Math.max(n2-1, 1)));
+  const c21=cableRunCost(int(inp.m075NoBrake)), c22c=cableRunCost(int(inp.m15NoBrake)), c23=cableRunCost(int(inp.m22NoBrake));
+  const c24=cableRunCost(int(inp.m075Brake)), c25=cableRunCost(int(inp.m15Brake)), c26=cableRunCost(int(inp.m22Brake));
+  const cable4G25Total = c21+c22c+c23+c24+c25+c26;
+  const decGroup = n2 => Math.ceil(n2/6);
+  const g31=decGroup(int(inp.dec075)), g32=decGroup(int(inp.dec15)), g33=decGroup(int(inp.dec22));
+  const decCableCost = g2 => g2===0 ? 0 : (g2*5 + (g2*(g2+1)/2)*(layoutLength/g2));
+  const cable4G4Total = decCableCost(g31)+decCableCost(g32)+decCableCost(g33);
+  const ethernetDecTotal = decCableCost(g31)+decCableCost(g32)+decCableCost(g33);
+
+  const lbHandsN = int(inp.lbHands), lbFingerN = int(inp.lbFinger);
+  const totalCentMotors = int(inp.m075NoBrake)+int(inp.m15NoBrake)+int(inp.m22NoBrake)+int(inp.m075Brake)+int(inp.m15Brake)+int(inp.m22Brake);
+  const numberOfPanels = Math.max(1, Math.ceil(((topology==='Centralised'?totalCentMotors:0) + 1.5*totalServos) / 30));
+  const opPanelQty = int(inp.opPanelQty);
+  const eStopButtons = int(inp.eStopButtons) + numberOfPanels + opPanelQty;
+  const numberOfFDIFinal = lbHandsN + lbFingerN + eStopButtons + int(inp.eStopRopes) + int(inp.guardSwitch) + int(inp.laserScanner);
+  const numberOfFDQ = Math.max(1, safetyZones);
+
+  const numberOfDIFinal = Math.max(
+    int(inp.photoSensors)+int(inp.transparentSensors)+int(inp.proximitySensors)
+    - (4*int(inp.dec075)+4*int(inp.dec15)+4*int(inp.dec22)) + 4*opPanelQty + 2*(lbHandsN+lbFingerN)
+    - (isS71200 ? 14 : 0), 0);
+  const numberOfDQFinal = Math.max(
+    int(inp.actuatorsMono)+2*int(inp.actuatorsBi)
+    - (2*int(inp.dec075)+2*int(inp.dec15)+2*int(inp.dec22)) + 4*opPanelQty
+    - (isS71200 ? 10 : 0), 0);
+  const numberOfAI = int(inp.distanceSensors);
+
+  const diModulesNeeded = 1 + Math.ceil(numberOfDIFinal/8);
+  const dqModulesNeeded = 1 + Math.ceil(numberOfDQFinal/8);
+  const aiModulesNeeded = Math.ceil(numberOfAI/4);
+  const fdiModulesNeeded = Math.max(1, Math.ceil(numberOfFDIFinal/4));
+  const fdqModulesNeeded = Math.ceil(numberOfFDQ/4);
+  const slaveModulesNeeded = Math.ceil((diModulesNeeded+dqModulesNeeded+aiModulesNeeded+fdiModulesNeeded+fdqModulesNeeded)/25 + numberOfPanels - 1);
+
+  const networkSwitchesManaged = 1;
+  const networkSwitchesUnmanaged = 1
+    + ((inp.driveBrand==='Allen Bradley' && topology==='Centralised') ? Math.ceil((int(inp.m075NoBrake)+int(inp.m15NoBrake)+int(inp.m22NoBrake))/8) : 0)
+    + (topology==='Distributed' ? 1 : 0);
+  const powerSupplyNeeded = topology==='Centralised' ? 1 : 2;
+  const numberOfPDBs = Math.ceil(int(inp.mdrMotors)/2/7);
+  const numberOfJunctionBox = Math.max(0, Math.ceil(
+    (int(inp.photoSensors)+int(inp.transparentSensors)+int(inp.proximitySensors)+int(inp.distanceSensors)+int(inp.actuatorsMono)
+     + 2*(int(inp.actuatorsBi)+lbHandsN+lbFingerN+int(inp.laserScanner))
+     + 4*(eStopButtons+int(inp.eStopRopes)+int(inp.guardSwitch)) - 4) / 30
+  ));
+  const extraDoorCalc = 1*totalCentMotors + 1.5*totalServos;
+
+  const factoryHours = numberOfPanels*costingData.factory.doorCost.twoDoors
+    + Math.ceil(Math.max(0, extraDoorCalc - numberOfPanels*10)/10)*costingData.factory.doorCost.oneDoor
+    + costingData.factory.factoryBaseHours;
+  const factoryCost = factoryHours * costingData.factory.factoryDayCostPerHour;
+
+  const costRow = costingData.designTestingMatrix.find(r => r.type===inp.application && r.level===inp.complexity);
+  const designCostBase = costRow ? costRow.design : 0;
+  const testingCost = costRow ? (costRow.costFirstSku + costRow.additionalSku*(numSkus-1)) : 0;
+  const design = designCostBase + 90*opPanelQty;
+
+  const bom = [];
+  const warnings = [];
+  const addLine = (category, item, prod, qty, unitPrice) => {
+    if (qty > 0 && !prod) warnings.push(`${item}: no matching product for ${inp.plcBrand==='Allen Bradley'&&(category.includes('Drive')||category==='Servo Drives')?inp.driveBrand+'/'+inp.servoBrand:'the selected brand'} in the catalog — priced at $0, check manually.`);
+    const total = qty * unitPrice;
+    if (qty !== 0 || category==='Special Items') bom.push({ category, item, name: prod?.name, qty, unitPrice, total });
+    return total;
+  };
+
+  addLine('PLC and HMIs','PLC',plc,1,plc?.price||0);
+  addLine('PLC and HMIs','Slave IM',ioSlave,slaveModulesNeeded,ioSlave?.price||0);
+  addLine('PLC and HMIs','DI',ioDI,diModulesNeeded,ioDI?.price||0);
+  addLine('PLC and HMIs','DQ (incl. Relays)',ioDQ,dqModulesNeeded,ioDQ?.price||0);
+  addLine('PLC and HMIs','F-DI',ioFDI,fdiModulesNeeded,ioFDI?.price||0);
+  addLine('PLC and HMIs','F-DQ',ioFDQ,fdqModulesNeeded,ioFDQ?.price||0);
+  addLine('PLC and HMIs','AI',ioAI,aiModulesNeeded,ioAI?.price||0);
+  addLine('PLC and HMIs','HMI',hmi,(inp.hmiSize==='Not Included'?0:numberOfPanels),hmi?.price||0);
+
+  addLine('Switches & Power','Network Switches Managed',swManaged,networkSwitchesManaged,swManaged?.price||0);
+  addLine('Switches & Power','Network Switches Unmanaged',swUnmanaged,networkSwitchesUnmanaged,swUnmanaged?.price||0);
+  addLine('Switches & Power','Power Distribution',powerDist,numberOfPanels,powerDist?.price||0);
+  addLine('Switches & Power','Power Supply',{name:'Power Supply'},powerSupplyNeeded,240);
+  addLine('Switches & Power','UPS',ups,(inp.ups==='Not Included'?0:1),ups?.price||0);
+  addLine('Switches & Power','Ventilation',ventilation,numberOfPanels,ventilation?.price||0);
+
+  addLine('Drives Without Brake','VFD 0.75KW - Centralized',vfdCent075,int(inp.m075NoBrake),vfdCent075?.price||0);
+  addLine('Drives Without Brake','VFD 1.5KW - Centralized',vfdCent15,int(inp.m15NoBrake),vfdCent15?.price||0);
+  addLine('Drives Without Brake','VFD 2.2KW - Centralized',vfdCent22,int(inp.m22NoBrake),vfdCent22?.price||0);
+  addLine('Drives With Brakes','VFD 0.75KW - Centralized',vfdCent075,int(inp.m075Brake),(vfdCent075?.price||0)+100);
+  addLine('Drives With Brakes','VFD 1.5KW - Centralized',vfdCent15,int(inp.m15Brake),(vfdCent15?.price||0)+100);
+  addLine('Drives With Brakes','VFD 2.2KW - Centralized',vfdCent22,int(inp.m22Brake),(vfdCent22?.price||0)+100);
+  addLine('Distributed Drives','VFD 0.75KW - Distributed',vfdDist075,int(inp.dec075),vfdDist075?.price||0);
+  addLine('Distributed Drives','VFD 1.5KW - Distributed',vfdDist15,int(inp.dec15),vfdDist15?.price||0);
+  addLine('Distributed Drives','VFD 2.2KW - Distributed',vfdDist22,int(inp.dec22),vfdDist22?.price||0);
+  addLine('Servo Drives','Servo Drives 0.75KW',servo075,int(inp.s075),servo075?.price||0);
+  addLine('Servo Drives','Servo Drives 1.5KW',servo15,int(inp.s15),servo15?.price||0);
+  addLine('Servo Drives','Servo Drives 2.2KW',servo22,int(inp.s22),servo22?.price||0);
+
+  addLine('Panels','Enclosures - Panel',panel,numberOfPanels,panel?(panel.price/numberOfPanels):0);
+  addLine('Panels','Enclosures - JB',junctionBox,numberOfJunctionBox,junctionBox?.price||0);
+  addLine('Panels','PDB',pdb,numberOfPDBs,pdb?.price||0);
+
+  addLine('Sensors','PhotoElectric sensor',photoSensor,int(inp.photoSensors),photoSensor?.price||0);
+  addLine('Sensors','Transparent Sensors',transparentSensor,int(inp.transparentSensors),transparentSensor?.price||0);
+  addLine('Sensors','Proximity Sensor',proximitySensor,int(inp.proximitySensors),proximitySensor?.price||0);
+  addLine('Sensors','Distance Analog Sensor',distanceSensor,int(inp.distanceSensors),distanceSensor?.price||0);
+  addLine('Sensors','Barcode Scanner 2D basic',scanner2dBasicItem,int(inp.scanner2dBasic),scanner2dBasicItem?.price||0);
+  addLine('Sensors','Barcode Scanner 2D Advance',scanner2dAdvItem,int(inp.scanner2dAdvanced),scanner2dAdvItem?.price||0);
+  addLine('Sensors','Camera Scanner 3D',scanner3dItem,int(inp.scanner3d),scanner3dItem?.price||0);
+  addLine('Sensors','Vacuum Switches',{name:'Vacuum Switches'},int(inp.vacuumSwitches),costingData.factory.vacuumSwitchPrice);
+
+  addLine('Safety','Light Barrier - hands',lbBody,lbHandsN,lbBody?.price||0);
+  addLine('Safety','Light Barrier - Finger',lbHandsItem,lbFingerN,lbHandsItem?.price||0);
+  addLine('Safety','Emergency Stops Buttons',eStopBtnItem,eStopButtons,eStopBtnItem?.price||0);
+  addLine('Safety','Emergency Stop - Ropes',eStopRopeItem,int(inp.eStopRopes),eStopRopeItem?.price||0);
+  addLine('Safety','Guard Switch',guardSwitchItem,int(inp.guardSwitch),guardSwitchItem?.price||0);
+  addLine('Safety','Laser Scanner',laserScannerItem,int(inp.laserScanner),laserScannerItem?.price||0);
+
+  const cableStd = inp.standard;
+  const jbRunSpacing = layoutLength/(numberOfJunctionBox+1);
+  const controlCableQty = numberOfJunctionBox*5 + jbRunSpacing*(numberOfJunctionBox*(numberOfJunctionBox+1)/2);
+  addLine('Cables',"Cables 4G2.5",{name:'4G2.5'},cable4G25Total,costingData.factory.cablePrice['4G2.5'][cableStd]);
+  addLine('Cables',"Cables 4G4",{name:'4G4'},cable4G4Total,costingData.factory.cablePrice['4G4'][cableStd]);
+  addLine('Cables',"Control Cable 25x0.75",{name:'Control Cable 25x0.75'},controlCableQty,costingData.factory.controlCable2575Price);
+  addLine('Cables',"Ethernet",{name:'Ethernet'},ethernetDecTotal,costingData.factory.ethernetCablePrice);
+  addLine('Glands',inp.glandsType,{name:inp.glandsType},
+    totalCentMotors*4+(int(inp.dec075)+int(inp.dec15)+int(inp.dec22))*4+(numberOfPDBs*2+numberOfPDBs*7+numberOfPDBs*2)+(numberOfJunctionBox*2+numberOfJunctionBox*30),
+    costingData.factory.glandPrice[inp.glandsType]);
+
+  addLine('Operator Panel','Operator Panel',{name:'Operator Panel SS With HMI'},opPanelQty,2940);
+  addLine('Communication Module','Remote IO',{name:'SIG Communication Module'},numRobots+Math.ceil(int(inp.vacuumSwitches)/8),costingData.factory.commModulePrice);
+
+  const materialFromBom = bom.reduce((s,l) => s+l.total, 0);
+  const isUL = inp.standard === 'UL';
+  const factory = costingData.factory;
+  const allSensorSafetyCount = int(inp.photoSensors)+int(inp.transparentSensors)+int(inp.proximitySensors)+int(inp.distanceSensors)
+    +int(inp.scanner2dBasic)+int(inp.scanner2dAdvanced)+int(inp.scanner3d)+int(inp.actuatorsMono)+int(inp.actuatorsBi)
+    +lbHandsN+lbFingerN+eStopButtons+int(inp.eStopRopes)+int(inp.guardSwitch)+int(inp.laserScanner);
+
+  const iCable05Qty = extraDoorCalc<2 ? 5 : 10;
+  const iCable25Qty = Math.ceil(totalCentMotors/5);
+  const iCable6Qty = totalCentMotors/90;
+  const iCable25mQty = 10;
+  const railOmegaQty = extraDoorCalc<2 ? 20 : 40;
+  const cacheCableQty = extraDoorCalc<2 ? 20 : 40;
+  const junctionsQty = Math.ceil((allSensorSafetyCount*2+totalCentMotors*4)*1.2);
+  const fusesQty = Math.ceil(junctionsQty/24);
+  const cableTiesQty = inp.cableTiesDetectable==='No' ? 0 : Math.ceil(int(inp.cableTiesLength)*20/100);
+  const numberingQty = 12;
+  const std = isUL ? 'UL' : 'CE';
+  const cablesTotalCost = iCable05Qty*factory.internalCablePrice['0.5mm'][std] + iCable25Qty*factory.internalCablePrice['2.5mm'][std]
+    + iCable6Qty*factory.internalCablePrice['6mm'][std] + iCable25mQty*factory.internalCablePrice['25mm'][std];
+  const otherTotalCost = railOmegaQty*factory.railOmegaPrice[std] + cacheCableQty*factory.cacheCablePrice[std]
+    + junctionsQty*factory.junctionPrice[std] + fusesQty*factory.fusePrice[std]
+    + cableTiesQty*factory.cableTieDetectablePrice + numberingQty*factory.numberingPrice[std];
+  const factoryMaterial = (isUL ? 0 : cablesTotalCost) + otherTotalCost;
+  const material = materialFromBom + (isUL ? cablesTotalCost : 0);
+  const total = material + design + testingCost + factoryCost + factoryMaterial;
+
+  return { plc, numberOfPanels, topology, bom, warnings, material, design, testingCost, factoryCost, factoryMaterial, total };
+}
+
+function calcCabinetPage() {
+  if (!cabinetCatalog || !cabinetCosting) return;
+  const inp = readCabinetInputs();
+  const r = calcCabinet(inp, cabinetCatalog, cabinetCosting);
+
+  sv('cab-live-total', fmt(r.total));
+  sv('cab-live-panels', String(r.numberOfPanels));
+  sv('cab-live-topology', r.topology);
+
+  sv('cab-sum-material', fmt(r.material));
+  sv('cab-sum-designtest', fmt(r.design + r.testingCost));
+  sv('cab-sum-factory', fmt(r.factoryCost + r.factoryMaterial));
+  sv('cab-sum-total', fmt(r.total));
+  sv('cab-detail-material', fmt(r.material));
+  sv('cab-detail-design', fmt(r.design));
+  sv('cab-detail-testing', fmt(r.testingCost));
+  sv('cab-detail-factorylabor', fmt(r.factoryCost));
+  sv('cab-detail-factorymat', fmt(r.factoryMaterial));
+  sv('cab-detail-total', fmt(r.total));
+
+  const bomBody = document.getElementById('cab-bom-body');
+  if (bomBody) {
+    bomBody.innerHTML = r.bom.map(l => `
+      <tr>
+        <td class="dim">${l.category}</td>
+        <td>${l.item}</td>
+        <td>${l.name || '<span class="dim">—</span>'}</td>
+        <td>${(Math.round(l.qty*100)/100).toLocaleString()}</td>
+        <td class="n">${fmt(l.unitPrice)}</td>
+        <td class="n">${fmt(l.total)}</td>
+      </tr>`).join('') || `<tr><td colspan="6" class="dim" style="text-align:center;padding:20px">Fill in the Configurator to see the Bill of Materials.</td></tr>`;
+  }
+
+  const warnCard = document.getElementById('cab-warnings-card');
+  const warnList = document.getElementById('cab-warnings-list');
+  if (warnCard && warnList) {
+    if (r.warnings.length) {
+      warnCard.style.display = 'block';
+      warnList.innerHTML = r.warnings.map(w => `<div style="font-size:12px;padding:4px 0;color:var(--red)">⚠ ${w}</div>`).join('');
+    } else {
+      warnCard.style.display = 'none';
+    }
+  }
+}
+
 
 async function loadSuppliers() {
   try {
