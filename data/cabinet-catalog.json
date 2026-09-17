@@ -627,7 +627,7 @@
       "name": "Unmanaged 16 ports",
       "description": "Stratix 2000 unmanaged switch, 16 copper 10/100 ports",
       "spec": "1783-US16T",
-      "price": "$\u00a0 1,059.00 ",
+      "price": 1059.0,
       "code": null,
       "remarks": null
     },
