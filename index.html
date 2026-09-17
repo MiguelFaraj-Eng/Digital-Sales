@@ -3404,9 +3404,29 @@ function calcCabinet(inp, catalog, costingData) {
   ));
   const extraDoorCalc = 1*totalCentMotors + 1.5*totalServos;
 
+  // Factory Base "Days" figure — NOT a flat constant. The source is a
+  // 10-category checklist (hours-per-unit x count-of-that-thing), summed and
+  // rounded up to a day count, which then gets added directly into the hours
+  // formula below (a units quirk in the original workbook, replicated
+  // faithfully rather than "corrected"). Every count here is itself a live
+  // formula tied to Configurator inputs — verified cell-by-cell against the
+  // source, same pattern as the Power Distribution and Panels fixes.
+  const factoryChecklistHours =
+      1    * (int(inp.photoSensors)+int(inp.transparentSensors)+int(inp.proximitySensors)+int(inp.distanceSensors)+int(inp.scanner2dBasic)+int(inp.scanner2dAdvanced)+int(inp.scanner3d)+int(inp.guardSwitch)+int(inp.laserScanner))
+    + 0.5  * (int(inp.actuatorsMono) + 2*int(inp.actuatorsBi))
+    + 1.75 * totalCentMotors
+    + 0.5  * (int(inp.dec075)+int(inp.dec15)+int(inp.dec22))
+    + 4    * numberOfPDBs
+    + 3    * numberOfJunctionBox
+    + 12   * (inp.application === 'Robot cell' ? 1 : 0)
+    + 24   * 1
+    + 2    * (lbHandsN + lbFingerN)
+    + 3    * opPanelQty;
+  const factoryBaseHours = Math.ceil(factoryChecklistHours / 8);
+
   const factoryHours = numberOfPanels*costingData.factory.doorCost.twoDoors
     + Math.ceil(Math.max(0, extraDoorCalc - numberOfPanels*10)/10)*costingData.factory.doorCost.oneDoor
-    + costingData.factory.factoryBaseHours;
+    + factoryBaseHours;
   const factoryCost = factoryHours * costingData.factory.factoryDayCostPerHour;
 
   const costRow = costingData.designTestingMatrix.find(r => r.type===inp.application && r.level===inp.complexity);
