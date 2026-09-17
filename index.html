@@ -3086,6 +3086,7 @@ async function loadCabinetData() {
     }
     cabinetCatalog = await catRes.json();
     cabinetCosting = await costRes.json();
+    cabinetDisambig = buildDisambiguationMap(cabinetCatalog);
     cabinetDataError = null;
   } catch (e) {
     cabinetDataError = e.message || String(e);
@@ -3175,6 +3176,53 @@ function resetCabinetManualAdds() {
 // Reference Price: the live Suppliers Directory's latest price for a product,
 // falling back to the catalog price when nothing's tracked there yet. Same
 // name-match + most-recently-updated resolution as the pricing-page badges.
+// Several catalog families reuse the same product name across different
+// brands/variants (e.g. both Siemens and Allen Bradley's Power Distribution
+// bundle are both literally named "Power Distribution CE") — matching by
+// bare name would silently conflate them for supplier-price lookup, and
+// would also make the importer drop the second one as a false duplicate.
+// This builds a stable per-family disambiguation, trying the least
+// cluttered fix first: brand suffix, then brand+standard, then a bare
+// itemNo tiebreaker if a name still collides after that. Names with no
+// collision at all are left untouched.
+function buildDisambiguationMap(catalog) {
+  const map = {};
+  Object.keys(catalog).forEach(family => {
+    const items = catalog[family] || [];
+    const byName = {};
+    items.forEach(it => { if (it.name) (byName[it.name] = byName[it.name] || []).push(it); });
+    const famMap = {};
+    Object.entries(byName).forEach(([name, group]) => {
+      if (group.length === 1) { famMap[group[0].itemNo] = name; return; }
+      const byBrand = {};
+      group.forEach(it => (byBrand[it.brand] = byBrand[it.brand] || []).push(it));
+      if (Object.values(byBrand).every(v => v.length === 1) && Object.keys(byBrand).length > 1) {
+        group.forEach(it => { famMap[it.itemNo] = `${name} (${it.brand})`; });
+        return;
+      }
+      const byBrandUl = {};
+      group.forEach(it => { const k = it.brand+'|'+it.ul; (byBrandUl[k] = byBrandUl[k] || []).push(it); });
+      if (Object.values(byBrandUl).every(v => v.length === 1) && Object.keys(byBrandUl).length > 1) {
+        group.forEach(it => {
+          const std = it.ul === 'Yes' ? 'UL' : 'CE';
+          famMap[it.itemNo] = it.brand ? `${name} (${it.brand}, ${std})` : `${name} (${std})`;
+        });
+        return;
+      }
+      group.forEach(it => { famMap[it.itemNo] = `${name} (#${it.itemNo})`; });
+    });
+    map[family] = famMap;
+  });
+  return map;
+}
+let cabinetDisambig = {};
+// The stable, collision-free lookup key for a resolved catalog item — use
+// this (never the bare .name) for anything touching Suppliers alignment.
+function dispName(family, item) {
+  if (!item) return undefined;
+  return (cabinetDisambig[family] && cabinetDisambig[family][item.itemNo]) || item.name;
+}
+
 function getReferencePrice(itemName, catalogPrice) {
   if (itemName && suppliersData && suppliersData.entries) {
     const matches = suppliersData.entries.filter(e => (e.item||'').trim().toLowerCase() === itemName.trim().toLowerCase());
@@ -3189,6 +3237,18 @@ function getReferencePrice(itemName, catalogPrice) {
 function hasSupplierPrice(itemName) {
   if (!itemName || !suppliersData || !suppliersData.entries) return false;
   return suppliersData.entries.some(e => (e.item||'').trim().toLowerCase() === itemName.trim().toLowerCase() && (e.latestPrice || e.cost));
+}
+function getPowerDistDetailItems(bundleBrand, bundleStandard) {
+  if (!suppliersData || !suppliersData.entries) return [];
+  return suppliersData.entries.filter(e => e.category === 'Power Distribution Components' && e.bundleBrand === bundleBrand && e.bundleStandard === bundleStandard);
+}
+function toggleCabinetDetail(id) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  const willOpen = el.style.display === 'none';
+  el.style.display = willOpen ? 'table-row' : 'none';
+  const toggle = el.previousElementSibling?.querySelector('.sup-expand-toggle');
+  if (toggle) toggle.textContent = willOpen ? '▾' : '▸';
 }
 
 function calcCabinet(inp, catalog, costingData) {
@@ -3337,18 +3397,33 @@ function calcCabinet(inp, catalog, costingData) {
   const testingCost = costRow ? (costRow.costFirstSku + costRow.additionalSku*(numSkus-1)) : 0;
   const design = designCostBase + 90*opPanelQty;
 
+  const SLOT_TO_FAMILY = {
+    plc:'plc', ioSlave:'plcIO', ioDI:'plcIO', ioDQ:'plcIO', ioFDI:'plcIO', ioFDQ:'plcIO', ioAI:'plcIO',
+    hmi:'hmi', swManaged:'switches', swUnmanaged:'switches', powerDist:'powerDist', ups:'ups', ventilation:'ventilation',
+    vfdCent075:'vfdCentralized', vfdCent15:'vfdCentralized', vfdCent22:'vfdCentralized',
+    vfdDist075:'vfdDistributed', vfdDist15:'vfdDistributed', vfdDist22:'vfdDistributed',
+    servo075:'servo', servo15:'servo', servo22:'servo',
+    panel:'panels', junctionBox:'junctionBox', pdb:'pdb',
+    photoSensor:'sensors', transparentSensor:'sensors', proximitySensor:'sensors', distanceSensor:'sensors',
+    scanner2dBasic:'sensors', scanner2dAdv:'sensors', scanner3d:'sensors',
+    lbBody:'safety', lbHands:'safety', eStopBtn:'safety', eStopRope:'safety', guardSwitch:'safety', laserScanner:'safety',
+  };
   const bom = [];
   const warnings = [];
   const addLine = (category, item, slotKey, eligibleList, prod, qty, fallbackBase, surcharge=0, skipLookup=false) => {
-    const referencePrice = (skipLookup ? fallbackBase : getReferencePrice(prod?.name, fallbackBase)) + surcharge;
+    const family = SLOT_TO_FAMILY[slotKey];
+    const lookupName = family && prod ? dispName(family, prod) : prod?.name;
+    const referencePrice = (skipLookup ? fallbackBase : getReferencePrice(lookupName, fallbackBase)) + surcharge;
     const manualKey = category + '|' + item;
     const manualAdd = cabinetManualAdds[manualKey] || 0;
     const unitPrice = referencePrice + manualAdd;
     if (qty > 0 && !prod) warnings.push(`${item}: no matching product for ${inp.plcBrand==='Allen Bradley'&&(category.includes('Drive')||category==='Servo Drives')?inp.driveBrand+'/'+inp.servoBrand:'the selected brand'} in the catalog — priced at $0, check manually.`);
     const total = qty * unitPrice;
     if (qty !== 0 || category==='Special Items') {
-      bom.push({ category, item, slotKey, eligibleList: eligibleList||[], selectedItemNo: prod?.itemNo, name: prod?.name,
-        qty, referencePrice, manualAdd, manualKey, unitPrice, total });
+      const line = { category, item, slotKey, eligibleList: eligibleList||[], selectedItemNo: prod?.itemNo, name: prod?.name,
+        lookupName, qty, referencePrice, manualAdd, manualKey, unitPrice, total };
+      if (slotKey === 'powerDist' && prod) { line.bundleBrand = prod.brand; line.bundleStandard = inp.standard; }
+      bom.push(line);
     }
     return total;
   };
@@ -3385,7 +3460,7 @@ function calcCabinet(inp, catalog, costingData) {
   // Panel is priced per-panel by dividing the catalog/supplier price across
   // numberOfPanels — the division must apply AFTER supplier-alignment, not
   // before, or a tracked supplier price would silently skip the division.
-  const panelRefPerUnit = panel ? getReferencePrice(panel.name, panel.price||0) / numberOfPanels : 0;
+  const panelRefPerUnit = panel ? getReferencePrice(dispName('panels', panel), panel.price||0) / numberOfPanels : 0;
   addLine('Panels','Enclosures - Panel','panel',eligPanel,panel,numberOfPanels,panelRefPerUnit,0,true);
   addLine('Panels','Enclosures - JB','junctionBox',eligJunctionBox,junctionBox,numberOfJunctionBox,junctionBox?.price||0);
   addLine('Panels','PDB','pdb',eligPdb,pdb,numberOfPDBs,pdb?.price||0);
@@ -3475,7 +3550,7 @@ function calcCabinetPage() {
 
   const bomBody = document.getElementById('cab-bom-body');
   if (bomBody) {
-    bomBody.innerHTML = r.bom.map(l => {
+    bomBody.innerHTML = r.bom.map((l, idx) => {
       let productCell;
       if (l.slotKey && l.eligibleList && l.eligibleList.length > 1) {
         const options = l.eligibleList.map(opt =>
@@ -3485,12 +3560,19 @@ function calcCabinetPage() {
       } else {
         productCell = l.name || '<span class="dim">—</span>';
       }
-      const fromSupplier = l.name && hasSupplierPrice(l.name);
+      const fromSupplier = l.lookupName && hasSupplierPrice(l.lookupName);
       const refCell = (fromSupplier ? '<span style="color:var(--blue)" title="From the Suppliers Directory">🔗 </span>' : '') + fmt(l.referencePrice);
       const manualKeyEsc = l.manualKey.replace(/'/g,"\\'");
-      return `
+
+      const hasDetail = l.bundleBrand && l.bundleStandard;
+      const detailId = `pd-detail-${idx}`;
+      const categoryCell = hasDetail
+        ? `<span class="sup-expand-toggle" onclick="toggleCabinetDetail('${detailId}')" style="cursor:pointer;display:inline-block;width:14px;color:var(--t3)">▸</span>${l.category}`
+        : l.category;
+
+      const mainRow = `
       <tr>
-        <td class="dim">${l.category}</td>
+        <td class="dim">${categoryCell}</td>
         <td>${l.item}</td>
         <td>${productCell}</td>
         <td>${(Math.round(l.qty*100)/100).toLocaleString()}</td>
@@ -3499,6 +3581,26 @@ function calcCabinetPage() {
         <td class="n">${fmt(l.unitPrice)}</td>
         <td class="n">${fmt(l.total)}</td>
       </tr>`;
+
+      if (!hasDetail) return mainRow;
+
+      const parts = getPowerDistDetailItems(l.bundleBrand, l.bundleStandard);
+      const partsRows = parts.map(p => {
+        const price = getReferencePrice(p.item, p.cost || 0);
+        return `<div style="display:flex;justify-content:space-between;padding:3px 0;font-size:12px">
+          <span>${p.item}</span><span class="dim">${fmt(price)}</span>
+        </div>`;
+      }).join('');
+      const partsSum = parts.reduce((s, p) => s + getReferencePrice(p.item, p.cost || 0), 0);
+      const detailRow = `
+      <tr class="sup-detail-row" id="${detailId}" style="display:none">
+        <td colspan="8" style="background:var(--s2);padding:12px 20px 14px 34px">
+          <div class="note" style="margin-bottom:8px">What's inside this bundle (for reference — the line above is still priced as one bundled item, this doesn't change its total):</div>
+          ${partsRows || '<span class="dim" style="font-size:12px">No component breakdown tracked yet for this brand/standard — import it from the Suppliers Directory.</span>'}
+          ${parts.length ? `<div style="display:flex;justify-content:space-between;padding-top:6px;margin-top:6px;border-top:1px solid var(--b1);font-size:12px;font-weight:500"><span>Sum of parts</span><span>${fmt(partsSum)}</span></div>` : ''}
+        </td>
+      </tr>`;
+      return mainRow + detailRow;
     }).join('') || `<tr><td colspan="8" class="dim" style="text-align:center;padding:20px">Fill in the Configurator to see the Bill of Materials.</td></tr>`;
   }
 
@@ -3566,6 +3668,21 @@ const CABINET_CATALOG_TO_SUPPLIER_CATEGORY = {
   sensors: 'Sensors & Instrumentation', pdb: 'Power Distribution',
   safety: 'Safety & Emergency Stop', operatorPanel: 'Operator Panels',
 };
+
+// The two "Detailed" sheets (powerDistDetailedCE / powerDistDetailedUL) aren't
+// a flat list — each is really two brand-specific parts lists back-to-back
+// (Siemens block, then an Allen Bradley block, identified by these itemNo
+// ranges), plus a few blank placeholder rows in the UL sheet that fall
+// outside both ranges and get skipped naturally. 16 part names (e.g. "MCB -
+// 100A") appear in both the CE and UL sheets at different prices, so each
+// imported name is suffixed with (Brand, Standard) to keep them distinct —
+// without that, the plain-name importer would treat the second one as an
+// already-tracked duplicate and silently drop it.
+const POWER_DIST_DETAIL_RANGES = {
+  powerDistDetailedCE: { standard: 'CE', blocks: [{brand:'Siemens', min:1, max:14}, {brand:'Allen Bradley', min:20, max:34}] },
+  powerDistDetailedUL: { standard: 'UL', blocks: [{brand:'Siemens', min:1, max:16}, {brand:'Allen Bradley', min:20, max:37}] },
+};
+
 function importCabinetCatalogToSuppliers() {
   if (!cabinetCatalog) { alert("The Electrical Cabinet catalog hasn't loaded yet — try again in a moment."); return; }
   const existingNames = new Set(suppliersData.entries.map(e => (e.item||'').trim().toLowerCase()));
@@ -3575,18 +3692,42 @@ function importCabinetCatalogToSuppliers() {
     if (!suppliersData.categories.includes(category)) { suppliersData.categories.push(category); categoriesAdded++; }
     (cabinetCatalog[family] || []).forEach(item => {
       if (!item.name) return;
-      const key = item.name.trim().toLowerCase();
+      const importName = dispName(family, item);
+      const key = importName.trim().toLowerCase();
       if (existingNames.has(key)) return;
       existingNames.add(key);
       suppliersData.entries.push({
         id: 'sup-cab-' + family + '-' + item.itemNo + '-' + Date.now().toString(36) + Math.random().toString(36).slice(2,5),
-        category, item: item.name, supplier: item.brand || '', email: '',
+        category, item: importName, supplier: item.brand || '', email: '',
         cost: item.price || 0, latestPrice: item.price || 0, updated: today,
         description: item.description || item.spec || '',
       });
       added++;
     });
   });
+
+  const pdCategory = 'Power Distribution Components';
+  Object.entries(POWER_DIST_DETAIL_RANGES).forEach(([family, { standard, blocks }]) => {
+    if (!suppliersData.categories.includes(pdCategory)) { suppliersData.categories.push(pdCategory); categoriesAdded++; }
+    (cabinetCatalog[family] || []).forEach(item => {
+      if (!item.name || item.itemNo == null) return;
+      const block = blocks.find(b => item.itemNo >= b.min && item.itemNo <= b.max);
+      if (!block) return; // blank placeholder rows fall outside every range
+      const uniqueName = `${item.name} (${block.brand}, ${standard})`;
+      const key = uniqueName.trim().toLowerCase();
+      if (existingNames.has(key)) return;
+      existingNames.add(key);
+      suppliersData.entries.push({
+        id: 'sup-cab-' + family + '-' + item.itemNo + '-' + Date.now().toString(36) + Math.random().toString(36).slice(2,5),
+        category: pdCategory, item: uniqueName, supplier: item.brand || '', email: '',
+        cost: item.price || 0, latestPrice: item.price || 0, updated: today,
+        description: `${item.category || ''} — part of the ${block.brand} ${standard} Power Distribution bundle`.trim(),
+        bundleBrand: block.brand, bundleStandard: standard,
+      });
+      added++;
+    });
+  });
+
   renderSuppliersPage();
   calcCabinetPage();  // Reference Price may now resolve against the newly-imported entries
   suppliersSetStatus(added
