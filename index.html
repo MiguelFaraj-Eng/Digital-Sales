@@ -4,66 +4,74 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>SCADA Budgeting Tool</title>
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders:wght@500;600;700;800&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
-  --bg:#0a0c10;--s1:#111318;--s2:#181c24;--s3:#1f2430;--s4:#262d3a;
-  --b1:rgba(255,255,255,0.06);--b2:rgba(255,255,255,0.11);--b3:rgba(255,255,255,0.18);
-  --t1:#e4e8f0;--t2:#8b93a8;--t3:#555e72;
-  --blue:#4d8ff5;--blue-d:#1a3d8a;--blue-bg:rgba(77,143,245,0.1);
-  --green:#34d399;--green-bg:rgba(52,211,153,0.1);
-  --amber:#f5a623;--amber-bg:rgba(245,166,35,0.1);
-  --red:#f56565;--red-bg:rgba(245,101,101,0.1);
-  --r:8px;--r2:12px;
+  --bg:#15161B;--s1:#1D1F26;--s2:#242731;--s3:#2B2F3B;--s4:#353A49;
+  --b1:rgba(255,255,255,0.07);--b2:rgba(255,255,255,0.13);--b3:rgba(255,255,255,0.2);
+  --t1:#EDEEF2;--t2:#9498AA;--t3:#5D6175;
+  --blue:#5B9BC2;--blue-d:#2C5A73;--blue-bg:rgba(91,155,194,0.13);
+  --copper:#CC8B52;--copper-d:#8F5E33;--copper-bg:rgba(204,139,82,0.14);
+  --green:#63A87D;--green-bg:rgba(99,168,125,0.13);
+  --amber:#D4A34A;--amber-bg:rgba(212,163,74,0.13);
+  --red:#C1584F;--red-bg:rgba(193,88,79,0.13);
+  --r:6px;--r2:9px;
+  --f-display:'Big Shoulders',sans-serif;--f-body:'IBM Plex Sans',sans-serif;--f-mono:'IBM Plex Mono',monospace;
 }
 [data-theme="light"]{
-  --bg:#f4f5f7;--s1:#ffffff;--s2:#f0f1f4;--s3:#e8eaed;--s4:#dde0e6;
-  --b1:rgba(0,0,0,0.07);--b2:rgba(0,0,0,0.12);--b3:rgba(0,0,0,0.18);
-  --t1:#1a1d26;--t2:#4a5068;--t3:#8b93a8;
-  --blue:#2563eb;--blue-bg:rgba(37,99,235,0.08);
-  --green:#059669;--green-bg:rgba(5,150,105,0.08);
-  --amber:#d97706;--amber-bg:rgba(217,119,6,0.08);
-  --red:#dc2626;--red-bg:rgba(220,38,38,0.08);
+  --bg:#F2F3F6;--s1:#ffffff;--s2:#ECEDF2;--s3:#E1E3EA;--s4:#D3D6E0;
+  --b1:rgba(18,22,35,0.08);--b2:rgba(18,22,35,0.14);--b3:rgba(18,22,35,0.22);
+  --t1:#191B22;--t2:#565A6C;--t3:#888CA0;
+  --blue:#2C6E8E;--blue-bg:rgba(44,110,142,0.08);
+  --copper:#A9682F;--copper-bg:rgba(169,104,47,0.08);
+  --green:#3D7D57;--green-bg:rgba(61,125,87,0.08);
+  --amber:#A87423;--amber-bg:rgba(168,116,35,0.08);
+  --red:#A3413A;--red-bg:rgba(163,65,58,0.08);
 }
-body{font-family:'IBM Plex Sans',sans-serif;background:var(--bg);color:var(--t1);font-size:14px;line-height:1.5;display:flex;height:100vh;overflow:hidden}
+body{font-family:var(--f-body);background:var(--bg);color:var(--t1);font-size:14px;line-height:1.5;display:flex;height:100vh;overflow:hidden}
 ::-webkit-scrollbar{width:4px;height:4px}
 ::-webkit-scrollbar-thumb{background:var(--s4);border-radius:2px}
 
 /* SIDEBAR */
-.sidebar{width:210px;min-width:210px;background:var(--s1);border-right:1px solid var(--b1);display:flex;flex-direction:column;overflow-y:auto}
-.logo{padding:18px 16px 14px;border-bottom:1px solid var(--b1)}
-.logo-eyebrow{font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:.15em;text-transform:uppercase;color:var(--blue);margin-bottom:3px}
-.logo-title{font-size:15px;font-weight:600;color:var(--t1)}
-.nav{padding:10px 0;flex:1}
-.nav-group{font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--t3);padding:14px 16px 5px}
-.nav-item{display:flex;align-items:center;gap:8px;padding:8px 16px;cursor:pointer;color:var(--t2);font-size:13px;transition:all .12s;border-left:2px solid transparent;user-select:none}
+.sidebar{width:216px;min-width:216px;background:var(--s1);border-right:1px solid var(--b1);display:flex;flex-direction:column;overflow-y:auto}
+.logo{padding:20px 18px 16px;border-bottom:1px solid var(--b1)}
+.logo-eyebrow{font-size:10px;font-weight:500;letter-spacing:.04em;color:var(--copper);margin-bottom:2px}
+.logo-title{font-family:var(--f-display);font-size:21px;font-weight:700;color:var(--t1);letter-spacing:.01em;line-height:1}
+.nav{padding:8px 0;flex:1}
+.nav-group{display:flex;align-items:center;gap:6px;font-size:11px;font-weight:500;color:var(--t3);padding:13px 18px 6px;cursor:pointer;user-select:none}
+.nav-group:hover{color:var(--t2)}
+.nav-group-arrow{font-size:9px;transition:transform .15s;opacity:.7}
+.nav-group.collapsed .nav-group-arrow{transform:rotate(-90deg)}
+.nav-group-items{overflow:hidden;transition:max-height .18s ease}
+.nav-group.collapsed + .nav-group-items{max-height:0!important}
+.nav-item{display:flex;align-items:center;gap:8px;padding:7px 18px;cursor:pointer;color:var(--t2);font-size:13px;transition:all .12s;border-left:2px solid transparent;user-select:none}
 .nav-item:hover{color:var(--t1);background:var(--s2)}
-.nav-item.active{color:var(--blue);background:var(--blue-bg);border-left-color:var(--blue)}
+.nav-item.active{color:var(--copper);background:var(--copper-bg);border-left-color:var(--copper)}
 .nav-dot{width:5px;height:5px;border-radius:50%;background:currentColor;opacity:.5;flex-shrink:0}
 .nav-item.active .nav-dot{opacity:1}
 
 /* MAIN */
-.main{flex:1;overflow-y:auto;padding:28px 30px}
+.main{flex:1;overflow-y:auto;padding:28px 32px}
 .page{display:none}.page.active{display:block}
 
 /* PAGE HEADER */
-.ph{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:24px}
-.ph-title{font-size:20px;font-weight:600;color:var(--t1)}
-.ph-sub{font-size:12px;color:var(--t3);margin-top:3px;font-family:'IBM Plex Mono',monospace}
+.ph{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:26px}
+.ph-title{font-family:var(--f-display);font-size:28px;font-weight:700;color:var(--t1);letter-spacing:.005em;line-height:1.1}
+.ph-sub{font-size:12.5px;color:var(--t3);margin-top:4px}
 
 /* STAT GRID */
 .stat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:20px}
-.stat{background:var(--s2);border:1px solid var(--b1);border-radius:var(--r2);padding:16px 18px}
-.stat-label{font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--t3);margin-bottom:6px}
-.stat-value{font-size:22px;font-weight:600;font-variant-numeric:tabular-nums}
-.stat-sub{font-size:11px;color:var(--t3);margin-top:2px}
-.c-blue{color:var(--blue)}.c-green{color:var(--green)}.c-amber{color:var(--amber)}.c-red{color:var(--red)}
+.stat{background:var(--s2);border:1px solid var(--b1);border-radius:var(--r2);padding:15px 18px}
+.stat-label{font-size:11px;font-weight:500;color:var(--t3);margin-bottom:5px}
+.stat-value{font-family:var(--f-display);font-size:26px;font-weight:700;font-variant-numeric:tabular-nums;line-height:1}
+.stat-sub{font-size:11px;color:var(--t3);margin-top:4px}
+.c-blue{color:var(--blue)}.c-green{color:var(--green)}.c-amber{color:var(--amber)}.c-red{color:var(--red)}.c-copper{color:var(--copper)}
 
 /* CARD */
 .card{background:var(--s1);border:1px solid var(--b1);border-radius:var(--r2);padding:18px 20px;margin-bottom:16px}
-.card-head{font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--blue);margin-bottom:14px;display:flex;align-items:center;gap:7px}
-.card-head::before{content:'';width:2px;height:11px;background:var(--blue);border-radius:1px;display:inline-block}
+.card-head{font-size:13px;font-weight:600;color:var(--t1);margin-bottom:14px;display:flex;align-items:center;gap:8px}
+.card-head::before{content:'';width:3px;height:13px;background:var(--copper);border-radius:1px;display:inline-block}
 
 /* GRID 2 */
 .g2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
@@ -73,38 +81,38 @@ body{font-family:'IBM Plex Sans',sans-serif;background:var(--bg);color:var(--t1)
 
 /* FORM */
 .fg{display:flex;flex-direction:column;gap:5px}
-label.fl{font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--t3)}
+label.fl{font-size:11.5px;font-weight:500;color:var(--t3)}
 input[type=text],input[type=number],input[type=password],select,textarea{
   background:var(--s3);border:1px solid var(--b2);border-radius:var(--r);
-  padding:8px 10px;color:var(--t1);font-family:'IBM Plex Sans',sans-serif;font-size:13px;
+  padding:8px 10px;color:var(--t1);font-family:var(--f-body);font-size:13px;
   width:100%;outline:none;transition:border-color .15s
 }
 input:focus,select:focus,textarea:focus{border-color:var(--blue)}
 select option{background:var(--s2)}
 textarea{resize:vertical;min-height:68px}
-input[type=checkbox]{accent-color:var(--blue);width:14px;height:14px;cursor:pointer;flex-shrink:0}
+input[type=checkbox]{accent-color:var(--copper);width:14px;height:14px;cursor:pointer;flex-shrink:0}
 
 /* TABLE */
 .tbl-wrap{overflow-x:auto;border-radius:var(--r)}
 table{width:100%;border-collapse:collapse;font-size:12.5px}
-th{background:var(--s3);color:var(--t3);font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:.1em;text-transform:uppercase;padding:9px 12px;text-align:left;font-weight:400;border-bottom:1px solid var(--b1);white-space:nowrap}
+th{background:var(--s3);color:var(--t3);font-size:10.5px;font-weight:600;letter-spacing:.02em;padding:9px 12px;text-align:left;border-bottom:1px solid var(--b1);white-space:nowrap}
 td{padding:9px 12px;border-bottom:1px solid var(--b1);color:var(--t1);vertical-align:middle}
 tr:last-child td{border-bottom:none}
 tr:hover td{background:rgba(255,255,255,.015)}
 .tr-total td{background:var(--s3);font-weight:600;border-top:1px solid var(--b2)}
-.tr-total td:last-child{color:var(--blue)}
-td.n{text-align:right;font-family:'IBM Plex Mono',monospace;font-size:12px}
+.tr-total td:last-child{color:var(--copper)}
+td.n{text-align:right;font-family:var(--f-mono);font-size:12px}
 td.dim{color:var(--t3);font-size:12px}
 
 /* EDITABLE */
-.en{background:transparent;border:none;color:var(--t1);font-family:'IBM Plex Mono',monospace;font-size:12px;text-align:right;width:75px;padding:2px 4px;border-radius:4px;outline:none;transition:background .12s}
+.en{background:transparent;border:none;color:var(--t1);font-family:var(--f-mono);font-size:12px;text-align:right;width:75px;padding:2px 4px;border-radius:4px;outline:none;transition:background .12s}
 .en:focus{background:var(--s4);border:1px solid var(--blue)}
 .esel{background:var(--s3);border:1px solid var(--b1);color:var(--t1);border-radius:4px;font-size:11px;padding:2px 4px;outline:none}
 .ein{background:transparent;border:none;color:var(--t1);font-size:12px;width:100%;padding:1px 2px;border-radius:4px;outline:none}
 .ein:focus{background:var(--s4)}
 
 /* BADGE */
-.badge{display:inline-block;font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:.05em;padding:2px 6px;border-radius:3px}
+.badge{display:inline-block;font-family:var(--f-mono);font-size:10px;padding:2px 6px;border-radius:3px}
 .b-yes{background:var(--green-bg);color:var(--green)}
 .b-no{background:var(--b1);color:var(--t3)}
 .b-blue{background:var(--blue-bg);color:var(--blue)}
@@ -114,8 +122,8 @@ td.dim{color:var(--t3);font-size:12px}
 .prog-fill{height:100%;border-radius:3px;transition:width .5s ease}
 
 /* BUTTON */
-.btn{display:inline-flex;align-items:center;gap:5px;padding:7px 14px;border-radius:var(--r);font-size:12px;font-family:'IBM Plex Sans',sans-serif;cursor:pointer;border:none;font-weight:500;transition:all .12s}
-.btn-primary{background:var(--blue);color:#fff}.btn-primary:hover{background:#6aa3f7}
+.btn{display:inline-flex;align-items:center;gap:5px;padding:7px 14px;border-radius:var(--r);font-size:12.5px;font-family:var(--f-body);cursor:pointer;border:none;font-weight:500;transition:all .12s}
+.btn-primary{background:var(--copper);color:#fff}.btn-primary:hover{background:#DB9C61}
 .btn-ghost{background:var(--s3);color:var(--t2);border:1px solid var(--b2)}.btn-ghost:hover{color:var(--t1)}
 
 /* BAR CHART */
@@ -123,16 +131,16 @@ td.dim{color:var(--t3);font-size:12px}
 .bar-label{width:170px;color:var(--t2);font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;flex-shrink:0}
 .bar-track{flex:1;background:var(--s3);border-radius:3px;height:7px;overflow:hidden}
 .bar-fill{height:100%;border-radius:3px}
-.bar-val{width:80px;text-align:right;font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--t2);flex-shrink:0}
+.bar-val{width:80px;text-align:right;font-family:var(--f-mono);font-size:11px;color:var(--t2);flex-shrink:0}
 
 /* NOTE BOX */
-.note{background:var(--blue-bg);border:1px solid rgba(77,143,245,.2);border-radius:var(--r);padding:10px 13px;font-size:12px;color:var(--t2);margin-top:10px}
+.note{background:var(--blue-bg);border:1px solid rgba(91,155,194,.22);border-radius:var(--r);padding:10px 13px;font-size:12px;color:var(--t2);margin-top:10px}
 
 /* DIVIDER */
 hr{border:none;border-top:1px solid var(--b1);margin:16px 0}
 
 /* THEME TOGGLE */
-.theme-toggle{display:flex;align-items:center;gap:6px;padding:10px 16px;border-top:1px solid var(--b1);cursor:pointer;color:var(--t3);font-size:12px;transition:color .12s;user-select:none}
+.theme-toggle{display:flex;align-items:center;gap:6px;padding:10px 18px;border-top:1px solid var(--b1);cursor:pointer;color:var(--t3);font-size:12px;transition:color .12s;user-select:none}
 .theme-toggle:hover{color:var(--t1)}
 .toggle-track{width:32px;height:18px;border-radius:9px;background:var(--s4);border:1px solid var(--b2);position:relative;transition:background .2s;flex-shrink:0}
 .toggle-thumb{width:12px;height:12px;border-radius:50%;background:var(--t3);position:absolute;top:2px;left:2px;transition:all .2s}
@@ -140,11 +148,11 @@ hr{border:none;border-top:1px solid var(--b1);margin:16px 0}
 [data-theme="light"] .toggle-track{background:var(--blue-bg)}
 
 /* USER BADGE in sidebar */
-.user-badge{display:flex;align-items:center;gap:8px;padding:10px 16px;border-top:1px solid var(--b1);background:var(--s2)}
-.user-avatar{width:26px;height:26px;border-radius:50%;background:var(--blue-bg);border:1px solid var(--blue);display:flex;align-items:center;justify-content:center;font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:500;color:var(--blue);flex-shrink:0;background-size:cover;background-position:center}
+.user-badge{display:flex;align-items:center;gap:8px;padding:10px 18px;border-top:1px solid var(--b1);background:var(--s2)}
+.user-avatar{width:26px;height:26px;border-radius:50%;background:var(--copper-bg);border:1px solid var(--copper);display:flex;align-items:center;justify-content:center;font-family:var(--f-mono);font-size:10px;font-weight:500;color:var(--copper);flex-shrink:0;background-size:cover;background-position:center}
 .user-info{flex:1;min-width:0}
 .user-name{font-size:12px;font-weight:500;color:var(--t1);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.user-role{font-size:10px;color:var(--t3);font-family:'IBM Plex Mono',monospace}
+.user-role{font-size:10.5px;color:var(--t3)}
 .user-logout{font-size:10px;color:var(--t3);cursor:pointer;padding:2px 5px;border-radius:3px;transition:all .12s;border:1px solid transparent;white-space:nowrap}
 .user-logout:hover{color:var(--red);border-color:var(--red)}
 
@@ -153,30 +161,30 @@ hr{border:none;border-top:1px solid var(--b1);margin:16px 0}
 
 .projects-home{position:fixed;inset:0;background:var(--s1);z-index:9000;display:flex;flex-direction:column;padding:32px 48px;overflow-y:auto}
 .ph-home-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:32px;padding-bottom:20px;border-bottom:1px solid var(--b1)}
-.ph-home-title{font-size:22px;font-weight:600;color:var(--t1);margin-top:2px}
+.ph-home-title{font-family:var(--f-display);font-size:30px;font-weight:700;color:var(--t1);margin-top:2px;line-height:1}
 .ph-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px}
 .ph-card{background:var(--s2);border:1px solid var(--b1);border-radius:var(--r);padding:18px;cursor:pointer;transition:all .15s}
-.ph-card:hover{border-color:var(--blue);transform:translateY(-2px);box-shadow:0 4px 16px rgba(0,0,0,.2)}
+.ph-card:hover{border-color:var(--copper);transform:translateY(-2px);box-shadow:0 4px 16px rgba(0,0,0,.2)}
 .ph-card-name{font-size:15px;font-weight:600;color:var(--t1);margin-bottom:6px}
 .ph-card-client{font-size:12px;color:var(--t2);margin-bottom:12px;min-height:16px}
-.ph-card-meta{display:flex;justify-content:space-between;font-size:11px;color:var(--t3);font-family:'IBM Plex Mono',monospace;padding-top:10px;border-top:1px solid var(--b1)}
+.ph-card-meta{display:flex;justify-content:space-between;font-size:11px;color:var(--t3);padding-top:10px;border-top:1px solid var(--b1)}
 .current-project-box{margin:0 16px 16px;padding:12px;background:var(--s2);border:1px solid var(--b1);border-radius:var(--r)}
-.cp-label{font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--t3);margin-bottom:4px}
+.cp-label{font-size:10px;font-weight:500;color:var(--t3);margin-bottom:4px}
 .cp-name{font-size:13px;font-weight:600;color:var(--t1);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .cp-owner{font-size:10px;color:var(--t3)}
 [data-theme="light"] .login-overlay{background:rgba(200,205,215,0.7)}
-.login-box{background:var(--s1);border:1px solid var(--b2);border-radius:16px;padding:36px 40px;width:360px;box-shadow:0 24px 60px rgba(0,0,0,0.4)}
-.login-logo{font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--blue);margin-bottom:4px}
-.login-title{font-size:22px;font-weight:600;color:var(--t1);margin-bottom:4px}
+.login-box{background:var(--s1);border:1px solid var(--b2);border-radius:var(--r2);padding:36px 40px;width:360px;box-shadow:0 24px 60px rgba(0,0,0,0.4)}
+.login-logo{font-size:10px;font-weight:500;letter-spacing:.04em;color:var(--copper);margin-bottom:4px}
+.login-title{font-family:var(--f-display);font-size:26px;font-weight:700;color:var(--t1);margin-bottom:4px;line-height:1}
 .login-sub{font-size:12px;color:var(--t3);margin-bottom:28px}
 .login-field{margin-bottom:16px}
-.login-label{font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--t3);display:block;margin-bottom:6px}
-.login-input{width:100%;background:var(--s3);border:1px solid var(--b2);border-radius:8px;padding:10px 12px;color:var(--t1);font-family:'IBM Plex Sans',sans-serif;font-size:14px;outline:none;transition:border-color .15s}
+.login-label{font-size:11px;font-weight:500;color:var(--t3);display:block;margin-bottom:6px}
+.login-input{width:100%;background:var(--s3);border:1px solid var(--b2);border-radius:var(--r);padding:10px 12px;color:var(--t1);font-family:var(--f-body);font-size:14px;outline:none;transition:border-color .15s}
 .login-input:focus{border-color:var(--blue)}
-.login-btn{width:100%;background:var(--blue);color:#fff;border:none;border-radius:8px;padding:11px;font-size:14px;font-weight:500;font-family:'IBM Plex Sans',sans-serif;cursor:pointer;transition:background .12s;margin-top:8px}
-.login-btn:hover{background:#6aa3f7}
+.login-btn{width:100%;background:var(--copper);color:#fff;border:none;border-radius:var(--r);padding:11px;font-size:14px;font-weight:500;font-family:var(--f-body);cursor:pointer;transition:background .12s;margin-top:8px}
+.login-btn:hover{background:#DB9C61}
 .login-err{color:var(--red);font-size:12px;margin-top:10px;text-align:center;min-height:18px}
-.login-info{font-size:11px;color:var(--t3);text-align:center;margin-top:14px;font-family:'IBM Plex Mono',monospace}
+.login-info{font-size:11px;color:var(--t3);text-align:center;margin-top:14px}
 
 /* LOCK OVERLAY on pricing fields */
 .lock-notice{display:flex;align-items:center;gap:8px;background:var(--amber-bg);border:1px solid rgba(245,166,35,.25);border-radius:8px;padding:10px 14px;font-size:12px;color:var(--amber);margin-bottom:14px}
@@ -342,30 +350,30 @@ body.role-procurement button[onclick="exportOffer()"] { display:none; }
     </div>
     <div id="project-save-status" style="display:none;font-size:10px;margin-top:6px;text-align:center"></div>
   </div>
-  <nav class="nav">
-    <div class="nav-group">Overview</div>
+  <nav class="nav" id="main-nav">
+    <div class="nav-group" onclick="toggleNavGroup(this)">Overview<span class="nav-group-arrow">▾</span></div>
     <div class="nav-item active" data-p="dashboard"><span class="nav-dot"></span>Dashboard</div>
-    <div class="nav-group">Configuration</div>
+    <div class="nav-group" onclick="toggleNavGroup(this)">Configuration<span class="nav-group-arrow">▾</span></div>
     <div class="nav-item" data-p="general"><span class="nav-dot"></span>General Info</div>
     <div class="nav-item" data-p="production"><span class="nav-dot"></span>Production Data</div>
     <div class="nav-item" data-p="equipment"><span class="nav-dot"></span>Technica Equipment</div>
     <div class="nav-item" data-p="supplier"><span class="nav-dot"></span>Supplier Equipment</div>
-    <div class="nav-group">Pricing</div>
+    <div class="nav-group" onclick="toggleNavGroup(this)">Pricing<span class="nav-group-arrow">▾</span></div>
     <div class="nav-item" data-p="licenses"><span class="nav-dot"></span>Smart Factory License</div>
     <div class="nav-item" data-p="hardware"><span class="nav-dot"></span>Hardware</div>
     <div class="nav-item" data-p="mandays"><span class="nav-dot"></span>Mandays</div>
     <div class="nav-item" data-p="brief"><span class="nav-dot"></span>Budget Brief</div>
-    <div class="nav-group">Electrical Cabinet</div>
+    <div class="nav-group" onclick="toggleNavGroup(this)">Electrical Cabinet<span class="nav-group-arrow">▾</span></div>
     <div class="nav-item" data-p="cabinet-config"><span class="nav-dot"></span>Configurator</div>
     <div class="nav-item" data-p="cabinet-bom"><span class="nav-dot"></span>Bill of Materials</div>
     <div class="nav-item" data-p="cabinet-material-pr"><span class="nav-dot"></span>Material for PR</div>
-    <div class="nav-group">Suppliers</div>
+    <div class="nav-group" onclick="toggleNavGroup(this)">Suppliers<span class="nav-group-arrow">▾</span></div>
     <div class="nav-item" data-p="suppliers-overview" id="nav-item-suppliers-overview" style="display:none"><span class="nav-dot"></span>Overview</div>
     <div class="nav-item" data-p="suppliers" id="nav-item-suppliers" style="display:none"><span class="nav-dot"></span>Directory</div>
     <div class="nav-item" data-p="suppliers-vendors" id="nav-item-suppliers-vendors" style="display:none"><span class="nav-dot"></span>Vendors</div>
     <div class="nav-item" data-p="suppliers-history" id="nav-item-suppliers-history" style="display:none"><span class="nav-dot"></span>Price History</div>
     <div class="nav-item" data-p="suppliers-ref"><span class="nav-dot"></span>Reference Links</div>
-    <div class="nav-group" id="nav-group-admin" style="display:none">Admin</div>
+    <div class="nav-group" id="nav-group-admin" onclick="toggleNavGroup(this)" style="display:none">Admin<span class="nav-group-arrow">▾</span></div>
     <div class="nav-item" data-p="users" id="nav-item-users" style="display:none"><span class="nav-dot"></span>User Management</div>
   </nav>
   <div class="theme-toggle" onclick="toggleTheme()">
@@ -414,10 +422,11 @@ body.role-procurement button[onclick="exportOffer()"] { display:none; }
     </div>
     <div class="card">
       <div class="card-head">Cost Summary</div>
-      <div style="font-size:12px;color:var(--t3);margin-bottom:10px">Purchasing + Labor breakdown</div>
-      <div class="price-row" style="display:flex;justify-content:space-between;margin-bottom:6px"><span style="color:var(--t2)">Purchasing (hardware + software)</span><span style="font-family:'IBM Plex Mono',monospace" id="d-purch">$33,427</span></div>
-      <div class="price-row" style="display:flex;justify-content:space-between;margin-bottom:6px"><span style="color:var(--t2)">Labor &amp; travel</span><span style="font-family:'IBM Plex Mono',monospace" id="d-labor2">$45,200</span></div>
-      <div class="cost-row" style="display:flex;justify-content:space-between;padding-top:8px;border-top:1px solid var(--b1)"><span style="color:var(--t2)">Total cost basis</span><span style="font-family:'IBM Plex Mono',monospace" id="d-cost">$48,454</span></div>
+      <div style="font-size:12px;color:var(--t3);margin-bottom:10px">What the client pays</div>
+      <div class="price-row" style="display:flex;justify-content:space-between;margin-bottom:6px"><span style="color:var(--t2)">Purchasing (hardware + software)</span><span style="font-family:var(--f-mono)" id="d-purch">$33,427</span></div>
+      <div class="price-row" style="display:flex;justify-content:space-between;margin-bottom:10px"><span style="color:var(--t2)">Labor &amp; travel</span><span style="font-family:var(--f-mono)" id="d-labor2">$45,200</span></div>
+      <div style="font-size:12px;color:var(--t3);margin-bottom:6px;padding-top:10px;border-top:1px solid var(--b1)">What it costs us (margin reference only)</div>
+      <div class="cost-row" style="display:flex;justify-content:space-between"><span style="color:var(--t2)">Our cost basis, pre-markup</span><span style="font-family:var(--f-mono)" id="d-cost">$48,454</span></div>
     </div>
   </div>
 
@@ -1168,12 +1177,17 @@ body.role-procurement button[onclick="exportOffer()"] { display:none; }
   <div class="ph"><div><div class="ph-title">Directory</div><div class="ph-sub">Item-level supplier entries, descriptions &amp; datasheets — Procurement, Administrator, and Super Admin only</div></div></div>
 
   <div class="card">
-    <div class="card-head">Categories</div>
-    <div id="supplier-category-chips" style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px"></div>
-    <div style="display:flex;gap:10px;align-items:flex-end">
-      <div class="fg" style="flex:1;margin-bottom:0"><label class="fl">New category</label>
-        <input type="text" id="supplier-new-category" placeholder="e.g. Pneumatics"></div>
-      <button class="btn btn-ghost" onclick="addSupplierCategory()">+ Add Category</button>
+    <div class="card-head" style="cursor:pointer" onclick="toggleSupplierCategoryPanel()">
+      Categories
+      <span id="supplier-cat-arrow" style="font-size:11px;color:var(--t3);transform:rotate(-90deg);transition:transform .15s;margin-left:auto">▾</span>
+    </div>
+    <div id="supplier-cat-panel" style="display:none;margin-top:14px">
+      <div id="supplier-category-chips" style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px"></div>
+      <div style="display:flex;gap:10px;align-items:flex-end">
+        <div class="fg" style="flex:1;margin-bottom:0"><label class="fl">New category</label>
+          <input type="text" id="supplier-new-category" placeholder="e.g. Pneumatics"></div>
+        <button class="btn btn-ghost" onclick="addSupplierCategory()">+ Add Category</button>
+      </div>
     </div>
   </div>
 
@@ -1306,12 +1320,42 @@ body.role-procurement button[onclick="exportOffer()"] { display:none; }
 // ═══════════════════════════════════════════════════════════════
 
 // ─── NAV ────────────────────────────────────────────────────────
+// Groups collapse to keep the sidebar from outgrowing the viewport as
+// sections are added — only the group containing the active page stays
+// open. Walking siblings (rather than nesting each group's items in a
+// wrapper) keeps every existing #nav-item-* / .nav-item selector intact.
+function setNavGroupItemsVisibility(groupEl, visible) {
+  let el = groupEl.nextElementSibling;
+  while (el && !el.classList.contains('nav-group')) {
+    if (!el.dataset.hiddenByRole) el.style.display = visible ? '' : 'none';
+    el = el.nextElementSibling;
+  }
+}
+function toggleNavGroup(groupEl) {
+  const collapsed = groupEl.classList.toggle('collapsed');
+  setNavGroupItemsVisibility(groupEl, !collapsed);
+}
+function findNavGroupFor(itemEl) {
+  let el = itemEl.previousElementSibling;
+  while (el) { if (el.classList.contains('nav-group')) return el; el = el.previousElementSibling; }
+  return null;
+}
+function collapseNavGroupsExcept(activeGroupEl) {
+  document.querySelectorAll('.nav-group').forEach(g => {
+    const isActive = g === activeGroupEl;
+    g.classList.toggle('collapsed', !isActive);
+    setNavGroupItemsVisibility(g, isActive);
+  });
+}
+
 document.querySelectorAll('.nav-item').forEach(item => {
   item.addEventListener('click', () => {
     document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
     document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
     item.classList.add('active');
     document.getElementById('page-' + item.dataset.p).classList.add('active');
+    const group = findNavGroupFor(item);
+    if (group) collapseNavGroupsExcept(group);
   });
 });
 
@@ -3103,6 +3147,10 @@ async function createNewProject() {
     // Reset the whole app to a blank slate before capturing — otherwise a
     // brand new project would inherit whatever happens to be on screen.
     resetAppToBlank();
+    // Client Name starts as the project name — a reasonable default that's
+    // easy to forget to fill in otherwise, still fully editable in General Info.
+    const clientField = document.getElementById('g-name');
+    if (clientField) clientField.value = name;
     const snap = buildProjectSnapshot();
     snap.projectName = name;
     await writeFileToGitHub(path, JSON.stringify(snap, null, 2), `Create project ${name}`);
@@ -3140,6 +3188,8 @@ function enterProject() {
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
   document.getElementById('page-dashboard').classList.add('active');
   document.querySelector('.nav-item[data-p="dashboard"]')?.classList.add('active');
+  const overviewGroup = document.querySelector('.nav-group');
+  if (overviewGroup) collapseNavGroupsExcept(overviewGroup);
 }
 
 function updateCurrentProjectBadge() {
@@ -4217,6 +4267,14 @@ function importCabinetCatalogToSuppliers() {
   suppliersSetStatus(added
     ? `Imported ${added} new item${added===1?'':'s'}${categoriesAdded?` (added ${categoriesAdded} new categor${categoriesAdded===1?'y':'ies'})`:''} ✓ — review below, then "Save Suppliers to Cloud" when ready.`
     : 'Nothing new to import — every Cabinet catalog item is already tracked here.');
+}
+
+function toggleSupplierCategoryPanel() {
+  const panel = document.getElementById('supplier-cat-panel');
+  const arrow = document.getElementById('supplier-cat-arrow');
+  const open = panel.style.display !== 'none';
+  panel.style.display = open ? 'none' : 'block';
+  arrow.style.transform = open ? 'rotate(-90deg)' : 'rotate(0deg)';
 }
 
 function addSupplierCategory() {
