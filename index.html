@@ -3718,12 +3718,19 @@ function calcCabinet(inp, catalog, costingData) {
   const cableRunCost = n2 => n2 === 0 ? 0 : (n2*5 + ((n2-1)*n2/2) * (layoutLength / Math.max(n2-1, 1)));
   const c21=cableRunCost(int(inp.m075NoBrake)), c22c=cableRunCost(int(inp.m15NoBrake)), c23=cableRunCost(int(inp.m22NoBrake));
   const c24=cableRunCost(int(inp.m075Brake)), c25=cableRunCost(int(inp.m15Brake)), c26=cableRunCost(int(inp.m22Brake));
-  const cable4G25Total = c21+c22c+c23+c24+c25+c26;
+  // PDB cable run (BackGround!C83/E83) — a cable run to each MDR power
+  // distribution board, using the exact same run-length model as the
+  // centralized motors (raw count, not grouped). This was entirely missing
+  // before: numberOfPDBs is needed here, so it's computed early rather than
+  // where it's used for other purposes later.
+  const numberOfPDBs = Math.ceil(int(inp.mdrMotors)/2/7);
+  const c83 = cableRunCost(numberOfPDBs);
+  const cable4G25Total = c21+c22c+c23+c24+c25+c26+c83;
   const decGroup = n2 => Math.ceil(n2/6);
   const g31=decGroup(int(inp.dec075)), g32=decGroup(int(inp.dec15)), g33=decGroup(int(inp.dec22));
   const decCableCost = g2 => g2===0 ? 0 : (g2*5 + (g2*(g2+1)/2)*(layoutLength/g2));
   const cable4G4Total = decCableCost(g31)+decCableCost(g32)+decCableCost(g33);
-  const ethernetDecTotal = decCableCost(g31)+decCableCost(g32)+decCableCost(g33);
+  const ethernetDecTotal = decCableCost(g31)+decCableCost(g32)+decCableCost(g33)+c83;
 
   const lbHandsN = int(inp.lbHands), lbFingerN = int(inp.lbFinger);
   const totalCentMotors = int(inp.m075NoBrake)+int(inp.m15NoBrake)+int(inp.m22NoBrake)+int(inp.m075Brake)+int(inp.m15Brake)+int(inp.m22Brake);
@@ -3755,7 +3762,6 @@ function calcCabinet(inp, catalog, costingData) {
     + ((inp.driveBrand==='Allen Bradley' && topology==='Centralised') ? Math.ceil((int(inp.m075NoBrake)+int(inp.m15NoBrake)+int(inp.m22NoBrake))/8) : 0)
     + (topology==='Distributed' ? 1 : 0);
   const powerSupplyNeeded = topology==='Centralised' ? 1 : 2;
-  const numberOfPDBs = Math.ceil(int(inp.mdrMotors)/2/7);
   const numberOfJunctionBox = Math.max(0, Math.ceil(
     (int(inp.photoSensors)+int(inp.transparentSensors)+int(inp.proximitySensors)+int(inp.distanceSensors)+int(inp.actuatorsMono)
      + 2*(int(inp.actuatorsBi)+lbHandsN+lbFingerN+int(inp.laserScanner))
