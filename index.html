@@ -11,8 +11,8 @@
   --bg:#15161B;--s1:#1D1F26;--s2:#242731;--s3:#2B2F3B;--s4:#353A49;
   --b1:rgba(255,255,255,0.07);--b2:rgba(255,255,255,0.13);--b3:rgba(255,255,255,0.2);
   --t1:#EDEEF2;--t2:#9498AA;--t3:#5D6175;
-  --blue:#5B9BC2;--blue-d:#2C5A73;--blue-bg:rgba(91,155,194,0.13);
-  --copper:#CC8B52;--copper-d:#8F5E33;--copper-bg:rgba(204,139,82,0.14);
+  --blue:#697878;--blue-d:#3F4848;--blue-bg:rgba(105,120,120,0.15);
+  --copper:#5F87A0;--copper-d:#3E5868;--copper-bg:rgba(95,135,160,0.15);
   --green:#63A87D;--green-bg:rgba(99,168,125,0.13);
   --amber:#D4A34A;--amber-bg:rgba(212,163,74,0.13);
   --red:#C1584F;--red-bg:rgba(193,88,79,0.13);
@@ -23,8 +23,8 @@
   --bg:#F2F3F6;--s1:#ffffff;--s2:#ECEDF2;--s3:#E1E3EA;--s4:#D3D6E0;
   --b1:rgba(18,22,35,0.08);--b2:rgba(18,22,35,0.14);--b3:rgba(18,22,35,0.22);
   --t1:#191B22;--t2:#565A6C;--t3:#888CA0;
-  --blue:#2C6E8E;--blue-bg:rgba(44,110,142,0.08);
-  --copper:#A9682F;--copper-bg:rgba(169,104,47,0.08);
+  --blue:#3F4848;--blue-bg:rgba(63,72,72,0.09);
+  --copper:#3E5868;--copper-bg:rgba(62,88,104,0.09);
   --green:#3D7D57;--green-bg:rgba(61,125,87,0.08);
   --amber:#A87423;--amber-bg:rgba(168,116,35,0.08);
   --red:#A3413A;--red-bg:rgba(163,65,58,0.08);
@@ -123,7 +123,7 @@ td.dim{color:var(--t3);font-size:12px}
 
 /* BUTTON */
 .btn{display:inline-flex;align-items:center;gap:5px;padding:7px 14px;border-radius:var(--r);font-size:12.5px;font-family:var(--f-body);cursor:pointer;border:none;font-weight:500;transition:all .12s}
-.btn-primary{background:var(--copper);color:#fff}.btn-primary:hover{background:#DB9C61}
+.btn-primary{background:var(--copper);color:#fff}.btn-primary:hover{background:#7DA5BE}
 .btn-ghost{background:var(--s3);color:var(--t2);border:1px solid var(--b2)}.btn-ghost:hover{color:var(--t1)}
 
 /* BAR CHART */
@@ -182,7 +182,7 @@ hr{border:none;border-top:1px solid var(--b1);margin:16px 0}
 .login-input{width:100%;background:var(--s3);border:1px solid var(--b2);border-radius:var(--r);padding:10px 12px;color:var(--t1);font-family:var(--f-body);font-size:14px;outline:none;transition:border-color .15s}
 .login-input:focus{border-color:var(--blue)}
 .login-btn{width:100%;background:var(--copper);color:#fff;border:none;border-radius:var(--r);padding:11px;font-size:14px;font-weight:500;font-family:var(--f-body);cursor:pointer;transition:background .12s;margin-top:8px}
-.login-btn:hover{background:#DB9C61}
+.login-btn:hover{background:#7DA5BE}
 .login-err{color:var(--red);font-size:12px;margin-top:10px;text-align:center;min-height:18px}
 .login-info{font-size:11px;color:var(--t3);text-align:center;margin-top:14px}
 
@@ -1058,6 +1058,18 @@ body.role-procurement button[onclick="exportOffer()"] { display:none; }
       <div class="fg"><label class="fl">Metal-Detectable Cable Ties Needed?</label><select id="cab-cabletie-detect" onchange="calcCabinetPage()"><option>No</option><option>Yes</option></select></div>
       <div class="fg"><label class="fl">Cable Tie Run Length (m)</label><input type="number" id="cab-cabletie-length" value="0" min="0" oninput="calcCabinetPage()"></div>
     </div>
+  </div>
+
+  <div class="card">
+    <div class="card-head" style="justify-content:space-between">
+      Special Items
+      <button class="btn btn-ghost" style="padding:4px 10px;font-size:11px;margin-left:auto" onclick="addSpecialItem()">+ Add Item</button>
+    </div>
+    <div class="note" style="margin-bottom:14px">Anything not covered by the catalog — a one-off part, a special service, a custom component. Add as many as you need; each one flows into the Bill of Materials and Material for PR alongside everything else.</div>
+    <div class="tbl-wrap"><table>
+      <thead><tr><th>Item Name</th><th>Qty</th><th>Unit Price ($)</th><th>Total</th><th></th></tr></thead>
+      <tbody id="cab-special-items-body"></tbody>
+    </table></div>
   </div>
 
   <div class="card" style="border-color:var(--blue);background:var(--blue-bg)">
@@ -2741,6 +2753,7 @@ function buildCabinetSnapshot() {
     fields,
     overrides: { ...cabinetOverrides },
     manualAdds: { ...cabinetManualAdds },
+    specialItems: cabinetSpecialItems.map(i => ({ ...i })),
   };
 }
 function applyCabinetSnapshot(snap) {
@@ -2752,6 +2765,7 @@ function applyCabinetSnapshot(snap) {
   });
   cabinetOverrides = { ...(snap.overrides || {}) };
   cabinetManualAdds = { ...(snap.manualAdds || {}) };
+  cabinetSpecialItems = (snap.specialItems || []).map(i => ({ ...i }));
   calcCabinetPage();
 }
 
@@ -3231,6 +3245,7 @@ function resetAppToBlank() {
   ['equip-t-body','equip-s-body'].forEach(id => { const tb = document.getElementById(id); if (tb) tb.innerHTML = ''; });
   cabinetOverrides = {};
   cabinetManualAdds = {};
+  cabinetSpecialItems = [];
   document.querySelectorAll('[id^="cab-"]').forEach(el => {
     if (el.tagName === 'SELECT') el.selectedIndex = 0;
     else if (el.type === 'checkbox') el.checked = false;
@@ -3563,6 +3578,40 @@ function changeCabinetManualAdd(manualKey, valueStr) {
 function resetCabinetManualAdds() {
   cabinetManualAdds = {};
   calcCabinetPage();
+}
+
+// Special Items: fully manual line items not covered by the catalog — a
+// one-off part, a custom service. Each is {id, name, qty, price}, flows into
+// the BOM via addLine exactly like any other line, and rides along in the
+// project snapshot for save/restore.
+let cabinetSpecialItems = [];
+function addSpecialItem() {
+  cabinetSpecialItems.push({ id: 'si-' + Date.now().toString(36) + Math.random().toString(36).slice(2,6), name: '', qty: 1, price: 0 });
+  renderSpecialItemsTable();
+  calcCabinetPage();
+}
+function updateSpecialItem(id, field, value) {
+  const item = cabinetSpecialItems.find(i => i.id === id);
+  if (!item) return;
+  item[field] = (field === 'name') ? value : (Number(value) || 0);
+  calcCabinetPage();
+}
+function removeSpecialItem(id) {
+  cabinetSpecialItems = cabinetSpecialItems.filter(i => i.id !== id);
+  renderSpecialItemsTable();
+  calcCabinetPage();
+}
+function renderSpecialItemsTable() {
+  const body = document.getElementById('cab-special-items-body');
+  if (!body) return;
+  body.innerHTML = cabinetSpecialItems.map(item => `
+    <tr>
+      <td><input type="text" class="ein" style="text-align:left" placeholder="e.g. Custom bracket fabrication" value="${(item.name||'').replace(/"/g,'&quot;')}" onchange="updateSpecialItem('${item.id}','name',this.value)"></td>
+      <td><input type="number" class="en" style="width:60px" value="${item.qty}" min="0" onchange="updateSpecialItem('${item.id}','qty',this.value)"></td>
+      <td><input type="number" class="en" value="${item.price}" min="0" onchange="updateSpecialItem('${item.id}','price',this.value)"></td>
+      <td class="n">${fmt((Number(item.qty)||0) * (Number(item.price)||0))}</td>
+      <td><button class="btn btn-ghost" style="padding:3px 8px;font-size:11px" onclick="removeSpecialItem('${item.id}')">✕</button></td>
+    </tr>`).join('') || `<tr><td colspan="5" class="dim" style="text-align:center;padding:16px">No special items yet — click "+ Add Item" above.</td></tr>`;
 }
 
 // Reference Price: the live Suppliers Directory's latest price for a product,
@@ -3961,6 +4010,16 @@ function calcCabinet(inp, catalog, costingData) {
   addLine('Operator Panel','Operator Panel',null,null,{name:'Operator Panel SS With HMI'},opPanelQty,2940);
   addLine('Communication Module','Remote IO',null,null,{name:'SIG Communication Module'},numRobots+Math.ceil(int(inp.vacuumSwitches)/8),costingData.factory.commModulePrice);
 
+  // Special Items: fully manual entries, not tied to any catalog family. The
+  // entered price is used directly as the reference price (skipLookup=true) —
+  // there's nothing in Suppliers to align a one-off custom item against.
+  cabinetSpecialItems.forEach(si => {
+    const hasContent = (si.name && si.name.trim()) || Number(si.qty) || Number(si.price);
+    if (!hasContent) return;
+    const label = (si.name && si.name.trim()) ? si.name.trim() : 'Custom Item';
+    addLine('Special Items', label, null, null, {name: label}, Number(si.qty)||0, Number(si.price)||0, 0, true);
+  });
+
   const materialFromBom = bom.reduce((s,l) => s+l.total, 0);
   const isUL = inp.standard === 'UL';
   const factory = costingData.factory;
@@ -4043,6 +4102,7 @@ function renderMaterialForPR(r, inp) {
 
 function calcCabinetPage() {
   renderCabinetDataErrorBanner();
+  renderSpecialItemsTable();
   if (!cabinetCatalog || !cabinetCosting) return;
   const inp = readCabinetInputs();
   const r = calcCabinet(inp, cabinetCatalog, cabinetCosting);
