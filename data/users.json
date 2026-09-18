@@ -2,8 +2,7 @@
   "Miguel": {
     "pass": "D0022b0c0cf53@$",
     "role": "admin",
-    "label": "Administrator",
-    "avatar": "data:image/jpeg;base64,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"
+    "label": "Administrator"
   },
   "Michel Halabi": {
     "pass": "Password",
@@ -109,5 +108,140 @@
     "pass": "Password",
     "role": "procurement",
     "label": "Sandra"
+  },
+  "Abdo Sebaaly": {
+    "pass": "Password",
+    "role": "sales",
+    "label": "Abdo"
+  },
+  "Andrew Costantine": {
+    "pass": "Password",
+    "role": "sales",
+    "label": "Andrew"
+  },
+  "Anthony Abdallah": {
+    "pass": "Password",
+    "role": "sales",
+    "label": "Anthony"
+  },
+  "Anthony Achkar": {
+    "pass": "Password",
+    "role": "sales",
+    "label": "Anthony"
+  },
+  "Anthony Bteich": {
+    "pass": "Password",
+    "role": "sales",
+    "label": "Anthony"
+  },
+  "Antoine Daoud": {
+    "pass": "Password",
+    "role": "sales",
+    "label": "Antoine"
+  },
+  "Charbel Fakhoury": {
+    "pass": "Password",
+    "role": "sales",
+    "label": "Charbel"
+  },
+  "Claritta Lahour": {
+    "pass": "Password",
+    "role": "sales",
+    "label": "Clarita"
+  },
+  "Eliane Jeitani": {
+    "pass": "Password",
+    "role": "admin",
+    "label": "Eliane"
+  },
+  "Elias Abi Doumit": {
+    "pass": "Password",
+    "role": "sales",
+    "label": "Elias"
+  },
+  "Elie Sidnawi": {
+    "pass": "Password",
+    "role": "sales",
+    "label": "Elie"
+  },
+  "Fady Elias": {
+    "pass": "Password",
+    "role": "sales",
+    "label": "Fady"
+  },
+  "Georges Eid": {
+    "pass": "Password",
+    "role": "sales",
+    "label": "Georges"
+  },
+  "Georgio Nasr": {
+    "pass": "Password",
+    "role": "sales",
+    "label": "Georgio"
+  },
+  "Jad Mallah": {
+    "pass": "Password",
+    "role": "sales",
+    "label": "Jad"
+  },
+  "Jennifer Haddad": {
+    "pass": "Password",
+    "role": "sales",
+    "label": "Jennifer"
+  },
+  "Joe Nicolas": {
+    "pass": "Password",
+    "role": "sales",
+    "label": "Joe"
+  },
+  "Karl Saliba": {
+    "pass": "Password",
+    "role": "sales",
+    "label": "Karl"
+  },
+  "Ibrahim Tohme": {
+    "pass": "Password",
+    "role": "admin",
+    "label": "Ibrahim"
+  },
+  "Mario Khoury": {
+    "pass": "Password",
+    "role": "sales",
+    "label": "Mario"
+  },
+  "Marwan Nehme": {
+    "pass": "Password",
+    "role": "sales",
+    "label": "Marwan"
+  },
+  "Miguel Kaboushe": {
+    "pass": "Password",
+    "role": "sales",
+    "label": "Miguel"
+  },
+  "Mike Sakr": {
+    "pass": "Password",
+    "role": "sales",
+    "label": "Mike"
+  },
+  "Mohamad Fleifel": {
+    "pass": "Password",
+    "role": "sales",
+    "label": "Mohamad"
+  },
+  "Peter Fakhry": {
+    "pass": "Password",
+    "role": "sales",
+    "label": "Peter"
+  },
+  "Reve Fawaz": {
+    "pass": "Password",
+    "role": "sales",
+    "label": "Reve"
+  },
+  "Simon Hantouch": {
+    "pass": "Password",
+    "role": "sales",
+    "label": "Simon"
   }
 }
