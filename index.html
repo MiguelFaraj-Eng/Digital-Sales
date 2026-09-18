@@ -298,6 +298,11 @@ body.role-procurement button[onclick="exportOffer()"] { display:none; }
       <div class="card-head">☁ Connect to Cloud</div>
       <div class="note" style="margin-bottom:12px">One-time setup on this device — paste your access key to see and manage shared projects.</div>
       <input id="gh-token" type="password" placeholder="Paste your cloud access key" oninput="persistGitHubSyncPrefs()">
+      <div id="gh-repo-row" style="display:none;margin-top:12px">
+        <label class="fl">Repository (owner/repo)</label>
+        <input id="gh-repo" type="text" placeholder="e.g. yourname/your-repo" oninput="persistGitHubSyncPrefs()">
+        <div class="note" style="margin-top:6px">This page isn't being served from github.io, so the repository can't be detected automatically — enter it once and it's remembered on this device.</div>
+      </div>
       <button class="btn btn-primary" style="margin-top:12px;width:100%" onclick="connectProjectsHome()">Connect</button>
     </div>
   </div>
@@ -1120,11 +1125,11 @@ body.role-procurement button[onclick="exportOffer()"] { display:none; }
   </div>
 
   <div class="card">
-    <div class="note" style="margin-bottom:14px">This explodes the Power Distribution bundle into its actual sub-components (disconnects, contactors, breakers, relays) — since a Purchase Request needs the real part, not the bundle. Everything else matches the Bill of Materials line-for-line. Supplier &amp; email are pulled from the Suppliers Directory when tracked there.</div>
+    <div class="note" style="margin-bottom:14px">This explodes the Power Distribution bundle into its actual sub-components (disconnects, contactors, breakers, relays) — since a Purchase Request needs the real part, not the bundle. Everything else matches the Bill of Materials line-for-line. Technica Code, Specification, Supplier &amp; Email are pulled from the Suppliers Directory when tracked there, otherwise from the catalog.</div>
     <div class="tbl-wrap"><table>
-      <thead><tr><th>Category</th><th>Item</th><th>Qty</th><th>Unit Price</th><th>Total</th><th>Supplier</th><th>Email</th></tr></thead>
+      <thead><tr><th>Category</th><th>Item</th><th>Technica Code</th><th>Specification</th><th>Qty</th><th>Unit Price</th><th>Total</th><th>Supplier</th><th>Email</th></tr></thead>
       <tbody id="pr-material-body"></tbody>
-      <tfoot><tr class="tr-total"><td colspan="4" style="font-weight:600">TOTAL MATERIAL</td><td class="n" style="font-weight:600;color:var(--green)" id="pr-material-total">$0</td><td colspan="2"></td></tr></tfoot>
+      <tfoot><tr class="tr-total"><td colspan="6" style="font-weight:600">TOTAL MATERIAL</td><td class="n" style="font-weight:600;color:var(--green)" id="pr-material-total">$0</td><td colspan="2"></td></tr></tfoot>
     </table></div>
   </div>
 </div>
@@ -2853,8 +2858,9 @@ function ghSetStatus(msg, isError) {
   el.style.color = isError ? 'var(--red)' : 'var(--t2)';
 }
 function ghConfig() {
+  const manualRepo = document.getElementById('gh-repo')?.value.trim();
   return {
-    repo: detectGitHubRepoFromLocation(),
+    repo: manualRepo || detectGitHubRepoFromLocation(),
     token: document.getElementById('gh-token')?.value.trim(),
     projectName: document.getElementById('gh-project-name')?.value.trim(),
   };
@@ -3204,17 +3210,23 @@ async function refreshGitHubProjectList() {
 }
 
 function persistGitHubSyncPrefs() {
-  const { token } = ghConfig();
+  const { token, repo } = ghConfig();
   try {
     localStorage.setItem('scada-gh-token', token || '');
+    // Only persist a repo the person actually typed — never the auto-detected
+    // one, so a github.io deployment never accidentally starts depending on
+    // a stale stored value instead of re-detecting itself each time.
+    const typedRepo = document.getElementById('gh-repo')?.value.trim();
+    if (typedRepo) localStorage.setItem('scada-gh-repo', typedRepo);
+    else localStorage.removeItem('scada-gh-repo');
   } catch (e) { console.error('Could not persist cloud sync prefs:', e); }
 }
 function forgetGitHubSync() {
   try { localStorage.removeItem('scada-gh-token'); localStorage.removeItem('scada-gh-repo'); } catch (e) {}
 }
-// The tool is already being served from the exact repo it needs to save to —
-// a *.github.io hostname with the repo name as the first path segment (project
-// pages) — so it's derived automatically rather than shown or typed anywhere.
+// Auto-detected only when served from a *.github.io project-pages URL. Any
+// other hosting (a PC's local server, an intranet address, a custom domain)
+// falls back to whatever's typed into #gh-repo — see ghConfig().
 function detectGitHubRepoFromLocation() {
   try {
     const m = location.hostname.match(/^([^.]+)\.github\.io$/i);
@@ -3227,16 +3239,25 @@ function detectGitHubRepoFromLocation() {
 
 function restoreGitHubSyncPrefs() {
   try {
-    // scada-gh-repo may still exist from before the repo field was removed —
-    // purge it so it can never resurface.
-    try { localStorage.removeItem('scada-gh-repo'); } catch (e2) {}
-
     const token = localStorage.getItem('scada-gh-token');
     if (token) {
       const tokEl = document.getElementById('gh-token'); if (tokEl) tokEl.value = token;
       updateCloudConnectionUI(true);
     } else {
       updateCloudConnectionUI(false);
+    }
+    // Only show (and populate) the manual repo field when this page genuinely
+    // can't detect its own repo — keeps the github.io deployment exactly as
+    // frictionless as before this existed.
+    const repoRow = document.getElementById('gh-repo-row');
+    if (repoRow) {
+      const needsManualRepo = !detectGitHubRepoFromLocation();
+      repoRow.style.display = needsManualRepo ? 'block' : 'none';
+      if (needsManualRepo) {
+        const savedRepo = localStorage.getItem('scada-gh-repo');
+        const repoEl = document.getElementById('gh-repo');
+        if (repoEl && savedRepo) repoEl.value = savedRepo;
+      }
     }
   } catch (e) {}
 }
@@ -3567,13 +3588,16 @@ function getSupplierContact(itemName) {
   const matches = suppliersData.entries.filter(e => (e.item||'').trim().toLowerCase() === itemName.trim().toLowerCase());
   if (!matches.length) return null;
   const best = matches.slice().sort((a,b) => (b.updated||'').localeCompare(a.updated||''))[0];
-  return { supplier: best.supplier || '', email: best.email || '' };
+  return { supplier: best.supplier || '', email: best.email || '', code: best.code || '', spec: best.spec || '' };
 }
 function getPowerDistDetailItems(bundleBrand, bundleStandard, outputRelayQty) {
   if (!cabinetCosting || !cabinetCosting.powerDistBreakdown) return [];
   const items = cabinetCosting.powerDistBreakdown[`${bundleBrand}|${bundleStandard}`] || [];
   return items.map(it => ({
     item: it.item,
+    code: it.code || null,
+    spec: it.spec || null,
+    description: it.description || null,
     // Matches exactly how these were imported into Suppliers (name + brand +
     // standard) — the plain item name alone collides across CE/UL sheets, so
     // that's not what got stored, and a plain-name lookup would never find them.
@@ -3793,6 +3817,7 @@ function calcCabinet(inp, catalog, costingData) {
     const total = qty * unitPrice;
     if (qty !== 0 || category==='Special Items') {
       const line = { category, item, slotKey, eligibleList: eligibleList||[], selectedItemNo: prod?.itemNo, name: prod?.name,
+        code: prod?.code, spec: prod?.spec,
         lookupName, qty, referencePrice, manualAdd, manualKey, unitPrice, total };
       if (slotKey === 'powerDist' && prod) { line.bundleBrand = prod.brand; line.bundleStandard = inp.standard; }
       bom.push(line);
@@ -3926,11 +3951,11 @@ function renderMaterialForPR(r, inp) {
       parts.forEach(p => {
         const unitPrice = getReferencePrice(p.lookupName, p.catalogPrice);
         const qty = p.qty * l.qty;
-        rows.push({ category: 'Power Distribution', item: p.item, qty, unitPrice, total: unitPrice*qty, lookupName: p.lookupName });
+        rows.push({ category: 'Power Distribution', item: p.item, qty, unitPrice, total: unitPrice*qty, lookupName: p.lookupName, code: p.code, spec: p.spec });
       });
       return;
     }
-    rows.push({ category: l.category, item: l.name || l.item, qty: l.qty, unitPrice: l.unitPrice, total: l.total, lookupName: l.lookupName || l.name });
+    rows.push({ category: l.category, item: l.name || l.item, qty: l.qty, unitPrice: l.unitPrice, total: l.total, lookupName: l.lookupName || l.name, code: l.code, spec: l.spec });
   });
 
   let withSupplier = 0;
@@ -3939,16 +3964,20 @@ function renderMaterialForPR(r, inp) {
   body.innerHTML = rows.map(row => {
     const contact = getSupplierContact(row.lookupName);
     if (contact) withSupplier++;
+    const code = (contact && contact.code) || row.code;
+    const spec = (contact && contact.spec) || row.spec;
     return `<tr>
       <td class="dim">${row.category}</td>
       <td>${row.item}</td>
+      <td class="dim" style="font-family:'IBM Plex Mono',monospace;font-size:11px">${code || '—'}</td>
+      <td class="dim" style="font-family:'IBM Plex Mono',monospace;font-size:11px">${spec || '—'}</td>
       <td>${(Math.round(row.qty*100)/100).toLocaleString()}</td>
       <td class="n">${fmt(row.unitPrice)}</td>
       <td class="n">${fmt(row.total)}</td>
       <td>${contact && contact.supplier ? contact.supplier : '<span class="dim">—</span>'}</td>
       <td>${contact && contact.email ? contact.email : '<span class="dim">—</span>'}</td>
     </tr>`;
-  }).join('') || `<tr><td colspan="7" class="dim" style="text-align:center;padding:20px">Fill in the Configurator to see the materials list.</td></tr>`;
+  }).join('') || `<tr><td colspan="9" class="dim" style="text-align:center;padding:20px">Fill in the Configurator to see the materials list.</td></tr>`;
 
   sv('pr-stat-lines', String(rows.length));
   sv('pr-stat-suppliers', String(withSupplier));
@@ -4142,11 +4171,40 @@ function importCabinetCatalogToSuppliers() {
         id: 'sup-cab-' + family + '-' + item.itemNo + '-' + Date.now().toString(36) + Math.random().toString(36).slice(2,5),
         category, item: importName, supplier: item.brand || '', email: '',
         cost: item.price || 0, latestPrice: item.price || 0, updated: today,
-        description: item.description || item.spec || '',
+        code: item.code || '', spec: item.spec || '',
+        description: item.description || '',
       });
       added++;
     });
   });
+
+  // Power Distribution sub-components: sourced from the verified live-formula
+  // breakdown (cabinet-costing.json), NOT the catalog's separate "PD Detailed"
+  // sheets — those have different prices for the same parts (confirmed) and
+  // silently corrupted totals the one time they were imported here before.
+  // This is the same data the Configurator's own calculation and detail view
+  // use, so there's no risk of it disagreeing with itself.
+  if (cabinetCosting && cabinetCosting.powerDistBreakdown) {
+    const pdCategory = 'Power Distribution Components';
+    if (!suppliersData.categories.includes(pdCategory)) { suppliersData.categories.push(pdCategory); categoriesAdded++; }
+    Object.entries(cabinetCosting.powerDistBreakdown).forEach(([key, items]) => {
+      const [brand, standard] = key.split('|');
+      items.forEach((it, idx) => {
+        const importName = `${it.item} (${brand}, ${standard})`;
+        const keyLower = importName.trim().toLowerCase();
+        if (existingNames.has(keyLower)) return;
+        existingNames.add(keyLower);
+        suppliersData.entries.push({
+          id: 'sup-cab-pd-' + brand.replace(/\s+/g,'') + '-' + standard + '-' + idx + '-' + Date.now().toString(36) + Math.random().toString(36).slice(2,5),
+          category: pdCategory, item: importName, supplier: brand, email: '',
+          cost: it.price || 0, latestPrice: it.price || 0, updated: today,
+          code: it.code || '', spec: it.spec || '',
+          description: it.description || '',
+        });
+        added++;
+      });
+    });
+  }
 
   renderSuppliersPage();
   calcCabinetPage();  // Reference Price may now resolve against the newly-imported entries
@@ -4241,6 +4299,10 @@ function supplierRowsHtml(e) {
               <button class="btn btn-ghost" style="padding:4px 10px;font-size:11px" onclick="document.getElementById('pdf-input-${e.id}').click()">${e.pdfPath ? 'Replace' : 'Upload'} PDF</button>
             </div>
           </div>
+        </div>
+        <div class="g2" style="margin-top:12px">
+          <div class="fg"><label class="fl">Technica Code</label><input class="en sup-code" type="text" value="${supplierEsc(e.code)}" placeholder="e.g. EL.SW.MS.066" style="width:100%;text-align:left;font-family:'IBM Plex Mono',monospace" ${sync}></div>
+          <div class="fg"><label class="fl">Specification</label><input class="en sup-spec" type="text" value="${supplierEsc(e.spec)}" placeholder="e.g. 3LD2704-0TK53" style="width:100%;text-align:left;font-family:'IBM Plex Mono',monospace" ${sync}></div>
         </div>
         <div class="fg" style="margin-top:12px;margin-bottom:0"><label class="fl">Description / Notes</label>
           <textarea class="en sup-description" style="width:100%;text-align:left;min-height:56px" placeholder="Lead time, MOQ, part number, anything worth remembering…" ${sync}>${supplierEsc(e.description)}</textarea></div>
@@ -4533,6 +4595,8 @@ function collectVisibleSupplierRows() {
       latestPrice: parseFloat(tr.querySelector('.sup-latest')?.value) || 0,
       updated: tr.querySelector('.sup-date')?.value || '',
       email: detailTr?.querySelector('.sup-email')?.value.trim() || '',
+      code: detailTr?.querySelector('.sup-code')?.value.trim() || '',
+      spec: detailTr?.querySelector('.sup-spec')?.value.trim() || '',
       description: detailTr?.querySelector('.sup-description')?.value.trim() || '',
       pdfPath: existing.pdfPath,   // set only via upload/remove, not a plain text field
       pdfName: existing.pdfName,
