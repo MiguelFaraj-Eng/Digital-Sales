@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "savedAt": "2026-09-17T11:19:32.683Z",
+  "savedAt": "2026-09-18T06:00:46.112Z",
   "fields": {
     "g-name": "",
     "g-loc": "",
@@ -558,7 +558,7 @@
       "cab-complexity": "Low",
       "cab-skus": "1",
       "cab-robots": "2",
-      "cab-layout-length": "10",
+      "cab-layout-length": "60",
       "cab-safety-zones": "0",
       "cab-ac": "Not Included",
       "cab-ups": "Not Included",
