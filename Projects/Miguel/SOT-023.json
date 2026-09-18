@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "savedAt": "2026-09-18T06:01:19.224Z",
+  "savedAt": "2026-09-18T13:52:11.818Z",
   "fields": {
     "g-name": "",
     "g-loc": "",
@@ -37,7 +37,7 @@
   },
   "hardware": {
     "categoryEnabled": {
-      "serverRoom": true,
+      "serverRoom": false,
       "operatorPanel": false,
       "commercialPC": false
     },
@@ -601,7 +601,8 @@
     "overrides": {
       "hmi": 2
     },
-    "manualAdds": {}
+    "manualAdds": {},
+    "specialItems": []
   },
   "projectName": "SOT-023"
 }
