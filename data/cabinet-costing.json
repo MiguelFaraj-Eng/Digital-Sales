@@ -156,318 +156,504 @@
       {
         "item": "Disconnect - 100A",
         "qty": 1,
-        "price": 55
+        "price": 55,
+        "code": "EL.SW.MS.066",
+        "spec": "3LD2704-0TK53",
+        "description": "MAIN/EMERG. STOP SWITCH 3-POLE IU=100, P/AC-23A AT 400V=37KW FRONT MOUNTING FOUR-HOLE MOUNTING ROTARY ACTUATOR RED/YELLOW (EMERG. STOP)"
       },
       {
         "item": "Contactor - 110A",
         "qty": 1,
-        "price": 253
+        "price": 253,
+        "code": "EL.RL.CN.187",
+        "spec": "3RT2047-1AL20",
+        "description": "Power contactor, AC-3 110 A, 55 kW / 400 V 1 NO + 1 NC, 230 V AC, 50/60 Hz 3-pole, 3 NO, Size S3 screw terminal"
       },
       {
         "item": "Power Supply - 20A",
         "qty": 1,
-        "price": 253
+        "price": 253,
+        "code": "EL.LC.PU.105",
+        "spec": "6EP1436-2BA10",
+        "description": "SITOP PSU300S 20 A stabilized power supply input: 400-500 V 3 AC output: 24 V DC/20 A"
       },
       {
         "item": "DB - 125A",
         "qty": 1,
-        "price": 253
+        "price": 253,
+        "code": "EL.TE.JN.087",
+        "spec": "LGY412560",
+        "description": "Screw distribution blocks 125A 4X15 holes"
       },
       {
         "item": "Voltage Relay",
         "qty": 1,
-        "price": 121
+        "price": 121,
+        "code": "EL.RL.VR.016",
+        "spec": "3UG5616-1CR20",
+        "description": "Digitally adjustable monitoring relay phase failure, phase sequence, asymmetry, frequency, over- and under-voltage monitoring 3x 90-690 V AC, 15-70 Hz 2 changeover contacts screw terminal"
       },
       {
         "item": "MCB - 100A",
         "qty": 1,
-        "price": 143
+        "price": 143,
+        "code": null,
+        "spec": "3VA1110-3EF46-0AA0",
+        "description": "circuit breaker 3VA1 IEC Frame 160 breaking capacity class N Icu=25 kA @ 415 V 4-pole, line protection TM240, ATAM, In=100 A overload protection Ir=70 A...100 A short-circuit protection Ii=5...10 x In N conductor unprotected terminal connection"
       },
       {
         "item": "CB - 1P 1A",
         "qty": 1,
-        "price": 3.3
+        "price": 3.3,
+        "code": "EL.CB.LB.110",
+        "spec": "5SL6 101-7",
+        "description": "Miniature circuit breaker 230/400 V 6kA, 1-pole, C, 1 A"
       },
       {
         "item": "CB - 3P 6A",
         "qty": 1,
-        "price": 19.8
+        "price": 19.8,
+        "code": "EL.CB.LB.104",
+        "spec": "5SL6 306-7",
+        "description": "Miniature circuit breaker 400 V 6kA, 3-pole, C, 6A"
       },
       {
         "item": "CB - 2P 6A",
         "qty": 1,
-        "price": 11
+        "price": 11,
+        "code": "EL.CB.LB.126",
+        "spec": "5SL6 206-7",
+        "description": "Miniature circuit breaker 400 V 6kA, 2-pole, C, 6A"
       },
       {
         "item": "CB - 1P 2A",
         "qty": 1,
-        "price": 3.3
+        "price": 3.3,
+        "code": "EL.CB.LB.105",
+        "spec": "\t\n5SL6 102-7",
+        "description": "Miniature circuit breaker 230/400 V 6kA, 1-pole, C, 2 A"
       },
       {
         "item": "RCD - 2P 25A",
         "qty": 1,
-        "price": 132
+        "price": 132,
+        "code": "EL.CB.LB.242",
+        "spec": "5SV3312-6",
+        "description": "Residual current operated circuit breaker, 2-pole, type A, In: 25 A, 30 mA, Un AC: 230 V"
       },
       {
         "item": "Fuse - 3P 32A",
         "qty": 1,
-        "price": 8.8
+        "price": 8.8,
+        "code": "EL.FU.FH.029",
+        "spec": "3NW7033",
+        "description": "Fuse Holder 3P 10*38mm 32A"
       },
       {
         "item": "Output Relay",
         "qtyFormula": "outputRelay",
-        "price": 12
+        "price": 12,
+        "code": "EL.RL.CR.166",
+        "spec": "3RQ3118-1AM00",
+        "description": "Output coupler with plug-in Relay, 1 change-over contact screw terminal 24 V DC Enclosure width 6.2 mm Thermal current 6A"
       },
       {
         "item": "Murr ECB",
         "qty": 1,
-        "price": 180
+        "price": 180,
+        "code": "EL.CB.PM.001\nEL.CB.PM.002\nEL.CB.PM.003\nEL.CB.PM.004\nEL.CB.PM.005",
+        "spec": "9000-41190-0000000\n9000-41014-0600000\n9000-41000-0000006\n9000-41000-0000002\n996078",
+        "description": "Mico Pro Power module, IN: 24 V DC / 40 A, 16 mm\u00b2\nMico Pro electronic auxilary circuit, 4 channels, IN: 24 V DC OUT: 24 V DC / 6 A\nMico Pro side cover set\nPlug-in link blue-red\nLabels"
       }
     ],
     "Allen Bradley|CE": [
       {
         "item": "Disconnect - 100A",
         "qty": 1,
-        "price": 65
+        "price": 65,
+        "code": "EL.SW.MS.083",
+        "spec": "194E-E100-1753-6N",
+        "description": "194E Load switch, 100 A, 3 Poles, OFF-ON 90\u00b0, Open, Front/Door, Standard Terminals, With Type N Red/Yellow ACTR, Open Switch Style, OFF-ON 90\u00b0"
       },
       {
         "item": "Contactor - 97A",
         "qty": 1,
-        "price": 240
+        "price": 240,
+        "code": "EL.RL.CN.231",
+        "spec": "100-C97KF00",
+        "description": "Contactor, 97 A, IEC, 230V 50/60 Hz, AC, 3 Normally Open Poles, 230V AC 50/60 Hz, No Contact Configuration, Single Pack, Line Side Coil Termination, Screw Terminals, Motor Load"
       },
       {
         "item": "Power Supply - 20A",
         "qty": 1,
-        "price": 240
+        "price": 240,
+        "code": "EL.LC.PU.578",
+        "spec": "1606-XLS480E-3",
+        "description": "Power Supply, 480 W, 24V DC, 3-Phases, 380 - 480VAC wide range, Performance Family, Output: 24 V DC/ 20 A "
       },
       {
         "item": "DB - 125A",
         "qty": 1,
-        "price": 240
+        "price": 240,
+        "code": "EL.TE.JN.087",
+        "spec": "LGY412560",
+        "description": "Screw distribution blocks 125A 4X15 holes"
       },
       {
         "item": "Voltage Relay",
         "qty": 1,
-        "price": 150
+        "price": 150,
+        "code": "EL.RL.CR.159",
+        "spec": "813S-V3-400V",
+        "description": "Three Phase Monitoring Relay, 380...415V AC max monitoring and control power 400Hz  "
       },
       {
         "item": "MCB - 100A",
         "qty": 1,
-        "price": 235
+        "price": 235,
+        "code": "EL.CB.NB.075",
+        "spec": "140G-G2C4-D10",
+        "description": "Molded Case Circuit Breaker, G frame, 25 kA at 480V, T/M - Fixed Thermal / Fixed Magnetic TMF, Rated Current 100 A, 4 Pole, Interrupting Code G2"
       },
       {
         "item": "CB - 1P 2A",
         "qty": 1,
-        "price": 5
+        "price": 5,
+        "code": "EL.CB.LB.215",
+        "spec": "188-K1C020",
+        "description": "Bulletin 188, Standard Configuration, 6 kA, 1-Pole, Trip Curve C, 2 A, No Neutral"
       },
       {
         "item": "CB - 3P 6A",
         "qty": 1,
-        "price": 17
+        "price": 17,
+        "code": "EL.CB.LB.210",
+        "spec": "188-K3C060",
+        "description": "Bulletin 188, Standard Configuration, 6 kA, 3-Pole, Trip Curve C, 6 A, No Neutral"
       },
       {
         "item": "CB - 2P 6A",
         "qty": 1,
-        "price": 17
+        "price": 17,
+        "code": "EL.CB.LB.213",
+        "spec": "188-K2C060",
+        "description": "Bulletin 188, Standard Configuration, 6 kA, 2-Pole, Trip Curve C, 6 A, No Neutral"
       },
       {
         "item": "CB - 1P 2A (2)",
         "qty": 1,
-        "price": 5
+        "price": 5,
+        "code": "EL.CB.LB.215",
+        "spec": "188-K1C020",
+        "description": "Bulletin 188, Standard Configuration, 6 kA, 1-Pole, Trip Curve C, 2 A, No Neutral"
       },
       {
         "item": "RCD - 2P 25A",
         "qty": 1,
-        "price": 80
+        "price": 80,
+        "code": "EL.CB.LB.234",
+        "spec": "1492-RCDA2A25",
+        "description": "Residual Current Circuit Breaker, Type A, 25A, 2P, 30mA"
       },
       {
         "item": "Fuse - 3P 32A",
         "qty": 1,
-        "price": 30
+        "price": 30,
+        "code": "EL.FU.FH.036",
+        "spec": "1492-FB3M30",
+        "description": "1492-FB Fuse Holder with 3 poles, 1 1/2 x 13/32 Midget Fuses, 30A, Pkg. Qty. 4"
       },
       {
         "item": "Output Relay",
         "qtyFormula": "outputRelay",
-        "price": 13
+        "price": 13,
+        "code": "EL.RL.CR.158",
+        "spec": "700-HLT1U24",
+        "description": "Electromechanical Relay Output, SPDT (1 C/O), w/ Screw Terminals, 24V AC/DC,Touch Safe"
       },
       {
         "item": "Disconnect - 100A accessories",
         "qty": 1,
-        "price": 13
+        "price": 13,
+        "code": "EL.CT.AX.091",
+        "spec": "194E-E100-NP",
+        "description": "194E Accessories, Additional Pole, Front / Door , 100 A"
       },
       {
         "item": "Murr ECB",
         "qty": 1,
-        "price": 180
+        "price": 180,
+        "code": "EL.CB.PM.001\nEL.CB.PM.002\nEL.CB.PM.003\nEL.CB.PM.004\nEL.CB.PM.005",
+        "spec": "9000-41190-0000000\n9000-41014-0600000\n9000-41000-0000006\n9000-41000-0000002\n996078",
+        "description": "Mico Pro Power module, IN: 24 V DC / 40 A, 16 mm\u00b2\nMico Pro electronic auxilary circuit, 4 channels, IN: 24 V DC OUT: 24 V DC / 6 A\nMico Pro side cover set\nPlug-in link blue-red\nLabels"
       }
     ],
     "Allen Bradley|UL": [
       {
         "item": "Disconnect - 100A",
         "qty": 1,
-        "price": 65
+        "price": 65,
+        "code": "EL.SW.MS.083",
+        "spec": "194E-E100-1753-6N",
+        "description": "194E Load switch, 100 A, 3 Poles, OFF-ON 90\u00b0, Open, Front/Door, Standard Terminals, With Type N Red/Yellow ACTR, Open Switch Style, OFF-ON 90\u00b0"
       },
       {
         "item": "Contactor - 97A",
         "qty": 1,
-        "price": 240
+        "price": 240,
+        "code": "EL.RL.CN.231",
+        "spec": "100-C97KF00",
+        "description": "Contactor, 97 A, IEC, 230V 50/60 Hz, AC, 3 Normally Open Poles, 230V AC 50/60 Hz, No Contact Configuration, Single Pack, Line Side Coil Termination, Screw Terminals, Motor Load"
       },
       {
         "item": "Power Supply - 20A",
         "qty": 1,
-        "price": 240
+        "price": 240,
+        "code": "EL.LC.PU.578",
+        "spec": "1606-XLS480E-3",
+        "description": "Power Supply, 480 W, 24V DC, 3-Phases, 380 - 480VAC wide range, Performance Family, Output: 24 V DC/ 20 A "
       },
       {
         "item": "DB - 125A",
         "qty": 1,
-        "price": 240
+        "price": 240,
+        "code": "EL.TE.JN.120",
+        "spec": "9080LBA365212",
+        "description": "Power distribution block, Linergy, 3 pole, 2 line, 12 load, 760A Cu, 620A Al, 600V, HS CODE: 8537109070"
       },
       {
         "item": "Voltage Relay",
         "qty": 1,
-        "price": 150
+        "price": 150,
+        "code": "EL.RL.CR.159",
+        "spec": "813S-V3-400V",
+        "description": "Three Phase Monitoring Relay, 380...415V AC max monitoring and control power 400Hz  "
       },
       {
         "item": "MCB - 100A",
         "qty": 1,
-        "price": 235
+        "price": 235,
+        "code": "EL.CB.NB.075",
+        "spec": "140G-G2C4-D10",
+        "description": "Molded Case Circuit Breaker, G frame, 25 kA at 480V, T/M - Fixed Thermal / Fixed Magnetic TMF, Rated Current 100 A, 4 Pole, Interrupting Code G2"
       },
       {
         "item": "CB - 1P 1A",
         "qty": 1,
-        "price": 50
+        "price": 50,
+        "code": null,
+        "spec": "1489-M1C020",
+        "description": "Description: Bulletin 1489-M Thermal-magnetic Circuit Breakers, Standard configuration, AC, 1 Pole Configuration, Trip Curve C, UL/CSA Max. Voltage:480Y/277V AC, 96V DC; IEC/EN Max. Voltage: 400V AC,2A"
       },
       {
         "item": "CB - 3P 6A",
         "qty": 1,
-        "price": 70
+        "price": 70,
+        "code": "EL.CB.LB.287",
+        "spec": "1489-M3C060",
+        "description": "Bulletin 1489-M Thermal-magnetic Circuit Breakers, Standard configuration, AC, 3 Pole Configuration, Trip Curve C, UL/CSA Max. Voltage: 480Y/277V AC , IEC/EN Max. Voltage: 400V AC,6A"
       },
       {
         "item": "CB - 2P 6A",
         "qty": 1,
-        "price": 50
+        "price": 50,
+        "code": "EL.CB.LB.290",
+        "spec": "1489-M2C060",
+        "description": "Bulletin 1489-M Thermal-magnetic Circuit Breakers, Standard configuration, AC, 2 Pole Configuration, Trip Curve C, UL/CSA Max. Voltage:480Y/277V AC, 96V DC; IEC/EN Max. Voltage: 400V AC,6A"
       },
       {
         "item": "CB - 1P 2A",
         "qty": 1,
-        "price": 50
+        "price": 50,
+        "code": "EL.CB.LB.288",
+        "spec": "1489-M2C020",
+        "description": "Description: Bulletin 1489-M Thermal-magnetic Circuit Breakers, Standard configuration, AC, 2 Pole Configuration, Trip Curve C, UL/CSA Max. Voltage:480Y/277V AC, 96V DC; IEC/EN Max. Voltage: 400V AC,2A"
       },
       {
         "item": "RCD - 2P 25A",
         "qty": 1,
-        "price": 80
+        "price": 80,
+        "code": null,
+        "spec": "1492-RCDA2A25-US",
+        "description": "Residual Current Circuit Breaker, Type A, 25A, 2P, 30mA"
       },
       {
         "item": "Fuse - 3P 32A",
         "qty": 1,
-        "price": 30
+        "price": 30,
+        "code": "EL.FU.FH.036",
+        "spec": "1492-FB3M30",
+        "description": "1492-FB Fuse Holder with 3 poles, 1 1/2 x 13/32 Midget Fuses, 30A, Pkg. Qty. 4"
       },
       {
         "item": "Output Relay",
         "qtyFormula": "outputRelay",
-        "price": 13
+        "price": 13,
+        "code": "EL.RL.CR.158",
+        "spec": "700-HLT1U24",
+        "description": "Electromechanical Relay Output, SPDT (1 C/O), w/ Screw Terminals, 24V AC/DC,Touch Safe"
       },
       {
         "item": "Trans -1000VA",
         "qty": 1,
-        "price": 340
+        "price": 340,
+        "code": "EL.CO.TF.093",
+        "spec": "1497-K-BASX-0-N",
+        "description": "1497 Control Circuit Transformer, 1000 VA, 240/480V(60Hz), 220/440V(50Hz), 110V (50Hz) / 120V (60Hz), 0 Pri - 0 Sec"
       },
       {
         "item": "CB - 2P 2A",
         "qty": 1,
-        "price": 50
+        "price": 50,
+        "code": "EL.CB.LB.288",
+        "spec": "1489-M2C020",
+        "description": "Description: Bulletin 1489-M Thermal-magnetic Circuit Breakers, Standard configuration, AC, 2 Pole Configuration, Trip Curve C, UL/CSA Max. Voltage:480Y/277V AC, 96V DC; IEC/EN Max. Voltage: 400V AC,2A"
       },
       {
         "item": "Disconnect - 100A accessories",
         "qty": 1,
-        "price": 13
+        "price": 13,
+        "code": "EL.CT.AX.091",
+        "spec": "194E-E100-NP",
+        "description": "194E Accessories, Additional Pole, Front / Door , 100 A"
       },
       {
         "item": "Murr ECB",
         "qty": 1,
-        "price": 180
+        "price": 180,
+        "code": "EL.CB.PM.001\nEL.CB.PM.002\nEL.CB.PM.003\nEL.CB.PM.004\nEL.CB.PM.005",
+        "spec": "9000-41190-0000000\n9000-41014-0600000\n9000-41000-0000006\n9000-41000-0000002\n996078",
+        "description": "Mico Pro Power module, IN: 24 V DC / 40 A, 16 mm\u00b2\nMico Pro electronic auxilary circuit, 4 channels, IN: 24 V DC OUT: 24 V DC / 6 A\nMico Pro side cover set\nPlug-in link blue-red\nLabels"
       }
     ],
     "Siemens|UL": [
       {
         "item": "Disconnect - 100A",
         "qty": 1,
-        "price": 55
+        "price": 55,
+        "code": "EL.SW.MS.066",
+        "spec": "3LD2704-0TK53",
+        "description": "MAIN/EMERG. STOP SWITCH 3-POLE IU=100, P/AC-23A AT 400V=37KW FRONT MOUNTING FOUR-HOLE MOUNTING ROTARY ACTUATOR RED/YELLOW (EMERG. STOP)"
       },
       {
         "item": "Contactor - 110A",
         "qty": 1,
-        "price": 253
+        "price": 253,
+        "code": "EL.RL.CN.187",
+        "spec": "3RT2047-1AL20",
+        "description": "Power contactor, AC-3 110 A, 55 kW / 400 V 1 NO + 1 NC, 230 V AC, 50/60 Hz 3-pole, 3 NO, Size S3 screw terminal"
       },
       {
         "item": "Power Supply - 20A",
         "qty": 1,
-        "price": 253
+        "price": 253,
+        "code": "EL.LC.PU.105",
+        "spec": "6EP1436-2BA10",
+        "description": "SITOP PSU300S 20 A stabilized power supply input: 400-500 V 3 AC output: 24 V DC/20 A"
       },
       {
         "item": "DB - 125A",
         "qty": 1,
-        "price": 253
+        "price": 253,
+        "code": "EL.TE.JN.120",
+        "spec": "9080LBA365212",
+        "description": "Power distribution block, Linergy, 3 pole, 2 line, 12 load, 760A Cu, 620A Al, 600V, HS CODE: 8537109070"
       },
       {
         "item": "Voltage Relay",
         "qty": 1,
-        "price": 121
+        "price": 121,
+        "code": "EL.RL.VR.016",
+        "spec": "3UG5616-1CR20",
+        "description": "Digitally adjustable monitoring relay phase failure, phase sequence, asymmetry, frequency, over- and under-voltage monitoring 3x 90-690 V AC, 15-70 Hz 2 changeover contacts screw terminal"
       },
       {
         "item": "MCB - 100A",
         "qty": 1,
-        "price": 643.5
+        "price": 643.5,
+        "code": "EL.CB.NB.112",
+        "spec": "3VA5210-6EC41-0AA0",
+        "description": "Circuit breaker 3VA5 UL frame 250 breaking capacity class H 65kA @ 480V 4-pole, line protection TM230, FTAM, In=100A overload protection Ir=100A fixed short-circuit protection Ii=5...10 x In N conductor unprotected without connection"
       },
       {
         "item": "CB - 1P 1A",
         "qty": 1,
-        "price": 99
+        "price": 99,
+        "code": "EL.CB.LB.306",
+        "spec": "5SJ4201-7HG42",
+        "description": "Circuit breaker 10kA, 2-pole, C, 1A according to UL 489-480Y/277V"
       },
       {
         "item": "CB - 3P 6A",
         "qty": 1,
-        "price": 165
+        "price": 165,
+        "code": "EL.CB.LB.301",
+        "spec": "5SJ4306-7HG42",
+        "description": "Circuit breaker 10kA, 3-pole, C, 6A according to UL 489-480Y/277V"
       },
       {
         "item": "CB - 2P 6A",
         "qty": 1,
-        "price": 104.5
+        "price": 104.5,
+        "code": "EL.CB.LB.298",
+        "spec": "5SJ4206-7HG42",
+        "description": "Circuit breaker 10kA, 2-pole, C, 6A according to UL 489-480Y/277V"
       },
       {
         "item": "CB - 1P 2A",
         "qty": 1,
-        "price": 99
+        "price": 99,
+        "code": "EL.CB.LB.302",
+        "spec": "5SJ4202-7HG42",
+        "description": "Circuit breaker 10kA, 2-pole, C, 2A according to UL 489-480Y/277V"
       },
       {
         "item": "RCD - 2P 25A",
         "qty": 1,
-        "price": 132
+        "price": 132,
+        "code": "EL.CB.LB.242",
+        "spec": "5SV3312-6",
+        "description": "Residual current operated circuit breaker, 2-pole, type A, In: 25 A, 30 mA, Un AC: 230 V"
       },
       {
         "item": "Fuse - 3P 32A",
         "qty": 1,
-        "price": 71.5
+        "price": 71.5,
+        "code": "EL.FU.FH.045",
+        "spec": "3NW7034-1",
+        "description": "SENTRON, cylindrical fuse holder, 10x38 mm, 3-pole, In: 32 A, Un AC: 690 V, LED signal detector, compact version"
       },
       {
         "item": "Output Relay",
         "qtyFormula": "outputRelay",
-        "price": 12
+        "price": 12,
+        "code": "EL.RL.CR.166",
+        "spec": "3RQ3118-1AM00",
+        "description": "Output coupler with plug-in Relay, 1 change-over contact screw terminal 24 V DC Enclosure width 6.2 mm Thermal current 6A"
       },
       {
         "item": "Trans -1000VA",
         "qty": 1,
-        "price": 300
+        "price": 300,
+        "code": "EL.CO.TF.100",
+        "spec": 86151,
+        "description": "MST 1-PHASE CONTROL AND ISOLATION TRANSFORMER P: 1000VA IN: 208...550VAC OUT: 2x115VAC"
       },
       {
         "item": "MPCB - 6.3A",
         "qty": 1,
-        "price": 93.5
+        "price": 93.5,
+        "code": "EL.CB.MB.067",
+        "spec": "3RV2811-1GD10",
+        "description": "Circuit breaker size S00 for transformer protection with approval circuit breaker UL 489, CSA C22.2 No.5-02 A-release 6.3 A N release 130 A screw terminal Standard switching capacity"
       },
       {
         "item": "Murr ECB",
         "qty": 1,
-        "price": 180
+        "price": 180,
+        "code": "EL.CB.PM.001\nEL.CB.PM.002\nEL.CB.PM.003\nEL.CB.PM.004\nEL.CB.PM.005",
+        "spec": "9000-41190-0000000\n9000-41014-0600000\n9000-41000-0000006\n9000-41000-0000002\n996078",
+        "description": "Mico Pro Power module, IN: 24 V DC / 40 A, 16 mm\u00b2\nMico Pro electronic auxilary circuit, 4 channels, IN: 24 V DC OUT: 24 V DC / 6 A\nMico Pro side cover set\nPlug-in link blue-red\nLabels"
       }
     ]
   },
